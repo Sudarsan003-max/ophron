@@ -23,9 +23,8 @@ import Lenis from "lenis";
 export default function App() {
   const [hash, setHash] = useState(window.location.hash);
 
-  // Initialize Lenis Smooth Scroll and Viewport Reveal Observers
+  // 1. Initialize Lenis Smooth Scroll ONCE on mount
   useEffect(() => {
-    // 1. Initialize Lenis for luxurious, silky smooth scrolling
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth exponential easeOut
@@ -37,6 +36,8 @@ export default function App() {
       infinite: false,
     });
 
+    (window as any).__lenis = lenis;
+
     let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
@@ -44,23 +45,48 @@ export default function App() {
     }
     rafId = requestAnimationFrame(raf);
 
-    // 2. Smooth Anchor & Hash Navigation
+    // Smooth Anchor & Hash Navigation
     const handleHash = () => {
       const currentHash = window.location.hash;
       setHash(currentHash);
-      if (currentHash && currentHash !== "#" && currentHash !== "#top") {
-        const targetEl = document.querySelector(currentHash);
-        if (targetEl) {
-          lenis.scrollTo(targetEl as HTMLElement, { offset: -70, duration: 1.2 });
-          return;
+
+      const cleanHash = currentHash.split("?")[0];
+      if (cleanHash && cleanHash !== "#" && cleanHash !== "#top" && cleanHash !== "#services") {
+        try {
+          const targetEl = document.querySelector(cleanHash);
+          if (targetEl) {
+            lenis.scrollTo(targetEl as HTMLElement, { offset: -70, duration: 1.0 });
+            return;
+          }
+        } catch {
+          // Selector contains special characters, fallback safely
         }
       }
-      lenis.scrollTo(0, { duration: 0.9 });
+
+      window.scrollTo(0, 0);
+      lenis.scrollTo(0, { immediate: true });
+      setTimeout(() => {
+        lenis.resize();
+      }, 100);
     };
 
     window.addEventListener("hashchange", handleHash);
 
-    // 3. Viewport Intersection Observer for Reveal Animations
+    // Initial check & resize
+    setTimeout(() => {
+      lenis.resize();
+    }, 200);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHash);
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+      delete (window as any).__lenis;
+    };
+  }, []);
+
+  // 2. Viewport Reveal Observers and Lenis Resize on Hash/Route Change
+  useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -85,16 +111,14 @@ export default function App() {
     };
 
     observeElements();
-
-    // Re-observe on subtle DOM updates without heavy continuous polling
-    const timer = setTimeout(observeElements, 500);
+    const timer = setTimeout(() => {
+      observeElements();
+      (window as any).__lenis?.resize();
+    }, 250);
 
     return () => {
-      window.removeEventListener("hashchange", handleHash);
-      cancelAnimationFrame(rafId);
       clearTimeout(timer);
       io.disconnect();
-      lenis.destroy();
     };
   }, [hash]);
 

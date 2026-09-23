@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { OPHRON_SERVICE_PAGES, ServicePageData, SectionBlock } from "../data/ophronServicePages";
 
 type Props = {
@@ -7,13 +7,40 @@ type Props = {
 };
 
 export default function ServiceDetailModal({ serviceSlug, onClose }: Props) {
+  useEffect(() => {
+    if (!serviceSlug) return;
+    document.body.style.overflow = "hidden";
+    (window as any).__lenis?.stop();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      (window as any).__lenis?.start();
+      (window as any).__lenis?.resize();
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [serviceSlug, onClose]);
+
   if (!serviceSlug || !OPHRON_SERVICE_PAGES[serviceSlug]) return null;
 
   const data: ServicePageData = OPHRON_SERVICE_PAGES[serviceSlug];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md p-4 sm:p-6 lg:p-10 animate-fadeIn">
-      <div className="relative mx-auto max-w-6xl rounded-[32px] bg-[#032147] text-[#EDE5DA] border border-[#B7A38B]/40 overflow-hidden shadow-2xl">
+    <div
+      data-lenis-prevent
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md p-4 sm:p-6 lg:p-10 animate-fadeIn"
+    >
+      <div
+        data-lenis-prevent
+        className="relative mx-auto max-w-6xl rounded-[32px] bg-[#032147] text-[#EDE5DA] border border-[#B7A38B]/40 overflow-hidden shadow-2xl"
+      >
         {/* Top bar with back/close */}
         <div className="sticky top-0 z-30 flex items-center justify-between bg-[#032147]/95 backdrop-blur-md px-6 sm:px-8 py-5 border-b border-white/10">
           <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.2em] text-[#B7A38B]">

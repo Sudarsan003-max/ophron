@@ -345,8 +345,12 @@ export default function Nav() {
                   <div className="absolute top-0 left-0 h-full w-1.5 bg-gradient-to-b from-[#B7A38B] to-transparent" />
                   
                   <div className="flex items-center gap-4">
-                    <span className="grid place-items-center h-12 w-12 rounded-2xl bg-gradient-to-br from-[#B7A38B] to-[#E0D0BB] text-[#032147] font-bold text-xl shadow-[0_0_20px_rgba(183,163,139,0.4)] group-hover:scale-108 transition-transform">
-                      ✦
+                    <span className="grid place-items-center h-12 w-12 rounded-2xl bg-gradient-to-br from-[#B7A38B] to-[#E0D0BB] p-2.5 shadow-[0_0_20px_rgba(183,163,139,0.4)] group-hover:scale-108 transition-transform shrink-0">
+                      <img
+                        src="/images/brand/ophron-navy-emblem-transparent.png"
+                        className="h-full w-auto object-contain"
+                        alt="OPHRON"
+                      />
                     </span>
                     <div>
                       <div className="flex items-center gap-3 flex-wrap">
@@ -530,7 +534,7 @@ export default function Nav() {
                         <span className="flex items-center gap-2 font-bold">
                           {l.label}
                           <span className="text-[9px] font-mono text-[#B7A38B] bg-[#B7A38B]/20 px-1.5 py-0.2 rounded font-bold">
-                            11 SCOPES
+                            14 SCOPES
                           </span>
                         </span>
                         <svg
@@ -559,14 +563,17 @@ export default function Nav() {
                             }}
                             className="flex items-center justify-between p-2.5 rounded-xl bg-[#B7A38B]/20 text-white text-[12px] font-montserrat font-bold"
                           >
-                            <span>✦ View All Services Hub</span>
+                            <span className="flex items-center gap-2">
+                              <img src="/images/brand/ophron-navy-emblem-transparent.png" className="h-3.5 w-auto object-contain" alt="OPHRON" />
+                              <span>All Services & Master Hub</span>
+                            </span>
                             <span>→</span>
                           </a>
 
-                          {/* 6 Specialized Services */}
+                          {/* 9 Specialized Operational SOPs */}
                           <div>
                             <div className="text-[10px] font-mono uppercase tracking-[0.15em] text-[#B7A38B] font-bold mb-1.5 px-1">
-                              [ 6 Specialized Services ]
+                              [ 9 Specialized Operational SOPs ]
                             </div>
                             <div className="space-y-1">
                               {specializedServices.map((srv) => (

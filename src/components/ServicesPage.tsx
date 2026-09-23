@@ -20,6 +20,27 @@ export default function ServicesPage() {
   const [selectedPillar, setSelectedPillar] = useState<"all" | "people" | "hygiene" | "facilities" | "technology">("all");
   const [searchQuery, setSearchQuery] = useState("");
 
+  const handleOpenService = (slug: string) => {
+    setActiveSlug(slug);
+    window.history.replaceState(null, "", `#services?service=${slug}`);
+  };
+
+  const handleCloseModal = () => {
+    setActiveSlug(null);
+    window.history.replaceState(null, "", `#services${activeTab !== "catalog" ? `?tab=${activeTab}` : ""}`);
+    setTimeout(() => {
+      (window as any).__lenis?.resize();
+    }, 100);
+  };
+
+  const switchTab = (tab: "catalog" | "pillars" | "sops") => {
+    setActiveTab(tab);
+    window.history.replaceState(null, "", `#services?tab=${tab}`);
+    setTimeout(() => {
+      (window as any).__lenis?.resize();
+    }, 100);
+  };
+
   useEffect(() => {
     const parseHash = () => {
       const h = window.location.hash;
@@ -149,7 +170,7 @@ export default function ServicesPage() {
           <div className="flex items-center justify-between border-b border-[#032147]/15 pb-4 mb-10 flex-wrap gap-4">
             <div className="flex items-center gap-3 flex-wrap">
               <button
-                onClick={() => setActiveTab("catalog")}
+                onClick={() => switchTab("catalog")}
                 className={`px-6 py-3 rounded-full text-[13px] font-montserrat font-bold transition-all duration-300 cursor-pointer ${
                   activeTab === "catalog"
                     ? "bg-[#032147] text-[#EDE5DA] shadow-lg shadow-[#032147]/20 scale-105"
@@ -159,7 +180,7 @@ export default function ServicesPage() {
                 All Services Directory ({ALL_SERVICES_CATALOG.length})
               </button>
               <button
-                onClick={() => setActiveTab("pillars")}
+                onClick={() => switchTab("pillars")}
                 className={`px-6 py-3 rounded-full text-[13px] font-montserrat font-bold transition-all duration-300 cursor-pointer ${
                   activeTab === "pillars"
                     ? "bg-[#032147] text-[#EDE5DA] shadow-lg shadow-[#032147]/20 scale-105"
@@ -169,7 +190,7 @@ export default function ServicesPage() {
                 4 Business Pillars & Category Breakdown
               </button>
               <button
-                onClick={() => setActiveTab("sops")}
+                onClick={() => switchTab("sops")}
                 className={`px-6 py-3 rounded-full text-[13px] font-montserrat font-bold transition-all duration-300 cursor-pointer ${
                   activeTab === "sops"
                     ? "bg-[#032147] text-[#EDE5DA] shadow-lg shadow-[#032147]/20 scale-105"
@@ -314,7 +335,7 @@ export default function ServicesPage() {
                   <ScrollReveal key={srv.id} variant="up" delay={(idx % 6) * 60}>
                     <TiltCard
                       maxTilt={4}
-                      onClick={() => setActiveSlug(srv.slug)}
+                      onClick={() => handleOpenService(srv.slug)}
                       className="group relative cursor-pointer rounded-3xl bg-[#EDE5DA] border border-[#B7A38B]/40 p-6 flex flex-col justify-between hover:bg-[#032147] hover:text-[#EDE5DA] hover:border-[#B7A38B] transition-all duration-500 shadow-lg hover:shadow-2xl overflow-hidden h-full"
                     >
                       <CornerBrackets color="#B7A38B" size={12} hoverSize={18} />
@@ -416,7 +437,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="lg:col-span-4 flex justify-start lg:justify-end">
                     <button
-                      onClick={() => setActiveSlug(pillar.id)}
+                      onClick={() => handleOpenService(pillar.id)}
                       className="inline-flex items-center gap-2 rounded-full bg-[#032147] text-[#EDE5DA] px-6 py-3 text-[13px] font-montserrat font-bold hover:bg-[#B7A38B] hover:text-[#032147] transition shadow-md cursor-pointer"
                     >
                       View Master Pillar Overview →
@@ -447,7 +468,7 @@ export default function ServicesPage() {
                         {cat.services.map((srv) => (
                           <div
                             key={srv.id}
-                            onClick={() => setActiveSlug(srv.slug)}
+                            onClick={() => handleOpenService(srv.slug)}
                             className="group p-5 rounded-2xl bg-white border border-[#032147]/10 hover:border-[#B7A38B] hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between overflow-hidden"
                           >
                             <div>
@@ -509,7 +530,7 @@ export default function ServicesPage() {
                 return (
                   <ScrollReveal key={srv.slug} variant="up" delay={(index % 6) * 100}>
                     <TiltCard
-                      onClick={() => setActiveSlug(srv.slug)}
+                      onClick={() => handleOpenService(srv.slug)}
                       className="group relative cursor-pointer rounded-3xl bg-[#EDE5DA] border border-[#B7A38B]/40 p-7 flex flex-col justify-between hover:bg-[#032147] hover:text-[#EDE5DA] hover:border-[#B7A38B] transition-all duration-500 shadow-xl overflow-hidden h-full"
                     >
                       <div>
@@ -614,7 +635,7 @@ export default function ServicesPage() {
       </div>
 
       {/* Full Service Detail Modal */}
-      <ServiceDetailModal serviceSlug={activeSlug} onClose={() => setActiveSlug(null)} />
+      <ServiceDetailModal serviceSlug={activeSlug} onClose={handleCloseModal} />
     </div>
   );
 }
