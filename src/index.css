@@ -251,7 +251,62 @@ html, body {
   perspective: 1000px;
 }
 
-/* 9. ACCESSIBILITY: REDUCED MOTION SUPPORT */
+/* 9. APPLE 3D CHASSIS & TAB SYSTEM ANIMATIONS */
+@keyframes smoothTabFade {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes smoothMetricSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.animate-smoothTabFade {
+  animation: smoothTabFade 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-smoothMetricSlide {
+  animation: smoothMetricSlide 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.apple-3d-chassis {
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+
+.apple-3d-screen {
+  transform: translateZ(24px);
+}
+
+.apple-specular-glare {
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(183, 163, 139, 0.05) 30%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+/* 10. ACCESSIBILITY: REDUCED MOTION SUPPORT */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
