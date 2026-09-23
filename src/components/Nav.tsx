@@ -308,166 +308,203 @@ export default function Nav() {
           </div>
 
           {/* ============================================================== */}
-          {/*  DESKTOP CLEAN MEGA-DROPDOWN BOX FOR SERVICES                 */}
+          {/*  DESKTOP CLEAN MEGA-DROPDOWN BOX FOR SERVICES (LUXURY GLASS)  */}
           {/* ============================================================== */}
           <div
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className={`hidden md:block absolute left-5 right-5 top-full mt-3 transition-all duration-300 ease-out origin-top ${
+            className={`hidden md:block absolute left-4 right-4 top-full mt-3 transition-all duration-300 ease-out origin-top z-50 ${
               servicesDropdownOpen
                 ? "opacity-100 translate-y-0 pointer-events-auto scale-100"
-                : "opacity-0 -translate-y-3 pointer-events-none scale-[0.98]"
+                : "opacity-0 -translate-y-4 pointer-events-none scale-[0.97]"
             }`}
           >
-            <div className="rounded-[28px] bg-[#032147]/98 backdrop-blur-2xl border border-[#B7A38B]/40 p-6 lg:p-7 shadow-[0_25px_60px_-12px_rgba(3,33,71,0.9)] text-[#EDE5DA] overflow-hidden">
-              
-              {/* Top Hub Bar: "All Services" Master Link */}
-              <a
-                href="#services"
-                onClick={() => setServicesDropdownOpen(false)}
-                className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:bg-[#B7A38B]/15 hover:border-[#B7A38B]/50 transition-all duration-300 mb-6"
-              >
-                <div className="flex items-center gap-3.5">
-                  <span className="grid place-items-center h-10 w-10 rounded-xl bg-[#B7A38B] text-[#032147] font-bold text-base shadow-sm group-hover:scale-105 transition-transform">
-                    ✦
-                  </span>
-                  <div>
-                    <div className="flex items-center gap-2.5">
-                      <span className="font-montserrat font-bold text-[15px] text-white tracking-tight">
-                        All Services & Master Platform Hub
-                      </span>
-                      <span className="text-[10px] font-mono uppercase bg-[#B7A38B]/20 text-[#B7A38B] px-2 py-0.5 rounded-full font-bold">
-                        Full Catalog
-                      </span>
-                    </div>
-                    <p className="text-[12.5px] font-inter text-[#EDE5DA]/75 mt-0.5">
-                      Explore the complete unified scope, chemical SOPs, and technical blueprints across Singapore & internationally.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 text-[12px] font-montserrat font-bold text-[#B7A38B] group-hover:text-white transition whitespace-nowrap pl-2">
-                  <span>View All Services Overview</span>
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </div>
-              </a>
+            {/* Outer Glow Halo */}
+            <div className="relative">
+              <div className="absolute -inset-1 rounded-[34px] bg-gradient-to-r from-[#B7A38B]/35 via-[#D4AF37]/25 to-[#B7A38B]/35 blur-xl opacity-80 pointer-events-none" />
 
-              {/* Two Clean Columns: 6 Specialized Services vs 5 Master Platform Pillars */}
-              <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-                
-                {/* Column 1: 6 Specialized Operational Services (Col span 7) */}
-                <div className="lg:col-span-7">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-3.5">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#B7A38B] font-bold">
-                        [ 6 Specialized Operational Services ]
-                      </span>
-                    </div>
-                    <a
-                      href="#services?tab=catalog"
-                      onClick={() => setServicesDropdownOpen(false)}
-                      className="text-[10px] font-mono text-[#EDE5DA]/60 hover:text-[#B7A38B] transition uppercase font-semibold"
-                    >
-                      View SOP Catalog ↗
-                    </a>
-                  </div>
+              <div className="relative rounded-[32px] bg-gradient-to-b from-[#031C3A]/98 via-[#02132B]/98 to-[#010B18]/98 backdrop-blur-3xl border-2 border-[#B7A38B]/50 p-6 sm:p-7 lg:p-8 shadow-[0_35px_100px_-10px_rgba(0,0,0,0.95),0_0_50px_rgba(183,163,139,0.25)] text-[#EDE5DA] overflow-hidden">
+                {/* Background Ambient Blueprint Grid & Glow Blobs */}
+                <div
+                  className="absolute inset-0 opacity-[0.07] pointer-events-none"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(circle at 50% 50%, rgba(212,175,55,0.6) 1.2px, transparent 1.2px)",
+                    backgroundSize: "28px 28px",
+                  }}
+                />
+                <div className="absolute -top-32 -left-32 h-80 w-80 rounded-full bg-[#B7A38B]/20 blur-3xl pointer-events-none" />
+                <div className="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-[#0A305C]/50 blur-3xl pointer-events-none" />
 
-                  <div className="grid sm:grid-cols-2 gap-2.5">
-                    {specializedServices.map((item) => (
-                      <a
-                        key={item.title}
-                        href={item.href}
-                        onClick={() => setServicesDropdownOpen(false)}
-                        className="group/item flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.08] hover:border-[#B7A38B]/40 transition-all duration-200"
-                      >
-                        <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-white/5 text-[#B7A38B] font-bold shrink-0 mt-0.5 group-hover/item:bg-[#B7A38B] group-hover/item:text-[#032147] transition-colors">
-                          {item.tag}
+                {/* Top Master Platform Hub Bar */}
+                <a
+                  href="#services"
+                  onClick={() => setServicesDropdownOpen(false)}
+                  className="group relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-white/[0.07] via-[#B7A38B]/15 to-white/[0.04] border border-[#B7A38B]/45 hover:border-[#B7A38B] hover:from-[#B7A38B]/25 hover:to-[#B7A38B]/15 transition-all duration-300 mb-6 shadow-xl overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 h-full w-1.5 bg-gradient-to-b from-[#B7A38B] to-transparent" />
+                  
+                  <div className="flex items-center gap-4">
+                    <span className="grid place-items-center h-12 w-12 rounded-2xl bg-gradient-to-br from-[#B7A38B] to-[#E0D0BB] text-[#032147] font-bold text-xl shadow-[0_0_20px_rgba(183,163,139,0.4)] group-hover:scale-108 transition-transform">
+                      ✦
+                    </span>
+                    <div>
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <span className="font-canela font-bold text-lg sm:text-xl text-white tracking-tight group-hover:text-[#F3E5AB] transition-colors">
+                          All Services & Master Platform Hub
                         </span>
-                        <div className="min-w-0 flex-1">
-                          <div className="font-montserrat font-semibold text-[13px] text-white tracking-tight leading-snug group-hover/item:text-[#B7A38B] transition-colors flex items-center justify-between">
-                            <span className="truncate">{item.title}</span>
-                            <span className="opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all text-[11px] text-[#B7A38B]">
-                              →
-                            </span>
-                          </div>
-                          <p className="mt-1 text-[11.5px] font-inter text-[#EDE5DA]/65 line-clamp-2 leading-relaxed">
-                            {item.subtitle}
-                          </p>
-                        </div>
-                      </a>
-                    ))}
+                        <span className="text-[10px] font-mono uppercase bg-[#B7A38B]/30 text-[#EDE5DA] border border-[#B7A38B]/50 px-2.5 py-0.5 rounded-full font-bold shadow-sm">
+                          14 ENTERPRISE SCOPES
+                        </span>
+                      </div>
+                      <p className="text-[13px] font-inter text-[#EDE5DA]/85 mt-1">
+                        Explore the complete unified scope, chemical SOPs, and technical blueprints across Singapore & internationally.
+                      </p>
+                    </div>
                   </div>
+
+                  <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#032147] border border-[#B7A38B]/40 text-xs font-montserrat font-bold text-[#B7A38B] group-hover:bg-[#B7A38B] group-hover:text-[#032147] transition-all whitespace-nowrap shadow-md group-hover:scale-105">
+                    <span>Explore Master Platform Overview</span>
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </div>
+                </a>
+
+                {/* Two Columns: 9 Specialized Services vs 5 Master Platform Pillars */}
+                <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start relative z-10">
+                  
+                  {/* Column 1: 9 Specialized Operational Services (7 Cols) */}
+                  <div className="lg:col-span-7 space-y-3.5">
+                    <div className="flex items-center justify-between border-b border-white/15 pb-3">
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold flex items-center gap-2">
+                          <span className="text-[#D4AF37]">◆</span>
+                          [ 9 Specialized Operational SOPs ]
+                        </span>
+                        <span className="text-[9px] font-mono uppercase bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 px-2 py-0.5 rounded-full font-semibold hidden sm:inline">
+                          SFA · NEA · ISO Class
+                        </span>
+                      </div>
+                      <a
+                        href="#services?tab=catalog"
+                        onClick={() => setServicesDropdownOpen(false)}
+                        className="text-[11px] font-mono text-[#EDE5DA]/70 hover:text-[#B7A38B] transition uppercase font-bold flex items-center gap-1 group/link"
+                      >
+                        <span>View SOP Catalog</span>
+                        <span className="group-link:translate-x-0.5 transition-transform">↗</span>
+                      </a>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-2.5 max-h-[440px] overflow-y-auto no-scrollbar pr-1">
+                      {specializedServices.map((item) => (
+                        <a
+                          key={item.title}
+                          href={item.href}
+                          onClick={() => setServicesDropdownOpen(false)}
+                          className="group/item flex items-start gap-3 p-3 sm:p-3.5 rounded-2xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/10 hover:border-[#B7A38B]/60 hover:bg-[#032349]/90 transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-[1.01]"
+                        >
+                          {/* SOP Tag & Icon Box */}
+                          <div className="grid place-items-center h-8 w-8 rounded-xl bg-white/5 border border-white/15 text-[#B7A38B] group-hover/item:bg-[#B7A38B] group-hover/item:text-[#032147] group-hover/item:border-[#B7A38B] transition-all shrink-0 mt-0.5 shadow-sm font-mono text-[10px] font-bold">
+                            {item.tag.replace("SOP ", "")}
+                          </div>
+
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between gap-1">
+                              <span className="font-montserrat font-bold text-[13px] text-white tracking-tight leading-snug group-hover/item:text-[#F3E5AB] transition-colors truncate">
+                                {item.title}
+                              </span>
+                              <span className="opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-1 transition-all text-[12px] text-[#B7A38B] font-bold">
+                                →
+                              </span>
+                            </div>
+                            <p className="mt-1 text-[11.5px] font-inter text-[#EDE5DA]/75 line-clamp-2 leading-relaxed">
+                              {item.subtitle}
+                            </p>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Column 2: 5 Master Platform Pillars (5 Cols) */}
+                  <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-white/15 pt-5 lg:pt-0 lg:pl-8 space-y-3.5">
+                    <div className="flex items-center justify-between border-b border-white/15 pb-3">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold flex items-center gap-2">
+                          <span className="text-[#D4AF37]">◆</span>
+                          [ 5 Master Platform Pillars ]
+                        </span>
+                      </div>
+                      <a
+                        href="#services?tab=pillars"
+                        onClick={() => setServicesDropdownOpen(false)}
+                        className="text-[11px] font-mono text-[#EDE5DA]/70 hover:text-[#B7A38B] transition uppercase font-bold flex items-center gap-1 group/link"
+                      >
+                        <span>5 Pillars Scope</span>
+                        <span className="group-link:translate-x-0.5 transition-transform">↗</span>
+                      </a>
+                    </div>
+
+                    <div className="space-y-2.5">
+                      {masterPillars.map((item) => (
+                        <a
+                          key={item.title}
+                          href={item.href}
+                          onClick={() => setServicesDropdownOpen(false)}
+                          className="group/item flex items-start gap-3.5 p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-white/[0.04] to-white/[0.01] border border-white/10 hover:border-[#B7A38B]/60 hover:bg-[#032349]/90 transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-[1.01]"
+                        >
+                          <span className="text-[10px] font-mono uppercase px-2 py-1 rounded-lg bg-[#B7A38B]/20 border border-[#B7A38B]/40 text-[#B7A38B] font-bold shrink-0 mt-0.5 group-hover/item:bg-[#B7A38B] group-hover/item:text-[#032147] transition-all shadow-sm">
+                            {item.tag}
+                          </span>
+
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between gap-1">
+                              <span className="font-montserrat font-bold text-[13.5px] text-white tracking-tight leading-snug group-hover/item:text-[#F3E5AB] transition-colors">
+                                {item.title}
+                              </span>
+                              <span className="opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-1 transition-all text-[12px] text-[#B7A38B] font-bold">
+                                →
+                              </span>
+                            </div>
+                            <p className="mt-1 text-[11.5px] font-inter text-[#EDE5DA]/75 line-clamp-1 leading-relaxed">
+                              {item.subtitle}
+                            </p>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
 
-                {/* Column 2: 5 Master Platform Pillars (Col span 5) */}
-                <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-white/10 pt-4 lg:pt-0 lg:pl-8">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-3.5">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#B7A38B] font-bold">
-                        [ 5 Master Platform Pillars ]
-                      </span>
-                    </div>
-                    <a
-                      href="#services?tab=pillars"
-                      onClick={() => setServicesDropdownOpen(false)}
-                      className="text-[10px] font-mono text-[#EDE5DA]/60 hover:text-[#B7A38B] transition uppercase font-semibold"
-                    >
-                      5 Pillars Scope ↗
-                    </a>
+                {/* Bottom Quick Strip with Certifications & Assessment Trigger */}
+                <div className="mt-6 pt-5 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#EDE5DA]/80">
+                  <div className="flex items-center gap-3.5 flex-wrap">
+                    <span className="flex items-center gap-2 text-[#B7A38B] font-bold bg-[#020F21] px-3 py-1 rounded-full border border-[#B7A38B]/30">
+                      <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34D399]" />
+                      NEA Licensed
+                    </span>
+                    <span>·</span>
+                    <span className="font-bold text-white">bizSAFE Level 3</span>
+                    <span>·</span>
+                    <span className="font-bold text-white">100% WSQ Certified Crew</span>
+                    <span>·</span>
+                    <span className="font-bold text-[#B7A38B]">ISO Cleanroom Compliant</span>
                   </div>
 
-                  <div className="space-y-2">
-                    {masterPillars.map((item) => (
-                      <a
-                        key={item.title}
-                        href={item.href}
-                        onClick={() => setServicesDropdownOpen(false)}
-                        className="group/item flex items-start gap-3 p-2.5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.08] hover:border-[#B7A38B]/40 transition-all duration-200"
-                      >
-                        <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-[#B7A38B]/15 text-[#B7A38B] font-bold shrink-0 mt-0.5 group-hover/item:bg-[#B7A38B] group-hover/item:text-[#032147] transition-colors">
-                          {item.tag}
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <div className="font-montserrat font-semibold text-[13px] text-white tracking-tight leading-snug group-hover/item:text-[#B7A38B] transition-colors flex items-center justify-between">
-                            <span>{item.title}</span>
-                            <span className="opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all text-[11px] text-[#B7A38B]">
-                              →
-                            </span>
-                          </div>
-                          <p className="mt-0.5 text-[11.5px] font-inter text-[#EDE5DA]/65 line-clamp-1 leading-relaxed">
-                            {item.subtitle}
-                          </p>
-                        </div>
-                      </a>
-                    ))}
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#EDE5DA]/60 hidden sm:inline">Need a custom SLA?</span>
+                    <a
+                      href="#contact"
+                      onClick={() => setServicesDropdownOpen(false)}
+                      className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#B7A38B] to-[#E0D0BB] text-[#032147] font-montserrat font-bold text-xs hover:bg-white hover:scale-105 transition-all shadow-md uppercase"
+                    >
+                      <span>Request Facility Assessment</span>
+                      <span>→</span>
+                    </a>
                   </div>
                 </div>
 
               </div>
-
-              {/* Bottom Quick Strip */}
-              <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono text-[#EDE5DA]/70">
-                <div className="flex items-center gap-3">
-                  <span className="flex items-center gap-1.5 text-[#B7A38B] font-bold">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
-                    NEA Licensed
-                  </span>
-                  <span>·</span>
-                  <span className="font-semibold">bizSAFE Level 3</span>
-                  <span>·</span>
-                  <span className="font-semibold">WSQ Certified Workforce</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[#EDE5DA]/50">Need a custom SLA?</span>
-                  <a
-                    href="#contact"
-                    onClick={() => setServicesDropdownOpen(false)}
-                    className="font-bold text-[#B7A38B] hover:text-white hover:underline transition uppercase"
-                  >
-                    Request Facility Assessment →
-                  </a>
-                </div>
-              </div>
-
             </div>
           </div>
 
