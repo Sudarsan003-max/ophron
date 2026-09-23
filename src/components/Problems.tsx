@@ -1,94 +1,130 @@
 import { SectionHead } from "./About";
+import {
+  MaskedHeadline,
+  ScrollReveal,
+  AnimatedCounter,
+  ExpandRule,
+} from "./ui/animations";
 
 const problems = [
   {
     n: "01",
-    title: "Low client acquisition & visibility",
+    title: "Critical manpower shortages & high stewarding churn",
     items: [
-      "Limited visibility on Google, Meta and LinkedIn",
-      "Lack of local SEO and outdated websites",
-      "Weak lead generation systems",
-      "Low presence on key social channels",
-      "Poor content strategy",
-      "No clear conversion funnels",
+      "Inconsistent back-of-house staffing & casual labor reliability",
+      "Unvetted stewarding crews failing workplace safety checks",
+      "Severe labor shortages during peak service & weekend surges",
+      "High managerial overhead recruiting & retraining replacements",
+      "Absence of WSQ-certified, supervisor-led deployment",
+      "Unpredictable overtime costs eating into thin F&B margins",
     ],
   },
   {
     n: "02",
-    title: "Broken or outdated digital infrastructure",
+    title: "SFA hygiene demerits, canopy grease & fire risks",
     items: [
-      "No professional website or microsite",
-      "Manual workflows without automation",
-      "No conversion or ROI tracking",
-      "Generic CRMs with limited follow‑up",
-      "Unscalable systems that hinder growth",
+      "Heavy grease accumulation in exhaust hoods & ventilation ducts",
+      "Persistent grease trap odors & drainage backup risks",
+      "Cross-contamination risks from uncalibrated chemical use",
+      "Lack of documented batch-level chemical records for inspectors",
+      "Demerit points & risk of forced SFA suspension during unannounced audits",
+      "Poor washroom hygiene damaging guest reviews & ratings",
     ],
   },
   {
     n: "03",
-    title: "No strategic direction or forecasting",
+    title: "Fragmented multi-vendor chaos & rising operational overhead",
     items: [
-      "No clear, data‑backed marketing plan",
-      "Scattered tools without central reporting",
-      "Multiple vendors with no accountability",
-      "No strategist ensuring direction",
-      "Disjointed efforts and slow growth",
+      "Managing 5+ separate vendors for cleaning, manpower, pest & waste",
+      "No centralized SLA tracking, digital logs, or unified reporting",
+      "Sudden kitchen equipment & facility breakdown downtime",
+      "Lack of proactive maintenance and integrated facility care (IFM Lite)",
+      "Unsynchronized schedules disrupting guest & tenant experience",
+      "Escalating vendor invoices with zero accountability",
     ],
   },
 ];
 
 export default function Problems() {
   return (
-    <section id="problems" className="relative py-28 bg-ink overflow-hidden" style={{ background: "#0a0a0a", color: "#f5f1ea" }}>
+    <section id="problems" className="relative py-28 bg-[#032147] overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
       {/* Subtle dot bg */}
-      <div className="absolute inset-0 opacity-[0.04]" style={{
-        backgroundImage: "radial-gradient(rgba(255,255,255,1) 1px, transparent 1px)",
-        backgroundSize: "32px 32px"
-      }} />
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: "radial-gradient(rgba(237,229,218,1) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
       <div className="relative mx-auto max-w-[1400px] px-5">
-        <SectionHead n="004" label="The diagnosis" light />
+        <SectionHead n="004" label="Operational Realities" light />
 
         <div className="mt-12 grid lg:grid-cols-12 gap-10">
           <div className="lg:col-span-7">
-            <h2 className="font-display text-[44px] sm:text-[64px] lg:text-[84px] leading-[0.92] tracking-[-0.04em]">
-              The growth <span className="font-serif-i">symptoms</span>
-              <br />
-              we treat <span className="text-[#ff5d3b]">every day.</span>
-            </h2>
+            <MaskedHeadline
+              as="h2"
+              className="font-canela text-[40px] sm:text-[60px] lg:text-[76px] leading-[0.95] tracking-tight text-white font-bold"
+              staggerMs={130}
+              lines={[
+                <>
+                  The operational <span className="font-serif-i italic text-[#B7A38B]">frictions</span>
+                </>,
+                <>
+                  we eliminate <span className="text-[#B7A38B]">every shift.</span>
+                </>,
+              ]}
+            />
           </div>
           <div className="lg:col-span-5 lg:pt-6">
-            <p className="text-[15px] leading-relaxed text-bone/65" style={{ color: "rgba(245,241,234,.65)" }}>
-              Most healthcare organizations struggle with the same three critical barriers.
-              We've identified them, systematized the solution, and solved them for 130+ healthcare brands.
-            </p>
+            <ScrollReveal variant="left" delay={150}>
+              <p className="text-[15.5px] font-inter leading-relaxed text-[#EDE5DA]/80">
+                Singapore's premier hospitality and commercial venues battle three recurring operational bottlenecks: manpower shortages, strict SFA regulatory compliance, and multi-vendor chaos. OPHRON unifies the solution under one accountable platform.
+              </p>
+            </ScrollReveal>
           </div>
         </div>
 
         {/* Problems list */}
         <div className="mt-16 border-t border-white/10">
-          {problems.map((p) => (
-            <ProblemRow key={p.n} p={p} />
+          {problems.map((p, idx) => (
+            <ScrollReveal key={p.n} variant={idx % 2 === 0 ? "left" : "right"} delay={idx * 100}>
+              <ProblemRow p={p} />
+            </ScrollReveal>
           ))}
         </div>
 
+        <ExpandRule className="border-white/15 my-12" />
+
         {/* CTA strip */}
-        <div className="mt-12 rounded-3xl bg-white text-ink p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-          <div className="flex items-start gap-4">
-            <span className="grid place-items-center h-12 w-12 rounded-full bg-ink text-[#0000cd] text-xl" style={{ background: "#0a0a0a" }}>✓</span>
-            <div>
-              <div className="font-display text-2xl sm:text-3xl tracking-[-0.03em]">Solved for 130+ healthcare brands.</div>
-              <div className="text-[13px] opacity-70 mt-1">From single‑doctor practices to multi‑location specialty groups.</div>
+        <ScrollReveal variant="scale">
+          <div className="rounded-3xl bg-[#EDE5DA] text-[#032147] p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-[#B7A38B]/30 shadow-xl">
+            <div className="flex items-start gap-4">
+              <span className="grid place-items-center h-12 w-12 rounded-full bg-[#032147] text-[#B7A38B] text-xl font-bold shrink-0">
+                ✓
+              </span>
+              <div>
+                <div className="font-canela font-bold text-2xl sm:text-3xl tracking-tight text-[#032147]">
+                  Solved across <AnimatedCounter value={140} suffix="+" /> Singapore establishments.
+                </div>
+                <div className="text-[13.5px] font-inter text-[#032147]/75 mt-1">
+                  From 5-star hotel towers and Michelin-starred dining to high-throughput commercial central kitchens.
+                </div>
+              </div>
             </div>
+            <a
+              href="#services"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#032147] text-[#EDE5DA] pl-6 pr-2 py-2 text-[13px] font-montserrat font-bold hover:bg-[#B7A38B] hover:text-[#032147] transition shrink-0 hover:scale-105"
+              style={{ color: "#EDE5DA" }}
+            >
+              Explore OPHRON Solutions
+              <span className="grid place-items-center h-9 w-9 rounded-full bg-[#B7A38B] text-[#032147] transition-transform group-hover:rotate-45 font-bold">
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 17 17 7M9 7h8v8" />
+                </svg>
+              </span>
+            </a>
           </div>
-          <a href="#services" className="group inline-flex items-center gap-2 rounded-full bg-ink text-bone pl-5 pr-2 py-2 text-[13px] font-medium" style={{ background: "#0a0a0a", color: "#f5f1ea" }}>
-            See the prescription
-            <span className="grid place-items-center h-9 w-9 rounded-full bg-[#0000cd] text-ink transition-transform group-hover:rotate-45">
-              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 17 17 7M9 7h8v8" />
-              </svg>
-            </span>
-          </a>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
@@ -96,30 +132,30 @@ export default function Problems() {
 
 function ProblemRow({ p }: { p: { n: string; title: string; items: string[] } }) {
   return (
-    <div className="group relative border-b border-white/10 py-8 md:py-10 grid grid-cols-12 gap-6 hover:bg-white/[0.02] transition cursor-pointer" data-cursor="hover">
-      {/* number */}
+    <div className="group relative border-b border-white/10 py-8 md:py-10 grid grid-cols-12 gap-6 hover:bg-white/[0.04] transition cursor-pointer">
+      {/* Number */}
       <div className="col-span-2 md:col-span-1">
-        <div className="font-mono text-[11px] tracking-[0.22em] opacity-50">[ {p.n} ]</div>
+        <div className="font-mono text-[11px] tracking-[0.22em] text-[#B7A38B] font-bold">[ {p.n} ]</div>
       </div>
-      {/* title */}
+      {/* Title */}
       <div className="col-span-10 md:col-span-5">
-        <h3 className="font-display text-2xl md:text-3xl tracking-[-0.02em] leading-tight transition group-hover:text-[#0000cd]">
+        <h3 className="font-canela text-2xl md:text-3xl font-bold tracking-tight leading-tight text-white transition group-hover:text-[#B7A38B]">
           {p.title}
         </h3>
       </div>
-      {/* items */}
+      {/* Items */}
       <div className="col-span-12 md:col-span-5">
-        <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-1.5">
+        <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
           {p.items.map((it) => (
-            <li key={it} className="flex items-start gap-2.5 text-[13px] text-bone/65" style={{ color: "rgba(245,241,234,.65)" }}>
-              <span className="mt-1.5 h-1 w-1 rounded-full bg-[#ff5d3b] flex-none" />
+            <li key={it} className="flex items-start gap-2.5 text-[13px] font-inter text-[#EDE5DA]/80">
+              <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#B7A38B] flex-none" />
               <span>{it}</span>
             </li>
           ))}
         </ul>
       </div>
       <div className="col-span-12 md:col-span-1 flex justify-end items-start">
-        <span className="grid place-items-center h-10 w-10 rounded-full border border-white/15 text-[#0000cd] transition group-hover:bg-[#0000cd] group-hover:text-ink group-hover:rotate-45">
+        <span className="grid place-items-center h-10 w-10 rounded-full border border-white/15 text-[#B7A38B] transition group-hover:bg-[#B7A38B] group-hover:text-[#032147] group-hover:rotate-45 font-bold">
           <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M7 17 17 7M9 7h8v8" />
           </svg>

@@ -60,7 +60,8 @@ export default function MainframeHero() {
       {/* 4. Navbar */}
       <header className="fixed top-0 inset-x-0 z-50 px-5 sm:px-8 py-4 sm:py-5 flex flex-row justify-between items-center bg-transparent">
         {/* Logo Left */}
-        <a href="#blog" className="flex flex-row items-center gap-3 select-none">
+        <a href="#blog" className="flex flex-row items-center gap-2.5 select-none">
+          <img src="/images/brand/ophron-navy-emblem-transparent.png" className="h-6 w-auto object-contain" alt="OPHRON" />
           <span className="text-[21px] sm:text-[26px] tracking-tight text-black font-medium">Mainframe®</span>
           <span className="text-[25px] sm:text-[30px] text-black tracking-[-0.02em] font-medium leading-none mb-1">✳</span>
         </a>

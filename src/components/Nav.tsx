@@ -1,90 +1,292 @@
-import { useEffect, useState } from "react";
-import logo from "./logo.png";
+import { useEffect, useRef, useState } from "react";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [time, setTime] = useState("");
+  const [hash, setHash] = useState(window.location.hash || "#top");
+  
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+    
+    const onHashChange = () => {
+      setHash(window.location.hash || "#top");
+      setServicesDropdownOpen(false);
+      setOpen(false);
+    };
+    window.addEventListener("hashchange", onHashChange);
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setServicesDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setServicesDropdownOpen(false);
+        setOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
     const t = setInterval(() => {
       const d = new Date();
       setTime(
         d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Kolkata" }) + " IST"
       );
     }, 1000);
-    return () => { window.removeEventListener("scroll", onScroll); clearInterval(t); };
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("hashchange", onHashChange);
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("keydown", handleKeyDown);
+      clearInterval(t);
+      if (dropdownTimerRef.current) clearTimeout(dropdownTimerRef.current);
+    };
   }, []);
 
+  const handleMouseEnter = () => {
+    if (dropdownTimerRef.current) clearTimeout(dropdownTimerRef.current);
+    setServicesDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    dropdownTimerRef.current = setTimeout(() => {
+      setServicesDropdownOpen(false);
+    }, 180);
+  };
+
   const links = [
-    { href: "#work", label: "Work", n: "01" },
-    { href: "#services", label: "Services", n: "02" },
-    { href: "#why", label: "Studio", n: "03" },
-    { href: "#results", label: "Results", n: "04" },
-    { href: "#blog", label: "Blog", n: "05" },
-    { href: "#founder", label: "Founder", n: "06" },
+    { href: "#top", label: "HOME" },
+    { href: "#about", label: "ABOUT" },
+    { href: "#services", label: "SERVICES", hasDropdown: true },
+    { href: "#why", label: "WHY US" },
+    { href: "#gallery", label: "GALLERY" },
+    { href: "#blog", label: "BLOG" },
+    { href: "#contact", label: "CONTACT" },
   ];
+
+  const specializedServices = [
+    {
+      title: "Disinfecting & Decontamination",
+      subtitle: "Microbial suppression, electrostatic spraying & NEA bio-kill protocols",
+      href: "#services?service=disinfecting-services",
+      tag: "SOP 01",
+    },
+    {
+      title: "Commercial Kitchen & Line Deep Cleans",
+      subtitle: "Cookline degreasing, exhaust hoods, ducts & SFA compliance",
+      href: "#services?service=dishwashing-kitchen",
+      tag: "SOP 02",
+    },
+    {
+      title: "Cleanroom & Healthcare Maintenance",
+      subtitle: "ISO Class 5–8 sterile facility maintenance & surgical suite protocols",
+      href: "#services?service=cleanroom-healthcare",
+      tag: "SOP 03",
+    },
+    {
+      title: "Carpet & Upholstery Steam Extraction",
+      subtitle: "80°C thermal extraction & low-moisture encapsulation restoration",
+      href: "#services?service=carpet-upholstery",
+      tag: "SOP 04",
+    },
+    {
+      title: "Marble Diamond & Powder Polishing",
+      subtitle: "Planetary diamond grinding, crystallization & mirror finish honing",
+      href: "#services?service=marble-polishing",
+      tag: "SOP 05",
+    },
+    {
+      title: "High-Rise Facade & Rope Access",
+      subtitle: "IRATA industrial abseiling, BMU & de-ionized pure-water washing",
+      href: "#services?service=facade-cleaning",
+      tag: "SOP 06",
+    },
+    {
+      title: "Marina & Superyacht Detailing",
+      subtitle: "Teak deck restoration, hull descaling, gelcoat compounding & cabin care",
+      href: "#services?service=yacht-marina-detailing",
+      tag: "SOP 07",
+    },
+    {
+      title: "Post-Renovation & Handover Deep Cleans",
+      subtitle: "HEPA silica dust removal, paint/cement stripping & defect-free sign-off",
+      href: "#services?service=post-renovation-cleaning",
+      tag: "SOP 08",
+    },
+    {
+      title: "Indoor Air Quality (IAQ) & UV-C",
+      subtitle: "Sensor monitoring, HVAC chemical wash & germicidal UV-C coils",
+      href: "#services?service=air-quality-testing",
+      tag: "SOP 09",
+    },
+  ];
+
+  const masterPillars = [
+    {
+      title: "OPHRON PEOPLE",
+      subtitle: "F&B stewarding, kitchen helpers, dishwashers, utility porters & cleaners",
+      href: "#services?service=people",
+      tag: "Pillar 01",
+    },
+    {
+      title: "OPHRON HYGIENE",
+      subtitle: "Commercial, F&B kitchen, healthcare, carpet, marble & air hygiene",
+      href: "#services?service=hygiene",
+      tag: "Pillar 02",
+    },
+    {
+      title: "OPHRON FACILITIES",
+      subtitle: "IFM Lite, facade abseiling, event turnover, post-renovation & yachts",
+      href: "#services?service=facilities",
+      tag: "Pillar 03",
+    },
+    {
+      title: "OPHRON TECHNOLOGY",
+      subtitle: "Hospitality SaaS, AI automation & real-time operational reporting",
+      href: "#services?service=technology",
+      tag: "Pillar 04",
+    },
+    {
+      title: "COMMERCIAL INTELLIGENCE",
+      subtitle: "Labor optimization, cost reduction & executive margin advisory",
+      href: "#services?service=intelligence",
+      tag: "Pillar 05",
+    },
+  ];
+
+  const isActive = (linkHref: string) => {
+    if ((linkHref === "#top" || linkHref === "#home") && (hash === "" || hash === "#top" || hash === "#home")) {
+      return true;
+    }
+    if (linkHref === "#services" && hash.startsWith("#services")) {
+      return true;
+    }
+    return hash === linkHref;
+  };
 
   return (
     <>
       {/* Top ticker */}
-      <div className="fixed top-0 inset-x-0 z-40 bg-ink text-bone border-b border-white/10" style={{ background: "#0a0a0a", color: "#f5f1ea" }}>
+      <div className="fixed top-0 inset-x-0 z-40 text-bone border-b border-[#B7A38B]/20" style={{ background: "#032147", color: "#EDE5DA" }}>
         <div className="flex items-center justify-between px-5 py-2 text-[10px] font-mono tracking-[0.2em] uppercase">
           <div className="flex items-center gap-4">
-            <span className="opacity-70">CHENNAI</span>
+            <span className="opacity-90 font-bold text-[#B7A38B]">SINGAPORE & INTERNATIONAL</span>
+            <span className="opacity-40 hidden sm:inline">|</span>
+            <span className="hidden sm:inline font-bold text-[#EDE5DA]/90">OPHRON HOSPITALITY OPERATIONAL INFRASTRUCTURE PLATFORM</span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="hidden md:inline opacity-70">130+ healthcare brands scaled</span>
+            <a href="tel:+6592951155" className="hidden md:inline font-bold text-[#B7A38B] hover:text-white transition">
+              SG HOTLINE: +65 9295 1155
+            </a>
             <span className="opacity-50 hidden md:inline">·</span>
-            <span className="tabular-nums">{time || "— —:— IST"}</span>
+            <span className="tabular-nums font-semibold">{time || "— —:— IST"}</span>
           </div>
         </div>
       </div>
 
       <header className="fixed top-9 inset-x-0 z-50 transition-all duration-500" style={{ paddingTop: scrolled ? 8 : 16 }}>
-        <div className="mx-auto max-w-[1400px] px-5">
+        <div className="mx-auto max-w-[1400px] px-5 relative" ref={dropdownRef}>
           <div
             className={`flex items-center justify-between rounded-full pl-3 pr-2 py-2 transition-all duration-500 ${
               scrolled
-                ? "bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 shadow-[0_10px_40px_-10px_rgba(0,0,0,.4)]"
-                : "bg-[#0a0a0a] border border-[#0a0a0a]"
+                ? "bg-[#032147]/95 backdrop-blur-xl border border-[#B7A38B]/30 shadow-[0_10px_40px_-10px_rgba(3,33,71,.6)]"
+                : "bg-[#032147] border border-[#032147]"
             }`}
           >
-            <a href="#top" className="flex items-center gap-3 group pl-2">
-              <span className="relative grid place-items-center h-9 w-9 rounded-full bg-[#0000cd]">
-                <img src={logo} className="h-[18px] w-auto object-contain" alt="Medscale Systems Logo" />
+            {/* Logo */}
+            <a href="#top" className="flex items-center gap-3 group pl-2" onClick={() => setServicesDropdownOpen(false)}>
+              <span className="relative grid place-items-center h-9 w-9 rounded-full bg-[#B7A38B] shadow-[0_2px_10px_rgba(183,163,139,0.3)] transition-transform group-hover:scale-105">
+                <img src="/images/brand/ophron-navy-emblem-transparent.png" className="h-[20px] w-auto object-contain" alt="OPHRON Emblem" />
               </span>
               <div className="leading-none">
-                <div className="text-[15px] font-display font-medium tracking-tight text-bone" style={{ color: "#f5f1ea" }}>
-                  Medscale Systems
+                <div className="text-[15px] font-display font-bold tracking-tight text-bone" style={{ color: "#EDE5DA" }}>
+                  OPHRON
                 </div>
-                <div className="text-[9px] font-mono tracking-[0.22em] uppercase text-bone/50 mt-0.5" style={{ color: "rgba(245,241,234,.5)" }}>Healthcare Growth</div>
+                <div className="text-[8px] font-mono tracking-[0.2em] uppercase text-[#B7A38B] mt-0.5 font-bold">Operational Platform · SG</div>
               </div>
             </a>
 
-            <nav className="hidden md:flex items-center gap-0.5 text-[12px]" style={{ color: "#f5f1ea" }}>
-              {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className="group flex items-center gap-1.5 px-3.5 py-2 rounded-full hover:bg-white/5 transition"
-                >
-                  <span className="font-mono text-[9px] opacity-50 group-hover:text-[#0000cd] transition">{l.n}</span>
-                  <span className="font-medium">{l.label}</span>
-                </a>
-              ))}
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-0.5 text-[12px] uppercase font-heading font-medium tracking-wider" style={{ color: "#EDE5DA" }}>
+              {links.map((l) => {
+                const active = isActive(l.href);
+                if (l.hasDropdown) {
+                  return (
+                    <div
+                      key={l.label}
+                      className="relative"
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setServicesDropdownOpen((prev) => !prev)}
+                        className={`relative flex items-center gap-1.5 px-3.5 py-2 rounded-full transition cursor-pointer ${
+                          active || servicesDropdownOpen ? "text-white font-semibold" : "hover:bg-white/10"
+                        }`}
+                        aria-expanded={servicesDropdownOpen}
+                      >
+                        <span>{l.label}</span>
+                        <svg
+                          viewBox="0 0 24 24"
+                          className={`h-3 w-3 text-[#B7A38B] transition-transform duration-300 ${
+                            servicesDropdownOpen ? "rotate-180" : ""
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="m6 9 6 6 6-6" />
+                        </svg>
+                        {(active || servicesDropdownOpen) && (
+                          <span className="absolute bottom-0.5 left-3.5 right-3.5 h-[2.5px] bg-[#B7A38B] rounded-full" />
+                        )}
+                      </button>
+                    </div>
+                  );
+                }
+
+                return (
+                  <a
+                    key={l.label}
+                    href={l.href}
+                    onClick={() => setServicesDropdownOpen(false)}
+                    className={`relative flex items-center gap-1 px-3.5 py-2 rounded-full transition ${
+                      active ? "text-white font-semibold" : "hover:bg-white/10"
+                    }`}
+                  >
+                    <span>{l.label}</span>
+                    {active && (
+                      <span className="absolute bottom-0.5 left-3.5 right-3.5 h-[2.5px] bg-[#B7A38B] rounded-full" />
+                    )}
+                  </a>
+                );
+              })}
             </nav>
 
+            {/* Right Audit CTA & Mobile toggle */}
             <div className="flex items-center gap-2">
               <a
                 href="#contact"
-                className="hidden sm:inline-flex items-center gap-2 rounded-full bg-white text-[#0a0a0a] pl-4 pr-1.5 py-1.5 text-[12px] font-semibold hover:bg-[#0000cd] transition group"
+                onClick={() => setServicesDropdownOpen(false)}
+                className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[#B7A38B] text-[#032147] pl-4 pr-1.5 py-1.5 text-[12px] font-heading font-semibold hover:bg-white hover:text-[#032147] transition group"
               >
-                Book Intro Call
-                <span className="grid place-items-center h-7 w-7 rounded-full bg-[#0a0a0a] text-white transition-transform group-hover:rotate-45">
+                Request Platform Audit
+                <span className="grid place-items-center h-7 w-7 rounded-full bg-[#032147] text-[#EDE5DA] transition-transform group-hover:rotate-45">
                   <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M7 17 17 7M9 7h8v8" />
                   </svg>
@@ -92,9 +294,9 @@ export default function Nav() {
               </a>
               <button
                 onClick={() => setOpen((o) => !o)}
-                className="md:hidden grid place-items-center h-10 w-10 rounded-full border border-white/10"
+                className="md:hidden grid place-items-center h-11 w-11 rounded-full border border-white/15"
                 aria-label="Menu"
-                style={{ color: "#f5f1ea" }}
+                style={{ color: "#EDE5DA" }}
               >
                 <div className="space-y-1.5">
                   <span className={`block h-px w-5 bg-current transition ${open ? "translate-y-1.5 rotate-45" : ""}`} />
@@ -105,17 +307,299 @@ export default function Nav() {
             </div>
           </div>
 
-          {/* Mobile menu */}
-          <div className={`md:hidden overflow-hidden transition-all duration-500 ${open ? "max-h-96 mt-2 opacity-100" : "max-h-0 opacity-0"}`}>
-            <div className="rounded-3xl p-3 flex flex-col bg-[#0a0a0a] border border-white/10">
-              {links.map((l) => (
-                <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="flex items-center justify-between px-4 py-3 rounded-2xl hover:bg-white/5" style={{ color: "#f5f1ea" }}>
-                  <span className="flex items-center gap-3"><span className="font-mono text-[10px] opacity-50">{l.n}</span> {l.label}</span>
-                  <span>↗</span>
-                </a>
-              ))}
-              <a href="#contact" onClick={() => setOpen(false)} className="mt-1 mx-1 inline-flex justify-center rounded-2xl bg-white text-[#0a0a0a] px-4 py-3 text-sm font-semibold hover:bg-[#0000cd] transition">
-                Book Intro Call →
+          {/* ============================================================== */}
+          {/*  DESKTOP CLEAN MEGA-DROPDOWN BOX FOR SERVICES                 */}
+          {/* ============================================================== */}
+          <div
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            className={`hidden md:block absolute left-5 right-5 top-full mt-3 transition-all duration-300 ease-out origin-top ${
+              servicesDropdownOpen
+                ? "opacity-100 translate-y-0 pointer-events-auto scale-100"
+                : "opacity-0 -translate-y-3 pointer-events-none scale-[0.98]"
+            }`}
+          >
+            <div className="rounded-[28px] bg-[#032147]/98 backdrop-blur-2xl border border-[#B7A38B]/40 p-6 lg:p-7 shadow-[0_25px_60px_-12px_rgba(3,33,71,0.9)] text-[#EDE5DA] overflow-hidden">
+              
+              {/* Top Hub Bar: "All Services" Master Link */}
+              <a
+                href="#services"
+                onClick={() => setServicesDropdownOpen(false)}
+                className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:bg-[#B7A38B]/15 hover:border-[#B7A38B]/50 transition-all duration-300 mb-6"
+              >
+                <div className="flex items-center gap-3.5">
+                  <span className="grid place-items-center h-10 w-10 rounded-xl bg-[#B7A38B] text-[#032147] font-bold text-base shadow-sm group-hover:scale-105 transition-transform">
+                    ✦
+                  </span>
+                  <div>
+                    <div className="flex items-center gap-2.5">
+                      <span className="font-montserrat font-bold text-[15px] text-white tracking-tight">
+                        All Services & Master Platform Hub
+                      </span>
+                      <span className="text-[10px] font-mono uppercase bg-[#B7A38B]/20 text-[#B7A38B] px-2 py-0.5 rounded-full font-bold">
+                        Full Catalog
+                      </span>
+                    </div>
+                    <p className="text-[12.5px] font-inter text-[#EDE5DA]/75 mt-0.5">
+                      Explore the complete unified scope, chemical SOPs, and technical blueprints across Singapore & internationally.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-[12px] font-montserrat font-bold text-[#B7A38B] group-hover:text-white transition whitespace-nowrap pl-2">
+                  <span>View All Services Overview</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </a>
+
+              {/* Two Clean Columns: 6 Specialized Services vs 5 Master Platform Pillars */}
+              <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                
+                {/* Column 1: 6 Specialized Operational Services (Col span 7) */}
+                <div className="lg:col-span-7">
+                  <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-3.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#B7A38B] font-bold">
+                        [ 6 Specialized Operational Services ]
+                      </span>
+                    </div>
+                    <a
+                      href="#services?tab=catalog"
+                      onClick={() => setServicesDropdownOpen(false)}
+                      className="text-[10px] font-mono text-[#EDE5DA]/60 hover:text-[#B7A38B] transition uppercase font-semibold"
+                    >
+                      View SOP Catalog ↗
+                    </a>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-2.5">
+                    {specializedServices.map((item) => (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        onClick={() => setServicesDropdownOpen(false)}
+                        className="group/item flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.08] hover:border-[#B7A38B]/40 transition-all duration-200"
+                      >
+                        <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-white/5 text-[#B7A38B] font-bold shrink-0 mt-0.5 group-hover/item:bg-[#B7A38B] group-hover/item:text-[#032147] transition-colors">
+                          {item.tag}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="font-montserrat font-semibold text-[13px] text-white tracking-tight leading-snug group-hover/item:text-[#B7A38B] transition-colors flex items-center justify-between">
+                            <span className="truncate">{item.title}</span>
+                            <span className="opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all text-[11px] text-[#B7A38B]">
+                              →
+                            </span>
+                          </div>
+                          <p className="mt-1 text-[11.5px] font-inter text-[#EDE5DA]/65 line-clamp-2 leading-relaxed">
+                            {item.subtitle}
+                          </p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Column 2: 5 Master Platform Pillars (Col span 5) */}
+                <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-white/10 pt-4 lg:pt-0 lg:pl-8">
+                  <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-3.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#B7A38B] font-bold">
+                        [ 5 Master Platform Pillars ]
+                      </span>
+                    </div>
+                    <a
+                      href="#services?tab=pillars"
+                      onClick={() => setServicesDropdownOpen(false)}
+                      className="text-[10px] font-mono text-[#EDE5DA]/60 hover:text-[#B7A38B] transition uppercase font-semibold"
+                    >
+                      5 Pillars Scope ↗
+                    </a>
+                  </div>
+
+                  <div className="space-y-2">
+                    {masterPillars.map((item) => (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        onClick={() => setServicesDropdownOpen(false)}
+                        className="group/item flex items-start gap-3 p-2.5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.08] hover:border-[#B7A38B]/40 transition-all duration-200"
+                      >
+                        <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-[#B7A38B]/15 text-[#B7A38B] font-bold shrink-0 mt-0.5 group-hover/item:bg-[#B7A38B] group-hover/item:text-[#032147] transition-colors">
+                          {item.tag}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="font-montserrat font-semibold text-[13px] text-white tracking-tight leading-snug group-hover/item:text-[#B7A38B] transition-colors flex items-center justify-between">
+                            <span>{item.title}</span>
+                            <span className="opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5 transition-all text-[11px] text-[#B7A38B]">
+                              →
+                            </span>
+                          </div>
+                          <p className="mt-0.5 text-[11.5px] font-inter text-[#EDE5DA]/65 line-clamp-1 leading-relaxed">
+                            {item.subtitle}
+                          </p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Bottom Quick Strip */}
+              <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono text-[#EDE5DA]/70">
+                <div className="flex items-center gap-3">
+                  <span className="flex items-center gap-1.5 text-[#B7A38B] font-bold">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
+                    NEA Licensed
+                  </span>
+                  <span>·</span>
+                  <span className="font-semibold">bizSAFE Level 3</span>
+                  <span>·</span>
+                  <span className="font-semibold">WSQ Certified Workforce</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#EDE5DA]/50">Need a custom SLA?</span>
+                  <a
+                    href="#contact"
+                    onClick={() => setServicesDropdownOpen(false)}
+                    className="font-bold text-[#B7A38B] hover:text-white hover:underline transition uppercase"
+                  >
+                    Request Facility Assessment →
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* ============================================================== */}
+          {/*  MOBILE DRAWER MENU WITH ACCORDION                           */}
+          {/* ============================================================== */}
+          <div className={`md:hidden overflow-hidden transition-all duration-500 ${open ? "max-h-[85vh] mt-2 opacity-100 overflow-y-auto" : "max-h-0 opacity-0"}`}>
+            <div className="rounded-3xl p-3 flex flex-col bg-[#032147] border border-[#B7A38B]/30 space-y-1">
+              {links.map((l) => {
+                const active = isActive(l.href);
+
+                if (l.hasDropdown) {
+                  return (
+                    <div key={l.label} className="rounded-2xl overflow-hidden bg-white/[0.03] border border-white/5">
+                      <button
+                        type="button"
+                        onClick={() => setMobileServicesOpen((prev) => !prev)}
+                        className={`w-full flex items-center justify-between px-4 py-3 text-[13px] font-heading font-medium uppercase tracking-wider ${
+                          active ? "text-[#B7A38B]" : ""
+                        }`}
+                        style={{ color: active ? "#B7A38B" : "#EDE5DA" }}
+                      >
+                        <span className="flex items-center gap-2 font-bold">
+                          {l.label}
+                          <span className="text-[9px] font-mono text-[#B7A38B] bg-[#B7A38B]/20 px-1.5 py-0.2 rounded font-bold">
+                            11 SCOPES
+                          </span>
+                        </span>
+                        <svg
+                          viewBox="0 0 24 24"
+                          className={`h-4 w-4 text-[#B7A38B] transition-transform duration-300 ${
+                            mobileServicesOpen ? "rotate-180" : ""
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="m6 9 6 6 6-6" />
+                        </svg>
+                      </button>
+
+                      {/* Mobile Accordion Content */}
+                      <div className={`transition-all duration-300 overflow-hidden ${mobileServicesOpen ? "max-h-[600px] px-3 pb-3" : "max-h-0"}`}>
+                        <div className="pt-2 border-t border-white/10 space-y-3">
+                          
+                          {/* All Services Hub */}
+                          <a
+                            href="#services"
+                            onClick={() => {
+                              setOpen(false);
+                              setMobileServicesOpen(false);
+                            }}
+                            className="flex items-center justify-between p-2.5 rounded-xl bg-[#B7A38B]/20 text-white text-[12px] font-montserrat font-bold"
+                          >
+                            <span>✦ View All Services Hub</span>
+                            <span>→</span>
+                          </a>
+
+                          {/* 6 Specialized Services */}
+                          <div>
+                            <div className="text-[10px] font-mono uppercase tracking-[0.15em] text-[#B7A38B] font-bold mb-1.5 px-1">
+                              [ 6 Specialized Services ]
+                            </div>
+                            <div className="space-y-1">
+                              {specializedServices.map((srv) => (
+                                <a
+                                  key={srv.title}
+                                  href={srv.href}
+                                  onClick={() => {
+                                    setOpen(false);
+                                    setMobileServicesOpen(false);
+                                  }}
+                                  className="flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-[11.5px] font-inter text-[#EDE5DA]/90"
+                                >
+                                  <span className="truncate pr-2">{srv.title}</span>
+                                  <span className="text-[9px] font-mono text-[#B7A38B]">{srv.tag}</span>
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* 5 Master Pillars */}
+                          <div>
+                            <div className="text-[10px] font-mono uppercase tracking-[0.15em] text-[#B7A38B] font-bold mb-1.5 px-1">
+                              [ 5 Master Platform Pillars ]
+                            </div>
+                            <div className="space-y-1">
+                              {masterPillars.map((p) => (
+                                <a
+                                  key={p.title}
+                                  href={p.href}
+                                  onClick={() => {
+                                    setOpen(false);
+                                    setMobileServicesOpen(false);
+                                  }}
+                                  className="flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-[11.5px] font-inter text-[#EDE5DA]/90"
+                                >
+                                  <span className="truncate pr-2">{p.title}</span>
+                                  <span className="text-[9px] font-mono text-[#B7A38B]">{p.tag}</span>
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <a
+                    key={l.label}
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className={`flex items-center justify-between px-4 py-3 rounded-2xl hover:bg-white/10 text-[13px] font-heading font-medium uppercase tracking-wider ${
+                      active ? "text-[#B7A38B]" : ""
+                    }`}
+                    style={{ color: active ? "#B7A38B" : "#EDE5DA" }}
+                  >
+                    <span>{l.label}</span>
+                    <span>↗</span>
+                  </a>
+                );
+              })}
+
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="mt-2 mx-1 inline-flex justify-center rounded-2xl bg-[#B7A38B] text-[#032147] px-4 py-3 text-sm font-heading font-semibold hover:bg-white transition"
+              >
+                Request Platform Audit →
               </a>
             </div>
           </div>

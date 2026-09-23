@@ -1,102 +1,67 @@
-# <div align="center">⚖️ MedScale Systems</div>
+# <div align="center">✦ OPHRON Systems</div>
 
 <div align="center">
-  
-  **Healthcare's #1 Patient Acquisition & Growth Engine**
+  <strong>Hospitality Operational Infrastructure Platform</strong><br>
+  <em>Powering People, Hygiene, Facilities, Technology, and Commercial Intelligence across Singapore & Internationally</em>
+</div>
 
-  [![HIPAA Compliant](https://img.shields.io/badge/Compliance-HIPAA%20Compliant-a3d60c?style=for-the-badge&logo=shield)](https://github.com)
-  [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev)
-  [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev)
-  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-  [![Deploy to Netlify](https://img.shields.io/badge/Deploy_to-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://netlify.com)
+<br>
 
+<div align="center">
+  <img src="https://img.shields.io/badge/NEA%20License-Certified%20Operator-032147?style=for-the-badge" alt="NEA Licensed">
+  <img src="https://img.shields.io/badge/bizSAFE-Level%203%20WSH-B7A38B?style=for-the-badge" alt="bizSAFE Level 3">
+  <img src="https://img.shields.io/badge/WSQ-Workforce%20Certified-032147?style=for-the-badge" alt="WSQ Certified">
+  <img src="https://img.shields.io/badge/Active%20Contracts-140%2B%20Singapore-B7A38B?style=for-the-badge" alt="140+ Contracts">
 </div>
 
 ---
 
-## <div align="center">🔄 The Patient Acquisition Engine</div>
+## 🏛️ About OPHRON
 
-```mermaid
-graph TD
-    A[🎯 High-Intent Search Ads] -->|Google & Meta Campaigns| B(⚡ Instant WhatsApp Lead Nurture)
-    B -->|WhatsApp Business API / CRM| C(📞 Front-Desk Conversion Audit)
-    C -->|Sales Playbooks & Scripts| D(📈 High-Value Booked Patients)
-    D -->|Real-Time ROI Dashboard| E{🚀 Revenue Scale}
-    E -->|Reinvest & Optimize| A
-    style A fill:#0a0a0a,stroke:#ff5d3b,stroke-width:2px,color:#fff
-    style B fill:#0a0a0a,stroke:#c8ff3d,stroke-width:2px,color:#fff
-    style C fill:#0a0a0a,stroke:#ff5d3b,stroke-width:2px,color:#fff
-    style D fill:#0a0a0a,stroke:#c8ff3d,stroke-width:2px,color:#fff
-    style E fill:#0a0a0a,stroke:#ff5d3b,stroke-width:4px,color:#fff
-```
+**OPHRON Systems** is the master Hospitality Operational Infrastructure Platform engineered for hotels, restaurants, resorts, serviced apartments, healthcare facilities, and commercial establishments across Singapore and globally.
+
+Instead of fragmented vendor management, OPHRON delivers unified operational discipline across 5 core business pillars:
+
+1. **OPHRON PEOPLE**: Vetted hospitality manpower, kitchen stewarding, kitchen helpers, and housekeeping teams.
+2. **OPHRON HYGIENE**: SFA/HACCP kitchen deep cleaning, exhaust & canopy degreasing, Indoor Air Quality (IAQ) testing, and NEA-licensed electrostatic disinfection.
+3. **OPHRON FACILITIES**: Integrated Facility Management (IFM Lite), pest control, waste management, and minor maintenance.
+4. **OPHRON TECHNOLOGY**: Hotel/restaurant SaaS, AI workflow automation, and real-time operational reporting dashboards.
+5. **COMMERCIAL INTELLIGENCE**: Labor optimization, hygiene compliance audits, and operating overhead reduction.
 
 ---
 
-## 👤 Executive Profile — Isaac Vivian (Founder)
-> **"Business is less about intelligence and more about endurance. Most people never stay in the game long enough to discover what they’re truly capable of."**
+## 🏢 Singapore Office & Contact Details
 
-Isaac Vivian is the Founder of **MedScale Systems**, a specialized growth advisory and technology partner for premium aesthetic and cosmetic healthcare clinics. MedScale builds comprehensive patient acquisition infrastructures that integrate performance marketing, CRM automation, and front-desk sales processes to deliver scalable, predictable revenue growth.
-
----
-
-## 🛠️ The Architecture & Systems
-
-### 01. Google & Meta Acquisition
-Deploying performance marketing campaigns to capture prospective patients actively seeking aesthetic and cosmetic treatments.
-
-### 02. CRM & Follow-up Automation
-Integrating instant messaging auto-responses via WhatsApp Business API and custom CRM workflows to capture and nurture leads in under 5 minutes.
-
-### 03. Front-Desk Sales Alignment
-Auditing clinic booking scripts and training front-desk teams to maximize lead-to-consultation conversion rates.
-
-### 04. Real-Time ROI Dashboards
-Delivering complete visibility over customer acquisition costs (CAC), lifetime value (LTV), and marketing spend return.
+- **Primary Hotline**: +65 9295 1155
+- **Secondary Hotline**: +65 9646 6300
+- **WhatsApp**: +65 9295 1155 / +65 9646 6300
+- **Email**: admin@ophronsystems.com / kelvin@gkt-intel.com.sg
+- **Singapore HQ Address**: 26 Sin Ming Lane, #05-124 Midview City, Singapore 573971
+- **Operating Hours**: Monday – Sunday, 10:00 AM – 10:00 PM (Flexible 24/7 Shift Windows Available)
 
 ---
 
-## 🏆 Proven Results Delivered
-| Metric | Achievement | Impact |
-| :--- | :--- | :--- |
-| **Qualified Leads** | **50+ Leads / Month** | Predictable booking pipeline |
-| **Response Time** | **< 5 Minutes** | Instant patient engagement |
-| **ROI** | **3.5x Average ROI** | Scalable practice growth |
+## 🌟 Verified Singapore Clients & Venues Served
+
+- **Luxury Hotels & Hospitality**: Pan Pacific Hotels & Resorts, YOTEL Singapore Orchard, ATLAS Bar (Parkview Square)
+- **Michelin Dining & F&B**: 晴月 HAZUKI, Un-Yang Kor-Dai (Bib Gourmand), Wild Honey, Baker & Cook, Bengawan Solo, La Nonna, Spizza, Fool, Hayop, PappaRich, Go Noodle House, Hathaway, Bread Yard, Bācaro, Lion Brewery Co, Kafe Utu, Granary
+- **Corporate & Industrial**: Yamazaki Mazak Corporation, OSHO Towers, NTU Labs & Tech
 
 ---
 
-## 🔒 Security & HIPAA Compliance
-> [!IMPORTANT]
-> **HIPAA-Compliant by Design**
-> Every system, form, and database built by MedScale is encrypted in transit and at rest to protect sensitive patient records and Protected Health Information (PHI).
+## 🛠️ Tech Stack & Visual Design System
 
-* **Encrypted Lead Captures**: Standard secure SSL/TLS protocols for landing page forms.
-* **Server-Side Configurations**: Deployment profiles enforce strict clickjacking protection (`X-Frame-Options`), MIME protection, and HTTPS redirection.
-
----
-
-## 💻 Tech Stack & Deployment
-
-* **Frontend Framework**: React (TypeScript) + Vite
-* **Styling Engine**: Tailwind CSS
-* **Build Optimization**: `vite-plugin-singlefile` (Compiles all styles/scripts into a single, high-performance static HTML file)
-
-### Getting Started
-
-1. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-2. **Launch Dev Server**:
-   ```bash
-   npm run dev
-   ```
-3. **Build Production Asset**:
-   ```bash
-   npm run build
-   ```
+- **Framework**: React 19 + TypeScript + Vite
+- **Styling**: TailwindCSS 4 with Luxury Editorial Aesthetic
+- **Master Color Palette**:
+  - **Deep Royal Navy (70%)**: `#032147` (Logo, Headings, Buttons, Strong brand elements)
+  - **Warm Taupe / Muted Gold Beige (20%)**: `#B7A38B` (Accents, Borders, Premium highlights)
+  - **Soft Ivory / Warm Cream (10%)**: `#EDE5DA` (Backgrounds, Stationery, Clean spaces)
+- **Typography**: Canela (Display), Montserrat (Headings), Inter (Body), JetBrains Mono (Technical Details)
+- **Interactive UI**: HTML5 Canvas Particle Extrusions, 3D Scrub Video Engine, 3D Tilt Mockups, Dynamic Island Notifications.
 
 ---
 
 <div align="center">
-  <sub>Developed by MedScale Systems © 2026. All rights reserved.</sub>
+  <sub>Developed by OPHRON Systems © 2026. All rights reserved.</sub>
 </div>

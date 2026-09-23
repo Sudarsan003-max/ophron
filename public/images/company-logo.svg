@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="gkt-swoosh-grad" x1="0%" y1="20%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#005fae" />
+      <stop offset="35%" stop-color="#0089e0" />
+      <stop offset="75%" stop-color="#00b4ff" />
+      <stop offset="100%" stop-color="#0077d4" />
+    </linearGradient>
+    <linearGradient id="gkt-silver-facade" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eaf0f6" />
+      <stop offset="100%" stop-color="#b8c2cc" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(0, 10)">
+    <!-- LEFT BUILDING -->
+    <path d="M 115 160 L 205 125 L 205 285 C 160 288 135 282 115 270 Z" fill="#11161b" />
+    <path d="M 124 168 L 194 141 L 194 275 C 160 279 140 274 124 264 Z" fill="url(#gkt-silver-facade)" />
+    <rect x="133" y="198" width="22" height="24" rx="1.5" fill="#606870" />
+    <rect x="162" y="187" width="22" height="24" rx="1.5" fill="#606870" />
+    <rect x="133" y="230" width="22" height="24" rx="1.5" fill="#606870" />
+    <rect x="162" y="219" width="22" height="24" rx="1.5" fill="#606870" />
+
+    <!-- CENTER BUILDING -->
+    <path d="M 295 10 L 214 95 L 214 220 L 246 228 L 246 142 L 295 85 Z" fill="#11161b" />
+    <path d="M 295 10 L 246 85 L 246 308 C 275 312 288 312 295 312 Z" fill="url(#gkt-silver-facade)" />
+    <path d="M 295 10 L 320 102 L 320 312 C 308 312 295 312 295 312 Z" fill="#11161b" />
+
+    <!-- RIGHT BUILDING -->
+    <path d="M 320 102 L 400 135 L 468 152 L 468 315 L 320 312 Z" fill="#11161b" />
+    <path d="M 324 112 L 392 140 L 392 305 L 324 305 Z" fill="url(#gkt-silver-facade)" />
+    <!-- 12 Windows grid -->
+    <rect x="334" y="160" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="334" y="184" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="334" y="208" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="334" y="232" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="334" y="256" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="334" y="280" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="360" y="160" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="360" y="184" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="360" y="208" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="360" y="232" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="360" y="256" width="20" height="18" rx="1" fill="#606870" />
+    <rect x="360" y="280" width="20" height="18" rx="1" fill="#606870" />
+
+    <!-- DYNAMIC BLUE SWOOSH -->
+    <path d="M 40 215 C 5 300 110 380 295 380 C 475 380 555 315 515 270 C 500 252 472 245 465 250 C 458 255 472 272 450 292 C 412 328 325 352 280 352 C 125 352 68 300 95 242 C 105 218 68 190 40 215 Z" fill="url(#gkt-swoosh-grad)" />
+  </g>
+</svg>

@@ -1,266 +1,170 @@
 import { useState } from "react";
 import { SectionHead } from "./About";
-
-interface BlogCardProps {
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  onClick: () => void;
-}
+import { OPHRON_BLOG_POSTS, BlogPost } from "../data/ophronBlogPosts";
+import ArticleReaderModal from "./ArticleReaderModal";
+import {
+  MaskedHeadline,
+  ScrollReveal,
+  TiltCard,
+  CornerBrackets,
+} from "./ui/animations";
 
 export default function Blog() {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [activePost, setActivePost] = useState<BlogPost | null>(null);
+
+  const featuredPost = OPHRON_BLOG_POSTS[0];
 
   const channels = [
     {
       num: "01",
-      title: "Google Search Ads",
-      desc: "Capture high-intent searches like 'hair loss treatment Chennai' or 'skin clinic near me'. Puts your practice at the top from day one.",
-      badge: "HIGH INTENT",
-      metric: "Day 1 Leads",
+      title: "SFA & Kitchen Compliance",
+      desc: "Daily close-down protocols, grease-trap clearing, and canopy degreasing engineered to keep Singapore F&B kitchens SFA Grade A inspectable.",
+      badge: "SFA & HACCP",
+      metric: "Grade A Standards",
     },
     {
       num: "02",
-      title: "Instagram & Meta Ads",
-      desc: "Showcase before-and-after cases, treatment videos, and patient stories. Target by hyper-local radius, interests, and age.",
-      badge: "VISUAL DRIVE",
-      metric: "High ROI",
+      title: "NEA Disinfection Defense",
+      desc: "Electrostatic spraying & ULV fogging using NEA-approved compounds. Baseline pathogen suppression protecting your operating calendar.",
+      badge: "NEA APPROVED",
+      metric: "100% Suppression",
     },
     {
       num: "03",
-      title: "Google Business Profile",
-      desc: "Optimize local SEO to rank in Google Maps Top 3. The absolute highest-ROI tool driving free calls and driving directions.",
-      badge: "LOCAL POWER",
-      metric: "Free Calls",
+      title: "ESG & Green Mark Cleaning",
+      desc: "Low-VOC eco chemistry, automated dilution control, and closed-loop microfibre supporting Singapore Green Mark building disclosures.",
+      badge: "GREEN MARK ESG",
+      metric: "Low Chemical Load",
     },
     {
       num: "04",
-      title: "SEO & Blog Content",
-      desc: "Answering patient questions (e.g. 'what is PRP therapy?') builds organic trust and ranks you as the local authority long-term.",
-      badge: "TRUST BUILDER",
-      metric: "Authority",
+      title: "Workforce & Operational Log",
+      desc: "WSQ-trained, security-screened crews operating under named site supervisors with daily checklists and digital audit sign-offs.",
+      badge: "WSQ CERTIFIED",
+      metric: "Auditable SLA",
     },
   ];
 
   return (
-    <section id="blog" className="relative pt-28 pb-10 bg-ink overflow-hidden border-b border-white/5" style={{ background: "#0a0a0a", color: "#f5f1ea" }}>
+    <section id="blog" className="relative pt-28 pb-10 bg-[#032147] overflow-hidden border-b border-white/5" style={{ background: "#032147", color: "#EDE5DA" }}>
       {/* Glow Blob */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 h-[350px] w-[350px] rounded-full bg-[#0000cd]/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 h-[350px] w-[350px] rounded-full bg-[#B7A38B]/10 blur-[120px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-[1400px] px-5">
-        <SectionHead n="009" label="Insights & Guides" light />
+        <SectionHead n="006" label="Insights & Operations Research" light />
 
         <div className="mt-12 grid lg:grid-cols-12 gap-12 items-start">
           {/* Left Column: Featured Post Card */}
           <div className="lg:col-span-5 lg:sticky lg:top-32">
-            <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#0000cd] mb-4">[ Featured Article ]</div>
+            <ScrollReveal variant="up" delay={50}>
+              <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold mb-4">[ Featured Research ]</div>
+            </ScrollReveal>
             
-            <div className="group relative rounded-[28px] bg-white/[0.02] border border-white/10 p-6 sm:p-8 hover:bg-white/[0.04] hover:border-white/15 transition-all duration-300">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#0000cd]/10 border border-[#0000cd]/20 px-3 py-1 text-[10px] font-mono text-[#0000cd] uppercase tracking-[0.1em]">
-                PATIENT ACQUISITION · CASE
-              </span>
-              
-              <h3 className="mt-6 font-display text-3xl sm:text-4xl leading-[1.15] tracking-tight text-bone">
-                How Aesthetic Clinics in India Are Getting <span className="font-serif-i text-[#0000cd]">3x More Patients</span> Using Digital Marketing
-              </h3>
-              
-              <p className="mt-4 text-[14.5px] leading-relaxed text-bone/70">
-                Picture this: two clinics in the same city, offering the same treatments. One is fully booked three weeks in advance; the other struggles to fill slots. The difference is online visibility.
-              </p>
-              
-              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-end">
-                <a
-                  href="https://medscalesystems.com/digital-marketing-aesthetic-clinics-india/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#0000cd] text-ink pl-4 pr-1.5 py-1.5 text-[12px] font-semibold hover:bg-bone transition group/btn"
-                >
-                  Read Article
-                  <span className="grid place-items-center h-7 w-7 rounded-full bg-ink text-[#0000cd] transition-transform group-hover/btn:translate-x-0.5">
-                    →
-                  </span>
-                </a>
-              </div>
-            </div>
+            <ScrollReveal variant="left" delay={100}>
+              <TiltCard
+                maxTilt={6}
+                className="group relative rounded-[28px] bg-white/[0.03] border border-white/10 p-6 sm:p-8 hover:bg-white/[0.06] hover:border-[#B7A38B]/40 transition-all duration-300 shadow-xl"
+              >
+                <CornerBrackets color="#B7A38B" size={14} hoverSize={20} />
+                <span className="inline-flex items-center gap-2 rounded-full bg-[#B7A38B]/20 border border-[#B7A38B]/30 px-3 py-1 text-[10px] font-mono text-[#B7A38B] uppercase tracking-[0.1em] font-bold">
+                  SINGAPORE F&B · HYGIENE GUIDE
+                </span>
+                
+                <h3 className="mt-6 font-canela font-bold text-3xl sm:text-4xl leading-[1.15] tracking-tight text-[#EDE5DA]">
+                  Restaurant & Kitchen Deep Cleaning in Singapore: <span className="font-serif-i text-[#B7A38B]">SFA Compliance Guide</span>
+                </h3>
+                
+                <p className="mt-4 font-inter text-[14.5px] leading-relaxed text-[#EDE5DA]/80">
+                  Between SFA inspection grades, grease trap maintenance, and canopy fire safety, a Singapore kitchen's cleaning program is its license to operate. Here is how OPHRON ensures inspectable kitchens 24/7.
+                </p>
+                
+                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setActivePost(featuredPost)}
+                    className="inline-flex items-center gap-2 rounded-full bg-[#B7A38B] text-[#032147] pl-4 pr-1.5 py-1.5 text-[12px] font-montserrat font-bold hover:bg-white transition group/btn cursor-pointer hover:scale-105"
+                  >
+                    Read Research Guide
+                    <span className="grid place-items-center h-7 w-7 rounded-full bg-[#032147] text-[#EDE5DA] transition-transform group-hover/btn:translate-x-0.5">
+                      →
+                    </span>
+                  </button>
+                </div>
+              </TiltCard>
+            </ScrollReveal>
           </div>
 
           {/* Right Column: Scraped Insights Bento Cards */}
           <div className="lg:col-span-7">
-            <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#0000cd] mb-4">[ The 4 Growth Channels ]</div>
+            <ScrollReveal variant="up" delay={150}>
+              <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold mb-4">[ Operational Principles ]</div>
+            </ScrollReveal>
             
             <div className="grid sm:grid-cols-2 gap-4">
-              {channels.map((ch) => (
-                <div
-                  key={ch.num}
-                  className="group relative rounded-2xl bg-white/[0.01] border border-white/5 p-6 hover:border-white/15 hover:bg-white/[0.03] transition duration-300"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs text-bone/30 group-hover:text-[#0000cd] transition duration-300">{ch.num}</span>
-                    <span className="rounded-md bg-white/5 border border-white/10 px-2 py-0.5 font-mono text-[9px] text-bone/60 uppercase tracking-[0.1em]">
-                      {ch.badge}
-                    </span>
-                  </div>
+              {channels.map((ch, idx) => (
+                <ScrollReveal key={ch.num} variant="up" delay={idx * 100}>
+                  <TiltCard
+                    maxTilt={7}
+                    className="group relative rounded-2xl bg-white/[0.02] border border-white/10 p-6 hover:border-[#B7A38B]/40 hover:bg-white/[0.05] transition duration-300 h-full flex flex-col justify-between"
+                  >
+                    <CornerBrackets color="#B7A38B" size={10} hoverSize={16} />
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs text-[#B7A38B] font-bold group-hover:text-white transition duration-300">{ch.num}</span>
+                        <span className="rounded-md bg-white/5 border border-white/10 px-2 py-0.5 font-mono text-[9px] text-[#EDE5DA]/80 uppercase tracking-[0.1em]">
+                          {ch.badge}
+                        </span>
+                      </div>
 
-                  <h4 className="mt-4 font-display text-xl font-medium text-bone group-hover:text-[#0000cd] transition duration-300">
-                    {ch.title}
-                  </h4>
+                      <h4 className="mt-4 font-montserrat text-xl font-bold text-[#EDE5DA] group-hover:text-[#B7A38B] transition duration-300">
+                        {ch.title}
+                      </h4>
 
-                  <p className="mt-2 text-[13px] leading-relaxed text-bone/60">
-                    {ch.desc}
-                  </p>
+                      <p className="mt-2 font-inter text-[13px] leading-relaxed text-[#EDE5DA]/75">
+                        {ch.desc}
+                      </p>
+                    </div>
 
-                  <div className="mt-6 flex items-center justify-between text-[11px] font-mono border-t border-white/5 pt-4">
-                    <span className="opacity-40">Impact</span>
-                    <span className="text-[#0000cd]">{ch.metric}</span>
-                  </div>
-                </div>
+                    <div className="mt-6 flex items-center justify-between text-[11px] font-mono border-t border-white/10 pt-4">
+                      <span className="opacity-60">Standard</span>
+                      <span className="text-[#B7A38B] font-bold">{ch.metric}</span>
+                    </div>
+                  </TiltCard>
+                </ScrollReveal>
               ))}
             </div>
 
             {/* Quick Summary Banner */}
-            <div className="mt-6 rounded-2xl border border-[#0000cd]/15 bg-[#0000cd]/[0.02] p-5">
-              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#0000cd]">[ Digital Engine Verdict ]</div>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-bone/80">
-                Aesthetic clinics that dominate their local Indian market in 2026 treat digital marketing as a core business system. Combining high-intent search ads with visual social proof creates a compounding patient acquisition loop that runs 24/7.
-              </p>
-            </div>
+            <ScrollReveal variant="up" delay={300}>
+              <div className="mt-6 rounded-2xl border border-[#B7A38B]/30 bg-white/[0.03] p-5">
+                <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#B7A38B] font-bold">[ OPHRON Operating Verdict ]</div>
+                <p className="mt-2 font-inter text-[13.5px] leading-relaxed text-[#EDE5DA]/85">
+                  Hospitality establishments in Singapore that hold Grade A health ratings and zero SLA penalties treat cleaning as an integrated operational platform. Combining WSQ-certified crews with digital audit logging delivers complete SLA confidence 365 days a year.
+                </p>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
 
         {/* More Articles Button */}
-        <div className="mt-16 flex justify-center">
-          <a
-            href="#all-articles"
-            className="group inline-flex items-center gap-3.5 rounded-full border border-white/10 px-10 py-5 text-[15px] font-semibold hover:bg-white hover:text-ink transition duration-300"
-            style={{ color: "#f5f1ea" }}
-          >
-            More Articles
-            <span className="grid place-items-center h-7 w-7 rounded-full bg-white/10 text-bone group-hover:bg-[#0000cd] group-hover:text-ink transition-all">
-              →
-            </span>
-          </a>
-        </div>
+        <ScrollReveal variant="scale" delay={200}>
+          <div className="mt-16 flex justify-center">
+            <a
+              href="#all-articles"
+              className="group inline-flex items-center gap-3.5 rounded-full border border-white/20 px-10 py-5 text-[15px] font-montserrat font-bold hover:bg-white hover:text-[#032147] transition duration-300 hover:scale-105 shadow-xl"
+              style={{ color: "#EDE5DA" }}
+            >
+              Explore All OPHRON Research Articles
+              <span className="grid place-items-center h-7 w-7 rounded-full bg-[#B7A38B] text-[#032147] group-hover:bg-[#032147] group-hover:text-[#EDE5DA] transition-all">
+                →
+              </span>
+            </a>
+          </div>
+        </ScrollReveal>
       </div>
 
-      {/* Modal Reader Overlay */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-end bg-ink/80 backdrop-blur-md transition-all duration-300">
-          <div className="h-full w-full max-w-[720px] bg-[#0c0c0c] border-l border-white/10 p-8 sm:p-12 overflow-y-auto flex flex-col justify-between shadow-[20px_0_80px_rgba(0,0,0,0.8)]">
-            <div>
-              {/* Header inside modal */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-6">
-                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#0000cd]">Medscale Systems Insights</span>
-                <button
-                  onClick={() => setModalOpen(false)}
-                  className="group grid place-items-center h-10 w-10 rounded-full border border-white/10 hover:border-white/20 hover:bg-white/5 transition"
-                  aria-label="Close modal"
-                >
-                  <span className="font-mono text-xs text-bone group-hover:rotate-90 transition-transform duration-300">✕</span>
-                </button>
-              </div>
-
-              {/* Scrollable Content */}
-              <article className="mt-8 space-y-6 text-bone/80 text-[15.5px] leading-relaxed font-sans">
-                <span className="inline-block bg-[#0000cd]/10 px-2 py-0.5 rounded font-mono text-[10px] text-[#0000cd] uppercase tracking-[0.1em]">
-                  Comprehensive Guide
-                </span>
-                
-                <h2 className="font-display text-3xl sm:text-5xl leading-tight text-bone tracking-tight mt-3">
-                  How Aesthetic Clinics in India Get <span className="font-serif-i text-[#0000cd]">3x Patients</span>
-                </h2>
-
-                <p className="mt-4">
-                  Picture this: two aesthetic clinics in the same city, offering the same treatments at similar prices. One is fully booked three weeks in advance. The other is struggling to fill appointment slots.
-                </p>
-
-                <p>
-                  What is the difference? The first clinic shows up on Google when patients search for treatments. The second one does not.
-                </p>
-
-                <div className="border-l-2 border-[#0000cd] pl-4 py-1 my-6 italic text-bone/95">
-                  "In 2026, digital marketing is no longer optional for aesthetic clinics in India. It is the single biggest lever for growing your patient base."
-                </div>
-
-                <h3 className="font-display text-2xl text-bone mt-8 font-semibold">
-                  Why Digital Marketing Is Non-Negotiable
-                </h3>
-                <p>
-                  If your clinic is not visible online, you are invisible to 80% of your potential patients. Your competitor — who IS visible — is getting those bookings instead.
-                </p>
-
-                <h3 className="font-display text-2xl text-bone mt-8 font-semibold">
-                  The 4 Channels That Work Best
-                </h3>
-                
-                <div className="space-y-4 mt-4">
-                  <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4">
-                    <h4 className="font-display font-medium text-bone text-base">1. Google Search Ads</h4>
-                    <p className="mt-1 text-[13.5px] opacity-80">
-                      When someone types "hair loss treatment Chennai" or "laser skin treatment near me" into Google, they are ready to book. Google Search Ads put your clinic at the very top of those results instantly. Unlike SEO which takes months, Google Ads drive patient enquiries from day one.
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4">
-                    <h4 className="font-display font-medium text-bone text-base">2. Instagram and Meta Ads</h4>
-                    <p className="mt-1 text-[13.5px] opacity-80">
-                      Instagram is where aesthetic patients spend their time. Before-and-after photos, treatment videos, and patient testimonials perform exceptionally well. Meta Ads allow you to target by age, location, and interests — so you show your ads only to people most likely to book.
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4">
-                    <h4 className="font-display font-medium text-bone text-base">3. Google Business Profile</h4>
-                    <p className="mt-1 text-[13.5px] opacity-80">
-                      Your GBP is completely free and one of the highest-ROI tools available. When someone searches for a clinic near them, Google shows the top 3 local results. Clinics in those spots get the majority of calls and bookings. Optimising it can get you there within weeks.
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4">
-                    <h4 className="font-display font-medium text-bone text-base">4. SEO and Blog Content</h4>
-                    <p className="mt-1 text-[13.5px] opacity-80">
-                      SEO brings free, consistent traffic month after month. By writing helpful articles about treatments — like "what is PRP therapy" or "best treatment for acne scars in India" — your clinic appears when patients research their options. This builds trust before they call.
-                    </p>
-                  </div>
-                </div>
-
-                <h3 className="font-display text-2xl text-bone mt-8 font-semibold">
-                  5 Common Mistakes to Avoid
-                </h3>
-                <ul className="list-disc list-inside space-y-2 text-[14.5px]">
-                  <li>Not tracking leads to actual consult conversions.</li>
-                  <li>Ignoring HIPAA / local healthcare advertising laws.</li>
-                  <li>Failing to showcase authentic before-and-after proofs.</li>
-                  <li>Bidding on broad terms rather than local high-intent keywords.</li>
-                  <li>Slow response time (leads cool down in 15 minutes).</li>
-                </ul>
-
-                <h3 className="font-display text-2xl text-bone mt-8 font-semibold">
-                  How to Get Started: Your 30-Day Plan
-                </h3>
-                <p>
-                  Aesthetic clinics in India that are growing consistently in 2026 have one thing in common: they treat digital marketing as a core business system, not an afterthought. Google Ads, Instagram Ads, Local SEO, and content marketing working together create a patient acquisition engine that runs 24 hours a day. The clinics that build this system now will dominate their local markets over the next 3 to 5 years.
-                </p>
-
-                <p className="mt-6 pt-6 border-t border-white/10 text-xs font-mono opacity-50">
-                  © Medscale Systems Research. All rights reserved.
-                </p>
-              </article>
-            </div>
-
-            <div className="mt-8 border-t border-white/10 pt-6 flex items-center justify-between">
-              <div className="text-[12px]">
-                Ready to scale?
-              </div>
-              <button
-                onClick={() => { setModalOpen(false); window.location.hash = "contact"; }}
-                className="rounded-full bg-[#0000cd] text-ink px-5 py-2.5 text-xs font-semibold hover:bg-bone transition"
-              >
-                Book Free Audit
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ArticleReaderModal post={activePost} onClose={() => setActivePost(null)} />
     </section>
   );
 }
+

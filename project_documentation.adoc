@@ -1,0 +1,633 @@
+= Medscale Systems: Overkill Technical & Creative Blueprint
+:toc: left
+:toclevels: 3
+:sectnums:
+:source-highlighter: rouge
+:icons: font
+:stem: latexmath
+
+This document provides a highly exhaustive, comprehensive architectural analysis of the **Medscale Systems** healthcare growth studio website. It details both the **creative decisions** (brand identity, design psychology, color theory, typography, and motion aesthetics) and the **technical execution** (performance characteristics, physics calculations, memory structures, custom canvas renderers, and responsive layout architectures).
+
+---
+
+== Creative & UX Breakdown (The "Why")
+
+The user experience (UX) and visual design system of Medscale Systems are engineered to project absolute authority in the medical marketing sector. It rejects standard SaaS templates in favor of a bespoke, editorial design language that builds trust, validates expertise, and encourages clinician engagement.
+
+=== 1. Brand Identity & Positioning
+Medscale Systems positions itself as a premium, highly specialized growth studio rather than a generic digital marketing agency. The branding speaks directly to medical doctors, clinic founders, and healthcare executives.
+* **Clinical Precision:** The structure uses clean grid lines, clear modular containers, and highly readable, structured monospace metadata cards.
+* **Agency Authority:** Bespoke animations and high-end editorial layouts convey that the studio possesses the technical sophistication and creative capability to build premium patient-acquisition systems.
+* **Compliance Consciousness:** The emphasis on HIPAA compliance, secure funnels, and data integrity is woven directly into the visual assets, employing locks, shields, and secure dashboard mockups.
+
+=== 2. Color Psychology & Palette Harmony
+The color system creates a high-contrast, tactile environment:
+
+[cols="1,2,3", options="header"]
+|===
+| Color Name | Tailwind Variable / Hex | Creative & Psychological Purpose
+| **Bone** | `--color-bone` / `#f5f1ea` | Tactile off-white paper tone. Replaces sterile digital white with an organic, high-end print look. It reduces eye strain and establishes a premium publishing aesthetic.
+| **Bone 2** | `--color-bone-2` / `#ebe5da` | Secondary container fill and structural borders. Provides depth layering on top of the base bone color.
+| **Ink** | `--color-ink` / `#0a0a0a` | Global dark tone. Represents clinical authority, ink on paper, and absolute readability. Used for text and primary dark cards.
+| **Ink 2** | `--color-ink-2` / `#141414` | High-density black. Used to define absolute backgrounds and deep card structures.
+| **Brand Blue** | `--color-lime` / `#0000cd` | Medium blue. Represents clinical safety, technology, and trust. Used for primary call-to-actions, indicators, and canvas highlights.
+| **Royal Blue** | `--color-lime-2` / `#4169e1` | Vibrant accent blue. Symbolizes flow, energy, and digital capabilities.
+| **Coral** | `--color-coral` / `#ff5d3b` | Secondary orange highlight. Inspires action, highlights critical badges (e.g. "● LIVE NOW"), and draws the eye to click triggers.
+|===
+
+=== 3. Typography Psychology & Hierarchy
+Typography defines the emotional tone of the content:
+* **Sans Font (`'Inter'`):** Used for bulk body copy and descriptive paragraphs. Chosen for its clean, uniform proportions that maximize text legibility across all display devices.
+* **Display Font (`'Geist'`):** Applied to major section headings with tight tracking (`tracking-[-0.05em]`) and a medium-to-semibold weight. This condensed, high-density style creates a modern, clinical presence.
+* **Serif Font (`'Instrument Serif'`):** Embedded in headings as an italicized modifier (e.g., _captivate_, _re-engineered_, _rapidly_). This editorial, humanist font breaks up the clinical grid and introduces a personal, high-end editorial feel.
+* **Mono Font (`'JetBrains Mono'`):** Utilized for metadata strips, card index numbers (e.g. `[ Manifesto / 01 ]`), and metrics. Emphasizes structure, data-rich accuracy, and automation.
+
+=== 4. Motion Design Principles
+The motion language across Medscale Systems is built on a few core principles:
+* **Asymmetric Transitions:** Rather than standard linear eases, reveals and scrolls use customized cubic-bezier parameters (`cubic-bezier(0.2, 0.7, 0.2, 1)`). This profile features a fast initial acceleration followed by a slow, elegant deceleration.
+* **Micro-Animations:** Interactive components utilize subtle feedback loops. Buttons shimmer (`btn-shimmer`), badges float (`floaty`), and text underlines draw out dynamically (`underline-draw`) to invite cursor interaction.
+* **Continuity of Space:** Transitions (like expanding the Dynamic Island on the mock iPhone or shifting tabs on the MacBook mock) occur inline within the components. This design keeps the user oriented and maintains spatial mapping.
+
+---
+
+== Layout & Component Architecture (Section-by-Section Breakdown)
+
+The website is structured as a modular single-page interface, with hash-routed sections and clean structural divider borders.
+
+=== 1. Navigation Header (`Nav.tsx`)
+* **Layout:** A top fixed black ticker bar showing location ("CHENNAI") and time zone calculations (`Asia/Kolkata` IST), followed by a sticky floating header that dynamically adjusts padding and background styles.
+* **Interactions:** When scrolled past 24px, the capsule transitions from transparent to a dark blurred overlay:
+[source,css]
+----
+bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 shadow-[0_10px_40px_-10px_rgba(0,0,0,.4)]
+----
+* **Desktop Menu:** Minimalist horizontal links menu with numeric index highlights (`01 Work`, `02 Services`, `03 Studio`, `04 Results`, `05 Blog`, `06 Founder`).
+* **Mobile Menu:** Accordion-style layout toggled by a custom SVG hamburger button which morphs into a close `X` symbol.
+
+=== 2. Hero Section (`Hero.tsx` & `ScrubVideo.tsx`)
+* **Layout:** Asymmetric editorial split. Left side hosts the large display header (`Healthcare growth, re-engineered.`) and studio manifesto. Right side is left empty to reveal the underlying interactive 3D video.
+* **Stats Metric Row:** Spans the full width of the container, housing incrementing counter elements.
+* **Increment Counter Hook (`useCount`):** Utilizes requestAnimationFrame and cubic-bezier easing to count from 0 to target metrics (e.g., 130+ Brands, $400K+ Revenue, 428% Avg Lead Growth, -89% Cost Per Lead) over a duration of 1800-2200ms.
+* **Social Proof Block:** Features cellular-style clinic avatar tags, review star clusters, and a rating value badge ("4.98 / 5").
+* **Bottom Services Marquee:** Infinite scrolling horizontal ticker displaying services (e.g. HIPAA-Compliant Funnels, Performance Marketing) separated by rotating star vectors (`✦`).
+
+=== 3. Logo Wall (`Logos.tsx`)
+* **Layout:** Modular full-width layout with a double-marquee track.
+* **Interactions:** The top row of hospital/clinic logos scrolls left-to-right (`marquee-track`), while the bottom row scrolls right-to-left (`marquee-track-rev`) at a linear pace of 40-50s, creating counter-directional movement.
+
+=== 4. About Studio Bento (`About.tsx`)
+* **Layout:** Tactical Bento Grid layout separating distinct clinic highlights:
+  * **Brand Count Card:** Displays metric statistics in bold type.
+  * **Healthcare Focus Card:** Highlights the medical marketing specialty.
+  * **Specialist Count Card:** Showcases team dimensions.
+  * **Founder Card:** Features an offset circular avatar of Isaac Vivian and brief professional biography description. Clicking this card changes URL hash to `#founder` to load the profile view.
+* **Sticker Pop Badge:** Floating absolute element ("● LIVE NOW") positioned at a rotated angle (`-rotate-[8deg]`) using a continuous elastic pulse keyframe animation.
+* **Metric Bar Indicators:** Vertical status column chart detailing clinic optimization percentages (Engaging Content, Data Analytics, Brand Visibility, ROI Optimization) that animate from 0 to target heights upon viewport entry.
+
+=== 5. Problems Section (`Problems.tsx`)
+* **Layout:** Grid separating typical healthcare agency issues (Left column) and Medscale's solutions (Right column).
+* **Styling:** Traditional agency problems are styled with dark backgrounds, red accent highlights (`--color-coral`), and crossing-out strike vectors. Medscale solutions utilize Brand Blue (`--color-lime`), checkmarks, and secure locks icons.
+
+=== 6. Approach Section (`Approach.tsx`)
+* **Layout:** Clean layout showcasing the MacBook OS mockup container.
+* **MacBook OS Mockup:** Formatted using CSS `@container` queries and `cqi` units for proportional scaling of all parts. Features dynamic webcam sensors, metallic chassis highlights, and a display hinge.
+* **Pill Selector Slideshow:** Clicking slide navigation buttons (`01 Amplify`, `02 Engage`, `03 Educate`, `04 Deliver`) pauses the autoplay loop and updates the displayed graphs.
+* **Path Graph Interpolation:** Smoothly morphs SVG graph line paths by interpolating coordinates (`d="..."` attribute) using CSS transitions.
+
+=== 7. Solutions Section (`Solutions.tsx`)
+* **Layout:** 3-row grid detailing core patient acquisition steps:
+  * **Attract:** Custom traffic funnels, search/social campaigns.
+  * **Convert:** Secure patient booking systems.
+  * **Retain:** LTV marketing, automations.
+* **Styling:** Employs large number identifiers, high-contrast grid borders, and minimal descriptions.
+
+=== 8. System Showcase (`Showcase.tsx`)
+* **Layout:** Extensive 3D perspective display.
+* **Flanking 3D Cards:** Cards are styled with perspective rotations:
+  * Card 1 (Leftmost vertical bars): `rotateY(20deg) translateZ(-30px)`
+  * Card 2 (Revenue Chart): `rotateY(13deg) translateZ(-10px)`
+  * Card 4 (Acquisition Velocity): `rotateY(-13deg) translateZ(-10px)`
+  * Card 5 (Rightmost blocks): `rotateY(-20deg) translateZ(-30px)`
+* **Titanium iPhone Mockup (Card 3):** High-end mockup with volume buttons, speaker grill, cellular signal bars, Dynamic Island sensor badge, and interactive footer tabs.
+* **Tab-Switching Slideshow:** Cycles through four custom mobile scenes (Brand Intro, Performance gauge, HIPAA Patient funnel, Testimonial cards) with active indicators.
+
+=== 9. Why Us Section (`WhyUs.tsx`)
+* **Layout:** 3-column card block showcasing structural advantages:
+  * Healthcare focus.
+  * Proprietary CRM integrations.
+  * Full-funnel compliance and data security.
+
+=== 10. Testimonials (`Testimonials.tsx`)
+* **Layout:** Grid displaying client reviews, profile details, stars rating, and clinic labels.
+
+=== 11. Blog & Articles Section (`Blog.tsx` & `AllArticles.tsx`)
+* **Layout:** Displays growth case studies and clinical marketing guides.
+* **Hash Routing:** Clicking "View all articles" updates the URL hash to `#all-articles` to render the full list of logs.
+
+=== 12. Contact Form (`Contact.tsx`)
+* **Layout:** Split layout. Left side details booking information. Right side features a multi-step project intake form.
+* **Validation:** Custom interactive inputs validate clinic dimensions, selected budgets, and contact credentials before submission.
+
+=== 13. Cinematic Footer (`Footer.tsx` & `ui/footer-3d-background.tsx`)
+* **Layout:** Dark container housing a 3D perspective grid floor, glowing background orbs, floating glass shapes, and a canvas displaying particle text.
+
+=== 14. Founder Bio Subpage (`Founder.tsx`)
+* **Layout:** Subpage rendered when URL hash is set to `#founder`. Detailed executive profile view.
+* **Editorial Squircle Portrait:** Features Isaac Vivian's profile image wrapped in offset border brackets, a glass backdrop, and technical crop indicators.
+* **Likes Interactive Feed:** Users can interact with three LinkedIn post cards, which dynamically update likes counters and save active states using standard React state hooks.
+
+=== 15. Mainframe subpage (`MainframeHero.tsx`)
+* **Layout:** A clean, high-contrast standalone section rendered when the URL hash is set to `#mainframe`. It features a full-screen layout with an editorial contact/inquiry form and an interactive multi-select tool.
+* **Interaction:** Integrates `ScrubVideo` as a background layer, running the CloudFront 3D video. Selected services use spring-loaded buttons and toggle a dynamic status banner with responsive micro-transitions.
+
+---
+
+== Technical Deep Dive: Core Animation Systems & Visual Effects
+
+The premium feel of the Medscale Systems website is driven by custom canvas renders, physics math, and hardware-accelerated CSS.
+
+=== 1. Interactive 3D Frame Scrubbing (`ScrubVideo.tsx`)
+
+==== The Seeking Problem
+Seeking a `<video>` element on `mousemove` by setting `currentTime` causes massive browser lag. Most compressed videos (like H.264) are encoded with a **Long GOP (Group of Pictures)** structure, meaning only occasional frames (keyframes/I-frames) store complete images, while intermediate frames (P/B-frames) store only differences. When the browser seeks, it must decode every frame from the nearest preceding keyframe up to the target timestamp. For a 4K frame, this demands massive CPU/GPU processing on every mouse event, resulting in low frame rates.
+
+==== The Frame Cache Solution
+To solve this, `ScrubVideo.tsx` pre-decodes the entire clip in memory once upon mounting:
+
+1. **Auto-Preplay:** The video element is played at double speed (`playbackRate = 2.0`) in a muted, hidden state.
+2. **rVFC Capture:** Using the `requestVideoFrameCallback` API (or a high-frequency interval fallback), the browser notifies the component when a new video frame is ready for composition.
+3. **Canvas Downscaling:** The frame is drawn onto an offscreen canvas downscaled to a maximum dimension of 1024px.
+4. **ImageBitmap Extraction:** Using `createImageBitmap(canvas)`, the pixel buffer is converted to a GPU-ready image texture and pushed to an in-memory sorted array:
+[source,typescript]
+----
+type Frame = { time: number; bmp: ImageBitmap };
+const frames: Frame[] = [];
+----
+5. **Video Disposal:** Once the video ends, the browser releases the heavy video element (`video.removeAttribute('src')`), freeing up memory.
+
+==== Eased Mouse Interaction
+On mouse movement, the mouse's horizontal position maps to a target time:
+[source,typescript]
+----
+targetTime += ((x - prevX) / window.innerWidth) * sensitivity * duration;
+targetTime = Math.max(0, Math.min(targetTime, duration));
+----
+
+An eased rendering loop uses a Hookean-style interpolation to continuously adjust the displayed frame time toward the target time, ensuring fluid transitions even when the mouse stops abruptly:
+[source,typescript]
+----
+const tick = () => {
+  const diff = targetTime - displayTime;
+  if (Math.abs(diff) < 0.0008) {
+    displayTime = targetTime;
+    renderAt(displayTime);
+    rafId = 0;
+    return;
+  }
+  displayTime += diff * 0.2; // 0.2 represents the easing coefficient
+  renderAt(displayTime);
+  rafId = requestAnimationFrame(tick);
+};
+----
+
+To display the frame, a binary search retrieves the nearest cached `ImageBitmap` to render onto the display canvas:
+[source,typescript]
+----
+const nearestIndex = (t: number) => {
+  let lo = 0;
+  let hi = frames.length - 1;
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1;
+    if (frames[mid].time < t) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+};
+----
+
+==== Dynamic Canvas Cover-Cropping Math
+To scale and crop each video frame to cover the entire canvas without distorting the aspect ratio, `ScrubVideo.tsx` implements a custom Canvas 2D equivalent of CSS `object-fit: cover` using alignment focus parameters (\(F_x, F_y \in [0, 1]\)):
+
+1. **Calculate Scale Factor:** The scale factor is determined by comparing the width and height ratios of the canvas (\(C_w, C_h\)) to the source dimensions of the `ImageBitmap` (\(S_w, S_h\)):
+   \[scale = \max\left(\frac{C_w}{S_w}, \frac{C_h}{S_h}\right)\]
+2. **Compute Destination Dimensions:**
+   \[D_w = S_w \times scale\]
+   \[D_h = S_h \times scale\]
+3. **Calculate Offset Positioning:** The cropped coordinate offsets are computed using the horizontal and vertical focus coordinates (\(F_x, F_y\)) to center or align the frame:
+   \[D_x = (C_w - D_w) \times F_x\]
+   \[D_y = (C_h - D_h) \times F_y\]
+   In code:
+[source,typescript]
+----
+const scale = Math.max(cw / sw, ch / sh);
+const dw = sw * scale;
+const dh = sh * scale;
+const dx = (cw - dw) * focusX;
+const dy = (ch - dh) * focusY;
+ctx.drawImage(source, dx, dy, dw, dh);
+----
+
+==== Fallback Matrix
+[cols="1,2", options="header"]
+|===
+| Environment | Execution Mode
+| **Touch / Mobile / Safari iOS** | Traditional muted, looping autoplay video element.
+| **Prefers Reduced Motion** | Video is loaded and seeked once to a static midpoint frame, disabling interaction.
+| **Desktop (No rVFC Support)** | Direct seeking on the `<video>` element throttled by `seeked` callbacks.
+|===
+
+---
+
+=== 2. Physics-Based 3D Dotted Wordmark (`ui/particle-text.tsx`)
+
+Located in the footer, `ParticleText` renders an interactive, 3D-extruded wordmark ("Medscale Systems") using HTML5 Canvas.
+
+```mermaid
+graph TD
+  Init[Mount Component] --> TextOff[Render Text to Offscreen Canvas]
+  TextOff --> Pixels[Extract Pixel Data via getImageData]
+  Pixels --> Generate[Filter Coordinates & Generate Particles]
+  Generate --> PreRender[Pre-render Blue Extrusion Layers to Static Canvas]
+  PreRender --> Loop[Loop: requestAnimationFrame]
+  Loop --> MouseDist{Cursor within radius?}
+  MouseDist -- Yes --> Force[Apply Outward Force Vector]
+  MouseDist -- No --> Spring[Apply Spring-back Force to Home Coordinates]
+  Force --> Velocity[Update Particle Position & Velocity]
+  Spring --> Velocity
+  Velocity --> Draw[Draw: Render Static Extrusions + Dynamic Active Dots]
+  Draw --> Loop
+```
+
+==== Offscreen Text Sampling & Scaling Algorithm
+To render the wordmark onto the offscreen canvas, the engine uses a proportional text fitting algorithm that ensures the text covers a specific width target (\(W_{\text{target}} = 92\%\) of canvas width) while keeping within vertical bounds (\(H_{\text{max}} = 82\%\) of canvas height):
+
+1. **Initial Parameter Estimation:** The system sets an initial font size equal to the canvas height:
+   \[F_{\text{initial}} = H\]
+2. **Text Measurement:** Draws and measures the text width on the context:
+   \[W_{\text{measured}} = \text{context.measureText}(text).width\]
+3. **Scale Proportional Fitting:** Scales the font size to exactly match the target width percentage:
+   \[F_{\text{scaled}} = \frac{F_{\text{initial}} \times (W_{\text{canvas}} \times 0.92)}{W_{\text{measured}}}\]
+4. **Clamping Bounds:** Clamps the final font size so it does not overflow vertically:
+   \[F_{\text{final}} = \min(F_{\text{scaled}}, H \times 0.82)\]
+   In code:
+[source,typescript]
+----
+let fontSize = height;
+sctx.font = `800 ${fontSize}px ${family}`;
+const measured = sctx.measureText(text).width || 1;
+fontSize = (fontSize * (width * 0.92)) / measured;
+fontSize = Math.min(fontSize, height * 0.82);
+sctx.font = `800 ${fontSize}px ${family}`;
+sctx.fillText(text, width / 2, height / 2);
+----
+5. **Alpha-Channel Scan:** Calls `sctx.getImageData` and samples pixels in steps to compile home coordinates:
+[source,typescript]
+----
+const data = sctx.getImageData(0, 0, width, height).data;
+for (let y = 0; y < height; y += gap) {
+  for (let x = 0; x < width; x += gap) {
+    if (data[(y * width + x) * 4 + 3] > 128) {
+      // Create particle record at home coordinates (hx, hy)
+    }
+  }
+}
+----
+
+==== 3D Static Extrusion
+To render the 3D depth effect efficiently, the component pre-renders a series of overlapping offset layers of the wordmark onto a static backplate canvas. The offset layers decrease in brightness to simulate lighting depth:
+[source,typescript]
+----
+const extDepth = Math.max(8, fontSize * 0.13); // Extrusion depth based on text size
+const layers = Math.max(8, Math.round(extDepth / 1.6));
+for (let i = layers; i >= 1; i--) {
+  const f = i / layers;
+  const t = 1 - f;
+  const off = f * extDepth;
+  // Blend colors from deep blue (far) to bright blue (near)
+  const r = Math.round(EXT_FAR[0] + (EXT_NEAR[0] - EXT_FAR[0]) * t);
+  const g = Math.round(EXT_FAR[1] + (EXT_NEAR[1] - EXT_FAR[1]) * t);
+  const b = Math.round(EXT_FAR[2] + (EXT_NEAR[2] - EXT_FAR[2]) * t);
+  ectx.fillStyle = `rgb(${r},${g},${b})`;
+  
+  const px = off * 0.55; // Horizontal shear direction
+  const py = off * 0.62; // Vertical shear direction
+  for (let k = 0; k < next.length; k++) {
+    ectx.fillRect(next[k].hx + px, next[k].hy + py, extSize, extSize);
+  }
+}
+----
+
+==== Physics Engine
+On every frame, the engine runs a particle simulation loop:
+1. **Mouse Repulsion:** If the distance `d` between the particle and the cursor is within `RADIUS` (70px), the particle experiences an outward push proportional to proximity:
+   [source,typescript]
+   ----
+   const force = (RADIUS - d) / RADIUS;
+   p.vx += (dx / d) * force * 3.2;
+   p.vy += (dy / d) * force * 3.2;
+   if (force > p.energy) p.energy = force; // Store displacement energy
+   ----
+2. **Spring Back (Hooke's Law):** The particle is pulled back to its home coordinate `(hx, hy)` by a restoring spring force:
+   [source,typescript]
+   ----
+   p.vx += (p.hx - p.x) * 0.12; // Spring constant
+   p.vy += (p.hy - p.y) * 0.12;
+   ----
+3. **Friction Damping:** Velocity is scaled down on every frame to prevent infinite oscillation:
+   [source,typescript]
+   ----
+   p.vx *= 0.8; // Damping factor
+   p.vy *= 0.8;
+   p.x += p.vx;
+   p.y += p.vy;
+   p.energy *= 0.92; // Energy decay
+   ----
+4. **Color & Glow Interpolation:** The particle's energy controls its render color, transitioning from solid white at rest to glowing light-blue when displaced:
+   [source,typescript]
+   ----
+   const r = Math.round(FACE[0] + (TOUCH[0] - FACE[0]) * p.energy);
+   const g = Math.round(FACE[1] + (TOUCH[1] - FACE[1]) * p.energy);
+   const b = Math.round(FACE[2] + (TOUCH[2] - FACE[2]) * p.energy);
+   ctx.fillStyle = `rgb(${r},${g},${b})`;
+   
+   if (p.energy > 0.05) {
+     ctx.shadowColor = `rgba(96,156,255, ${0.7 * p.energy})`;
+     ctx.shadowBlur = 10 * p.energy;
+   }
+   ctx.fillRect(p.x, p.y, p.size + p.energy * 1.6, p.size + p.energy * 1.6);
+   ----
+
+---
+
+=== 3. 3D Gimbal Card Rotation & Specular Glare (`Showcase.tsx`)
+
+The system showcase incorporates a parent 3D perspective field containing five panels. The central panel is a high-fidelity iPhone mock, flanked by angled dashboards that respond to cursor movement.
+
+==== Perspective Setup
+The outer showcase flex container establishes a 3D workspace:
+[source,css]
+----
+perspective: 1500px;
+transform-style: preserve-3d;
+----
+
+The flanking cards are statically angled in 3D space to form a curved layout:
+* **Card 1 (Leftmost):** `rotateY(20deg) translateZ(-30px) scale(0.91)`
+* **Card 2 (Middle Left):** `rotateY(13deg) translateZ(-10px) scale(0.97)`
+* **Card 3 (Center iPhone):** `translateZ(35px) scale(1.01)`
+* **Card 4 (Middle Right):** `rotateY(-13deg) translateZ(-10px) scale(0.97)`
+* **Card 5 (Rightmost):** `rotateY(-20deg) translateZ(-30px) scale(0.91)`
+
+==== Dynamic Gimbal Tilt
+When hovering over Cards 2, 3, or 4, a mousemove listener tracks the cursor coordinate relative to the card's center:
+[source,typescript]
+----
+const rect = card.getBoundingClientRect();
+const x = (e.clientX - rect.left) / rect.width - 0.5;  // Range: -0.5 to 0.5
+const y = (e.clientY - rect.top) / rect.height - 0.5;  // Range: -0.5 to 0.5
+setTilt({ id: cardId, x, y });
+----
+
+This coordinate offsets the card's 3D rotation, creating a responsive tilt effect:
+[source,typescript]
+----
+// Example: Card 2 Tilt calculation
+transform: `rotateY(${13 + tilt.x * 16}deg) rotateX(${-tilt.y * 16}deg) translateZ(25px) scale(1.03)`
+----
+
+==== Specular Glare Reflection
+To simulate a glass surface, an absolute overlay uses a linear gradient that shifts in the opposite direction of the tilt:
+[source,typescript]
+----
+const rx = tilt.x * -35;
+const ry = tilt.y * -35;
+----
+[source,html]
+----
+<div 
+  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.09] z-30"
+  style={{ transform: `translate(${rx}px, ${ry}px) rotate(30deg) scale(1.5)` }}
+/>
+----
+
+==== CSS Radial Spotlight Glow
+On hover, the card's local CSS variables `--mx` and `--my` are updated to position a radial spotlight gradient, creating a hover-tracking glow:
+[source,typescript]
+----
+card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+card.style.setProperty("--my", `${e.clientY - rect.top}px`);
+----
+[source,css]
+----
+background: radial-gradient(circle 180px at var(--mx) var(--my), rgba(0, 0, 205, 0.18), transparent 80%);
+----
+
+---
+
+=== 4. MacBook OS Mockup Container (`Approach.tsx`)
+
+The MacBook container in `Approach.tsx` displays the growth platform's features inside a styled device frame.
+
+==== Viewport-Relative Scaling (CQI Units)
+To maintain proportions across screen sizes without breaking layouts, the mockup is built using CSS container query units (`cqi` / `cqh`). When the browser resizes the width of the container, all sub-elements (borders, webcams, text, padding, buttons) scale proportionally:
+* **Display Bezel Padding:** `p-[1.2cqi]`
+* **Display Bezel Rounded Corner:** `rounded-t-[2.2cqi]`
+* **Webcam Lens size:** `w-[0.7cqi] h-[0.7cqi]`
+* **Internal Text Size:** `text-[max(8px,1cqi)]`
+
+==== SVG Vector Drawing Animations
+Inside the mockup screen, the platform dashboard renders responsive charts. When switching tabs, SVG lines animate their path transitions:
+[source,html]
+----
+<svg className="w-full h-full overflow-visible">
+  <path 
+    d={activePillar.pathString} 
+    fill="none" 
+    stroke="#1b3bf5" 
+    strokeWidth="3" 
+    className="transition-all duration-1000 ease-in-out" 
+  />
+</svg>
+----
+The path coordinate strings interpolate automatically, shifting values like `d="M0,80 L50,60..."` to `d="M0,90 L50,40..."` smoothly.
+
+---
+
+=== 5. Continuous & Loop Animations
+
+==== Infinite Marquee Loops
+Marquees in the Hero and Logos sections animate using CSS keyframes that translate the container by `-50%` over a linear timeline, creating a seamless loop when containing duplicate content:
+[source,css]
+----
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 40s linear infinite; }
+.marquee-track-rev { animation: marquee 50s linear infinite reverse; }
+----
+
+==== Dynamic Island Notification Wave
+Inside the iPhone mockup, changing scenes triggers an animation on the Dynamic Island, expanding it to display status updates:
+[source,typescript]
+----
+// Trigger expansion on scene index change
+useEffect(() => {
+  setIslandExpanded(true);
+  const timer = setTimeout(() => setIslandExpanded(false), 1200);
+  return () => clearTimeout(timer);
+}, [scene]);
+----
+The expansion transitions smoothly using CSS:
+[source,css]
+----
+transition: width 0.5s ease-out, height 0.5s ease-out;
+----
+
+==== Inverse Bell-Curve Pulsing Columns (`ui/gradient-bars-background.tsx`)
+The `GradientBars` background renders multiple vertical columns. The columns pulse in height based on their distance from the center, creating a symmetric wave:
+
+1. **Calculate Height Curve:** The height of each bar is computed based on its index relative to the total number of bars:
+   \[position = \frac{index}{total - 1}\]
+   The normalized distance from the center (\(center = 0.5\)) is:
+   \[d_{\text{center}} = |position - 0.5|\]
+   The height percentage scales non-linearly using an exponential curve:
+   \[heightPct = minHeight + (maxHeight - minHeight) \times (d_{\text{center}} \times 2)^{1.2}\]
+   In code:
+[source,typescript]
+----
+const calculateHeight = (index: number, total: number) => {
+  const position = index / (total - 1);
+  const center = 0.5;
+  const distanceFromCenter = Math.abs(position - center);
+  const heightPercentage = Math.pow(distanceFromCenter * 2, 1.2); // Bell-curve scale factor
+  return minHeight + (maxHeight - minHeight) * heightPercentage;
+};
+----
+2. **React/CSS Variable Binding:** To avoid defining dozens of keyframes, the component dynamically sets a CSS custom variable `--initial-scale` inline. The single shared `@keyframes pulseBar` references this variable to animate:
+[source,css]
+----
+@keyframes pulseBar {
+  0% { transform: scaleY(var(--initial-scale)); }
+  100% { transform: scaleY(calc(var(--initial-scale) * 0.6)); }
+}
+----
+3. **Staggered Wave Motion:** To create a dynamic wave pattern, the columns trigger with a staggered animation delay:
+[source,typescript]
+----
+style={{
+  transform: `scaleY(${height / 100})`,
+  animation: `pulseBar ${animationDuration}s ease-in-out infinite alternate`,
+  animationDelay: `${index * 0.15}s`,
+  '--initial-scale': height / 100,
+}}
+----
+
+---
+
+=== 6. Typewriter & Framer Motion Animations (`MainframeHero.tsx`)
+The `#mainframe` page utilizes custom react hook logic and declarative animations:
+
+* **Typewriter Effect Hook:** A custom hook `useTypewriter` slices the headline text `"we'd love to\nhear from you!"` sequentially at `speed = 38ms` after a `600ms` start delay. A blinking block cursor (`animate-blink`) renders at the end of the text slice and hides when typing completes (`done === true`).
+* **Tactile Multi-Select Pills:** Interactive buttons wrap category options with Framer Motion primitives. Hover triggers `whileHover={{ scale: 1.02 }}` and press triggers `whileTap={{ scale: 0.98 }}` for tactile feedback. Activating a pill triggers a spring-based scale pop of the check icon:
+[source,typescript]
+----
+transition={{ type: "spring", stiffness: 300, damping: 20 }}
+----
+* **AnimatePresence Status Banner:** The bottom inquiry box uses `<AnimatePresence mode="wait">` to transition between empty/active states. When services are selected, the status box interpolates its opacity and height:
+[source,typescript]
+----
+initial={{ height: 0, opacity: 0 }}
+animate={{ height: "auto", opacity: 1 }}
+exit={{ height: 0, opacity: 0 }}
+----
+
+---
+
+== Performance Optimization Strategy
+
+Rendering high-frequency canvas simulations, multiple GPU-tilted cards, and pre-decoded videos simultaneously requires strict optimization to maintain a target 60fps.
+
+=== Memory Management
+* **Canvas Recyclability:** In `ScrubVideo.tsx`, frame buffers (`ImageBitmap` objects) are explicitly garbage-collected on unmount:
+  [source,typescript]
+  ----
+  frames.forEach((f) => f.bmp.close());
+  frames.length = 0;
+  ----
+* **Offscreen Context Isolation:** The sampling canvas in `ParticleText` is created, parsed once, and immediately released from scope:
+  [source,typescript]
+  ----
+  const sample = document.createElement("canvas");
+  // sample context is utilized inside useEffect and dereferenced
+  ----
+
+=== Rendering Optimizations
+* **Device Pixel Ratio (DPR) Cap:** Higher DPR screens can bottleneck canvas renders. The system caps DPR at `2` to balance rendering performance with visual crispness:
+  [source,typescript]
+  ----
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  ----
+* **Static Layer Pre-rendering:** To optimize the particle wordmark, the static blue 3D extrusions are pre-rendered once onto an offscreen canvas. The animation loop then draws this static layer in a single draw call before drawing the active particles, saving thousands of fill operations per frame:
+  [source,typescript]
+  ----
+  ctx.drawImage(ext, 0, 0); // Blit the static 3D extrusion layer
+  ----
+* **Passive Event Listeners:** Event listeners for scrolling and mouse movements use `{ passive: true }` to prevent blocking main-thread layout calculations:
+  [source,typescript]
+  ----
+  window.addEventListener("mousemove", onMouseMove, { passive: true });
+  ----
+
+=== CSS Acceleration
+* **Hardware Compositing:** Layouts utilize `backface-visibility: hidden` and `transform: translateZ(0)` to force the browser to upload elements onto separate GPU layers, avoiding page-wide repaints.
+
+== Build Architecture & Compiler Setup
+
+This section details the build settings and compiler setups that package and bundle the Medscale Systems application.
+
+=== 1. Bundling & Build System Configuration (`vite.config.ts`)
+The application uses the Vite build system, configured with specialized plugins to optimize bundle size, assets loading, and CSS compiling:
+* **Tailwind CSS v4 Integration:** Natively compiled via `@tailwindcss/vite`, executing rapid style injection directly within the bundler without relying on external post-processors or legacy configuration files.
+* **React JSX Compilation:** Enabled via `@vitejs/plugin-react` to handle TypeScript React syntax conversions.
+* **Single-File Bundler Optimization:** Integrated via `viteSingleFile()` from the `vite-plugin-singlefile` package. This bundles the entire output—HTML, inline scripts, compiled styling sheet data, and base64-encoded small vector images—into a **single static HTML index file** inside the `dist` folder.
+  * *Why this is done:* Single-file bundles eliminate browser connection overhead (DNS lookups, HTTP round-trips for script/CSS files) when loaded over high-latency clinical networks. This delivers near-instantaneous page paint cycles.
+* **Path Mapping:** Path aliases map the `@/*` shorthand directly to the `src/*` root directory:
+[source,typescript]
+----
+resolve: {
+  alias: {
+    "@": path.resolve(__dirname, "src"),
+  },
+}
+----
+
+=== 2. TypeScript Compilation Engine (`tsconfig.json`)
+The compiler configuration defines the strict compile-time types checks and transpilation rules:
+* **Target Environment:** Compiles to `ES2020` to utilize modern JavaScript features (such as ES Modules, optional chaining, and async/await) natively supported by all modern browsers.
+* **Module Resolution Resolution:** Set to `bundler` to match Vite's ESM resolution requirements.
+* **Strict Type Safety:** Configured with `"strict": true`, enforcing strict null checks and prohibiting implicit declarations:
+[source,json]
+----
+"strict": true,
+"noUnusedLocals": true,
+"noUnusedParameters": true,
+"noFallthroughCasesInSwitch": true
+----
+* **No-Emit Output:** The compiler operates in type-checking-only mode (`"noEmit": true`), delegating file output generation entirely to Vite's high-speed ESBuild core.
+
+---
+
+== Best Practices & Recommended Improvements
+
+The codebase is highly optimized, demonstrating solid architectural patterns. Below is an evaluation of best practices followed, along with recommended enhancements.
+
+=== Best Practices Followed
+1. **Intersection Observer API:** Page animations and count-up metrics are deferred until elements enter the viewport, reducing off-screen CPU overhead.
+2. **Graceful Degradation:** High-end effects feature robust fallbacks (e.g., swapping canvas/hover elements for flat HTML/autoplay videos on mobile and touch devices).
+3. **Accessibility Integration:** Respects system motion preferences by handling `prefers-reduced-motion` media queries.
+
+=== Recommended Improvements
+1. **Dynamic Canvas Throttling:** For the particle footer, the animation loop (`requestAnimationFrame`) could be paused when the footer is scrolled out of view. Wrapping the footer canvas inside an Intersection Observer to toggle a flag would save idle CPU cycles.
+2. **Offscreen Canvas Workers:** Heavy pixel operations, like parsing text data with `getImageData`, could be offloaded to a Web Worker using `OffscreenCanvas` to prevent blocking the main UI thread.
+3. **Resource Preloading:** The 3D video file (`HERO_VIDEO`) could be preloaded using a `<link rel="preload" as="video" ...>` tag in the HTML head to speed up initial load times.
