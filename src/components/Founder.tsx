@@ -5,7 +5,6 @@ import {
   MaskedHeadline,
   ScrollReveal,
   TiltCard,
-  ExpandRule,
   CornerBrackets,
 } from "./ui/animations";
 

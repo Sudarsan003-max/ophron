@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { SectionHead } from "./About";
-import logo from "./logo.png";
 
 type TabType = "DAILY" | "WEEKLY" | "MONTHLY" | "ALL";
 
@@ -137,21 +136,19 @@ export default function Showcase() {
     }
   };
 
-  const isLightScene = false;
-
   const rx = (tilt?.id === 3 && tilt) ? -tilt.x * 35 : 0;
   const ry = (tilt?.id === 3 && tilt) ? -tilt.y * 35 : 0;
 
   return (
-    <section id="gallery" className="relative py-28 bg-[#032147] text-[#EDE5DA] overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
+    <section id="dashboard" className="relative py-16 bg-[#032147] text-[#EDE5DA] overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
       {/* Background glowing gradients */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#B7A38B]/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-20 -left-40 w-96 h-96 bg-[#B7A38B]/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="mx-auto max-w-[1400px] px-5">
-        <SectionHead n="006" label="OPHRON OS Live Dashboard" light />
+        <SectionHead n="010" label="OPHRON OS Live Dashboard" light />
 
-        <div className="mt-12 grid lg:grid-cols-12 gap-10 items-end">
+        <div className="mt-8 grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7">
             <h2 className="font-canela font-bold text-[38px] sm:text-[58px] lg:text-[76px] leading-[0.95] tracking-tight text-white">
               Visualizing your <span className="font-serif-i italic text-[#B7A38B]">operational</span>
@@ -166,7 +163,7 @@ export default function Showcase() {
 
         {/* Widescreen Behance-style Layout with 3D Perspective Container */}
         <div 
-          className="mt-20 relative flex items-center justify-center gap-6 py-16 overflow-x-auto lg:overflow-visible scrollbar-hide max-w-full"
+          className="mt-8 relative flex items-center justify-center gap-6 py-4 overflow-x-auto lg:overflow-visible scrollbar-hide max-w-full"
           style={{ perspective: "1500px", transformStyle: "preserve-3d" }}
         >
           
@@ -189,7 +186,7 @@ export default function Showcase() {
             onMouseMove={(e) => handleMouseMove(e, 2)}
             onMouseEnter={() => setHoveredCard(2)}
             onMouseLeave={() => { handleMouseLeave(); setHoveredCard(null); }}
-            className="relative w-80 h-[380px] bg-[#0a1e3f]/95 border border-[#B7A38B]/30 rounded-3xl p-6 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),_0_25px_60px_-15px_rgba(0,0,0,0.9),_0_0_40px_rgba(183, 163, 139,0.1)] hover:border-[#B7A38B]/60 shrink-0 flex flex-col justify-between overflow-hidden"
+            className="relative w-80 h-[380px] bg-[#0a1e3f]/95 border border-[#B7A38B]/30 rounded-3xl p-6 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),_0_25px_60px_-15px_rgba(0,0,0,0.9),_0_0_40px_rgba(183,163,139,0.1)] hover:border-[#B7A38B]/60 shrink-0 flex flex-col justify-between overflow-hidden"
             style={getCardStyle(2)}
           >
             <div className="absolute top-1/4 left-1/3 w-32 h-32 bg-[#B7A38B]/10 rounded-full blur-2xl pointer-events-none" />
@@ -236,7 +233,7 @@ export default function Showcase() {
                 <path d="M 0 170 Q 50 160 100 130 T 200 90 T 300 40" fill="none" stroke="#B7A38B" strokeWidth="3.5" strokeLinecap="round" />
                 {/* Point pulse */}
                 <circle cx="300" cy="40" r="5" fill="#ffffff" className="animate-ping" />
-                <circle cx="300" cy="40" r="4.5" fill="#B7A38B]" />
+                <circle cx="300" cy="40" r="4.5" fill="#B7A38B" />
               </svg>
             </div>
           </div>
@@ -267,7 +264,7 @@ export default function Showcase() {
 
             {/* Outer Titanium Chassis (3D Frame) */}
             <div 
-              className="w-full h-full rounded-[52px] p-[3.5px] bg-gradient-to-b from-[#B7A38B] via-[#3d4045] to-[#032147] shadow-[inset_0_1.5px_2.5px_rgba(255,255,255,0.55),_inset_0_-1.5px_2.5px_rgba(0,0,0,0.75),_0_35px_80px_rgba(0,0,0,0.95),_0_0_50px_rgba(3, 33, 71,0.4)] flex items-center justify-center relative"
+              className="w-full h-full rounded-[52px] p-[3.5px] bg-gradient-to-b from-[#B7A38B] via-[#3d4045] to-[#032147] shadow-[inset_0_1.5px_2.5px_rgba(255,255,255,0.55),_inset_0_-1.5px_2.5px_rgba(0,0,0,0.75),_0_35px_80px_rgba(0,0,0,0.95),_0_0_50px_rgba(3,33,71,0.4)] flex items-center justify-center relative"
               style={{ transform: "translateZ(0px)", transformStyle: "preserve-3d" }}
             >
               
@@ -279,7 +276,7 @@ export default function Showcase() {
 
                 {/* Main Screen */}
                 <div 
-                  className={`w-full h-full rounded-[41px] overflow-hidden relative flex flex-col justify-between p-6 select-none transition-colors duration-500 bg-[#061426]`}
+                  className="w-full h-full rounded-[41px] overflow-hidden relative flex flex-col justify-between p-6 select-none transition-colors duration-500 bg-[#061426]"
                   style={{
                     backgroundImage: `
                       radial-gradient(circle at 50% 35%, rgba(183, 163, 139, 0.18) 0%, transparent 60%),
@@ -371,8 +368,8 @@ export default function Showcase() {
                       scene === 0 ? "opacity-100 translate-x-0 scale-100 pointer-events-auto" : "opacity-0 translate-x-4 scale-95 pointer-events-none"
                     }`}
                   >
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#B7A38B]/30 to-[#032147]/80 border border-[#B7A38B]/50 shadow-[0_15px_30px_rgba(3, 33, 71,0.6)] flex items-center justify-center relative">
-                      <img src="/images/brand/ophron-gold-emblem-transparent.png" className="h-10 w-auto object-contain z-10 filter drop-shadow-[0_4px_10px_rgba(183, 163, 139,0.5)]" alt="OPHRON Emblem" />
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#B7A38B]/30 to-[#032147]/80 border border-[#B7A38B]/50 shadow-[0_15px_30px_rgba(3,33,71,0.6)] flex items-center justify-center relative">
+                      <img src="/images/brand/ophron-gold-emblem-transparent.png" className="h-10 w-auto object-contain z-10 filter drop-shadow-[0_4px_10px_rgba(183,163,139,0.5)]" alt="OPHRON Emblem" />
                     </div>
                     <div className="space-y-2">
                       <h4 className="text-[18px] font-canela font-bold leading-tight text-white">
@@ -456,7 +453,7 @@ export default function Showcase() {
 
                       <div className="space-y-1 relative z-10">
                         <div className="flex justify-between text-[8px] font-mono text-white/60">
-                          <span>2. CANOPY & DEEP CLEAN 🔒</span>
+                          <span>2. CANOPY & DEEP CLEAN</span>
                           <span className="text-[#B7A38B] font-semibold">Verified</span>
                         </div>
                         <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
@@ -466,7 +463,7 @@ export default function Showcase() {
 
                       <div className="space-y-1 relative z-10">
                         <div className="flex justify-between text-[8px] font-mono text-white/60">
-                          <span>3. NEA DISINFECTION LOG 🔒</span>
+                          <span>3. NEA DISINFECTION LOG</span>
                           <span className="text-white font-semibold">Logged</span>
                         </div>
                         <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
@@ -476,11 +473,11 @@ export default function Showcase() {
 
                       <div className="space-y-1 relative z-10">
                         <div className="flex justify-between text-[8px] font-mono text-white/60">
-                          <span>4. SUPERVISOR SFA AUDIT 🔒</span>
+                          <span>4. SUPERVISOR SFA AUDIT</span>
                           <span className="text-[#B7A38B] font-semibold">Grade A Pass</span>
                         </div>
                         <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                          <div className="h-full bg-[#B7A38B] rounded-full shadow-[0_0_8px_rgba(183, 163, 139,0.8)]" style={{ width: "100%" }} />
+                          <div className="h-full bg-[#B7A38B] rounded-full shadow-[0_0_8px_rgba(183,163,139,0.8)]" style={{ width: "100%" }} />
                         </div>
                       </div>
                     </div>
@@ -543,7 +540,7 @@ export default function Showcase() {
                         >
                           <span className="text-[8px] font-mono font-bold tracking-tight">{tab.label}</span>
                           {isActive && (
-                            <span className="absolute bottom-0 w-3 h-[1.5px] bg-[#B7A38B] rounded-full shadow-[0_0_8px_rgba(183, 163, 139,0.8)] animate-pulse" />
+                            <span className="absolute bottom-0 w-3 h-[1.5px] bg-[#B7A38B] rounded-full shadow-[0_0_8px_rgba(183,163,139,0.8)] animate-pulse" />
                           )}
                         </button>
                       );
@@ -569,7 +566,7 @@ export default function Showcase() {
             onMouseMove={(e) => handleMouseMove(e, 4)}
             onMouseEnter={() => setHoveredCard(4)}
             onMouseLeave={() => { handleMouseLeave(); setHoveredCard(null); }}
-            className="relative w-80 h-[380px] bg-[#0a1e3f]/95 border border-[#B7A38B]/30 rounded-3xl p-6 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),_0_25px_60px_-15px_rgba(0,0,0,0.9),_0_0_40px_rgba(183, 163, 139,0.1)] hover:border-[#B7A38B]/60 shrink-0 flex flex-col justify-between overflow-hidden"
+            className="relative w-80 h-[380px] bg-[#0a1e3f]/95 border border-[#B7A38B]/30 rounded-3xl p-6 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),_0_25px_60px_-15px_rgba(0,0,0,0.9),_0_0_40px_rgba(183,163,139,0.1)] hover:border-[#B7A38B]/60 shrink-0 flex flex-col justify-between overflow-hidden"
             style={getCardStyle(4)}
           >
             <div className="absolute bottom-1/4 right-1/3 w-32 h-32 bg-[#B7A38B]/10 rounded-full blur-2xl pointer-events-none" />
@@ -650,7 +647,7 @@ export default function Showcase() {
         </div>
 
         <div className="mt-10 text-center text-[12px] font-mono uppercase tracking-[0.22em] text-[#EDE5DA]/60 font-semibold">
-          ✦ Real‑Time compliance monitoring · SFA & NEA auditable operational logs ✦
+          ✦ Real-Time compliance monitoring · SFA &amp; NEA auditable operational logs ✦
         </div>
       </div>
     </section>

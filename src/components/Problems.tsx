@@ -47,7 +47,7 @@ const problems = [
 
 export default function Problems() {
   return (
-    <section id="problems" className="relative py-28 bg-[#032147] overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
+    <section id="problems" className="relative py-16 bg-[#032147] overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
       {/* Subtle dot bg */}
       <div
         className="absolute inset-0 opacity-[0.04]"
@@ -57,9 +57,9 @@ export default function Problems() {
         }}
       />
       <div className="relative mx-auto max-w-[1400px] px-5">
-        <SectionHead n="004" label="Operational Realities" light />
+        <SectionHead n="003" label="Operational Realities" light />
 
-        <div className="mt-12 grid lg:grid-cols-12 gap-10">
+        <div className="mt-8 grid lg:grid-cols-12 gap-10">
           <div className="lg:col-span-7">
             <MaskedHeadline
               as="h2"
@@ -75,7 +75,7 @@ export default function Problems() {
               ]}
             />
           </div>
-          <div className="lg:col-span-5 lg:pt-6">
+          <div className="lg:col-span-5 lg:pt-4">
             <ScrollReveal variant="left" delay={150}>
               <p className="text-[15.5px] font-inter leading-relaxed text-[#EDE5DA]/80">
                 Singapore's premier hospitality and commercial venues battle three recurring operational bottlenecks: manpower shortages, strict SFA regulatory compliance, and multi-vendor chaos. OPHRON unifies the solution under one accountable platform.
@@ -85,7 +85,7 @@ export default function Problems() {
         </div>
 
         {/* Problems list */}
-        <div className="mt-16 border-t border-white/10">
+        <div className="mt-10 border-t border-white/10">
           {problems.map((p, idx) => (
             <ScrollReveal key={p.n} variant={idx % 2 === 0 ? "left" : "right"} delay={idx * 100}>
               <ProblemRow p={p} />
@@ -93,11 +93,11 @@ export default function Problems() {
           ))}
         </div>
 
-        <ExpandRule className="border-white/15 my-12" />
+        <ExpandRule className="border-white/15 my-6" />
 
         {/* CTA strip */}
         <ScrollReveal variant="scale">
-          <div className="rounded-3xl bg-[#EDE5DA] text-[#032147] p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-[#B7A38B]/30 shadow-xl">
+          <div className="rounded-3xl bg-[#EDE5DA] text-[#032147] p-5 sm:p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-[#B7A38B]/30 shadow-xl">
             <div className="flex items-start gap-4">
               <span className="grid place-items-center h-12 w-12 rounded-full bg-[#032147] text-[#B7A38B] text-xl font-bold shrink-0">
                 ✓
@@ -112,7 +112,7 @@ export default function Problems() {
               </div>
             </div>
             <a
-              href="#services"
+              href="#solutions"
               className="group inline-flex items-center gap-2 rounded-full bg-[#032147] text-[#EDE5DA] pl-6 pr-2 py-2 text-[13px] font-montserrat font-bold hover:bg-[#B7A38B] hover:text-[#032147] transition shrink-0 hover:scale-105"
               style={{ color: "#EDE5DA" }}
             >
@@ -132,7 +132,7 @@ export default function Problems() {
 
 function ProblemRow({ p }: { p: { n: string; title: string; items: string[] } }) {
   return (
-    <div className="group relative border-b border-white/10 py-8 md:py-10 grid grid-cols-12 gap-6 hover:bg-white/[0.04] transition cursor-pointer">
+    <div className="group relative border-b border-white/10 py-5 md:py-6 grid grid-cols-12 gap-6 hover:bg-white/[0.04] transition cursor-pointer">
       {/* Number */}
       <div className="col-span-2 md:col-span-1">
         <div className="font-mono text-[11px] tracking-[0.22em] text-[#B7A38B] font-bold">[ {p.n} ]</div>

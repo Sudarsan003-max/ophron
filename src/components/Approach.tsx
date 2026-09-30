@@ -73,7 +73,7 @@ export default function Approach() {
   const activePillar = pillars[scene];
 
   return (
-    <section className="relative py-28 bg-[#032147] overflow-hidden" id="opportunity">
+    <section className="relative py-16 bg-[#032147] overflow-hidden" id="opportunity">
       {/* Ambient background spotlight scene */}
       <div className="absolute inset-0 bg-[#032147] z-0" />
       <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#B7A38B]/10 blur-[130px] pointer-events-none z-0" />
@@ -85,7 +85,7 @@ export default function Approach() {
       <div className="relative z-10 mx-auto max-w-[1400px] px-5 flex flex-col items-center">
         
         {/* Title and Intro layout matching original style but styled for dark backdrop */}
-        <div className="w-full max-w-[1000px] mb-8 text-center sm:text-left">
+        <div className="w-full max-w-[1000px] mb-4 text-center sm:text-left">
           <ScrollReveal variant="up" delay={50}>
             <div className="flex items-center justify-center sm:justify-start gap-3 text-[10px] font-mono uppercase tracking-[0.22em] text-[#EDE5DA]/60">
               <span className="grid place-items-center h-5 w-5 rounded-full text-[9px] font-bold bg-[#B7A38B] text-[#032147]">
@@ -95,7 +95,7 @@ export default function Approach() {
             </div>
           </ScrollReveal>
 
-          <div className="mt-8 grid lg:grid-cols-12 gap-8 items-end">
+          <div className="mt-4 grid lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8">
               <MaskedHeadline
                 as="h2"
@@ -119,7 +119,7 @@ export default function Approach() {
 
         {/* MacBook Container */}
         <ScrollReveal variant="scale" delay={200} className="w-full flex justify-center">
-          <div className="relative w-full max-w-[1020px] mt-6 flex flex-col items-center group @container">
+          <div className="relative w-full max-w-[1020px] mt-4 flex flex-col items-center group @container">
             
             {/* Lid (MacBook Screen) */}
             <div className="relative w-[88%] aspect-[16/10] bg-gradient-to-b from-[#032147] via-[#021733] to-[#01183b] rounded-t-[2.2cqi] p-[1.2cqi] shadow-[0_30px_75px_-10px_rgba(3, 33, 71,0.95),inset_0_1px_2px_rgba(255,255,255,0.25),inset_0_-1px_1px_rgba(255,255,255,0.05)] border border-[#B7A38B]/30 flex flex-col z-10">

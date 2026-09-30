@@ -10,7 +10,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#032147] text-[#EDE5DA] pt-16 sm:pt-20 pb-28 overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
+    <footer className="relative bg-[#032147] text-[#EDE5DA] pt-12 sm:pt-14 pb-14 overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
       {/* Background Animated Gradient Bars */}
       <GradientBars
         numBars={18}

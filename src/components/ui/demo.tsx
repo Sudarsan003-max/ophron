@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Component } from "@/components/ui/gradient-bars-background";
 import { Settings, X } from "lucide-react";
 

@@ -1,168 +1,530 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  MaskedHeadline,
-  ScrollReveal,
-  AnimatedCounter,
-  CornerBrackets,
-} from "./ui/animations";
+import { ScrollReveal } from "./ui/animations";
+import logoGold from "./logo-gold.png";
+
+const MARQUEE_ITEMS = [
+  "OPHRON FACILITIES — INTEGRATED FACILITY OPERATIONS",
+  "OPHRON TECHNOLOGY — AI AUTOMATION & OPERATIONS SAAS",
+  "COMMERCIAL INTELLIGENCE — LABOR & COST OPTIMIZATION",
+  "OPHRON PEOPLE — WORKFORCE & COMPLIANCE MANAGEMENT",
+  "HYGIENE & SANITATION — NEA LICENSED OPERATOR",
+];
+
+function useCount(target: number, duration = 1600, start = false) {
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let raf = 0;
+    const t0 = performance.now();
+    const step = (t: number) => {
+      const p = Math.min(1, (t - t0) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setV(Math.round(target * eased));
+      if (p < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration, start]);
+  return v;
+}
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && setInView(true), { threshold: 0.1 });
+    if (ref.current) io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+
+  const yrs = useCount(20, 1600, inView);
+  const contracts = useCount(140, 1800, inView);
 
   return (
-    <section id="top" ref={ref} className="relative pt-36 pb-0 overflow-hidden bg-[#EDE5DA]">
-      {/* Decorative blobs */}
-      <div className="pointer-events-none absolute -top-20 -right-40 h-[560px] w-[560px] blob bg-[#032147]/15 opacity-80 z-0" />
-      <div className="pointer-events-none absolute top-40 -left-32 h-[360px] w-[360px] rounded-full bg-[#B7A38B]/20 blur-[80px] z-0" />
-
-      <div className="relative z-20 mx-auto max-w-[1400px] px-5">
-        {/* Top meta strip */}
-        <ScrollReveal variant="down" delay={50}>
-          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.22em] text-[#032147]/70 mb-8">
-            <div className="flex items-center gap-3">
-              <span className="font-bold text-[#B7A38B]">[ OPHRON INFRASTRUCTURE PLATFORM ]</span>
-              <span className="hidden sm:inline opacity-50">/</span>
-              <span className="hidden sm:inline font-semibold">NEA Licensed & bizSAFE Level 3</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-[#032147]">20+ YRS OPERATIONAL EXPERTISE</span>
-            </div>
-          </div>
-        </ScrollReveal>
-
-        {/* Headline in Canela Bold with Masked Split-Line Reveal */}
-        <div className="relative">
-          <MaskedHeadline
-            as="h1"
-            className="font-canela font-bold leading-[0.92] tracking-tight text-[#032147]"
-            staggerMs={140}
-            lines={[
-              <span key="1" className="block text-[54px] sm:text-[96px] lg:text-[145px]">
-                Hospitality &
-              </span>,
-              <span key="2" className="block text-[54px] sm:text-[96px] lg:text-[145px] pl-0 lg:pl-3">
-                Facilities, <span className="font-serif-i text-[#B7A38B] italic font-normal">powered.</span>
-              </span>,
-            ]}
-          />
+    <section
+      id="top"
+      ref={ref}
+      className="relative overflow-hidden pt-[104px] sm:pt-[112px]"
+      style={{ background: "#EDE5DA", fontFamily: "inherit" }}
+    >
+      {/* ── TOP META STRIP ──────────────────────────────── */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "10px 36px",
+          borderBottom: "1px solid rgba(3,33,71,0.10)",
+          fontSize: "10px",
+          fontFamily: "'Courier New', monospace",
+          letterSpacing: "0.20em",
+          textTransform: "uppercase",
+          color: "rgba(3,33,71,0.50)",
+        }}
+      >
+        <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+          <span>[ OPHRON INFRASTRUCTURE PLATFORM ]</span>
+          <span style={{ opacity: 0.35 }}>|</span>
+          <span>[ NEA LICENSED &amp; BIZSAFE LEVEL 3 ]</span>
         </div>
-
-        {/* Sub row - Manifesto in Montserrat & Inter */}
-        <div className="mt-10 grid lg:grid-cols-12 gap-10 items-start">
-          <div className="lg:col-span-7">
-            <ScrollReveal variant="up" delay={200}>
-              <div className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold mb-3">
-                [ OPHRON Platform · Operational Infrastructure / 01 ]
-              </div>
-              <p className="font-montserrat font-medium text-[19px] sm:text-[21px] leading-[1.5] text-[#032147] max-w-2xl">
-                OPHRON powers hospitality operations across Singapore & globally with <span className="font-serif-i italic text-[#B7A38B] font-semibold">NEA Licensed & bizSAFE Level 3</span> standards.
-              </p>
-              <p className="mt-3 font-inter text-[15px] leading-relaxed text-[#032147]/80 max-w-xl">
-                We unify People, Hygiene, Facilities, Technology, and Commercial Intelligence into a single strategic system powering 140+ premium hotels, F&B groups, and commercial venues.
-              </p>
-            </ScrollReveal>
-
-            <ScrollReveal variant="up" delay={350}>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a href="#contact" className="group relative inline-flex items-center gap-3 rounded-full bg-[#032147] text-[#EDE5DA] pl-6 pr-2 py-3 text-[13px] font-heading font-semibold overflow-hidden shadow-lg shadow-[#032147]/20 hover:scale-105 transition-transform" style={{ color: "#EDE5DA" }}>
-                  <span className="relative z-10">Request SG Facility Audit</span>
-                  <span className="relative z-10 grid place-items-center h-9 w-9 rounded-full bg-[#B7A38B] text-[#032147] transition-transform group-hover:rotate-45">
-                    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17 17 7M9 7h8v8" />
-                    </svg>
-                  </span>
-                </a>
-                <a href="#services" className="group inline-flex items-center gap-2 rounded-full border border-[#032147]/30 px-6 py-3.5 text-[13px] font-heading font-semibold text-[#032147] hover:bg-[#032147] hover:text-[#EDE5DA] transition hover:scale-105">
-                  <span className="h-2 w-2 rounded-full bg-[#B7A38B] group-hover:bg-[#EDE5DA]" />
-                  Explore OPHRON Services
-                </a>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
+        <span className="hidden sm:block">SINGAPORE — EST. 2020</span>
       </div>
 
-      {/* Horizontal Stats Strip spanning full width */}
-      <div className="relative z-20 mx-auto max-w-[1550px] px-5 mt-14 pb-0">
-        <ScrollReveal variant="up" delay={250}>
-          <div className="group relative border border-[#B7A38B]/30 bg-[#EDE5DA]/95 backdrop-blur-md shadow-xl shadow-[#032147]/5 rounded-3xl p-8 grid sm:grid-cols-2 lg:grid-cols-5 gap-8 items-start relative z-30">
-            <CornerBrackets color="#B7A38B" size={14} hoverSize={20} />
-            <div>
-              <div className="font-montserrat font-bold text-3xl lg:text-4xl tracking-tight text-[#032147]">
-                <AnimatedCounter value={20} suffix="+ Yrs" />
-              </div>
-              <div className="mt-1 text-[11px] font-heading uppercase tracking-[0.15em] text-[#B7A38B] font-bold">
-                Operational Expertise
-              </div>
-            </div>
+      {/* ── MAIN HERO BODY ──────────────────────────────── */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 0,
+          padding: "40px 36px 28px",
+          maxWidth: "1400px",
+          margin: "0 auto",
+          alignItems: "center",
+        }}
+        className="hero-grid"
+      >
+        {/* LEFT */}
+        <div style={{ paddingRight: "48px" }}>
 
-            <div>
-              <div className="font-montserrat font-bold text-3xl lg:text-4xl tracking-tight text-[#032147]">
-                <AnimatedCounter value={140} suffix="+" />
-              </div>
-              <div className="mt-1 text-[11px] font-heading uppercase tracking-[0.15em] text-[#B7A38B] font-bold">
-                Active SG Contracts
-              </div>
-            </div>
+          {/* HEADLINE */}
+          <ScrollReveal variant="up" delay={80}>
+            <h1
+              style={{
+                fontFamily: "'Georgia', 'Times New Roman', serif",
+                fontSize: "clamp(48px, 6.5vw, 88px)",
+                fontWeight: 700,
+                lineHeight: 0.92,
+                letterSpacing: "-0.025em",
+                color: "#032147",
+                margin: "0 0 24px 0",
+              }}
+            >
+              One partner.
+              <br />
+              One ecosystem.
+              <br />
+              <span
+                style={{
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  color: "#B7A38B",
+                  fontSize: "clamp(42px, 5.8vw, 80px)",
+                }}
+              >
+                Better operations.
+              </span>
+            </h1>
+          </ScrollReveal>
 
-            <div>
-              <div className="font-montserrat font-bold text-3xl lg:text-4xl tracking-tight text-[#032147]">
-                bizSAFE 3
-              </div>
-              <div className="mt-1 text-[11px] font-heading uppercase tracking-[0.15em] text-[#B7A38B] font-bold">
-                WSH Council Certified
-              </div>
-            </div>
+          {/* SUBHEADLINE */}
+          <ScrollReveal variant="up" delay={160}>
+            <p
+              style={{
+                fontSize: "16px",
+                fontWeight: 500,
+                lineHeight: 1.65,
+                color: "rgba(3,33,71,0.80)",
+                marginBottom: "10px",
+                maxWidth: "460px",
+              }}
+            >
+              OPHRON unifies People, Hygiene, Facilities, Technology, and
+              Commercial Intelligence into a{" "}
+              <strong style={{ color: "#032147" }}>
+                single operational platform
+              </strong>{" "}
+              — built for Singapore's hotels, restaurants, and hospitality groups.
+            </p>
+            <p
+              style={{
+                fontSize: "14px",
+                lineHeight: 1.7,
+                color: "rgba(3,33,71,0.55)",
+                marginBottom: "24px",
+                maxWidth: "440px",
+              }}
+            >
+              Instead of coordinating 5+ fragmented vendors, OPHRON gives you
+              one accountable partner, one contract, and full operational
+              visibility.
+            </p>
+          </ScrollReveal>
 
-            <div>
-              <div className="font-montserrat font-bold text-3xl lg:text-4xl tracking-tight text-[#032147]">
-                NEA Licensed
-              </div>
-              <div className="mt-1 text-[11px] font-heading uppercase tracking-[0.15em] text-[#B7A38B] font-bold">
-                Singapore Operator
-              </div>
-            </div>
-
-            {/* Strategic Partner Assurance Block */}
-            <div className="lg:pl-6 border-t sm:border-t-0 sm:border-l border-[#032147]/10 pt-6 sm:pt-0 sm:pl-8 flex flex-col gap-2">
-              <div className="flex items-center gap-1 text-[#B7A38B]">
-                {"★★★★★".split("").map((s, i) => <span key={i} className="text-[12px]">{s}</span>)}
-                <span className="ml-2 text-[12px] font-mono tabular-nums text-[#032147] font-bold">
-                  <AnimatedCounter value={100} suffix="% SLA" />
+          {/* CTAs */}
+          <ScrollReveal variant="up" delay={220}>
+            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+              {/* Primary CTA */}
+              <a
+                href="#contact"
+                className="hero-cta-primary"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  background: "#032147",
+                  color: "#EDE5DA",
+                  padding: "14px 24px 14px 22px",
+                  borderRadius: "50px",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  letterSpacing: "0.01em",
+                  textDecoration: "none",
+                  transition: "transform 0.22s, box-shadow 0.22s",
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.transform = "translateY(-2px)";
+                  el.style.boxShadow = "0 10px 28px rgba(3,33,71,0.30)";
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.transform = "translateY(0)";
+                  el.style.boxShadow = "none";
+                }}
+              >
+                Discuss Your Operations
+                <span
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "50%",
+                    background: "#B7A38B",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#032147",
+                    fontWeight: 800,
+                    fontSize: "15px",
+                  }}
+                >
+                  →
                 </span>
-              </div>
-              <div className="text-[11px] font-heading font-bold uppercase tracking-[0.1em] text-[#032147]">Pan Pacific · YOTEL · ATLAS</div>
-              <div className="text-[10px] font-inter text-[#032147]/70">Trusted by Singapore's Top Hospitality & F&B Groups</div>
-            </div>
-          </div>
-        </ScrollReveal>
-      </div>
+              </a>
 
-      {/* Bottom marquee strip */}
-      <div className="relative mt-0 border-y border-[#032147]/15 bg-[#EDE5DA] overflow-hidden">
-        <div className="marquee-track inline-flex whitespace-nowrap py-5">
-          {[...Array(2)].map((_, j) => (
-            <div key={j} className="inline-flex items-center gap-10 pr-10">
+              {/* Secondary CTA */}
+              <a
+                href="#solutions"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  border: "1.5px solid rgba(3,33,71,0.22)",
+                  color: "#032147",
+                  padding: "14px 22px",
+                  borderRadius: "50px",
+                  fontSize: "13px",
+                  fontWeight: 500,
+                  textDecoration: "none",
+                  background: "transparent",
+                  transition: "background 0.2s, border-color 0.2s",
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.background = "rgba(3,33,71,0.06)";
+                  el.style.borderColor = "rgba(3,33,71,0.40)";
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.background = "transparent";
+                  el.style.borderColor = "rgba(3,33,71,0.22)";
+                }}
+              >
+                <span style={{ fontSize: "7px", opacity: 0.6 }}>◆</span>
+                Explore Solutions
+              </a>
+            </div>
+          </ScrollReveal>
+
+          {/* TRUST BADGES */}
+          <ScrollReveal variant="up" delay={300}>
+            <div
+              style={{
+                display: "flex",
+                gap: "20px",
+                marginTop: "24px",
+                paddingTop: "20px",
+                borderTop: "1px solid rgba(3,33,71,0.10)",
+                flexWrap: "wrap",
+              }}
+            >
               {[
-                "OPHRON PEOPLE — WSQ Hospitality Manpower & Stewarding",
-                "OPHRON HYGIENE — Kitchen Deep Cleaning, Exhaust & Disinfection",
-                "OPHRON FACILITIES — Integrated Facility Operations (IFM Lite)",
-                "OPHRON TECHNOLOGY — AI Automation & Operations SaaS",
-                "COMMERCIAL INTELLIGENCE — Labor & Cost Optimization"
-              ].map((t, i) => (
-                <div key={i} className="inline-flex items-center gap-10">
-                  <span className="font-heading text-[13px] uppercase font-bold tracking-[0.18em] text-[#032147]">
-                    {t}
+                { label: "NEA Licensed", sub: "Cleaning Operator" },
+                { label: "bizSAFE Level 3", sub: "WSH Council Certified" },
+                { label: "140+ Contracts", sub: "Active SG Clients" },
+              ].map((b) => (
+                <div key={b.label} style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                  <span style={{ fontSize: "12px", fontWeight: 700, color: "#032147", letterSpacing: "0.02em" }}>
+                    {b.label}
                   </span>
-                  <span className="grid place-items-center h-5 w-5 rounded-full border border-[#B7A38B] text-[10px] text-[#B7A38B]">
-                    ✦
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      fontFamily: "'Courier New', monospace",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.14em",
+                      color: "rgba(3,33,71,0.45)",
+                    }}
+                  >
+                    {b.sub}
                   </span>
                 </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+
+        {/* RIGHT — decorative block */}
+        <ScrollReveal variant="right" delay={100}>
+          <div
+            style={{
+              background: "rgba(3,33,71,0.05)",
+              border: "1px solid rgba(3,33,71,0.10)",
+              borderRadius: "16px",
+              height: "400px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              gap: "20px",
+              padding: "24px",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            {/* Background pattern */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                opacity: 0.03,
+                backgroundImage: "radial-gradient(rgba(3,33,71,1) 1px, transparent 1px)",
+                backgroundSize: "28px 28px",
+              }}
+            />
+            {/* Ecosystem preview */}
+            <div style={{ position: "relative", textAlign: "center" }}>
+              <div
+                style={{
+                  fontSize: "10px",
+                  fontFamily: "'Courier New', monospace",
+                  letterSpacing: "0.20em",
+                  textTransform: "uppercase",
+                  color: "rgba(3,33,71,0.45)",
+                  marginBottom: "20px",
+                }}
+              >
+                The OPHRON Ecosystem
+              </div>
+              {[
+                { icon: "⊙", label: "People & Manpower" },
+                { icon: "✦", label: "Cleaning & Hygiene" },
+                { icon: "⬡", label: "Facility Services" },
+                { icon: "◈", label: "Technology & AI" },
+                { icon: "◎", label: "Operational Intelligence" },
+              ].map((item, i) => (
+                <div
+                  key={item.label}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    padding: "8px 18px",
+                    background: i % 2 === 0 ? "rgba(255,255,255,0.40)" : "transparent",
+                    borderRadius: "8px",
+                    marginBottom: "4px",
+                    transition: "background 0.2s",
+                  }}
+                >
+                  <span style={{ color: "#B7A38B", fontSize: "14px", width: "18px", textAlign: "center" }}>
+                    {item.icon}
+                  </span>
+                  <span style={{ fontSize: "13px", fontWeight: 500, color: "#032147" }}>{item.label}</span>
+                  <span
+                    style={{
+                      marginLeft: "auto",
+                      fontSize: "9px",
+                      fontFamily: "'Courier New', monospace",
+                      color: "#B7A38B",
+                      letterSpacing: "0.10em",
+                    }}
+                  >
+                    ACTIVE
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+
+      {/* ── STATS STRIP ──────────────────────────────── */}
+      <div
+        style={{
+          margin: "0 36px 20px",
+          border: "1px solid rgba(3,33,71,0.12)",
+          borderRadius: "14px",
+          background: "rgba(255,255,255,0.50)",
+          backdropFilter: "blur(12px)",
+          padding: "18px 28px",
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr) 1.3fr",
+          gap: "20px",
+          alignItems: "start",
+          maxWidth: "1304px",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+        className="stats-grid"
+      >
+        <StatBlock value={`${yrs}+`} label="Yrs" sub="OPERATIONAL EXPERTISE" />
+        <StatBlock value={`${contracts}+`} label="" sub="ACTIVE SG CONTRACTS" />
+        <StatBlock value="bizSAFE 3" label="" sub="WSH COUNCIL CERTIFIED" />
+        <StatBlock value="NEA" label=" Licensed" sub="SINGAPORE OPERATOR" />
+
+        <div
+          style={{
+            borderLeft: "1px solid rgba(3,33,71,0.10)",
+            paddingLeft: "24px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "4px",
+          }}
+        >
+          <div style={{ display: "flex", gap: "3px", alignItems: "center" }}>
+            {"★★★★★".split("").map((s, i) => (
+              <span key={i} style={{ color: "#B7A38B", fontSize: "11px" }}>{s}</span>
+            ))}
+            <span
+              style={{
+                fontSize: "10px",
+                fontFamily: "'Courier New', monospace",
+                color: "rgba(3,33,71,0.55)",
+                marginLeft: "7px",
+              }}
+            >
+              100% SLA
+            </span>
+          </div>
+          <div style={{ fontSize: "12px", fontWeight: 700, color: "#032147", letterSpacing: "0.06em" }}>
+            PAN PACIFIC · YOTEL · ATLAS
+          </div>
+          <div style={{ fontSize: "11px", color: "rgba(3,33,71,0.50)", lineHeight: 1.4 }}>
+            Trusted by Singapore's top hospitality &amp; F&amp;B groups
+          </div>
+        </div>
+      </div>
+
+      {/* ── BOTTOM MARQUEE ──────────────────────────────── */}
+      <div
+        aria-hidden="true"
+        style={{
+          borderTop: "1px solid rgba(3,33,71,0.12)",
+          background: "#EDE5DA",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          className="marquee-track"
+          style={{ display: "inline-flex", whiteSpace: "nowrap", padding: "12px 0" }}
+        >
+          {[...Array(3)].map((_, j) => (
+            <div key={j} style={{ display: "inline-flex", alignItems: "center", gap: "40px", paddingRight: "40px" }}>
+              {MARQUEE_ITEMS.map((item, i) => (
+                <span
+                  key={`${j}-${i}`}
+                  style={{ display: "inline-flex", alignItems: "center", gap: "32px" }}
+                >
+                  <span
+                    style={{
+                      fontSize: "13px",
+                      fontFamily: "'Courier New', monospace",
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "rgba(3,33,71,0.75)",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {item}
+                  </span>
+                  <img
+                    src={logoGold}
+                    alt=""
+                    aria-hidden="true"
+                    style={{ height: "20px", width: "auto", objectFit: "contain", opacity: 0.75, flexShrink: 0 }}
+                  />
+                </span>
               ))}
             </div>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            padding: 40px 24px 32px !important;
+          }
+          .hero-grid > div:first-child {
+            padding-right: 0 !important;
+          }
+          .hero-grid > div:last-child {
+            display: none !important;
+          }
+          .stats-grid {
+            grid-template-columns: 1fr 1fr !important;
+            margin: 0 24px 24px !important;
+          }
+          .stats-grid > div:last-child {
+            border-left: none !important;
+            padding-left: 0 !important;
+            border-top: 1px solid rgba(3,33,71,0.10);
+            padding-top: 16px;
+            grid-column: 1 / -1;
+          }
+        }
+        @media (max-width: 480px) {
+          .stats-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
+  );
+}
+
+function StatBlock({ value, label, sub }: { value: string; label: string; sub: string }) {
+  const accessibleText = `${value} ${label} - ${sub}`.trim();
+  return (
+    <div aria-label={accessibleText}>
+      <div
+        style={{
+          fontSize: "clamp(26px, 3vw, 40px)",
+          fontFamily: "'Georgia', serif",
+          fontWeight: 700,
+          color: "#032147",
+          letterSpacing: "-0.02em",
+          lineHeight: 1,
+        }}
+      >
+        {value}
+        {label && (
+          <span style={{ fontSize: "55%", fontWeight: 400, marginLeft: "3px" }}>{label}</span>
+        )}
+      </div>
+      <div
+        style={{
+          marginTop: "5px",
+          fontSize: "9.5px",
+          fontFamily: "'Courier New', monospace",
+          letterSpacing: "0.18em",
+          textTransform: "uppercase",
+          color: "rgba(3,33,71,0.45)",
+        }}
+      >
+        {sub}
+      </div>
+    </div>
   );
 }

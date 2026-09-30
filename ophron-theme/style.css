@@ -1,0 +1,26 @@
+/*
+Theme Name: OPHRON
+Theme URI: https://ophron.sg
+Author: OPHRON Platform Development Team
+Author URI: https://ophron.sg
+Description: High-performance Hospitality & Operational Infrastructure WordPress Theme. Pixel-perfect port engineered for NEA Licensed & bizSAFE Level 3 standards, 60fps micro-animations, and full Rank Math / Yoast SEO integration.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: Proprietary
+License URI: https://ophron.sg/terms
+Text Domain: ophron
+Tags: hospitality, facilities-management, modern, luxury, seo-optimized, clean-code, custom-post-types
+*/
+
+/* Core Theme Base styles */
+@import url('assets/css/ophron-style.css');
+
+html, body {
+  background-color: #EDE5DA !important;
+  color: #032147;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+}

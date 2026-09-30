@@ -4,7 +4,6 @@ import {
   BUSINESS_PILLARS_DATA,
   ALL_SERVICES_CATALOG,
   OPHRON_SERVICE_PAGES,
-  ServiceSubItem,
 } from "../data/ophronServicePages";
 import {
   MaskedHeadline,

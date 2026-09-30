@@ -9,13 +9,6 @@ import {
   CornerBrackets,
 } from "./ui/animations";
 
-const bars = [
-  { label: "Engaging content creation", v: 95, status: "OPTIMAL" },
-  { label: "Data‑driven analytics", v: 92, status: "EXCELLENT" },
-  { label: "Brand visibility", v: 88, status: "STABLE" },
-  { label: "ROI optimization", v: 97, status: "MAXIMUM" },
-];
-
 export default function About() {
   const ref = useRef<HTMLDivElement>(null);
   const [animate, setAnimate] = useState(false);
@@ -223,7 +216,7 @@ export default function About() {
 
 function BentoCard({
   span, big, k, tone, wide,
-}: { span: string; big: string; k: string; tone?: "dark" | "lime"; wide?: boolean }) {
+}: { span: string; big: React.ReactNode; k: string; tone?: "dark" | "lime"; wide?: boolean }) {
   const isDark = tone === "dark";
   const isLime = tone === "lime";
   return (
@@ -251,7 +244,7 @@ function MissionCard({ k, text }: { k: string; text: string }) {
 
 export function SectionHead({ n, label, light }: { n: string; label: string; light?: boolean }) {
   return (
-    <div className={`flex items-center justify-between border-b pb-4 ${light ? "border-[#EDE5DA]/20 text-[#EDE5DA]" : "border-[#032147]/15 text-[#032147]"}`} style={light ? { borderColor: "rgba(237,229,218,.2)", color: "#EDE5DA" } : {}}>
+    <div className={`flex items-center justify-between border-b pb-2.5 ${light ? "border-[#EDE5DA]/20 text-[#EDE5DA]" : "border-[#032147]/15 text-[#032147]"}`} style={light ? { borderColor: "rgba(237,229,218,.2)", color: "#EDE5DA" } : {}}>
       <div className="flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.22em]">
         <span className={`grid place-items-center h-6 w-6 rounded-full text-[9px] ${light ? "bg-[#EDE5DA] text-[#032147]" : "bg-[#032147] text-[#EDE5DA]"}`} style={light ? { background: "#EDE5DA", color: "#032147" } : { background: "#032147", color: "#EDE5DA" }}>
           §

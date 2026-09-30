@@ -19,7 +19,7 @@ export default function Logos() {
   const clientsWithImages = VALUABLE_CLIENTS.filter((c) => c.image);
 
   return (
-    <section className="relative bg-[#032147] py-24 overflow-hidden border-y border-[#B7A38B]/20" style={{ background: "#032147", color: "#EDE5DA" }}>
+    <section className="relative bg-[#032147] py-14 overflow-hidden border-y border-[#B7A38B]/20" style={{ background: "#032147", color: "#EDE5DA" }}>
       {/* Radial glow background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#B7A38B]/10 rounded-full blur-[160px] pointer-events-none" />
 
@@ -28,7 +28,7 @@ export default function Logos() {
           <div className="lg:col-span-6">
             <ScrollReveal variant="up" delay={50}>
               <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold mb-3">
-                [ <AnimatedCounter value={140} suffix="+" /> Active Singapore Contracts · 002 ]
+                [ <AnimatedCounter value={140} suffix="+" /> Active Singapore Contracts &middot; §002 ]
               </div>
             </ScrollReveal>
             <MaskedHeadline
@@ -45,14 +45,16 @@ export default function Logos() {
           </div>
           <div className="lg:col-span-6 text-[14.5px] font-inter leading-relaxed text-[#EDE5DA]/80 max-w-lg lg:ml-auto">
             <ScrollReveal variant="left" delay={200}>
-              From 5-star luxury hotels and Michelin-selected dining to artisanal bakery chains and industrial MNC facilities — we power the operational infrastructure behind Singapore's premier brands.
+              <p>
+                From 5-star luxury hotels and Michelin-selected dining to artisanal bakery chains and industrial MNC facilities — we power the operational infrastructure behind Singapore's premier brands.
+              </p>
             </ScrollReveal>
           </div>
         </div>
 
         {/* Sector Filter Tabs */}
         <ScrollReveal variant="up" delay={150}>
-          <div className="mt-12 flex flex-wrap items-center gap-2 border-b border-white/10 pb-5">
+          <div className="mt-7 flex flex-wrap items-center gap-2 border-b border-white/10 pb-3">
             {CLIENT_SECTORS.map((sec) => {
               const active = activeCategory === sec.key;
               return (
@@ -73,7 +75,7 @@ export default function Logos() {
         </ScrollReveal>
 
         {/* Highlighted Venue Badges Grid */}
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
           {clientsWithImages.slice(0, 6).map((item, idx) => (
             <ScrollReveal key={item.id} variant="up" delay={idx * 80}>
               <TiltCard
@@ -109,7 +111,7 @@ export default function Logos() {
       </div>
 
       {/* Marquee Track 1: Solid Typography */}
-      <div className="mt-14 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+      <div className="mt-8 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
         <div className="marquee-track inline-flex gap-14 whitespace-nowrap pr-14">
           {[...filteredClients, ...filteredClients].map((b, i) => (
             <span key={i} className="inline-flex items-center gap-6">
@@ -123,14 +125,20 @@ export default function Logos() {
       </div>
 
       {/* Marquee Track 2: Outlined Typography In Reverse */}
-      <div className="mt-5 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+      <div className="mt-3 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
         <div className="marquee-track-rev inline-flex gap-14 whitespace-nowrap pr-14">
           {[...filteredClients, ...filteredClients].map((b, i) => (
             <span key={i} className="inline-flex items-center gap-6">
               <span className="font-canela italic text-[34px] sm:text-[46px] tracking-tight text-white/40 hover:text-white transition-colors cursor-default">
                 {b.name}
               </span>
-              <span className="text-[#B7A38B] text-xl">✦</span>
+              <span className="inline-flex items-center justify-center h-5 w-5 opacity-70">
+                <img
+                  src="/images/brand/ophron-gold-emblem-transparent.png"
+                  alt="OPHRON Emblem"
+                  className="h-3.5 w-auto object-contain"
+                />
+              </span>
             </span>
           ))}
         </div>

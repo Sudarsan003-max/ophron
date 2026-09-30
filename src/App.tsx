@@ -17,6 +17,9 @@ import AllArticles from "./components/AllArticles";
 import MainframeHero from "./components/MainframeHero";
 import Gallery from "./components/Gallery";
 import ServicesPage from "./components/ServicesPage";
+import Ecosystem from "./components/Ecosystem";
+import HowItWorks from "./components/HowItWorks";
+import FAQ from "./components/FAQ";
 
 import Lenis from "lenis";
 
@@ -142,6 +145,8 @@ export default function App() {
       {isAboutPage ? (
         <main className="pt-24">
           <About />
+          <Problems />
+          <Ecosystem />
           <Founder />
         </main>
       ) : isServicesPage ? (
@@ -151,6 +156,7 @@ export default function App() {
       ) : isWhyPage ? (
         <main className="pt-24">
           <WhyUs />
+          <Showcase />
           <Testimonials />
         </main>
       ) : isGalleryPage ? (
@@ -174,18 +180,29 @@ export default function App() {
           <AllArticles />
         </main>
       ) : (
+        /* OPHRON Sales Journey — per hi.md strategy brief */
         <main>
+          {/* §001 HOOK — Who we are, what we solve, what to do next */}
           <Hero />
+          {/* §002 SOCIAL PROOF — Trust signals, client logos */}
           <Logos />
-          <About />
+          {/* §003 PROBLEM — Operational realities, friction recognition */}
           <Problems />
+          {/* §004 THE STRATEGIC ADVANTAGE — OphronOS platform & pillars */}
           <Approach />
+          {/* §005 SERVICES — Service cards with outcome framing */}
           <Solutions />
-          <Gallery />
-          <Showcase />
+          {/* §006 DIFFERENTIATION — Why OPHRON, not another vendor */}
           <WhyUs />
-          <Testimonials />
+          {/* §007 PROCESS + WHO WE SERVE — Journey to action */}
+          <HowItWorks />
+          {/* §008 PROOF — Live Dashboard, operational intelligence */}
+          <Showcase />
+          {/* §009 INSIGHTS — Thought leadership */}
           <Blog />
+          {/* §010 FREQUENTLY ASKED — Direct answers before final action */}
+          <FAQ />
+          {/* §012 FINAL CONVERSION — Qualify and start a conversation */}
           <Contact />
         </main>
       )}

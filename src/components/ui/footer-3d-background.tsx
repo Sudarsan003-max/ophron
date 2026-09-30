@@ -1,5 +1,3 @@
-import ParticleText from "./particle-text";
-
 interface Footer3DBackgroundProps {
   text?: string;
   className?: string;
@@ -7,12 +5,10 @@ interface Footer3DBackgroundProps {
 
 /**
  * Cinematic footer background.
- * - Rotating 3D ParticleText "OPHRON" model (white -> blue),
- *   auto-fit to the frame width.
  * - Perspective grid floor, drifting glow orbs and floating 3D shapes.
  */
 export default function Footer3DBackground({
-  text = "OPHRON",
+  text: _text,
   className = "pointer-events-none absolute inset-0 z-0 overflow-hidden",
 }: Footer3DBackgroundProps) {
   return (

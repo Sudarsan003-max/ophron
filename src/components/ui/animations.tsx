@@ -261,12 +261,14 @@ export function TiltCard({
   className = "",
   maxTilt = 9,
   spotlight = true,
+  style,
   onClick,
 }: {
   children: React.ReactNode;
   className?: string;
   maxTilt?: number;
   spotlight?: boolean;
+  style?: React.CSSProperties;
   onClick?: () => void;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -318,7 +320,8 @@ export function TiltCard({
       onClick={onClick}
       className={`tilt-card-container relative transition-transform duration-300 ease-out will-change-transform ${className}`}
       style={{
-        transform: transform || undefined,
+        ...style,
+        transform: transform || style?.transform || undefined,
         transformStyle: "preserve-3d",
       }}
     >
@@ -344,7 +347,7 @@ export function TiltCard({
 export function CornerBrackets({
   color = "#B7A38B",
   size = 14,
-  hoverSize = 22,
+  hoverSize: _hoverSize,
   thickness = 2,
   className = "",
 }: {

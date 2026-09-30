@@ -3,15 +3,141 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; connect-src 'self' https: wss:;" />
+    
+    <!-- Security Headers (B-003, R-008) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; connect-src 'self' https: wss:; object-src 'none'; base-uri 'self';" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
-    <title>OPHRON — Hospitality Operational Infrastructure Platform</title>
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    
+    <!-- Anti-Clickjacking Defense (R-008) -->
+    <script>
+      if (window.top !== window.self) {
+        window.top.location = window.self.location;
+      }
+    </script>
+
+    <!-- SEO & Metadata (B-006, B-009) -->
+    <title>OPHRON — Hospitality Operational Infrastructure Platform | Singapore</title>
     <meta name="description" content="OPHRON powers hospitality operations across Singapore & internationally — unifying People, Hygiene, Facilities, Technology, and Commercial Intelligence on a single strategic platform." />
+    <link rel="canonical" href="https://ophronsystems.com/" />
+    
+    <!-- Open Graph Social Sharing (B-006) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="OPHRON — Hospitality Operational Infrastructure Platform" />
+    <meta property="og:description" content="Not a vendor. An operating partner. Unifying People, Hygiene, Facilities, Technology, and Commercial Intelligence for Singapore hospitality." />
+    <meta property="og:image" content="https://ophronsystems.com/images/brand/ophron-gold-emblem-transparent.png" />
+    <meta property="og:url" content="https://ophronsystems.com/" />
+    <meta property="og:site_name" content="OPHRON" />
+    <meta property="og:locale" content="en_SG" />
+
+    <!-- Twitter Card (B-006) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="OPHRON — Hospitality Operational Infrastructure Platform" />
+    <meta name="twitter:description" content="One partner. One ecosystem. Better operations across Singapore & international hospitality." />
+    <meta name="twitter:image" content="https://ophronsystems.com/images/brand/ophron-gold-emblem-transparent.png" />
+
+    <!-- Favicons -->
     <link rel="icon" type="image/png" href="/images/brand/ophron-gold-emblem-transparent.png" />
     <link rel="apple-touch-icon" href="/images/brand/ophron-gold-emblem-transparent.png" />
+
+    <!-- Fonts Preconnect & Stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Schema.org JSON-LD Structured Data (B-004) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://ophronsystems.com/#organization",
+          "name": "OPHRON",
+          "alternateName": "OPHRON Systems",
+          "url": "https://ophronsystems.com",
+          "logo": "https://ophronsystems.com/images/brand/ophron-gold-emblem-transparent.png",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+65-9295-1155",
+              "contactType": "customer service",
+              "areaServed": "SG",
+              "availableLanguage": ["en"]
+            }
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "26 Sin Ming Lane, #05-124 Midview City",
+            "addressLocality": "Singapore",
+            "postalCode": "573971",
+            "addressCountry": "SG"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://ophronsystems.com/#localbusiness",
+          "name": "OPHRON Operational Infrastructure Platform",
+          "image": "https://ophronsystems.com/images/brand/ophron-gold-emblem-transparent.png",
+          "telephone": "+6592951155",
+          "priceRange": "$$$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "26 Sin Ming Lane, #05-124 Midview City",
+            "addressLocality": "Singapore",
+            "postalCode": "573971",
+            "addressCountry": "SG"
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              "opens": "10:00",
+              "closes": "22:00"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://ophronsystems.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What services does OPHRON provide?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "OPHRON covers five areas: People & Manpower, Cleaning & Hygiene, Facility Services, Hospitality Technology, and Operational Intelligence under a single operating infrastructure."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can OPHRON provide multiple services under one contract?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Many clients consolidate multiple services under a single OPHRON agreement — one contract, one point of contact, one SLA."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can OPHRON work alongside our existing vendors?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. We can complement your current arrangements. Some clients start with one service and expand seamlessly."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is OPHRON only a manpower or cleaning company?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. OPHRON is an operational infrastructure platform. Manpower and cleaning are part of a broader ecosystem that includes facilities, technology, and operational intelligence."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
