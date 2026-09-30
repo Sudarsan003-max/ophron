@@ -74,18 +74,13 @@ export default function Hero() {
       {/* ── MAIN HERO BODY ──────────────────────────────── */}
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 0,
-          padding: "40px 36px 28px",
+          padding: "40px 36px 32px",
           maxWidth: "1400px",
           margin: "0 auto",
-          alignItems: "center",
         }}
-        className="hero-grid"
+        className="hero-body"
       >
-        {/* LEFT */}
-        <div style={{ paddingRight: "48px" }}>
+        <div style={{ maxWidth: "860px" }}>
 
           {/* HEADLINE */}
           <ScrollReveal variant="up" delay={80}>
@@ -126,7 +121,7 @@ export default function Hero() {
                 lineHeight: 1.65,
                 color: "rgba(3,33,71,0.80)",
                 marginBottom: "10px",
-                maxWidth: "460px",
+                maxWidth: "600px",
               }}
             >
               OPHRON unifies People, Hygiene, Facilities, Technology, and
@@ -142,7 +137,7 @@ export default function Hero() {
                 lineHeight: 1.7,
                 color: "rgba(3,33,71,0.55)",
                 marginBottom: "24px",
-                maxWidth: "440px",
+                maxWidth: "540px",
               }}
             >
               Instead of coordinating 5+ fragmented vendors, OPHRON gives you
@@ -273,89 +268,6 @@ export default function Hero() {
             </div>
           </ScrollReveal>
         </div>
-
-        {/* RIGHT — decorative block */}
-        <ScrollReveal variant="right" delay={100}>
-          <div
-            style={{
-              background: "rgba(3,33,71,0.05)",
-              border: "1px solid rgba(3,33,71,0.10)",
-              borderRadius: "16px",
-              height: "400px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              gap: "20px",
-              padding: "24px",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            {/* Background pattern */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                opacity: 0.03,
-                backgroundImage: "radial-gradient(rgba(3,33,71,1) 1px, transparent 1px)",
-                backgroundSize: "28px 28px",
-              }}
-            />
-            {/* Ecosystem preview */}
-            <div style={{ position: "relative", textAlign: "center" }}>
-              <div
-                style={{
-                  fontSize: "10px",
-                  fontFamily: "'Courier New', monospace",
-                  letterSpacing: "0.20em",
-                  textTransform: "uppercase",
-                  color: "rgba(3,33,71,0.45)",
-                  marginBottom: "20px",
-                }}
-              >
-                The OPHRON Ecosystem
-              </div>
-              {[
-                { icon: "⊙", label: "People & Manpower" },
-                { icon: "✦", label: "Cleaning & Hygiene" },
-                { icon: "⬡", label: "Facility Services" },
-                { icon: "◈", label: "Technology & AI" },
-                { icon: "◎", label: "Operational Intelligence" },
-              ].map((item, i) => (
-                <div
-                  key={item.label}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    padding: "8px 18px",
-                    background: i % 2 === 0 ? "rgba(255,255,255,0.40)" : "transparent",
-                    borderRadius: "8px",
-                    marginBottom: "4px",
-                    transition: "background 0.2s",
-                  }}
-                >
-                  <span style={{ color: "#B7A38B", fontSize: "14px", width: "18px", textAlign: "center" }}>
-                    {item.icon}
-                  </span>
-                  <span style={{ fontSize: "13px", fontWeight: 500, color: "#032147" }}>{item.label}</span>
-                  <span
-                    style={{
-                      marginLeft: "auto",
-                      fontSize: "9px",
-                      fontFamily: "'Courier New', monospace",
-                      color: "#B7A38B",
-                      letterSpacing: "0.10em",
-                    }}
-                  >
-                    ACTIVE
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </ScrollReveal>
       </div>
 
       {/* ── STATS STRIP ──────────────────────────────── */}
@@ -462,15 +374,8 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 900px) {
-          .hero-grid {
-            grid-template-columns: 1fr !important;
-            padding: 40px 24px 32px !important;
-          }
-          .hero-grid > div:first-child {
-            padding-right: 0 !important;
-          }
-          .hero-grid > div:last-child {
-            display: none !important;
+          .hero-body {
+            padding: 32px 20px 24px !important;
           }
           .stats-grid {
             grid-template-columns: 1fr 1fr !important;
