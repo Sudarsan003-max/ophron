@@ -1,0 +1,11 @@
+# robots.txt for https://ophronsystems.com
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+
+# Crawl-delay for high-intensity scrapers
+Crawl-delay: 1
+
+Sitemap: https://ophronsystems.com/sitemap.xml

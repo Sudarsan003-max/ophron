@@ -306,6 +306,8 @@ export default function Nav() {
                 onClick={() => setOpen((o) => !o)}
                 className="md:hidden grid place-items-center h-11 w-11 rounded-full border border-white/15"
                 aria-label="Menu"
+                aria-expanded={open}
+                aria-controls="mobile-nav-drawer"
                 style={{ color: "#EDE5DA" }}
               >
                 <div className="space-y-1.5">
@@ -460,6 +462,7 @@ export default function Nav() {
           {/*  MOBILE MENU DRAWER                                          */}
           {/* ============================================================== */}
           <div
+            id="mobile-nav-drawer"
             className={`md:hidden overflow-hidden transition-all duration-500 ${
               open
                 ? "max-h-[85vh] mt-2 opacity-100 overflow-y-auto"

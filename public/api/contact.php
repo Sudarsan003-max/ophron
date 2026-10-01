@@ -1,14 +1,30 @@
 <?php
 /**
- * OPHRON Hospitality - Contact Form MySQL Database Endpoint
+ * OPHRON Hospitality - Contact Form Secure Ingestion Endpoint
  * Built for Hostinger Shared / Cloud / VPS Hosting
+ * Security Hardened: OWASP ASVS v4.0.3 & Singapore PDPA Compliant
  */
 
-// 1. CORS & Response Headers
-header("Access-Control-Allow-Origin: *");
+// 1. Strict CORS & Security Response Headers (BT-SEC-001, BT-SEC-003)
+$allowedOrigins = [
+    'https://ophronsystems.com',
+    'https://www.ophronsystems.com',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173'
+];
+
+$httpOrigin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($httpOrigin, $allowedOrigins, true)) {
+    header("Access-Control-Allow-Origin: " . $httpOrigin);
+} else {
+    header("Access-Control-Allow-Origin: https://ophronsystems.com");
+}
+
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 header("Content-Type: application/json; charset=UTF-8");
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: DENY");
 
 // Handle preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -23,17 +39,51 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// 2. IP Rate Limiting & Anti-Flood Defense (BT-SEC-004)
+$clientIp = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+$rateLimitDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'ophron_rate_limits';
+if (!is_dir($rateLimitDir)) {
+    @mkdir($rateLimitDir, 0700, true);
+}
+
+$rateLimitFile = $rateLimitDir . DIRECTORY_SEPARATOR . md5($clientIp) . '.json';
+$currentTime = time();
+$windowSeconds = 600; // 10 minutes window
+$maxRequests = 5;     // Max 5 submissions per 10 minutes
+
+$rateData = ['count' => 0, 'first_req' => $currentTime];
+if (file_exists($rateLimitFile)) {
+    $existing = @json_decode(file_get_contents($rateLimitFile), true);
+    if ($existing && isset($existing['first_req'], $existing['count'])) {
+        if (($currentTime - $existing['first_req']) < $windowSeconds) {
+            $rateData = $existing;
+        }
+    }
+}
+
+if ($rateData['count'] >= $maxRequests) {
+    http_response_code(429);
+    echo json_encode([
+        "success" => false,
+        "error" => "Submission rate limit exceeded. Please wait a few minutes or contact us directly at +65 9295 1155."
+    ]);
+    exit;
+}
+
+$rateData['count']++;
+@file_put_contents($rateLimitFile, json_encode($rateData));
+
 // ==========================================
-// 2. HOSTINGER DATABASE CREDENTIALS
+// 3. HOSTINGER DATABASE CREDENTIALS
 // Fill in your Hostinger MySQL Database details below:
 // ==========================================
 define('DB_HOST', 'localhost'); // In Hostinger, MySQL host is usually 'localhost'
 define('DB_NAME', 'u123456789_ophron'); // Replace with your Hostinger DB Name
 define('DB_USER', 'u123456789_user');   // Replace with your Hostinger DB Username
 define('DB_PASS', 'YOUR_DB_PASSWORD');  // Replace with your Hostinger DB Password
-define('NOTIFICATION_EMAIL', 'operations@ophronsystems.com'); // Where you want email alerts sent
+define('NOTIFICATION_EMAIL', 'operations@ophronsystems.com'); // Where email alerts are sent
 
-// 3. Receive & Parse Payload
+// 4. Receive & Parse Payload
 $rawInput = file_get_contents("php://input");
 $data = json_decode($rawInput, true);
 
@@ -48,27 +98,28 @@ if (!$data) {
     exit;
 }
 
-// 4. Honeypot Bot Trap
-if (!empty($data['honeypot'])) {
+// 5. Honeypot Bot Trap (R-001)
+if (!empty($data['honeypot']) || !empty($data['website_hp'])) {
     echo json_encode(["success" => true, "message" => "Inquiry received."]);
     exit;
 }
 
-// 5. Sanitize & Validate Fields
-function clean($str, $maxLen = 250) {
+// 6. Sanitize & Anti-Formula Injection Validation (B-002)
+function cleanInput($str, $maxLen = 250) {
     if (!$str) return "";
     $clean = strip_tags(trim($str));
+    // Strip leading spreadsheet formula triggers (=, +, -, @, \t, \r)
+    $clean = preg_replace('/^[=+\-@\t\r]+/', '', $clean);
     return mb_substr($clean, 0, $maxLen, 'UTF-8');
 }
 
-$name    = clean($data['name'] ?? '', 100);
-$company = clean($data['company'] ?? '', 150);
-$role    = clean($data['role'] ?? '', 100);
+$name    = cleanInput($data['name'] ?? '', 100);
+$company = cleanInput($data['company'] ?? '', 150);
+$role    = cleanInput($data['role'] ?? '', 100);
 $email   = filter_var(trim($data['email'] ?? ''), FILTER_SANITIZE_EMAIL);
-$phone   = clean($data['phone'] ?? '', 40);
-$service = clean($data['service'] ?? 'General Inquiry', 150);
-$notes   = clean($data['notes'] ?? '', 2000);
-$ip      = $_SERVER['REMOTE_ADDR'] ?? '';
+$phone   = cleanInput($data['phone'] ?? '', 40);
+$service = cleanInput($data['service'] ?? 'General Inquiry', 150);
+$notes   = cleanInput($data['notes'] ?? '', 2000);
 
 if (empty($name) || strlen($name) < 2) {
     http_response_code(422);
@@ -82,7 +133,7 @@ if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-// 6. Connect to Hostinger MySQL Database (PDO)
+// 7. Connect to Hostinger MySQL Database (PDO Prepared Statements)
 try {
     $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4";
     $pdo = new PDO($dsn, DB_USER, DB_PASS, [
@@ -123,12 +174,12 @@ try {
         ':phone'   => $phone,
         ':service' => $service,
         ':notes'   => $notes,
-        ':ip'      => $ip,
+        ':ip'      => $clientIp,
     ]);
 
     $insertedId = $pdo->lastInsertId();
 
-    // 7. Optional Email Notification via PHP mail
+    // 8. Optional Email Notification via PHP mail
     if (defined('NOTIFICATION_EMAIL') && NOTIFICATION_EMAIL) {
         $subject = "[OPHRON Inbound] Lead #{$insertedId} from {$name} ({$company})";
         $body = "New Inquiry Recorded in Database:\n\n"
@@ -140,7 +191,7 @@ try {
               . "Phone: {$phone}\n"
               . "Service: {$service}\n"
               . "Notes:\n{$notes}\n\n"
-              . "IP: {$ip}\n"
+              . "IP: {$clientIp}\n"
               . "Time: " . date("Y-m-d H:i:s") . " UTC\n";
 
         $headers = "From: OPHRON System <no-reply@" . ($_SERVER['HTTP_HOST'] ?? 'ophronsystems.com') . ">\r\n"
@@ -157,7 +208,6 @@ try {
     ]);
 
 } catch (PDOException $e) {
-    // If DB credentials are not yet configured, log error securely
     error_log("Database Error: " . $e->getMessage());
     http_response_code(500);
     echo json_encode([

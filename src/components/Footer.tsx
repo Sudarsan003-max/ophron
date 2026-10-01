@@ -75,7 +75,7 @@ export default function Footer() {
                 <li><a href="#about" className="underline-draw">About OPHRON</a></li>
                 <li><a href="#services" className="underline-draw">OPHRON Services</a></li>
                 <li><a href="#approach" className="underline-draw">5 Pillars</a></li>
-                <li><a href="#gallery-grid" className="underline-draw">Client Portfolio</a></li>
+                <li><a href="#gallery" className="underline-draw">Client Portfolio</a></li>
                 <li><a href="#blog" className="underline-draw">Insights & Articles</a></li>
                 <li><a href="#contact" className="underline-draw">Contact Singapore</a></li>
               </ul>
@@ -84,14 +84,14 @@ export default function Footer() {
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold">Specialized Solutions</div>
               <ul className="mt-4 space-y-2 text-[13.5px] opacity-90">
-                <li><a href="#services" className="underline-draw">Disinfection & Decon</a></li>
-                <li><a href="#services" className="underline-draw">Microfibre Concept</a></li>
-                <li><a href="#services" className="underline-draw">Cleanroom & Healthcare</a></li>
-                <li><a href="#services" className="underline-draw">Carpet & Upholstery</a></li>
-                <li><a href="#services" className="underline-draw">Marble Diamond Polish</a></li>
-                <li><a href="#services" className="underline-draw">High-Rise Facade</a></li>
-                <li><a href="#services" className="underline-draw">Dishwashing & Kitchen</a></li>
-                <li><a href="#services" className="underline-draw">Events Venue Care</a></li>
+                <li><a href="#services?service=disinfecting-services" className="underline-draw">Disinfection & Decon</a></li>
+                <li><a href="#services?service=microfibre-concept" className="underline-draw">Microfibre Concept</a></li>
+                <li><a href="#services?service=cleanroom-cleaning" className="underline-draw">Cleanroom & Healthcare</a></li>
+                <li><a href="#services?service=carpet-cleaning" className="underline-draw">Carpet & Upholstery</a></li>
+                <li><a href="#services?service=marble-polishing" className="underline-draw">Marble Diamond Polish</a></li>
+                <li><a href="#services?service=facade-cleaning" className="underline-draw">High-Rise Facade</a></li>
+                <li><a href="#services?service=dishwashing-services" className="underline-draw">Dishwashing & Kitchen</a></li>
+                <li><a href="#services?service=events-venue-cleaning" className="underline-draw">Events Venue Care</a></li>
               </ul>
             </div>
 
@@ -102,6 +102,7 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="gm@hotel.com.sg"
+                  aria-label="Enter your business email for monthly hospitality briefing"
                   className="flex-1 bg-transparent px-4 py-2 text-[13px] placeholder:opacity-40 focus:outline-none"
                 />
                 <button className="rounded-full bg-[#B7A38B] text-[#032147] px-4 py-2 text-[12px] font-semibold hover:bg-white transition hover:scale-105">
@@ -172,9 +173,9 @@ export default function Footer() {
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono uppercase tracking-[0.2em] opacity-60">
           <div>© {new Date().getFullYear()} OPHRON Systems · All rights reserved</div>
           <div className="flex items-center gap-5">
-            <a href="#" className="hover:text-[#B7A38B]">Privacy Policy</a>
-            <a href="#" className="hover:text-[#B7A38B]">NEA Credentials</a>
-            <a href="#" className="hover:text-[#B7A38B]">bizSAFE Level 3</a>
+            <a href="#contact" className="hover:text-[#B7A38B]">Privacy Policy</a>
+            <a href="#why" className="hover:text-[#B7A38B]">NEA Credentials</a>
+            <a href="#why" className="hover:text-[#B7A38B]">bizSAFE Level 3</a>
             <a href="#top" className="hover:text-[#B7A38B]">Back to top ↑</a>
           </div>
         </div>

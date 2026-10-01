@@ -21,34 +21,16 @@ import Ecosystem from "./components/Ecosystem";
 import HowItWorks from "./components/HowItWorks";
 import FAQ from "./components/FAQ";
 
-import Lenis from "lenis";
+import { initScrollEngine, initAutoReveals } from "./motion";
 
 export default function App() {
   const [hash, setHash] = useState(window.location.hash);
 
-  // 1. Initialize Lenis Smooth Scroll ONCE on mount
+  // 1. Initialize Unified Smooth Scroll & GSAP Motion Engine (LAW 1 & LAW 6)
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth exponential easeOut
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.2,
-      infinite: false,
-    });
+    const { destroy, scrollTo } = initScrollEngine();
 
-    (window as any).__lenis = lenis;
-
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
-    // Smooth Anchor & Hash Navigation
+    // Smooth Anchor & Hash Navigation Handler
     const handleHash = () => {
       const currentHash = window.location.hash;
       setHash(currentHash);
@@ -58,77 +40,44 @@ export default function App() {
         try {
           const targetEl = document.querySelector(cleanHash);
           if (targetEl) {
-            lenis.scrollTo(targetEl as HTMLElement, { offset: -70, duration: 1.0 });
+            scrollTo(targetEl as HTMLElement, -70);
             return;
           }
         } catch {
-          // Selector contains special characters, fallback safely
+          // Selector fallback
         }
       }
 
       window.scrollTo(0, 0);
-      lenis.scrollTo(0, { immediate: true });
-      setTimeout(() => {
-        lenis.resize();
-      }, 100);
+      scrollTo(0, 0);
     };
 
     window.addEventListener("hashchange", handleHash);
 
-    // Initial check & resize
-    setTimeout(() => {
-      lenis.resize();
-    }, 200);
+    // Initial Auto Reveal Scanner
+    const cleanupReveals = initAutoReveals();
 
     return () => {
       window.removeEventListener("hashchange", handleHash);
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-      delete (window as any).__lenis;
+      cleanupReveals();
+      destroy();
     };
   }, []);
 
-  // 2. Viewport Reveal Observers and Lenis Resize on Hash/Route Change
+  // 2. Route/Hash Change Refresh
   useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
-    );
-
-    const observeElements = () => {
-      const els = document.querySelectorAll<HTMLElement>(
-        ".reveal, .reveal-stagger, .mask-up, .scroll-fade, .scroll-fade-stagger, .split-line-headline, .scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-down, .scroll-reveal-scale, .scroll-reveal-stagger, .curtain-reveal, .hr-expand"
-      );
-      els.forEach((el) => {
-        if (!el.classList.contains("in")) {
-          io.observe(el);
-        }
-      });
-    };
-
-    observeElements();
     const timer = setTimeout(() => {
-      observeElements();
+      initAutoReveals();
       (window as any).__lenis?.resize();
-    }, 250);
+    }, 200);
 
-    return () => {
-      clearTimeout(timer);
-      io.disconnect();
-    };
+    return () => clearTimeout(timer);
   }, [hash]);
 
   const isAboutPage = hash === "#about";
   const isServicesPage = hash === "#services" || hash.startsWith("#services?");
   const isWhyPage = hash === "#why";
-  const isGalleryPage = hash === "#gallery";
+  const isGalleryPage = hash === "#gallery" || hash === "#gallery-grid";
   const isBlogPage = hash === "#blog";
   const isContactPage = hash === "#contact";
   const isFounderPage = hash === "#founder";
@@ -141,47 +90,55 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-paper text-ink grain overflow-x-hidden">
+      {/* Accessible Keyboard Skip Link (WCAG 2.1 AA - BT-A11Y-001) */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2.5 focus:bg-[#032147] focus:text-[#EDE5DA] focus:rounded-lg focus:shadow-2xl focus:font-montserrat focus:font-bold focus:outline-none focus:ring-2 focus:ring-[#B7A38B] focus:border focus:border-[#B7A38B]"
+      >
+        Skip to main content
+      </a>
+
       <Nav />
       {isAboutPage ? (
-        <main className="pt-24">
+        <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
           <About />
           <Problems />
           <Ecosystem />
           <Founder />
         </main>
       ) : isServicesPage ? (
-        <main className="pt-24">
+        <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
           <ServicesPage />
         </main>
       ) : isWhyPage ? (
-        <main className="pt-24">
+        <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
           <WhyUs />
           <Showcase />
           <Testimonials />
         </main>
       ) : isGalleryPage ? (
-        <main className="pt-24">
+        <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
           <Gallery />
         </main>
       ) : isBlogPage ? (
-        <main className="pt-24">
+        <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
           <AllArticles />
         </main>
       ) : isContactPage ? (
-        <main className="pt-24">
+        <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
           <Contact />
         </main>
       ) : isFounderPage ? (
-        <main className="pt-24">
+        <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
           <Founder />
         </main>
       ) : isAllArticlesPage ? (
-        <main className="pt-24">
+        <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
           <AllArticles />
         </main>
       ) : (
         /* OPHRON Sales Journey — per hi.md strategy brief */
-        <main>
+        <main id="main-content" tabIndex={-1} className="focus:outline-none">
           {/* §001 HOOK — Who we are, what we solve, what to do next */}
           <Hero />
           {/* §002 SOCIAL PROOF — Trust signals, client logos */}

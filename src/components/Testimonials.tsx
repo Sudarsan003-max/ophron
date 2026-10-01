@@ -41,7 +41,7 @@ const items = [
 
 export default function Testimonials() {
   return (
-    <section id="why" className="relative py-28 bg-paper overflow-hidden">
+    <section id="testimonials" className="relative py-28 bg-paper overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-5">
         <SectionHead n="005" label="Singapore Client Endorsements" />
 

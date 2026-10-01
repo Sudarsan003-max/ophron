@@ -73,7 +73,7 @@ export default function Approach() {
   const activePillar = pillars[scene];
 
   return (
-    <section className="relative py-16 bg-[#032147] overflow-hidden" id="opportunity">
+    <section className="relative py-16 bg-[#032147] overflow-hidden" id="approach">
       {/* Ambient background spotlight scene */}
       <div className="absolute inset-0 bg-[#032147] z-0" />
       <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#B7A38B]/10 blur-[130px] pointer-events-none z-0" />
