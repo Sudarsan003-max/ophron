@@ -136,21 +136,25 @@ type Props = {
 export default function AppleResearchTab({ onOpenArticle }: Props) {
   // Default to tab index 3 (Workforce & SLA) to match exact visual preview
   const [activeTab, setActiveTab] = useState<number>(3);
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [timerKey, setTimerKey] = useState<number>(0);
   const [tilt, setTilt] = useState({ x: 0, y: 0, mouseX: 50, mouseY: 50 });
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const chassisRef = useRef<HTMLDivElement | null>(null);
 
-  // Auto-cycle through tabs every 7 seconds
+  // Auto-cycle through tabs every 6 seconds continuously
   useEffect(() => {
-    if (!isPlaying) return;
     timerRef.current = setInterval(() => {
       setActiveTab((prev) => (prev + 1) % RESEARCH_BENCHMARKS.length);
-    }, 7000);
+    }, 6000);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isPlaying]);
+  }, [timerKey]);
+
+  const selectTab = (idx: number) => {
+    setActiveTab(idx);
+    setTimerKey((k) => k + 1); // Reset timer so user sees selected tab for full duration before cycling
+  };
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!chassisRef.current) return;
@@ -166,7 +170,6 @@ export default function AppleResearchTab({ onOpenArticle }: Props) {
 
   const handleMouseLeave = () => {
     setTilt({ x: 0, y: 0, mouseX: 50, mouseY: 50 });
-    setIsPlaying(true);
   };
 
   const current = RESEARCH_BENCHMARKS[activeTab];
@@ -192,7 +195,6 @@ export default function AppleResearchTab({ onOpenArticle }: Props) {
         <div
           ref={chassisRef}
           onMouseMove={handleMouseMove}
-          onMouseEnter={() => setIsPlaying(false)}
           onMouseLeave={handleMouseLeave}
           style={{
             transform: `perspective(1500px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
@@ -236,10 +238,7 @@ export default function AppleResearchTab({ onOpenArticle }: Props) {
                   <button
                     key={item.id}
                     type="button"
-                    onClick={() => {
-                      setActiveTab(idx);
-                      setIsPlaying(false);
-                    }}
+                    onClick={() => selectTab(idx)}
                     className={`group relative flex items-center justify-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-3 rounded-xl text-xs font-montserrat transition-all duration-300 cursor-pointer overflow-hidden ${
                       idx === 4 ? "col-span-2 sm:col-span-1" : ""
                     } ${

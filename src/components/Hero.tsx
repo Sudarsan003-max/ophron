@@ -4,9 +4,7 @@ import logoNavy from "./logo-navy.png";
 import {
   ArrowRight,
   Sparkle,
-  UtensilsCrossed,
   Building2,
-  Layers,
   Users,
   Cpu,
 } from "lucide-react";
@@ -32,36 +30,18 @@ const HERO_SERVICES: HeroServiceSlide[] = [
     icon: Sparkle,
   },
   {
-    id: "kitchen",
-    pillar: "BOH OPERATIONS & KITCHEN HYGIENE",
-    number: "02",
-    title: "Commercial Kitchen Hygiene & Stewarding",
-    tagline: "Deep degreasing, exhaust steam cleaning & SFA-compliant stewarding teams.",
-    image: "/images/hero/hero_kitchen_hygiene_4k.jpg",
-    icon: UtensilsCrossed,
-  },
-  {
     id: "venues",
     pillar: "FACILITY SERVICES & RAPID RESETS",
-    number: "03",
+    number: "02",
     title: "Events & Luxury Venue Turnover",
     tagline: "Rapid 60-minute ballroom turnovers & high-traffic venue maintenance.",
     image: "/images/hero/hero_event_venue_4k.jpg",
     icon: Building2,
   },
   {
-    id: "facade",
-    pillar: "HIGH-ALTITUDE BUILDING SERVICES",
-    number: "04",
-    title: "High-Rise Façade & Rope Access Cleaning",
-    tagline: "IRATA-certified rope access technicians & pure-water skyscraper detailing.",
-    image: "/images/hero/hero_facade_rope_4k.jpg",
-    icon: Layers,
-  },
-  {
     id: "manpower",
     pillar: "HOSPITALITY WORKFORCE INFRASTRUCTURE",
-    number: "05",
+    number: "03",
     title: "Hospitality Manpower & Executive Staffing",
     tagline: "WSQ-trained housekeeping, stewarding & operational crews on demand.",
     image: "/images/hero/hero_manpower_suite_4k.jpg",
@@ -70,7 +50,7 @@ const HERO_SERVICES: HeroServiceSlide[] = [
   {
     id: "technology",
     pillar: "OPHRON TECHNOLOGY & AI SAAS",
-    number: "06",
+    number: "04",
     title: "Smart Hospitality Technology & AI Operations",
     tagline: "Real-time shift dashboards, IoT IAQ tracking & automated compliance logs.",
     image: "/images/hero/hero_tech_dashboard_4k.jpg",
@@ -111,8 +91,6 @@ export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -139,13 +117,6 @@ export default function Hero() {
     return () => clearInterval(timer);
   }, [nextSlide]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setMousePos({ x, y });
-  };
-
   const currentService = HERO_SERVICES[activeIdx];
   const IconComponent = currentService.icon;
 
@@ -155,9 +126,6 @@ export default function Hero() {
       ref={ref}
       className="relative overflow-hidden pt-[112px] sm:pt-[132px] lg:pt-[144px] bg-[#032147] text-[#EDE5DA]"
       style={{ fontFamily: "inherit" }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       {/* ── 4K CINEMATIC BACKGROUND VIDEO / MOTION ENGINE (BRIGHT & VIBRANT) ──────── */}
       <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
@@ -170,61 +138,38 @@ export default function Hero() {
                 isActive ? "opacity-100 z-10" : "opacity-0 z-0"
               }`}
             >
-              {/* 4K Background Image with Ken-Burns slow breathing drift */}
-              <div
-                className={`w-full h-full bg-cover bg-center transition-transform duration-[8000ms] ease-out brightness-105 contrast-[1.03] ${
-                  isActive ? "scale-105" : "scale-100"
-                }`}
-                style={{
-                  backgroundImage: `url(${srv.image})`,
-                }}
-              />
-
-              {/* Dynamic Sheen Sweep Animation simulating polishing mirror gleam */}
-              {isActive && (
-                <div className="absolute inset-0 pointer-events-none sheen-sweep" />
-              )}
+              {/* True 4K UHD Background Image with smooth Ken-Burns drift */}
+              <picture className="w-full h-full block">
+                <source srcSet={srv.image.replace(".jpg", ".webp")} type="image/webp" />
+                <img
+                  src={srv.image}
+                  alt={srv.title}
+                  className={`w-full h-full object-cover object-center transition-transform duration-[8000ms] ease-out will-change-transform ${
+                    isActive ? "scale-105" : "scale-100"
+                  }`}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+              </picture>
             </div>
           );
         })}
 
-        {/* Interactive Polish Spotlight on Cursor */}
-        {isHovered && (
-          <div
-            className="absolute z-20 pointer-events-none transition-opacity duration-300 opacity-60 mix-blend-soft-light hidden lg:block"
-            style={{
-              left: `${mousePos.x}%`,
-              top: `${mousePos.y}%`,
-              width: "520px",
-              height: "520px",
-              transform: "translate(-50%, -50%)",
-              background:
-                "radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(227,209,190,0.25) 40%, transparent 70%)",
-              filter: "blur(24px)",
-            }}
-          />
-        )}
-
-        {/* Balanced Luxury Vignette — Clear Background Visibility & Razor-Sharp Text */}
+        {/* ── LUXURY DIRECTIONAL SCRIM (LEFT DEEP NAVY FADE → RIGHT VIBRANT PHOTO) ── */}
+        {/* Horizontal Directional Fade: Solid behind text on left, transparent on right */}
         <div
-          className="absolute inset-0 z-20"
+          className="absolute inset-0 z-20 pointer-events-none"
           style={{
             background:
-              "linear-gradient(90deg, rgba(3,33,71,0.85) 0%, rgba(3,33,71,0.65) 45%, rgba(3,33,71,0.22) 75%, rgba(3,33,71,0.50) 100%)",
+              "linear-gradient(90deg, rgba(3,33,71,0.97) 0%, rgba(3,33,71,0.95) 32%, rgba(3,33,71,0.82) 48%, rgba(3,33,71,0.40) 66%, rgba(3,33,71,0.08) 82%, rgba(3,33,71,0.0) 100%)",
           }}
         />
+        {/* Vertical Top/Bottom Smooth Anchors */}
         <div
-          className="absolute inset-0 z-20"
+          className="absolute inset-0 z-20 pointer-events-none"
           style={{
             background:
-              "linear-gradient(180deg, rgba(3,33,71,0.65) 0%, transparent 22%, rgba(3,33,71,0.25) 60%, rgba(3,33,71,0.92) 100%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 z-20 opacity-30 mix-blend-overlay"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 25% 45%, rgba(227,209,190,0.4) 0%, transparent 65%)",
+              "linear-gradient(180deg, rgba(3,33,71,0.60) 0%, rgba(3,33,71,0.15) 25%, transparent 50%, rgba(3,33,71,0.25) 75%, rgba(3,33,71,0.85) 100%)",
           }}
         />
       </div>
@@ -246,7 +191,7 @@ export default function Hero() {
           {/* Main Editorial Headline */}
           <ScrollReveal variant="up" delay={120}>
             <h1
-              className="text-5xl sm:text-6xl lg:text-[76px] xl:text-[86px] font-bold text-white tracking-tight leading-[0.93] mb-6 drop-shadow-md"
+              className="text-4xl sm:text-6xl lg:text-[76px] xl:text-[86px] font-bold text-white tracking-tight leading-[0.93] mb-6 drop-shadow-md"
               style={{ fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif" }}
             >
               One partner.
@@ -395,40 +340,6 @@ export default function Hero() {
           ))}
         </div>
       </div>
-
-      {/* Custom Styles for Polish Sheen Animation */}
-      <style>{`
-        @keyframes sheenSweep {
-          0% {
-            transform: translateX(-100%) skewX(-20deg);
-            opacity: 0;
-          }
-          20% {
-            opacity: 0.6;
-          }
-          60% {
-            opacity: 0.6;
-          }
-          100% {
-            transform: translateX(200%) skewX(-20deg);
-            opacity: 0;
-          }
-        }
-
-        .sheen-sweep {
-          background: linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(227, 209, 190, 0.20) 30%,
-            rgba(255, 255, 255, 0.45) 50%,
-            rgba(227, 209, 190, 0.20) 70%,
-            transparent 100%
-          );
-          animation: sheenSweep 4.5s ease-in-out infinite;
-          width: 150%;
-          height: 100%;
-        }
-      `}</style>
     </section>
   );
 }

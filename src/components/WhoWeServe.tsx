@@ -115,13 +115,13 @@ export default function WhoWeServe() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Viewport Observer for Autoplay
+  // Viewport Observer for Autoplay (Low threshold + generous rootMargin for mobile reliability)
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting);
       },
-      { threshold: 0.25 }
+      { threshold: 0.05, rootMargin: "150px 0px" }
     );
 
     if (containerRef.current) {
@@ -141,9 +141,15 @@ export default function WhoWeServe() {
 
   const goToCard = (index: number) => {
     setActiveIndex(index);
+    // Temporarily pause on tap for 6 seconds, then resume auto-cycling
+    setIsHovered(true);
+    if (timerRef.current) clearInterval(timerRef.current);
+    setTimeout(() => {
+      setIsHovered(false);
+    }, 6000);
   };
 
-  // Autoplay only when in view and not hovered
+  // Autoplay when in view
   useEffect(() => {
     if (isHovered || !isInView || prefersReducedMotion) {
       if (timerRef.current) clearInterval(timerRef.current);

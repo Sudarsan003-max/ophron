@@ -113,7 +113,7 @@ export const BUSINESS_PILLARS_DATA: BusinessPillarTaxonomy[] = [
         services: [
           {
             id: "fnb-stewarding-manpower",
-            name: "F&B Stewarding Manpower",
+            name: "F&B Stewarding Manpower & Kitchen Workforce",
             slug: "fnb-stewarding-manpower",
             pillarId: "people",
             category: "Manpower & Workforce Solutions",
@@ -540,19 +540,6 @@ export const BUSINESS_PILLARS_DATA: BusinessPillarTaxonomy[] = [
             features: ["Uniform 3D room volumetric coverage", "Penetrates upholstery and air grilles", "Zero moisture residue on paper or tech", "Quick 30-minute re-entry window"],
           },
           {
-            id: "bio-burden-reduction",
-            name: "Bio-Burden Reduction",
-            slug: "disinfecting-services",
-            pillarId: "hygiene",
-            category: "Disinfection & Decontamination",
-            tagline: "Systematic reduction of microbial counts on high-risk surfaces.",
-            description:
-              "Deep enzymatic cleaning combined with chemical biocides reducing overall colony-forming units (CFUs) below stringent healthcare thresholds.",
-            image: "/images/services/bio_burden_reduction.jpg",
-            badge: "Clinical Standard",
-            features: ["Enzyme pre-treatment dissolving biofilm", "Biocide wipe-down targeting spores", "Luminometer baseline benchmarking", "Progressive monthly audit tracking"],
-          },
-          {
             id: "infection-control-cleaning",
             name: "Infection-Control Cleaning",
             slug: "disinfecting-services",
@@ -870,7 +857,7 @@ export const BUSINESS_PILLARS_DATA: BusinessPillarTaxonomy[] = [
         name: "Air & Environmental Hygiene",
         pillarId: "hygiene",
         description:
-          "Indoor Air Quality (IAQ) testing, HVAC chemical washing, kitchen duct hygiene, and UV-C air sterilizer installation.",
+          "Indoor Air Quality (IAQ) testing, HVAC chemical washing, kitchen duct hygiene, and comprehensive air hygiene treatments.",
         image: "/images/services/air_quality_testing.jpg",
         services: [
           {
@@ -937,19 +924,6 @@ export const BUSINESS_PILLARS_DATA: BusinessPillarTaxonomy[] = [
             image: "/images/services/air_hygiene_treatment.jpg",
             badge: "Anti-Microbial Fog",
             features: ["Air duct interior aerosolization", "Kills black mold (Aspergillus) spores", "Long-lasting bacteriostatic barrier", "Non-toxic food-safe formulations"],
-          },
-          {
-            id: "uv-c-air-sterilizer-installation",
-            name: "UV-C Air Sterilizer Installation",
-            slug: "air-quality-testing",
-            pillarId: "hygiene",
-            category: "Air & Environmental Hygiene",
-            tagline: "254nm germicidal ultraviolet lamp integration inside AHU plenums.",
-            description:
-              "Installing commercial-grade UV-C irradiation lamps inside air handling units to continuously destroy 99.9% of viral and bacterial DNA in recirculated air.",
-            image: "/images/services/uv_c_air_sterilizer_installation.jpg",
-            badge: "254nm UV-C Germicidal",
-            features: ["Continuous viral & bacterial DNA destruction", "Keeps AHU cooling coils permanently sterile", "Zero ozone emission certified bulbs", "Turnkey electrical installation & maintenance"],
           },
         ],
       },
@@ -1492,29 +1466,144 @@ export const BUSINESS_PILLARS_DATA: BusinessPillarTaxonomy[] = [
             badge: "Guest CRM Engine",
             features: ["Guest loyalty & repeat diner recognition", "Automated 5-star review collection prompts", "Digital menu item profitability analysis", "Direct reservation marketing campaigns"],
           },
-          {
-            id: "iot-facility-monitoring",
-            name: "IoT Sensor & Facility Monitoring",
-            slug: "technology",
-            pillarId: "technology",
-            category: "Technology Solutions",
-            tagline: "Smart washroom traffic counters and environmental odor sensors.",
-            description:
-              "Connected wireless IoT sensors detecting washroom footfall thresholds, ammonia levels, and soap dispenser levels to trigger on-demand cleaner dispatch.",
-            image: "/images/services/iot_facility_monitoring.jpg",
-            badge: "Smart Restroom IoT",
-            features: ["People-counter infrared door sensors", "Ammonia & VOC odor spike detection", "Consumables auto-refill alert triggers", "Dynamic cleaning on-demand routing"],
-          },
         ],
       },
     ],
   },
 ];
 
-/* Flat catalog helper of all 45+ specialized services */
-export const ALL_SERVICES_CATALOG: ServiceSubItem[] = BUSINESS_PILLARS_DATA.flatMap((pillar) =>
+/* ------------------------------------------------------------------ */
+/*  SERVICE PRIORITY MAP: Flagship & Premium Services Ordered First   */
+/* ------------------------------------------------------------------ */
+
+export const SERVICE_PRIORITY_MAP: Record<string, number> = {
+  // ── 1. Flagship Hospitality Workforce & BOH Leadership (Row 1, #1) ──
+  "fnb-stewarding-manpower": 1,
+
+  // ── 2. Flagship Stone & Diamond Restoration (Tier 1) ──
+  "diamond-polishing": 2,
+  "powder-polishing": 3,
+  "marble-restoration": 4,
+  "marble-polishing": 5,
+  "stone-floor-care": 6,
+
+  // ── 3. High-Altitude Facade & Rope Access (Tier 1) ──
+  "rope-access-cleaning": 7,
+  "high-rise-facade-cleaning": 8,
+  "high-rise-window-cleaning": 9,
+  "exterior-glass-cleaning": 10,
+
+  // ── 4. Integrated Facility Management (IFM Lite) (Tier 1) ──
+  "integrated-facility-management-ifm-lite": 11,
+  "facility-maintenance-coordination": 12,
+
+  // ── 5. Luxury Events & Rapid Venue Turnovers (Tier 1) ──
+  "events-venue-maintenance": 13,
+  "overnight-venue-turnover": 14,
+  "exhibition-hall-cleaning": 15,
+
+  // ── 6. Commercial Kitchen & Exhaust Duct Engineering (Tier 1) ──
+  "commercial-kitchen-deep-cleaning": 16,
+  "exhaust-duct-cleaning-degreasing": 17,
+  "exhaust-hood-cleaning": 18,
+  "grease-trap-cleaning-maintenance": 19,
+
+  // ── 7. Additional Hospitality Workforce & Support (Tier 1) ──
+  "outsourced-cleaning-manpower": 20,
+  "facility-operations-support": 21,
+
+  // ── 7. Hospitality SaaS & AI Operations (Tier 1) ──
+  "smart-restaurant-hotel-tech": 22,
+  "ai-operations-automation": 23,
+  "real-time-customer-dashboards": 24,
+  "digital-reporting-systems": 25,
+  "workforce-management-solutions": 26,
+
+  // ── 8. Healthcare, Surgical & ISO Cleanrooms (Tier 1) ──
+  "cleanroom-maintenance": 27,
+  "hospital-grade-disinfection": 28,
+  "cleanroom-surface-sanitation": 29,
+  "medical-facility-cleaning": 30,
+
+  // ── 9. Superyacht & Marine Detailing (Tier 1) ──
+  "marina-yacht-detailing": 31,
+  "yacht-interior-deep-cleaning": 32,
+  "teak-wood-treatment": 33,
+
+  // ── 10. Thermal Carpet & Luxury Upholstery Care (Tier 1) ──
+  "carpet-steam-extraction": 34,
+  "upholstery-steam-extraction": 35,
+  "upholstery-cleaning": 36,
+
+  // ── 11. Handover & Post-Renovation Operations ──
+  "post-renovation-deep-cleaning": 37,
+  "final-handover-cleaning": 38,
+
+  // ── 12. Specialized Air, IAQ & Disinfection ──
+  "hvac-chemical-washing": 39,
+  "air-quality-testing": 40,
+  "indoor-air-quality-iaq-services": 41,
+  "air-hygiene-treatment": 42,
+  "kitchen-duct-hygiene": 43,
+  "disinfection-services": 44,
+  "decontamination-services": 45,
+  "ulv-cold-fogging": 46,
+  "surface-sanitization": 47,
+  "high-touch-point-disinfection": 48,
+  "infection-control-cleaning": 49,
+  "clinic-cleaning": 50,
+  "healthcare-institution-maintenance": 51,
+  "outpatient-clinic-bio-hygiene": 52,
+
+  // ── 13. Specialty Care & Deep Cleans ──
+  "showroom-cleaning": 53,
+  "commercial-office-cleaning": 54,
+  "carpet-cleaning": 55,
+  "carpet-maintenance": 56,
+  "fabric-care": 57,
+  "odour-treatment": 58,
+  "marble-cleaning": 59,
+  "toilet-washroom-deep-cleaning": 60,
+  "kitchen-line-cleaning": 61,
+  "cooking-appliance-degreasing": 62,
+  "kitchen-floor-descaling": 63,
+  "event-cleaning": 64,
+  "post-event-cleanup": 65,
+  "venue-sanitization": 66,
+  "handover-sanitization": 67,
+  "construction-dust-removal": 68,
+  "paint-spot-removal": 69,
+  "cement-residue-cleaning": 70,
+  "yacht-upholstery-maintenance": 71,
+  "hull-descaling": 72,
+  "sales-marketing-technology": 73,
+
+  // ── 14. Operational Support & Back-of-House Utility ──
+  "daily-janitorial-cleaning": 74,
+  "retail-commercial-cleaning": 75,
+  "stewarding-staff": 76,
+  "dishwashing-kitchen-hygiene": 77,
+  "dishwasher-manpower": 78,
+  "kitchen-helpers": 79,
+  "kitchen-boh-support": 80,
+  "venue-utility-personnel": 81,
+  "daily-facility-cleaning": 82,
+  "minor-handyman-maintenance": 83,
+  "waste-management-coordination": 84,
+  "pest-control-coordination": 85,
+  "high-level-cleaning": 86,
+};
+
+/* Flat catalog helper of all specialized services (Premium & High-Importance First) */
+const RAW_SERVICES_CATALOG: ServiceSubItem[] = BUSINESS_PILLARS_DATA.flatMap((pillar) =>
   pillar.categories.flatMap((cat) => cat.services)
 );
+
+export const ALL_SERVICES_CATALOG: ServiceSubItem[] = [...RAW_SERVICES_CATALOG].sort((a, b) => {
+  const pA = SERVICE_PRIORITY_MAP[a.id] ?? 999;
+  const pB = SERVICE_PRIORITY_MAP[b.id] ?? 999;
+  return pA - pB;
+});
 
 /* ------------------------------------------------------------------ */
 /*  FULL STANDALONE SERVICE PAGES (Interactive Modal / Detail Routes) */
@@ -2205,11 +2294,11 @@ export const OPHRON_SERVICE_PAGES: Record<string, ServicePageData> = {
         bullets: [
           "Commercial & Office Hygiene (Daily Janitorial, Showroom, Restroom Deep Cleans)",
           "F&B & Kitchen Hygiene (Kitchen Deep Cleans, Exhaust Canopy & Ducts, Grease Traps)",
-          "Disinfection & Decontamination (Electrostatic, ULV Fogging, Bio-Burden Reduction)",
+          "Disinfection & Decontamination (Electrostatic Spraying, ULV Fogging, Infection Control)",
           "Healthcare & Cleanrooms (ISO Class 5-8, Clinics, Surgical Suites, Bio-Hygiene)",
           "Carpet & Upholstery (80°C Thermal Extraction, Low-Moisture Encapsulation)",
           "Marble & Surface Care (Planetary Diamond Polishing, Italian Oxalic Powder Honing)",
-          "Air & Environmental Hygiene (IAQ Sensor Testing, HVAC Chemical Wash, UV-C Sterilization)",
+          "Air & Environmental Hygiene (IAQ Sensor Testing, HVAC Chemical Wash, Air Hygiene Fogging)",
         ],
       },
     ],

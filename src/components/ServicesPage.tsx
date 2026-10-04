@@ -4,6 +4,7 @@ import {
   BUSINESS_PILLARS_DATA,
   ALL_SERVICES_CATALOG,
   OPHRON_SERVICE_PAGES,
+  SERVICE_PRIORITY_MAP,
 } from "../data/ophronServicePages";
 import {
   MaskedHeadline,
@@ -357,7 +358,7 @@ export default function ServicesPage() {
                         </div>
 
                         {/* Title and Tagline */}
-                        <div className="flex items-center gap-2 mb-1.5">
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
                           <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-[#B7A38B] font-bold">
                             {srv.pillarId === "people"
                               ? "OPHRON PEOPLE"
@@ -367,6 +368,11 @@ export default function ServicesPage() {
                               ? "OPHRON FACILITIES"
                               : "OPHRON TECHNOLOGY"}
                           </span>
+                          {(SERVICE_PRIORITY_MAP[srv.id] ?? 999) <= 26 && (
+                            <span className="text-[9px] font-mono uppercase tracking-[0.1em] text-[#B7A38B] bg-[#032147]/10 group-hover:bg-[#B7A38B]/20 group-hover:text-[#EDE5DA] px-2 py-0.5 rounded-full font-bold transition">
+                              ✦ Premium Tier
+                            </span>
+                          )}
                         </div>
 
                         <h3 className="font-canela font-bold text-xl text-[#032147] group-hover:text-white transition duration-300 tracking-tight leading-snug">

@@ -221,14 +221,14 @@ function BentoCard({
   const isLime = tone === "lime";
   return (
     <div
-      className={`${span} lift relative rounded-2xl p-5 border ${
+      className={`${span} lift relative rounded-2xl p-4 sm:p-5 border ${
         isDark ? "bg-[#032147] text-[#EDE5DA] border-[#032147]" : isLime ? "bg-[#B7A38B] text-[#032147] border-[#B7A38B]" : "bg-[#EDE5DA] text-[#032147] border-[#B7A38B]/30"
       }`}
       style={isDark ? { background: "#032147", color: "#EDE5DA", borderColor: "#032147" } : {}}
     >
-      <div className={`font-display ${wide ? "text-6xl sm:text-7xl" : "text-4xl"} tracking-[-0.04em]`}>{big}</div>
-      <div className={`mt-2 text-[10px] font-mono uppercase tracking-[0.2em] ${isDark ? "opacity-60" : "opacity-70"}`}>{k}</div>
-      {isLime && <span className="absolute top-3 right-3 text-xl">✦</span>}
+      <div className={`font-display ${wide ? "text-5xl sm:text-6xl lg:text-7xl" : "text-2xl sm:text-3xl lg:text-4xl"} tracking-[-0.04em] leading-tight`}>{big}</div>
+      <div className={`mt-2 text-[9.5px] sm:text-[10px] font-mono uppercase tracking-[0.16em] sm:tracking-[0.2em] ${isDark ? "opacity-60" : "opacity-70"}`}>{k}</div>
+      {isLime && <span className="absolute top-3 right-3 text-lg sm:text-xl">✦</span>}
     </div>
   );
 }

@@ -7,9 +7,10 @@ export default function Showcase() {
   const [activeTab, setActiveTab] = useState<TabType>("MONTHLY");
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [scene, setScene] = useState(0);
-  const [isAutoplay, setIsAutoplay] = useState(true);
+  const [timerKey, setTimerKey] = useState(0);
   const [islandExpanded, setIslandExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [mobileWidget, setMobileWidget] = useState<"phone" | "cost" | "shifts">("phone");
   const [tilt, setTilt] = useState<{ id: number; x: number; y: number } | null>(null);
 
   // Monitor screen size to disable 3D rotation on mobile viewports
@@ -24,12 +25,16 @@ export default function Showcase() {
 
   // Auto-play the iPhone screen scene slideshow (walkthrough animation)
   useEffect(() => {
-    if (!isAutoplay) return;
     const timer = setInterval(() => {
       setScene((prev) => (prev + 1) % 4);
     }, 4500);
     return () => clearInterval(timer);
-  }, [isAutoplay]);
+  }, [timerKey]);
+
+  const selectScene = (idx: number) => {
+    setScene(idx);
+    setTimerKey((k) => k + 1);
+  };
 
   // Trigger dynamic island notification wave on scene changes
   useEffect(() => {
@@ -161,9 +166,33 @@ export default function Showcase() {
           </p>
         </div>
 
+        {/* Mobile & Tablet Interactive Widget Segmented Selector */}
+        <div className="mt-8 flex lg:hidden items-center justify-center">
+          <div className="p-1 rounded-2xl bg-[#0a1e3f]/90 border border-[#B7A38B]/35 flex items-center gap-1 shadow-xl max-w-md w-full">
+            {[
+              { id: "phone", label: "📱 Mobile App OS" },
+              { id: "cost", label: "📊 Cost & SLA" },
+              { id: "shifts", label: "📈 Shift Velocity" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setMobileWidget(tab.id as any)}
+                className={`flex-1 py-2.5 px-2 rounded-xl text-center transition-all duration-300 cursor-pointer ${
+                  mobileWidget === tab.id
+                    ? "bg-[#B7A38B] text-[#032147] font-bold shadow-md scale-[1.02]"
+                    : "text-[#EDE5DA]/70 hover:text-white hover:bg-white/5 font-medium"
+                }`}
+              >
+                <div className="text-[11.5px] sm:text-xs font-montserrat">{tab.label}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Widescreen Behance-style Layout with 3D Perspective Container */}
         <div 
-          className="mt-8 relative flex items-center justify-center gap-6 py-4 overflow-x-auto lg:overflow-visible scrollbar-hide max-w-full"
+          className="mt-6 lg:mt-8 relative flex items-center justify-center gap-6 py-4 overflow-visible max-w-full"
           style={{ perspective: "1500px", transformStyle: "preserve-3d" }}
         >
           
@@ -186,7 +215,9 @@ export default function Showcase() {
             onMouseMove={(e) => handleMouseMove(e, 2)}
             onMouseEnter={() => setHoveredCard(2)}
             onMouseLeave={() => { handleMouseLeave(); setHoveredCard(null); }}
-            className="relative w-80 h-[380px] bg-[#0a1e3f]/95 border border-[#B7A38B]/30 rounded-3xl p-6 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),_0_25px_60px_-15px_rgba(0,0,0,0.9),_0_0_40px_rgba(183,163,139,0.1)] hover:border-[#B7A38B]/60 shrink-0 flex flex-col justify-between overflow-hidden"
+            className={`relative w-full max-w-[330px] sm:max-w-[380px] lg:w-80 h-[380px] bg-[#0a1e3f]/95 border border-[#B7A38B]/30 rounded-3xl p-6 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),_0_25px_60px_-15px_rgba(0,0,0,0.9),_0_0_40px_rgba(183,163,139,0.1)] hover:border-[#B7A38B]/60 shrink-0 flex-col justify-between overflow-hidden ${
+              mobileWidget === 'cost' ? 'flex' : 'hidden lg:flex'
+            }`}
             style={getCardStyle(2)}
           >
             <div className="absolute top-1/4 left-1/3 w-32 h-32 bg-[#B7A38B]/10 rounded-full blur-2xl pointer-events-none" />
@@ -243,7 +274,9 @@ export default function Showcase() {
             onMouseMove={(e) => handleMouseMove(e, 3)}
             onMouseEnter={() => setHoveredCard(3)}
             onMouseLeave={() => { handleMouseLeave(); setHoveredCard(null); }}
-            className="relative w-[310px] h-[620px] shrink-0 z-20 select-none"
+            className={`relative w-[300px] sm:w-[310px] h-[600px] sm:h-[620px] shrink-0 z-20 select-none ${
+              mobileWidget === 'phone' ? 'block' : 'hidden lg:block'
+            }`}
             style={getCardStyle(3)}
           >
             {/* Volume & Power Buttons (3D Protrusions) */}
@@ -530,10 +563,8 @@ export default function Showcase() {
                       return (
                         <button
                           key={tab.sceneId}
-                          onClick={() => {
-                            setScene(tab.sceneId);
-                            setIsAutoplay(false);
-                          }}
+                          type="button"
+                          onClick={() => selectScene(tab.sceneId)}
                           className={`flex-1 flex flex-col items-center justify-center py-1 rounded-xl transition-all duration-300 relative cursor-pointer ${
                             isActive ? "text-[#B7A38B] scale-105" : "text-white/50 hover:text-white/80"
                           }`}
@@ -566,7 +597,9 @@ export default function Showcase() {
             onMouseMove={(e) => handleMouseMove(e, 4)}
             onMouseEnter={() => setHoveredCard(4)}
             onMouseLeave={() => { handleMouseLeave(); setHoveredCard(null); }}
-            className="relative w-80 h-[380px] bg-[#0a1e3f]/95 border border-[#B7A38B]/30 rounded-3xl p-6 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),_0_25px_60px_-15px_rgba(0,0,0,0.9),_0_0_40px_rgba(183,163,139,0.1)] hover:border-[#B7A38B]/60 shrink-0 flex flex-col justify-between overflow-hidden"
+            className={`relative w-full max-w-[330px] sm:max-w-[380px] lg:w-80 h-[380px] bg-[#0a1e3f]/95 border border-[#B7A38B]/30 rounded-3xl p-6 shadow-[inset_0_1px_2px_rgba(255,255,255,0.1),_0_25px_60px_-15px_rgba(0,0,0,0.9),_0_0_40px_rgba(183,163,139,0.1)] hover:border-[#B7A38B]/60 shrink-0 flex-col justify-between overflow-hidden ${
+              mobileWidget === 'shifts' ? 'flex' : 'hidden lg:flex'
+            }`}
             style={getCardStyle(4)}
           >
             <div className="absolute bottom-1/4 right-1/3 w-32 h-32 bg-[#B7A38B]/10 rounded-full blur-2xl pointer-events-none" />

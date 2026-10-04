@@ -205,6 +205,18 @@ export default function ParticleText({
       mouse.current.y = -9999;
     }
 
+    function onTouchMove(ev: TouchEvent) {
+      if (ev.touches.length > 0) {
+        const rect = cv.getBoundingClientRect();
+        mouse.current.x = ev.touches[0].clientX - rect.left;
+        mouse.current.y = ev.touches[0].clientY - rect.top;
+      }
+    }
+    function onTouchEnd() {
+      mouse.current.x = -9999;
+      mouse.current.y = -9999;
+    }
+
     build();
     raf = requestAnimationFrame(frame);
 
@@ -213,12 +225,20 @@ export default function ParticleText({
     if (parentEl) ro.observe(parentEl);
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseout", onLeave, { passive: true });
+    cv.addEventListener("touchstart", onTouchMove, { passive: true });
+    cv.addEventListener("touchmove", onTouchMove, { passive: true });
+    cv.addEventListener("touchend", onTouchEnd, { passive: true });
+    cv.addEventListener("touchcancel", onTouchEnd, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseout", onLeave);
+      cv.removeEventListener("touchstart", onTouchMove);
+      cv.removeEventListener("touchmove", onTouchMove);
+      cv.removeEventListener("touchend", onTouchEnd);
+      cv.removeEventListener("touchcancel", onTouchEnd);
     };
   }, [text]);
 
