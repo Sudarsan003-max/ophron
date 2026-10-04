@@ -122,6 +122,7 @@ export default function App() {
         </main>
       ) : isBlogPage ? (
         <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
+          <Blog />
           <AllArticles />
         </main>
       ) : isContactPage ? (
@@ -155,11 +156,9 @@ export default function App() {
           <HowItWorks />
           {/* §008 PROOF — Live Dashboard, operational intelligence */}
           <Showcase />
-          {/* §009 INSIGHTS — Thought leadership */}
-          <Blog />
-          {/* §010 FREQUENTLY ASKED — Direct answers before final action */}
+          {/* §009 FREQUENTLY ASKED — Direct answers before final action */}
           <FAQ />
-          {/* §012 FINAL CONVERSION — Qualify and start a conversation */}
+          {/* §010 FINAL CONVERSION — Qualify and start a conversation */}
           <Contact />
         </main>
       )}
