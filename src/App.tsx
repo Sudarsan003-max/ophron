@@ -20,6 +20,7 @@ import ServicesPage from "./components/ServicesPage";
 import Ecosystem from "./components/Ecosystem";
 import HowItWorks from "./components/HowItWorks";
 import FAQ from "./components/FAQ";
+import FloatingActions from "./components/FloatingActions";
 
 import { initScrollEngine, initAutoReveals } from "./motion";
 
@@ -352,6 +353,7 @@ export default function App() {
         </main>
       )}
       <Footer />
+      <FloatingActions />
     </div>
   );
 }
