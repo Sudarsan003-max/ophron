@@ -23,22 +23,75 @@ import FAQ from "./components/FAQ";
 
 import { initScrollEngine, initAutoReveals } from "./motion";
 
-export default function App() {
-  const [hash, setHash] = useState(window.location.hash);
+// Helper to determine active route from URL path or legacy hash
+export function resolveCurrentRoute(): string {
+  if (typeof window === "undefined") return "/";
+  
+  const rawPath = window.location.pathname.toLowerCase().replace(/\/+$/, "") || "/";
+  const rawHash = window.location.hash.toLowerCase().replace(/^#\/?/, "");
 
-  // 1. Initialize Unified Smooth Scroll & GSAP Motion Engine (LAW 1 & LAW 6)
+  // Check known route paths
+  const knownRoutes = [
+    "about",
+    "services",
+    "why",
+    "gallery",
+    "gallery-grid",
+    "blog",
+    "contact",
+    "founder",
+    "all-articles",
+    "mainframe",
+  ];
+
+  // If path matches a known route
+  for (const r of knownRoutes) {
+    if (rawPath === `/${r}` || rawPath.startsWith(`/${r}/`)) {
+      return `/${r}`;
+    }
+  }
+
+  // If visited via legacy hash (e.g. #about, #services), support and upgrade
+  for (const r of knownRoutes) {
+    if (rawHash === r || rawHash.startsWith(`${r}?`) || rawHash.startsWith(`${r}/`)) {
+      return `/${r}`;
+    }
+  }
+
+  return "/";
+}
+
+export default function App() {
+  const [currentRoute, setCurrentRoute] = useState<string>(resolveCurrentRoute());
+
+  // 1. Initialize Unified Smooth Scroll & GSAP Motion Engine
   useEffect(() => {
     const { destroy, scrollTo } = initScrollEngine();
 
-    // Smooth Anchor & Hash Navigation Handler
-    const handleHash = () => {
-      const currentHash = window.location.hash;
-      setHash(currentHash);
+    const handleLocationChange = () => {
+      const route = resolveCurrentRoute();
+      setCurrentRoute(route);
 
-      const cleanHash = currentHash.split("?")[0];
-      if (cleanHash && cleanHash !== "#" && cleanHash !== "#top" && cleanHash !== "#services") {
+      // Legacy hash auto-upgrade to clean SEO URL (e.g. /#about -> /about)
+      const rawHash = window.location.hash.toLowerCase();
+      if (
+        rawHash === "#about" ||
+        rawHash === "#services" ||
+        rawHash === "#why" ||
+        rawHash === "#gallery" ||
+        rawHash === "#blog" ||
+        rawHash === "#contact" ||
+        rawHash === "#founder" ||
+        rawHash === "#all-articles" ||
+        rawHash === "#mainframe"
+      ) {
+        window.history.replaceState(null, "", `/${rawHash.slice(1)}`);
+      }
+
+      // Smooth in-page section jump if hash corresponds to an ID (e.g. #contact, #solutions)
+      if (rawHash && !rawHash.includes("/")) {
         try {
-          const targetEl = document.querySelector(cleanHash);
+          const targetEl = document.querySelector(rawHash);
           if (targetEl) {
             scrollTo(targetEl as HTMLElement, -70);
             return;
@@ -48,23 +101,76 @@ export default function App() {
         }
       }
 
+      // If page route changed, scroll to top
       window.scrollTo(0, 0);
       scrollTo(0, 0);
     };
 
-    window.addEventListener("hashchange", handleHash);
+    // Global link click interceptor for instant SPA transitions
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest("a");
+      if (!target) return;
+      const href = target.getAttribute("href");
+      if (!href) return;
+
+      // Allow external links, protocols, and downloads
+      if (
+        href.startsWith("http://") ||
+        href.startsWith("https://") ||
+        href.startsWith("mailto:") ||
+        href.startsWith("tel:") ||
+        target.getAttribute("target") === "_blank" ||
+        target.hasAttribute("download")
+      ) {
+        return;
+      }
+
+      // Handle in-page anchors
+      if (href.startsWith("#")) {
+        e.preventDefault();
+        const cleanId = href.replace(/^#/, "");
+        if (cleanId === "top" || cleanId === "") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          (window as any).__lenis?.scrollTo(0);
+        } else {
+          const el = document.getElementById(cleanId);
+          if (el) {
+            (window as any).__lenis?.scrollTo(el, { offset: -70 }) || el.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+        return;
+      }
+
+      // Handle clean path navigation
+      if (href.startsWith("/")) {
+        e.preventDefault();
+        if (window.location.pathname !== href) {
+          window.history.pushState(null, "", href);
+          handleLocationChange();
+        }
+      }
+    };
+
+    window.addEventListener("popstate", handleLocationChange);
+    window.addEventListener("hashchange", handleLocationChange);
+    document.addEventListener("click", handleGlobalClick);
 
     // Initial Auto Reveal Scanner
     const cleanupReveals = initAutoReveals();
 
+    // Check if initial load had a legacy hash to upgrade
+    handleLocationChange();
+
     return () => {
-      window.removeEventListener("hashchange", handleHash);
+      window.removeEventListener("popstate", handleLocationChange);
+      window.removeEventListener("hashchange", handleLocationChange);
+      document.removeEventListener("click", handleGlobalClick);
       cleanupReveals();
       destroy();
     };
   }, []);
 
-  // 2. Route/Hash Change Refresh
+  // 2. Route Refresh for reveals and smooth scroll
   useEffect(() => {
     const timer = setTimeout(() => {
       initAutoReveals();
@@ -72,17 +178,17 @@ export default function App() {
     }, 200);
 
     return () => clearTimeout(timer);
-  }, [hash]);
+  }, [currentRoute]);
 
-  const isAboutPage = hash === "#about";
-  const isServicesPage = hash === "#services" || hash.startsWith("#services?");
-  const isWhyPage = hash === "#why";
-  const isGalleryPage = hash === "#gallery" || hash === "#gallery-grid";
-  const isBlogPage = hash === "#blog";
-  const isContactPage = hash === "#contact";
-  const isFounderPage = hash === "#founder";
-  const isAllArticlesPage = hash === "#all-articles";
-  const isMainframePage = hash === "#mainframe";
+  const isAboutPage = currentRoute === "/about";
+  const isServicesPage = currentRoute === "/services";
+  const isWhyPage = currentRoute === "/why";
+  const isGalleryPage = currentRoute === "/gallery" || currentRoute === "/gallery-grid";
+  const isBlogPage = currentRoute === "/blog";
+  const isContactPage = currentRoute === "/contact";
+  const isFounderPage = currentRoute === "/founder";
+  const isAllArticlesPage = currentRoute === "/all-articles";
+  const isMainframePage = currentRoute === "/mainframe";
 
   if (isMainframePage) {
     return <MainframeHero />;

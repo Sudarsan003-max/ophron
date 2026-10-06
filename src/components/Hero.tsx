@@ -138,15 +138,16 @@ export default function Hero() {
                 isActive ? "opacity-100 z-10" : "opacity-0 z-0"
               }`}
             >
-              {/* True 4K UHD Background Image with smooth Ken-Burns drift */}
+              {/* Ultra-sharp High-Fidelity Background Image with smooth subtle Ken-Burns drift */}
               <picture className="w-full h-full block">
                 <source srcSet={srv.image.replace(".jpg", ".webp")} type="image/webp" />
                 <img
                   src={srv.image}
                   alt={srv.title}
                   className={`w-full h-full object-cover object-center transition-transform duration-[8000ms] ease-out will-change-transform ${
-                    isActive ? "scale-105" : "scale-100"
+                    isActive ? "scale-103" : "scale-100"
                   }`}
+                  style={{ imageRendering: "auto" }}
                   loading={index === 0 ? "eager" : "lazy"}
                   decoding="async"
                 />

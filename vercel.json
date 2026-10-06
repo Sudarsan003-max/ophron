@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/((?!api/|_next/|images/|fonts/|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -21,15 +27,27 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
         },
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
         },
         {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "X-Permitted-Cross-Domain-Policies",
+          "value": "none"
+        },
+        {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; connect-src 'self' https://script.google.com https://api.ophronsystems.com https://*.google.com https://*.googleapis.com; object-src 'none'; base-uri 'self';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://script.google.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; connect-src 'self' https://script.google.com https://api.ophronsystems.com https://*.google.com https://*.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com;"
         }
       ]
     }

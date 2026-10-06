@@ -1,0 +1,99 @@
+# ==============================================================================
+# OPHRON OPERATIONAL INFRASTRUCTURE — ENTERPRISE SECURITY & SPA ROUTING (.htaccess)
+# Standards: OWASP Top 10 Defense-in-Depth, Singapore PDPA, CIS Security Benchmark
+# ==============================================================================
+
+# 1. DISABLE DIRECTORY BROWSING & ENFORCE UTF-8
+Options -Indexes -MultiViews
+AddDefaultCharset UTF-8
+
+# 2. BLOCK ACCESS TO SENSITIVE FILES & DIRECTORIES
+<FilesMatch "^(\.env|\.git|\.github|\.gitignore|\.htaccess|\.htpasswd|composer\.(json|lock)|package(-lock)?\.json|tsconfig\.json|vite\.config\.ts|.*\.sql|.*\.bak|.*\.log|.*\.md)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 3. ENTERPRISE HTTP SECURITY HEADERS
+<IfModule mod_headers.c>
+    # Enforce HTTPS Only via Strict-Transport-Security (2 Years + Subdomains + Preload)
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" env=HTTPS
+
+    # Prevent Clickjacking & UI Redress Attacks
+    Header always set X-Frame-Options "DENY"
+
+    # Prevent MIME-Type Sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Enable Legacy Browser XSS Filter
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Strict Origin Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Restrict Dangerous Browser Hardware APIs (Permissions Policy)
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+
+    # Cross-Origin Isolation Protections
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set Cross-Origin-Resource-Policy "same-origin"
+    Header always set X-Permitted-Cross-Domain-Policies "none"
+
+    # Robust Content Security Policy (CSP)
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://script.google.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; connect-src 'self' https://script.google.com https://api.ophronsystems.com https://*.google.com https://*.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com;"
+</IfModule>
+
+# 4. REWRITE ENGINE: FORCE HTTPS, CLEAN HTML5 SPA ROUTING & ATTACK MITIGATION
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # A. Force HTTPS (301 Permanent Redirect)
+    RewriteCond %{HTTPS} !=on [NC]
+    RewriteCond %{HTTP_HOST} ^(www\.)?ophronsystems\.com [NC]
+    RewriteRule ^(.*)$ https://ophronsystems.com/$1 [R=301,L]
+
+    # B. Block Suspicious Request Methods (TRACE, TRACK, DEBUG)
+    RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK|DEBUG) [NC]
+    RewriteRule .* - [F]
+
+    # C. Block Common Attack Vectors & Malicious Query Strings (OWASP)
+    RewriteCond %{QUERY_STRING} (proc/self/environ|base64_(en|de)code|eval\(|<script|UNION.*SELECT|GLOBALS|_REQUEST) [NC,OR]
+    RewriteCond %{QUERY_STRING} (boot\.ini|\.\./|etc/passwd) [NC]
+    RewriteRule .* - [F,L]
+
+    # D. Block Known Malicious Bots & Scanners
+    RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|wpscan|dirbuster|acunetix|masscan) [NC]
+    RewriteRule .* - [F,L]
+
+    # E. Allow Direct Access to Existing Files and Directories (Static Assets & API)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # F. HTML5 SPA Clean Routing: Route all virtual paths (/about, /services, /contact) to index.html
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+# 5. ASSET CACHING & PERFORMANCE COMPRESSION
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json font/woff2
+</IfModule>

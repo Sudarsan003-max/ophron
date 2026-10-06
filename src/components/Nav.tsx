@@ -15,7 +15,9 @@ export default function Nav() {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [time, setTime] = useState("");
-  const [hash, setHash] = useState(window.location.hash || "#top");
+  const [currentPath, setCurrentPath] = useState(
+    typeof window !== "undefined" ? window.location.pathname || "/" : "/"
+  );
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -25,12 +27,13 @@ export default function Nav() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    const onHashChange = () => {
-      setHash(window.location.hash || "#top");
+    const onLocationChange = () => {
+      setCurrentPath(window.location.pathname || "/");
       setServicesDropdownOpen(false);
       setOpen(false);
     };
-    window.addEventListener("hashchange", onHashChange);
+    window.addEventListener("popstate", onLocationChange);
+    window.addEventListener("hashchange", onLocationChange);
 
     const handleClickOutside = (event: globalThis.MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -61,7 +64,8 @@ export default function Nav() {
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("hashchange", onHashChange);
+      window.removeEventListener("popstate", onLocationChange);
+      window.removeEventListener("hashchange", onLocationChange);
       document.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("keydown", handleKeyDown);
       clearInterval(t);
@@ -81,13 +85,13 @@ export default function Nav() {
   };
 
   const links = [
-    { href: "#top", label: "HOME" },
-    { href: "#about", label: "ABOUT" },
-    { href: "#services", label: "SERVICES", hasDropdown: true },
-    { href: "#why", label: "WHY US" },
-    { href: "#gallery", label: "GALLERY" },
-    { href: "#blog", label: "BLOG" },
-    { href: "#contact", label: "CONTACT" },
+    { href: "/", label: "HOME" },
+    { href: "/about", label: "ABOUT" },
+    { href: "/services", label: "SERVICES", hasDropdown: true },
+    { href: "/why", label: "WHY US" },
+    { href: "/gallery", label: "GALLERY" },
+    { href: "/blog", label: "BLOG" },
+    { href: "/contact", label: "CONTACT" },
   ];
 
   const corePillars = [
@@ -97,7 +101,7 @@ export default function Nav() {
       title: "OPHRON People",
       subtitle: "Vetted hospitality stewarding, kitchen helpers & venue cleaners",
       badge: "WSQ Vetted",
-      href: "#services?service=people",
+      href: "/services?service=people",
     },
     {
       icon: ShieldCheck,
@@ -105,7 +109,7 @@ export default function Nav() {
       title: "OPHRON Hygiene",
       subtitle: "SFA kitchen deep cleans, exhaust ducts & NEA disinfection",
       badge: "SFA Grade A",
-      href: "#services?service=hygiene",
+      href: "/services?service=hygiene",
     },
     {
       icon: Building2,
@@ -113,7 +117,7 @@ export default function Nav() {
       title: "OPHRON Facilities",
       subtitle: "High-rise IRATA rope access façade, event resets & IFM Lite",
       badge: "IRATA L3",
-      href: "#services?service=facilities",
+      href: "/services?service=facilities",
     },
     {
       icon: Cpu,
@@ -121,7 +125,7 @@ export default function Nav() {
       title: "OPHRON Technology",
       subtitle: "Connected hospitality POS, AI shift tracking & SaaS telemetry",
       badge: "Cloud POS",
-      href: "#services?service=technology",
+      href: "/services?service=technology",
     },
     {
       icon: TrendingUp,
@@ -129,21 +133,19 @@ export default function Nav() {
       title: "Commercial Intelligence",
       subtitle: "Labor yield optimization, RevPASH & executive margin advisory",
       badge: "Yield Strategy",
-      href: "#services?service=intelligence",
+      href: "/services?service=intelligence",
     },
   ];
 
   const isActive = (linkHref: string) => {
-    if (
-      (linkHref === "#top" || linkHref === "#home") &&
-      (hash === "" || hash === "#top" || hash === "#home")
-    ) {
+    const p = currentPath.toLowerCase().replace(/\/+$/, "") || "/";
+    if (linkHref === "/" && (p === "/" || p === "/home")) {
       return true;
     }
-    if (linkHref === "#services" && hash.startsWith("#services")) {
+    if (linkHref === "/services" && p.startsWith("/services")) {
       return true;
     }
-    return hash === linkHref;
+    return p === linkHref;
   };
 
   return (
@@ -190,7 +192,7 @@ export default function Nav() {
           >
             {/* Brand Logo */}
             <a
-              href="#top"
+              href="/"
               className="flex items-center gap-3 group pl-2"
               onClick={() => setServicesDropdownOpen(false)}
             >
@@ -282,7 +284,7 @@ export default function Nav() {
             {/* Right Audit CTA & Mobile toggle */}
             <div className="flex items-center gap-2">
               <a
-                href="#contact"
+                href="/contact"
                 onClick={() => setServicesDropdownOpen(false)}
                 className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[#B7A38B] text-[#032147] pl-4 pr-1.5 py-1.5 text-[12px] font-heading font-semibold hover:bg-white hover:text-[#032147] transition group"
               >
@@ -402,7 +404,7 @@ export default function Nav() {
 
                 {/* 6th Card: All 14 Scopes & SOP Hub */}
                 <a
-                  href="#services"
+                  href="/services"
                   onClick={() => setServicesDropdownOpen(false)}
                   className="group relative flex flex-col justify-between p-4 rounded-2xl bg-gradient-to-br from-[#B7A38B]/20 via-[#B7A38B]/10 to-transparent border border-[#B7A38B]/40 hover:border-[#B7A38B] hover:scale-[1.02] transition-all duration-300 shadow-md"
                 >
@@ -446,7 +448,7 @@ export default function Nav() {
                 </div>
 
                 <a
-                  href="#contact"
+                  href="/contact"
                   onClick={() => setServicesDropdownOpen(false)}
                   className="text-xs font-montserrat font-bold text-[#B7A38B] hover:text-white uppercase tracking-wider flex items-center gap-1.5 transition"
                 >
@@ -537,7 +539,7 @@ export default function Nav() {
                           })}
 
                           <a
-                            href="#services"
+                            href="/services"
                             onClick={() => {
                               setOpen(false);
                               setMobileServicesOpen(false);
@@ -570,7 +572,7 @@ export default function Nav() {
               })}
 
               <a
-                href="#contact"
+                href="/contact"
                 onClick={() => setOpen(false)}
                 className="mt-2 mx-1 inline-flex justify-center rounded-2xl bg-[#B7A38B] text-[#032147] px-4 py-3 text-sm font-heading font-semibold hover:bg-white transition"
               >
