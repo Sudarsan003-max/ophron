@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 
 /* ------------------------------------------------------------------ */
 /*  1. ANIMATED NUMBER COUNTER HOOK & COMPONENT                       */
-/*  requestAnimationFrame with cubic-bezier ease-out (60fps)           */
+/*  requestAnimationFrame with cubic-bezier ease-out (60/120fps)      */
 /* ------------------------------------------------------------------ */
 
-export function useCountUp(endVal: number, duration = 1800, start = false, decimals = 0) {
+export function useCountUp(endVal: number, duration = 1200, start = false, decimals = 0) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export function AnimatedCounter({
   prefix = "",
   suffix = "",
   decimals = 0,
-  duration = 1800,
+  duration = 1200,
   className = "",
 }: {
   value: number;
@@ -72,7 +72,7 @@ export function AnimatedCounter({
           io.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0, rootMargin: "250px 0px" }
     );
 
     io.observe(el);
@@ -92,7 +92,6 @@ export function AnimatedCounter({
 
 /* ------------------------------------------------------------------ */
 /*  2. MASKED SPLIT-LINE HEADLINE REVEAL                              */
-/*  Line-by-line slide-up from overflow: hidden mask (translateY 112%) */
 /* ------------------------------------------------------------------ */
 
 export function MaskedHeadline({
@@ -100,7 +99,7 @@ export function MaskedHeadline({
   as: Component = "h2",
   className = "",
   lineClassName = "",
-  staggerMs = 120,
+  staggerMs = 60,
 }: {
   lines: (string | React.ReactNode)[];
   as?: React.ElementType;
@@ -122,7 +121,7 @@ export function MaskedHeadline({
           io.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0, rootMargin: "350px 0px 150px 0px" }
     );
 
     io.observe(el);
@@ -148,8 +147,7 @@ export function MaskedHeadline({
 }
 
 /* ------------------------------------------------------------------ */
-/*  3. VIEWPORT SCROLL REVEAL WRAPPER                                 */
-/*  Smooth fade & translate (up, down, left, right, scale, stagger)   */
+/*  3. PROACTIVE VIEWPORT SCROLL REVEAL WRAPPER (INSTANT RESPONSE)    */
 /* ------------------------------------------------------------------ */
 
 export function ScrollReveal({
@@ -172,6 +170,12 @@ export function ScrollReveal({
     const el = ref.current;
     if (!el) return;
 
+    // Instant on mobile/touch screens
+    if (window.innerWidth < 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0) {
+      setIsIn(true);
+      return;
+    }
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -179,7 +183,7 @@ export function ScrollReveal({
           io.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -30px 0px" }
+      { threshold: 0, rootMargin: "350px 0px 150px 0px" }
     );
 
     io.observe(el);
@@ -211,7 +215,7 @@ export function ScrollReveal({
 }
 
 /* ------------------------------------------------------------------ */
-/*  4. HORIZONTAL EXPANDING RULE (scaleX 0 -> 1)                      */
+/*  4. HORIZONTAL EXPANDING RULE                                      */
 /* ------------------------------------------------------------------ */
 
 export function ExpandRule({
@@ -235,7 +239,7 @@ export function ExpandRule({
           io.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0, rootMargin: "350px 0px" }
     );
 
     io.observe(el);
@@ -253,13 +257,12 @@ export function ExpandRule({
 
 /* ------------------------------------------------------------------ */
 /*  5. INTERACTIVE 3D PERSPECTIVE TILT CARD                           */
-/*  Gyro mouse tracking with specular spotlight gradient              */
 /* ------------------------------------------------------------------ */
 
 export function TiltCard({
   children,
   className = "",
-  maxTilt = 9,
+  maxTilt = 6,
   spotlight = true,
   style,
   onClick,
@@ -277,7 +280,7 @@ export function TiltCard({
   const rafId = useRef<number | null>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!cardRef.current || window.innerWidth < 1024 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     
     if (rafId.current) cancelAnimationFrame(rafId.current);
     
@@ -287,13 +290,13 @@ export function TiltCard({
     rafId.current = requestAnimationFrame(() => {
       if (!cardRef.current) return;
       const rect = cardRef.current.getBoundingClientRect();
-      const x = (clientX - rect.left) / rect.width; // 0 to 1
-      const y = (clientY - rect.top) / rect.height; // 0 to 1
+      const x = (clientX - rect.left) / rect.width;
+      const y = (clientY - rect.top) / rect.height;
 
       const tiltX = (y - 0.5) * -maxTilt;
       const tiltY = (x - 0.5) * maxTilt;
 
-      setTransform(`perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateZ(6px)`);
+      setTransform(`perspective(800px) rotateX(${tiltX.toFixed(1)}deg) rotateY(${tiltY.toFixed(1)}deg) translateZ(4px)`);
       if (spotlight) {
         setGlow({ x: Math.round(x * 100), y: Math.round(y * 100), opacity: 1 });
       }
@@ -302,7 +305,7 @@ export function TiltCard({
 
   const handleMouseLeave = () => {
     if (rafId.current) cancelAnimationFrame(rafId.current);
-    setTransform("perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)");
+    setTransform("perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0px)");
     setGlow((prev) => ({ ...prev, opacity: 0 }));
   };
 
@@ -318,7 +321,7 @@ export function TiltCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className={`tilt-card-container relative transition-transform duration-300 ease-out will-change-transform ${className}`}
+      className={`tilt-card-container relative transition-transform duration-200 ease-out ${className}`}
       style={{
         ...style,
         transform: transform || style?.transform || undefined,
@@ -327,7 +330,7 @@ export function TiltCard({
     >
       {spotlight && (
         <div
-          className="pointer-events-none absolute inset-0 z-20 rounded-[inherit] transition-opacity duration-500"
+          className="pointer-events-none absolute inset-0 z-20 rounded-[inherit] transition-opacity duration-300"
           style={{
             opacity: glow.opacity,
             background: `radial-gradient(circle 350px at ${glow.x}% ${glow.y}%, rgba(183, 163, 139,0.18), transparent 70%)`,
@@ -341,7 +344,6 @@ export function TiltCard({
 
 /* ------------------------------------------------------------------ */
 /*  6. CORNER REGISTRATION BRACKETS                                   */
-/*  Expanding metallic corner accents on image/card containers        */
 /* ------------------------------------------------------------------ */
 
 export function CornerBrackets({
@@ -359,9 +361,8 @@ export function CornerBrackets({
 }) {
   return (
     <div className={`corner-brackets-layer pointer-events-none absolute inset-0 z-20 ${className}`}>
-      {/* Top Left */}
       <span
-        className="corner-bracket top-left absolute top-2 left-2 transition-all duration-400 ease-out"
+        className="corner-bracket top-left absolute top-2 left-2"
         style={{
           width: `${size}px`,
           height: `${size}px`,
@@ -369,9 +370,8 @@ export function CornerBrackets({
           borderLeft: `${thickness}px solid ${color}`,
         }}
       />
-      {/* Top Right */}
       <span
-        className="corner-bracket top-right absolute top-2 right-2 transition-all duration-400 ease-out"
+        className="corner-bracket top-right absolute top-2 right-2"
         style={{
           width: `${size}px`,
           height: `${size}px`,
@@ -379,9 +379,8 @@ export function CornerBrackets({
           borderRight: `${thickness}px solid ${color}`,
         }}
       />
-      {/* Bottom Left */}
       <span
-        className="corner-bracket bottom-left absolute bottom-2 left-2 transition-all duration-400 ease-out"
+        className="corner-bracket bottom-left absolute bottom-2 left-2"
         style={{
           width: `${size}px`,
           height: `${size}px`,
@@ -389,9 +388,8 @@ export function CornerBrackets({
           borderLeft: `${thickness}px solid ${color}`,
         }}
       />
-      {/* Bottom Right */}
       <span
-        className="corner-bracket bottom-right absolute bottom-2 right-2 transition-all duration-400 ease-out"
+        className="corner-bracket bottom-right absolute bottom-2 right-2"
         style={{
           width: `${size}px`,
           height: `${size}px`,
@@ -404,15 +402,14 @@ export function CornerBrackets({
 }
 
 /* ------------------------------------------------------------------ */
-/*  7. CLIP-PATH CURTAIN REVEAL IMAGE CONTAINER                       */
-/*  Shutter curtain sweep with optional Ken Burns ambient zoom       */
+/*  7. CLIP-PATH CURTAIN REVEAL IMAGE CONTAINER (EAGER & INSTANT)     */
 /* ------------------------------------------------------------------ */
 
 export function CurtainRevealImage({
   src,
   alt,
   aspect = "aspect-[16/10]",
-  kenBurns = true,
+  kenBurns = false,
   showBrackets = true,
   className = "",
   imageClassName = "",
@@ -425,42 +422,16 @@ export function CurtainRevealImage({
   className?: string;
   imageClassName?: string;
 }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isIn, setIsIn] = useState(true);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el || typeof IntersectionObserver === "undefined") {
-      setIsIn(true);
-      return;
-    }
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsIn(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.01, rootMargin: "80px" }
-    );
-
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
   return (
     <div
-      ref={containerRef}
-      className={`group relative overflow-hidden rounded-2xl bg-[#032147]/10 ${aspect} ${
-        isIn ? "curtain-reveal in" : "curtain-reveal"
-      } ${className}`}
+      className={`group relative overflow-hidden rounded-2xl bg-[#032147]/10 ${aspect} curtain-reveal in ${className}`}
     >
       <img
         src={src}
         alt={alt}
-        loading="eager"
-        className={`h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108 ${
+        loading="lazy"
+        decoding="async"
+        className={`h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${
           kenBurns ? "ken-burns" : ""
         } ${imageClassName}`}
       />
@@ -471,12 +442,11 @@ export function CurtainRevealImage({
 
 /* ------------------------------------------------------------------ */
 /*  8. CONTINUOUS SCROLL PARALLAX CONTAINER                           */
-/*  Subtle 60fps vertical translate3d based on viewport position      */
 /* ------------------------------------------------------------------ */
 
 export function ScrollParallax({
   children,
-  speed = 0.08,
+  speed = 0.05,
   className = "",
 }: {
   children: React.ReactNode;
@@ -486,7 +456,11 @@ export function ScrollParallax({
   const elRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (
+      window.innerWidth < 1024 ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
     const el = elRef.current;
     if (!el) return;
 
@@ -500,7 +474,7 @@ export function ScrollParallax({
           update();
         }
       },
-      { rootMargin: "100px 0px" }
+      { rootMargin: "150px 0px" }
     );
     io.observe(el);
 
@@ -531,7 +505,7 @@ export function ScrollParallax({
   }, [speed]);
 
   return (
-    <div ref={elRef} className={`scroll-parallax will-change-transform ${className}`}>
+    <div ref={elRef} className={`scroll-parallax ${className}`}>
       {children}
     </div>
   );

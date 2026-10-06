@@ -11,10 +11,10 @@ let tickerFn: ((time: number) => void) | null = null;
 
 /**
  * ==============================================================================
- * UNIFIED HIGH-PERFORMANCE SCROLL & MOTION ENGINE
+ * UNIFIED HIGH-PERFORMANCE SCROLL & MOTION ENGINE (0-LAG)
  * ==============================================================================
  * Ultra-optimized 60/120fps engine. Uses native hardware scrolling on mobile touch
- * devices and buttery-smooth lightweight Lenis inertia on desktop.
+ * devices and buttery-smooth lightweight Lenis inertia on desktop with zero latency.
  */
 export function initScrollEngine(): {
   lenis: Lenis | null;
@@ -39,9 +39,12 @@ export function initScrollEngine(): {
   }
 
   const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const isTouchMobile = window.innerWidth < 768 || "ontouchstart" in window;
+  const isTouchMobile =
+    window.innerWidth < 768 ||
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0;
 
-  // On mobile touch devices, use native hardware scroll for 0ms latency and 120Hz responsiveness
+  // On mobile touch devices, use 100% native hardware scroll for 0ms latency and 120Hz responsiveness
   if (isTouchMobile || isReduced) {
     return {
       lenis: null,
@@ -50,10 +53,10 @@ export function initScrollEngine(): {
     };
   }
 
-  // 1. Initialize Lenis for desktop
+  // 1. Initialize Lenis for desktop with snappy responsiveness
   const lenis = new Lenis({
     duration: MOTION_TOKENS.scroll.duration,
-    easing: (t) => 1 - Math.pow(1 - t, 3), // cubic ease-out
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Snappy exponential ease-out
     orientation: "vertical",
     gestureOrientation: "vertical",
     smoothWheel: true,
@@ -74,7 +77,7 @@ export function initScrollEngine(): {
     lenis.raf(time * 1000);
   };
   gsap.ticker.add(tickerFn);
-  gsap.ticker.lagSmoothing(500, 33); // Smooth out any frame spikes
+  gsap.ticker.lagSmoothing(0); // 0 lag smoothing for instant direct response
 
   // 4. Global Resize / Orientation Watcher
   const handleResize = () => {
@@ -96,7 +99,7 @@ export function initScrollEngine(): {
 /**
  * Programmatic Smooth Glide to target element
  */
-export function scrollToElement(target: string | HTMLElement | number, offset = -70, duration = 0.6) {
+export function scrollToElement(target: string | HTMLElement | number, offset = -70, duration = 0.4) {
   if (!lenisInstance) {
     if (typeof target === "number") {
       window.scrollTo({ top: target, behavior: "smooth" });
@@ -116,7 +119,7 @@ export function scrollToElement(target: string | HTMLElement | number, offset = 
   lenisInstance.scrollTo(target, {
     offset,
     duration,
-    easing: (t) => 1 - Math.pow(1 - t, 3),
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   });
 }
 

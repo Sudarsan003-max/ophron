@@ -2,22 +2,22 @@
  * ==============================================================================
  * OPHRON MOTION DESIGN SYSTEM TOKENS
  * ==============================================================================
- * Optimized high-performance motion tokens for ultra-fluid 60/120fps scrolling.
+ * Ultra-fast, zero-latency motion tokens for 120fps smooth scrolling.
  */
 
 export const MOTION_TOKENS = {
-  // ── 1. DURATIONS ─────────────────────────────────────────────────────────────
+  // ── 1. DURATIONS (Snappy & Instant) ──────────────────────────────────────────
   duration: {
-    instant: 0.1,
-    fast: 0.25,      // Micro-interactions, active indicators
-    base: 0.45,      // Standard element entrances, cards, text blocks
-    slow: 0.7,       // Headlines, section reveals
-    deliberate: 0.9, // Deep section handoffs
+    instant: 0.05,
+    fast: 0.15,     // Micro-interactions, active indicators
+    base: 0.28,     // Standard element entrances, cards, text blocks
+    slow: 0.42,     // Headlines, section reveals
+    deliberate: 0.55, // Deep section handoffs
   },
 
-  // ── 2. EASING LANGUAGE ───────────────────────────────────────────────────────
+  // ── 2. EASING LANGUAGE (Fast Expo Out for Instant Response) ───────────────────
   ease: {
-    enter: "power2.out",
+    enter: "power3.out",
     enterExpo: "expo.out",
     enterQuint: "quint.out",
     exit: "power2.in",
@@ -26,32 +26,32 @@ export const MOTION_TOKENS = {
     linear: "none",
   },
 
-  // ── 3. TRAVEL DISTANCES ──────────────────────────────────────────────────────
+  // ── 3. TRAVEL DISTANCES (Subtle, Crisp Micro-shifts) ─────────────────────────
   distance: {
-    xs: 12,
-    sm: 24,
-    md: 36,
-    lg: 48,
-    xl: 60,
+    xs: 8,
+    sm: 14,
+    md: 18,
+    lg: 24,
+    xl: 32,
   },
 
-  // ── 4. STAGGER RHYTHMS ───────────────────────────────────────────────────────
+  // ── 4. STAGGER RHYTHMS (Tight & Instant) ─────────────────────────────────────
   stagger: {
-    tight: 0.04,
-    card: 0.06,
-    loose: 0.09,
+    tight: 0.02,
+    card: 0.035,
+    loose: 0.05,
   },
 
-  // ── 5. SMOOTH SCROLL INERTIA (LENIS CONFIG) ──────────────────────────────────
+  // ── 5. SMOOTH SCROLL INERTIA (LENIS CONFIG - 0 LAG) ──────────────────────────
   scroll: {
-    lerp: 0.12,          // Responsive, snappy fluid scroll without drag
-    duration: 0.75,      // Fast response
-    wheelMultiplier: 1.15,
-    touchMultiplier: 1.0,
+    lerp: 0.14,           // Ultra-responsive direct tracking
+    duration: 0.45,       // Snappy response
+    wheelMultiplier: 1.0,
+    touchMultiplier: 0,   // Never hijack touch on mobile
     headerOffset: -70,
-    triggerHook: "top 88%", // Trigger reveals early so user doesn't wait
+    triggerHook: "top 98%", // Trigger reveals well before entering viewport
   },
 
   // ── 6. RESPONSIVE SCALE FACTORS ──────────────────────────────────────────────
-  mobileScale: 0.5,
+  mobileScale: 0.3,
 };
