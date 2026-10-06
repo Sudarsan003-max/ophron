@@ -440,20 +440,24 @@ function PillarCard({ pillar, onSelect }: { pillar: Pillar; onSelect?: () => voi
     >
       <CornerBrackets color="#B7A38B" size={12} hoverSize={18} />
       {h && (
-        <>
-          <div className="absolute -top-32 -right-20 h-64 w-64 rounded-full bg-[#B7A38B]/20 blur-3xl pointer-events-none" />
-          <div className="absolute top-4 right-4 text-[9px] font-mono uppercase tracking-[0.2em] bg-[#B7A38B] text-[#032147] px-3 py-1 rounded-full font-bold">★ Core Pillar</div>
-        </>
+        <div className="absolute -top-32 -right-20 h-64 w-64 rounded-full bg-[#B7A38B]/20 blur-3xl pointer-events-none" />
       )}
 
       <div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap gap-2">
           <span className={`text-[10px] font-mono uppercase tracking-[0.22em] ${h ? "text-[#B7A38B]" : "text-[#032147]/60"} font-bold`}>
             {pillar.tag}
           </span>
-          <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full ${h ? "bg-white/10 text-[#EDE5DA]" : "bg-[#032147]/10 text-[#032147]"}`}>
-            {pillar.services.length} Services
-          </span>
+          <div className="flex items-center gap-1.5 shrink-0">
+            {h && (
+              <span className="text-[9px] font-mono uppercase tracking-[0.16em] bg-[#B7A38B] text-[#032147] px-2.5 py-0.5 rounded-full font-bold shadow-sm">
+                ★ Core Pillar
+              </span>
+            )}
+            <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full ${h ? "bg-white/10 text-[#EDE5DA]" : "bg-[#032147]/10 text-[#032147]"}`}>
+              {pillar.services.length} Services
+            </span>
+          </div>
         </div>
 
         <h3 className={`mt-3 sm:mt-4 font-canela text-2xl sm:text-3xl font-bold tracking-tight ${h ? "text-white" : "text-[#032147]"}`}>
