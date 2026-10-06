@@ -117,6 +117,7 @@ const pillars: Pillar[] = [
 export default function Solutions() {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [showAllServices, setShowAllServices] = useState(false);
+  const [activeMobilePillar, setActiveMobilePillar] = useState(0);
 
   // Priority front order as requested:
   // 1. Events Venue Maintenance
@@ -153,15 +154,15 @@ export default function Solutions() {
   };
 
   return (
-    <section id="solutions" className="relative py-16 bg-[#EDE5DA] overflow-hidden" style={{ background: "#EDE5DA", color: "#032147" }}>
-      <div className="mx-auto max-w-[1400px] px-5">
+    <section id="solutions" className="relative py-10 sm:py-16 bg-[#EDE5DA] overflow-hidden" style={{ background: "#EDE5DA", color: "#032147" }}>
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-5">
         <SectionHead n="005" label="Platform Solutions & Specialized Services" />
 
-        <div className="mt-8 grid lg:grid-cols-12 gap-10 items-end">
+        <div className="mt-6 sm:mt-8 grid lg:grid-cols-12 gap-6 lg:gap-10 items-end">
           <div className="lg:col-span-8">
             <MaskedHeadline
               as="h2"
-              className="font-canela font-bold text-[38px] sm:text-[58px] lg:text-[76px] leading-[0.95] tracking-tight text-[#032147]"
+              className="font-canela font-bold text-[34px] sm:text-[54px] lg:text-[76px] leading-[0.95] tracking-tight text-[#032147]"
               lines={[
                 <>
                   The <AnimatedCounter value={5} /> Pillars powering
@@ -173,32 +174,98 @@ export default function Solutions() {
             />
           </div>
           <ScrollReveal variant="right" className="lg:col-span-4 lg:ml-auto">
-            <p className="font-inter text-[15px] leading-relaxed text-[#032147]/80 max-w-md">
+            <p className="font-inter text-[14px] sm:text-[15px] leading-relaxed text-[#032147]/80 max-w-md">
               Instead of fragmented vendors, OPHRON provides a single, fully-integrated operational infrastructure across Singapore & international markets.
             </p>
           </ScrollReveal>
         </div>
 
-        {/* Master 5 Pillars with 3D Tilt Cards */}
-        <div className="mt-8 grid lg:grid-cols-3 gap-6 scroll-reveal-stagger">
-          {pillars.slice(0, 3).map((p) => (
-            <TiltCard key={p.id} maxTilt={6} className="h-full rounded-[28px]">
-              <PillarCard pillar={p} onSelect={() => setActiveSlug(p.id)} />
-            </TiltCard>
-          ))}
+        {/* ── MOBILE VIEW: Compact Interactive Pillar Selector (Saves ~2,500px vertical scroll) ── */}
+        <div className="mt-6 block md:hidden">
+          {/* Pillar selector tabs */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none">
+            {pillars.map((p, idx) => (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => setActiveMobilePillar(idx)}
+                className={`px-3 py-2 rounded-xl text-[12px] font-montserrat font-bold shrink-0 transition-all cursor-pointer ${
+                  activeMobilePillar === idx
+                    ? "bg-[#032147] text-[#EDE5DA] shadow-md scale-102"
+                    : "bg-[#032147]/10 text-[#032147]/70 hover:bg-[#032147]/15"
+                }`}
+              >
+                0{idx + 1} {p.name.replace("OPHRON ", "").replace("COMMERCIAL ", "")}
+              </button>
+            ))}
+          </div>
+
+          {/* Active Mobile Pillar Card */}
+          <div className="mt-3">
+            <PillarCard
+              pillar={pillars[activeMobilePillar]}
+              onSelect={() => setActiveSlug(pillars[activeMobilePillar].id)}
+            />
+          </div>
+
+          {/* Pillar Navigation dots + Next/Prev buttons */}
+          <div className="mt-3 flex items-center justify-between px-2">
+            <div className="flex items-center gap-1.5">
+              {pillars.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  aria-label={`Go to pillar 0${idx + 1}`}
+                  onClick={() => setActiveMobilePillar(idx)}
+                  className={`h-2 rounded-full transition-all ${
+                    activeMobilePillar === idx ? "w-6 bg-[#032147]" : "w-2 bg-[#032147]/25"
+                  }`}
+                />
+              ))}
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                aria-label="Previous pillar"
+                onClick={() => setActiveMobilePillar((prev) => (prev - 1 + pillars.length) % pillars.length)}
+                className="h-8 w-8 rounded-full bg-[#032147]/10 text-[#032147] hover:bg-[#032147] hover:text-[#EDE5DA] text-sm font-bold flex items-center justify-center transition"
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                aria-label="Next pillar"
+                onClick={() => setActiveMobilePillar((prev) => (prev + 1) % pillars.length)}
+                className="h-8 w-8 rounded-full bg-[#032147] text-[#EDE5DA] hover:bg-[#B7A38B] hover:text-[#032147] text-sm font-bold flex items-center justify-center transition"
+              >
+                →
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div className="mt-5 grid lg:grid-cols-2 gap-6 max-w-[1000px] mx-auto scroll-reveal-stagger">
-          {pillars.slice(3).map((p) => (
-            <TiltCard key={p.id} maxTilt={6} className="h-full rounded-[28px]">
-              <PillarCard pillar={p} onSelect={() => setActiveSlug(p.id)} />
-            </TiltCard>
-          ))}
+        {/* ── DESKTOP & TABLET VIEW: Master 5 Pillars with 3D Tilt Cards ── */}
+        <div className="hidden md:block">
+          <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6 scroll-reveal-stagger">
+            {pillars.slice(0, 3).map((p) => (
+              <TiltCard key={p.id} maxTilt={6} className="h-full rounded-[28px]">
+                <PillarCard pillar={p} onSelect={() => setActiveSlug(p.id)} />
+              </TiltCard>
+            ))}
+          </div>
+
+          <div className="mt-5 grid md:grid-cols-2 gap-6 max-w-[1000px] mx-auto scroll-reveal-stagger">
+            {pillars.slice(3).map((p) => (
+              <TiltCard key={p.id} maxTilt={6} className="h-full rounded-[28px]">
+                <PillarCard pillar={p} onSelect={() => setActiveSlug(p.id)} />
+              </TiltCard>
+            ))}
+          </div>
         </div>
 
         {/* Specialized Operational Services Sub-Header */}
-        <div id="specialized-services-section" className="mt-14 pt-6 scroll-mt-24">
-          <ExpandRule className="border-[#032147]/15 mb-8" />
+        <div id="specialized-services-section" className="mt-10 sm:mt-14 pt-4 sm:pt-6 scroll-mt-24">
+          <ExpandRule className="border-[#032147]/15 mb-6 sm:mb-8" />
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold">
               [ 100% Operational Service Breakdown ]
@@ -209,18 +276,18 @@ export default function Solutions() {
             </div>
           </div>
 
-          <div className="mt-4 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="mt-4 flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
             <div>
               <MaskedHeadline
                 as="h3"
-                className="font-canela font-bold text-3xl sm:text-5xl text-[#032147] tracking-tight"
+                className="font-canela font-bold text-2xl sm:text-4xl lg:text-5xl text-[#032147] tracking-tight"
                 lines={[
                   <>
                     Specialized Hygiene & Facility <span className="font-serif-i italic text-[#B7A38B]">Services</span>
                   </>
                 ]}
               />
-              <p className="mt-3 font-inter text-[15px] text-[#032147]/80 max-w-xl">
+              <p className="mt-2 sm:mt-3 font-inter text-[13.5px] sm:text-[15px] text-[#032147]/80 max-w-xl">
                 Explore key protocols, equipment specs, and SOP breakdowns for our full spectrum of specialized operational service offerings across Singapore.
               </p>
             </div>
@@ -230,7 +297,7 @@ export default function Solutions() {
           </div>
 
           {/* Specialized Services Grid (Top 3 initial, or all 6 when expanded) */}
-          <div className="mt-7 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500">
+          <div className="mt-6 sm:mt-7 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 transition-all duration-500">
             {displayedServices.map((srv) => {
               const overviewBlock = srv.sections.find((s) => s.kind === "overview");
               return (
@@ -362,10 +429,11 @@ export default function Solutions() {
 
 function PillarCard({ pillar, onSelect }: { pillar: Pillar; onSelect?: () => void }) {
   const h = pillar.highlight;
+  const [expandedScope, setExpandedScope] = useState(false);
   return (
     <TiltCard
       maxTilt={6}
-      className={`group relative rounded-[28px] p-8 flex flex-col justify-between overflow-hidden h-full shadow-lg ${
+      className={`group relative rounded-[24px] sm:rounded-[28px] p-5 sm:p-8 flex flex-col justify-between overflow-hidden h-full shadow-lg ${
         h ? "bg-[#032147] text-[#EDE5DA] border-2 border-[#B7A38B] shadow-2xl" : "bg-[#EDE5DA] text-[#032147] border border-[#B7A38B]/40"
       }`}
       style={h ? { background: "#032147", color: "#EDE5DA" } : { background: "#EDE5DA", color: "#032147" }}
@@ -388,47 +456,56 @@ function PillarCard({ pillar, onSelect }: { pillar: Pillar; onSelect?: () => voi
           </span>
         </div>
 
-        <h3 className={`mt-4 font-canela text-3xl font-bold tracking-tight ${h ? "text-white" : "text-[#032147]"}`}>
+        <h3 className={`mt-3 sm:mt-4 font-canela text-2xl sm:text-3xl font-bold tracking-tight ${h ? "text-white" : "text-[#032147]"}`}>
           {pillar.name}
         </h3>
-        <p className="mt-1 font-montserrat text-[13px] font-semibold text-[#B7A38B]">
+        <p className="mt-1 font-montserrat text-[12.5px] sm:text-[13px] font-semibold text-[#B7A38B]">
           {pillar.subtitle}
         </p>
 
-        <p className={`mt-4 font-inter text-[14px] leading-relaxed ${h ? "text-[#EDE5DA]/85" : "text-[#032147]/80"}`}>
+        <p className={`mt-3 sm:mt-4 font-inter text-[13.5px] sm:text-[14px] leading-relaxed ${h ? "text-[#EDE5DA]/85" : "text-[#032147]/80"}`}>
           {pillar.purpose}
         </p>
 
-        <div className={`mt-4 rounded-2xl p-4 ${h ? "bg-white/5 border border-white/10" : "bg-white/50 border border-[#032147]/10"}`}>
-          <div className={`text-[10px] font-mono uppercase tracking-[0.2em] font-bold ${h ? "text-[#B7A38B]" : "text-[#032147]/70"}`}>Strategic Positioning</div>
-          <div className={`mt-1 font-inter text-[12.5px] ${h ? "opacity-90" : "text-[#032147]"}`}>{pillar.positioning}</div>
+        <div className={`mt-3.5 sm:mt-4 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 ${h ? "bg-white/5 border border-white/10" : "bg-white/50 border border-[#032147]/10"}`}>
+          <div className={`text-[9.5px] sm:text-[10px] font-mono uppercase tracking-[0.2em] font-bold ${h ? "text-[#B7A38B]" : "text-[#032147]/70"}`}>Strategic Positioning</div>
+          <div className={`mt-1 font-inter text-[12px] sm:text-[12.5px] ${h ? "opacity-90" : "text-[#032147]"}`}>{pillar.positioning}</div>
         </div>
 
-        <div className="mt-5 space-y-2">
+        <div className="mt-4 sm:mt-5 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono uppercase tracking-[0.15em] text-[#B7A38B] font-bold">Service Scope ({pillar.services.length})</span>
+            <span className="text-[10.5px] sm:text-[11px] font-mono uppercase tracking-[0.15em] text-[#B7A38B] font-bold">Service Scope ({pillar.services.length})</span>
             {onSelect && (
               <button
                 type="button"
                 onClick={onSelect}
                 className="text-[10px] font-mono text-[#B7A38B] hover:underline uppercase font-bold cursor-pointer"
               >
-                View Blueprint ↗
+                Blueprint ↗
               </button>
             )}
           </div>
-          <ul className="space-y-1.5">
-            {pillar.services.map((s, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-[12.5px] font-inter leading-tight">
+          <ul className="space-y-1 sm:space-y-1.5">
+            {(expandedScope ? pillar.services : pillar.services.slice(0, 3)).map((s, idx) => (
+              <li key={idx} className="flex items-start gap-2 text-[12px] sm:text-[12.5px] font-inter leading-tight">
                 <span className={`text-[10px] font-bold mt-0.5 ${h ? "text-[#B7A38B]" : "text-[#032147]"}`}>✓</span>
                 <span className={h ? "opacity-85" : "text-[#032147]/85"}>{s}</span>
               </li>
             ))}
           </ul>
+          {pillar.services.length > 3 && (
+            <button
+              type="button"
+              onClick={() => setExpandedScope(!expandedScope)}
+              className="mt-1 text-[11px] font-mono text-[#B7A38B] hover:underline cursor-pointer flex items-center gap-1 font-bold"
+            >
+              {expandedScope ? "▲ Show less" : `▼ View all ${pillar.services.length} services`}
+            </button>
+          )}
         </div>
       </div>
 
-      <div className="mt-6 pt-4 border-t border-[#032147]/10 flex flex-col gap-3">
+      <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 border-t border-[#032147]/10 flex flex-col gap-3">
         <div className="flex items-center justify-between text-[11px] font-mono">
           <span className="opacity-60">Target Customer</span>
           <span className="font-bold text-[#B7A38B] truncate max-w-[200px]" title={pillar.targetCustomer}>{pillar.targetCustomer}</span>
@@ -439,7 +516,7 @@ function PillarCard({ pillar, onSelect }: { pillar: Pillar; onSelect?: () => voi
             <button
               type="button"
               onClick={onSelect}
-              className={`rounded-full py-2 text-[12px] font-montserrat font-bold transition text-center cursor-pointer ${
+              className={`rounded-full py-2 text-[11.5px] sm:text-[12px] font-montserrat font-bold transition text-center cursor-pointer ${
                 h ? "border border-white/20 hover:bg-white/10 text-white" : "border border-[#032147]/20 hover:bg-[#032147]/10 text-[#032147]"
               }`}
             >
@@ -448,7 +525,7 @@ function PillarCard({ pillar, onSelect }: { pillar: Pillar; onSelect?: () => voi
           )}
           <a
             href="#contact"
-            className={`group/btn inline-flex items-center justify-center rounded-full py-2 px-3 text-[12px] font-montserrat font-bold transition ${
+            className={`group/btn inline-flex items-center justify-center rounded-full py-2 px-3 text-[11.5px] sm:text-[12px] font-montserrat font-bold transition ${
               h ? "bg-[#B7A38B] text-[#032147] hover:bg-white" : "bg-[#032147] text-[#EDE5DA] hover:bg-[#B7A38B] hover:text-[#032147]"
             } ${!onSelect ? "col-span-2" : ""}`}
             style={!h ? { background: "#032147", color: "#EDE5DA" } : {}}

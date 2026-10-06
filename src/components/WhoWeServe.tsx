@@ -178,7 +178,7 @@ export default function WhoWeServe() {
     <section
       id="who-we-serve"
       ref={containerRef}
-      className="relative py-16 overflow-hidden select-none"
+      className="relative py-10 sm:py-16 overflow-hidden select-none"
       style={{ background: "#032147" }}
       aria-label="Who We Serve"
     >
@@ -559,6 +559,17 @@ export default function WhoWeServe() {
                 <path d="m9 18 6-6-6-6" />
               </svg>
             </button>
+          </div>
+
+          {/* Section Conversion CTA */}
+          <div className="mt-8 text-center px-4">
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#B7A38B] text-[#032147] hover:bg-white text-xs sm:text-sm font-montserrat font-bold tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+            >
+              <span>Custom SLA Solutions for Your Sector — Request Consultation</span>
+              <span>→</span>
+            </a>
           </div>
         </div>
       </div>

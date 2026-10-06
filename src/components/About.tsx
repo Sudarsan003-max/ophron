@@ -19,15 +19,15 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="relative py-28 overflow-hidden bg-paper">
-      <div className="mx-auto max-w-[1400px] px-5">
+    <section id="about" className="relative py-10 sm:py-16 lg:py-24 overflow-hidden bg-paper">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-5">
         <SectionHead n="002" label="Strategic Operating Platform" />
 
-        <div className="mt-12 grid lg:grid-cols-12 gap-12 items-start">
+        <div className="mt-6 sm:mt-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-7">
             <MaskedHeadline
               as="h2"
-              className="font-canela font-bold text-[40px] sm:text-[60px] lg:text-[76px] leading-[0.95] tracking-tight text-ink"
+              className="font-canela font-bold text-[34px] sm:text-[54px] lg:text-[76px] leading-[0.95] tracking-tight text-ink"
               lines={[
                 <>Operations <span className="font-serif-i text-[#B7A38B]">unified.</span></>,
                 <>
@@ -43,13 +43,13 @@ export default function About() {
             />
 
             <ScrollReveal variant="up" delay={150}>
-              <p className="mt-8 font-inter max-w-xl text-[16.5px] leading-relaxed text-[#032147]/85">
+              <p className="mt-5 sm:mt-8 font-inter max-w-xl text-[14.5px] sm:text-[16.5px] leading-relaxed text-[#032147]/85">
                 Instead of managing fragmented vendors for manpower, cleaning, and tech, OPHRON serves as your single <strong className="text-[#032147] font-semibold">Strategic Operating Partner</strong> — managing people, facilities, hygiene, technology, and performance from a single centralized platform.
               </p>
             </ScrollReveal>
 
             {/* Bento metrics with 3D Tilt & Animated Counters */}
-            <div ref={ref} className="mt-10 grid grid-cols-2 md:grid-cols-6 gap-3">
+            <div ref={ref} className="mt-6 sm:mt-10 grid grid-cols-2 md:grid-cols-6 gap-2.5 sm:gap-3">
               <TiltCard className="col-span-2 md:col-span-3 rounded-2xl">
                 <BentoCard
                   span="w-full h-full"
@@ -92,7 +92,7 @@ export default function About() {
                 />
               </TiltCard>
 
-              <TiltCard className="col-span-2 md:col-span-3 rounded-2xl">
+              <TiltCard className="col-span-1 md:col-span-3 rounded-2xl">
                 <BentoCard
                   span="w-full h-full"
                   big={<><AnimatedCounter value={30} suffix="%+" /></>}
@@ -105,7 +105,8 @@ export default function About() {
               <TiltCard
                 className="col-span-2 md:col-span-3 rounded-2xl"
                 onClick={() => {
-                  window.location.hash = "#founder";
+                  window.history.pushState(null, "", "/founder");
+                  window.dispatchEvent(new PopStateEvent("popstate"));
                 }}
               >
                 <div 

@@ -40,14 +40,14 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative py-16 overflow-hidden"
+      className="relative py-10 sm:py-16 overflow-hidden"
       style={{ background: "#EDE5DA" }}
       aria-label="Frequently Asked Questions"
     >
-      <div className="mx-auto max-w-[1400px] px-5">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-5">
         <SectionHead n="009" label="Frequently Asked" />
 
-        <div className="grid lg:grid-cols-12 gap-10 items-start mt-8">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start mt-6 sm:mt-8">
           <div className="lg:col-span-4">
             <ScrollReveal variant="up" delay={80}>
               <h2

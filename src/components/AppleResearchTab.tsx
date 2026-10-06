@@ -157,6 +157,7 @@ export default function AppleResearchTab({ onOpenArticle }: Props) {
   };
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) return;
     if (!chassisRef.current) return;
     const rect = chassisRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -341,6 +342,8 @@ export default function AppleResearchTab({ onOpenArticle }: Props) {
                 <img
                   src={current.image}
                   alt={current.title}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#041021] via-transparent to-transparent opacity-80" />

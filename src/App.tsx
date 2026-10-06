@@ -170,8 +170,91 @@ export default function App() {
     };
   }, []);
 
-  // 2. Route Refresh for reveals and smooth scroll
+  // SEO Dynamic Route Metadata Map
+  const ROUTE_METADATA: Record<string, { title: string; description: string; canonical: string }> = {
+    "/": {
+      title: "OPHRON — Hospitality Operational Infrastructure Platform | Singapore",
+      description: "OPHRON powers hospitality operations across Singapore & internationally — unifying People, Hygiene, Facilities, Technology, and Commercial Intelligence on a single strategic platform.",
+      canonical: "https://ophronsystems.com/",
+    },
+    "/about": {
+      title: "About OPHRON — Strategic Operating Platform | Singapore",
+      description: "Learn how OPHRON unifies People, Hygiene, Facilities, Technology, and Commercial Intelligence for Singapore hotels and F&B establishments.",
+      canonical: "https://ophronsystems.com/about",
+    },
+    "/services": {
+      title: "Specialized Services & SOP Catalog — OPHRON Singapore",
+      description: "Explore 14 specialized operational services including marble polishing, kitchen hygiene, rope access façade, and stewarding crews.",
+      canonical: "https://ophronsystems.com/services",
+    },
+    "/why": {
+      title: "Why Choose OPHRON — NEA Licensed & bizSAFE 3 Partner",
+      description: "20+ years of operational discipline, supervisor-signed accountability, and 100% SLA compliance for Singapore hospitality venues.",
+      canonical: "https://ophronsystems.com/why",
+    },
+    "/gallery": {
+      title: "Project Gallery & Portfolio — OPHRON Singapore",
+      description: "View verified visual field photography of marble grinding, commercial kitchen deep degreasing, hotel suites, and event turnovers.",
+      canonical: "https://ophronsystems.com/gallery",
+    },
+    "/gallery-grid": {
+      title: "Project Gallery & Portfolio — OPHRON Singapore",
+      description: "View verified visual field photography of marble grinding, commercial kitchen deep degreasing, hotel suites, and event turnovers.",
+      canonical: "https://ophronsystems.com/gallery",
+    },
+    "/blog": {
+      title: "Operations Research & Industry Benchmarks — OPHRON",
+      description: "Empirical research briefings and whitepapers on SFA Grade A kitchen audits, NEA disinfection biocides, and labor yield optimization.",
+      canonical: "https://ophronsystems.com/blog",
+    },
+    "/all-articles": {
+      title: "Editorial Research Whitepapers & Field Guides — OPHRON",
+      description: "Comprehensive library of hospitality operations whitepapers, compliance blueprints, and vendor consolidation frameworks.",
+      canonical: "https://ophronsystems.com/all-articles",
+    },
+    "/founder": {
+      title: "Isaac Vivian, Founder — OPHRON Operational Infrastructure",
+      description: "Executive profile and vision of Isaac Vivian, Founder of OPHRON Systems Singapore.",
+      canonical: "https://ophronsystems.com/founder",
+    },
+    "/contact": {
+      title: "Contact Singapore Operations — OPHRON Systems",
+      description: "Initiate your operational review with OPHRON. Call +65 9295 1155 or submit your facility requirements for rapid 24h response.",
+      canonical: "https://ophronsystems.com/contact",
+    },
+  };
+
+  // Sync SEO Title, Meta Description, and Canonical URL on route change
   useEffect(() => {
+    const meta = ROUTE_METADATA[currentRoute] || ROUTE_METADATA["/"];
+    document.title = meta.title;
+
+    // Update or create Meta Description
+    let descMeta = document.querySelector('meta[name="description"]');
+    if (!descMeta) {
+      descMeta = document.createElement("meta");
+      descMeta.setAttribute("name", "description");
+      document.head.appendChild(descMeta);
+    }
+    descMeta.setAttribute("content", meta.description);
+
+    // Update or create Canonical Link
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", meta.canonical);
+
+    // Update OpenGraph Title & Description
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", meta.title);
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute("content", meta.description);
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute("content", meta.canonical);
+
     const timer = setTimeout(() => {
       initAutoReveals();
       (window as any).__lenis?.resize();

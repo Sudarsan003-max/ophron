@@ -10,18 +10,22 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#032147] text-[#EDE5DA] pt-12 sm:pt-14 pb-14 overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
-      {/* Background Animated Gradient Bars */}
-      <GradientBars
-        numBars={18}
-        gradientFrom="rgba(183, 163, 139, 0.15)"
-        gradientTo="transparent"
-        animationDuration={3}
-      />
+    <footer className="relative bg-[#021833] text-[#EDE5DA] pt-12 sm:pt-16 pb-8 overflow-hidden" style={{ background: "#021833", color: "#EDE5DA" }}>
+      {/* Background Animated Gradient Bars - Desktop only for peak mobile performance */}
+      <div className="hidden md:block">
+        <GradientBars
+          numBars={14}
+          gradientFrom="rgba(183, 163, 139, 0.12)"
+          gradientTo="transparent"
+          animationDuration={3}
+        />
+      </div>
 
-      {/* Cinematic 3D "OPHRON" background */}
-      <Footer3DBackground text="OPHRON" className="pointer-events-none absolute inset-0 z-0 overflow-hidden" />
-      <div className="relative z-10 mx-auto max-w-[1400px] px-5">
+      {/* Cinematic 3D "OPHRON" background - Desktop only */}
+      <div className="hidden lg:block">
+        <Footer3DBackground text="OPHRON" className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60" />
+      </div>
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-5">
         <div className="flex flex-col md:flex-row justify-between gap-10">
           {/* Left Column: Studio profile */}
           <ScrollReveal variant="left" delay={50} className="relative w-full md:max-w-[340px] flex-shrink-0">
@@ -113,9 +117,14 @@ export default function Footer() {
           </ScrollReveal>
         </div>
 
-        {/* 3D Particle Text in natural flow below content columns */}
-        <div className="relative z-10 mx-auto max-w-[1400px] w-full h-[clamp(130px,24vw,270px)] px-5 mt-2 mb-1">
-          <ParticleText text="OPHRON" className="h-full w-full" />
+        {/* 3D Particle Text on desktop, lightweight typography watermark on mobile */}
+        <div className="relative z-10 mx-auto max-w-[1400px] w-full px-5 mt-2 mb-1">
+          <div className="hidden sm:block h-[clamp(120px,20vw,240px)]">
+            <ParticleText text="OPHRON" className="h-full w-full" />
+          </div>
+          <div className="block sm:hidden text-center py-4 font-display font-bold text-4xl tracking-[0.2em] text-[#EDE5DA]/15 select-none uppercase">
+            OPHRON
+          </div>
         </div>
 
         <ExpandRule className="border-white/10 my-4" />

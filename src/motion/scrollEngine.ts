@@ -11,16 +11,24 @@ let tickerFn: ((time: number) => void) | null = null;
 
 /**
  * ==============================================================================
- * UNIFIED SCROLL & MOTION ENGINE (LAW 1)
+ * UNIFIED HIGH-PERFORMANCE SCROLL & MOTION ENGINE
  * ==============================================================================
- * Locks Lenis inertial smooth scrolling and GSAP ScrollTrigger to a single,
- * high-performance requestAnimationFrame ticker loop running at 60/120fps.
+ * Ultra-optimized 60/120fps engine. Uses native hardware scrolling on mobile touch
+ * devices and buttery-smooth lightweight Lenis inertia on desktop.
  */
 export function initScrollEngine(): {
-  lenis: Lenis;
+  lenis: Lenis | null;
   destroy: () => void;
   scrollTo: (target: string | HTMLElement | number, offset?: number) => void;
 } {
+  if (typeof window === "undefined") {
+    return {
+      lenis: null,
+      destroy: () => {},
+      scrollTo: () => {},
+    };
+  }
+
   // Prevent duplicate initialization
   if (lenisInstance) {
     return {
@@ -30,17 +38,27 @@ export function initScrollEngine(): {
     };
   }
 
-  // 1. Initialize Lenis with weighted, physical glass-like inertia
-  const isReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isTouchMobile = window.innerWidth < 768 || "ontouchstart" in window;
 
+  // On mobile touch devices, use native hardware scroll for 0ms latency and 120Hz responsiveness
+  if (isTouchMobile || isReduced) {
+    return {
+      lenis: null,
+      destroy: () => {},
+      scrollTo: scrollToElement,
+    };
+  }
+
+  // 1. Initialize Lenis for desktop
   const lenis = new Lenis({
-    duration: isReduced ? 0 : MOTION_TOKENS.scroll.duration,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential Ease-Out
+    duration: MOTION_TOKENS.scroll.duration,
+    easing: (t) => 1 - Math.pow(1 - t, 3), // cubic ease-out
     orientation: "vertical",
     gestureOrientation: "vertical",
-    smoothWheel: !isReduced,
+    smoothWheel: true,
     wheelMultiplier: MOTION_TOKENS.scroll.wheelMultiplier,
-    touchMultiplier: MOTION_TOKENS.scroll.touchMultiplier,
+    touchMultiplier: 0, // Never hijack touch on mobile
     infinite: false,
     autoResize: true,
   });
@@ -51,35 +69,14 @@ export function initScrollEngine(): {
   // 2. Synchronize Lenis scroll updates with GSAP ScrollTrigger
   lenis.on("scroll", ScrollTrigger.update);
 
-  // 3. Single Unified RAF Loop: GSAP ticker drives Lenis (No competing requestAnimationFrame calls!)
+  // 3. Single Unified RAF Loop
   tickerFn = (time: number) => {
     lenis.raf(time * 1000);
   };
   gsap.ticker.add(tickerFn);
-  gsap.ticker.lagSmoothing(0); // Prevents frame drops / jumps during heavy CPU tasks
+  gsap.ticker.lagSmoothing(500, 33); // Smooth out any frame spikes
 
-  // 4. Smooth Anchor Navigation Handler
-  const handleAnchorClicks = (e: MouseEvent) => {
-    const target = (e.target as HTMLElement)?.closest("a");
-    if (!target) return;
-
-    const href = target.getAttribute("href");
-    if (!href || !href.startsWith("#") || href === "#") return;
-
-    // Exceptions for specialized hash routes handled by app
-    if (href === "#services" || href === "#mainframe" || href.includes("?")) return;
-
-    const targetEl = document.querySelector(href);
-    if (targetEl) {
-      e.preventDefault();
-      scrollToElement(targetEl as HTMLElement, MOTION_TOKENS.scroll.headerOffset);
-      window.history.pushState(null, "", href);
-    }
-  };
-
-  document.addEventListener("click", handleAnchorClicks);
-
-  // 5. Global Resize / Orientation Watcher
+  // 4. Global Resize / Orientation Watcher
   const handleResize = () => {
     lenis.resize();
     ScrollTrigger.refresh();
@@ -89,7 +86,6 @@ export function initScrollEngine(): {
   return {
     lenis,
     destroy: () => {
-      document.removeEventListener("click", handleAnchorClicks);
       window.removeEventListener("resize", handleResize);
       destroyScrollEngine();
     },
@@ -98,28 +94,29 @@ export function initScrollEngine(): {
 }
 
 /**
- * Programmatic Smooth Glide to target element with power3.inOut easing
+ * Programmatic Smooth Glide to target element
  */
-export function scrollToElement(target: string | HTMLElement | number, offset = -70, duration = 1.15) {
+export function scrollToElement(target: string | HTMLElement | number, offset = -70, duration = 0.6) {
   if (!lenisInstance) {
     if (typeof target === "number") {
       window.scrollTo({ top: target, behavior: "smooth" });
     } else if (typeof target === "string") {
       const el = document.querySelector(target);
-      el?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      target?.scrollIntoView({ behavior: "smooth" });
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY + offset;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    } else if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY + offset;
+      window.scrollTo({ top, behavior: "smooth" });
     }
     return;
   }
 
-  const isReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   lenisInstance.scrollTo(target, {
     offset,
-    duration: isReduced ? 0.01 : duration,
-    easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, // power3.inOut
-    immediate: isReduced,
+    duration,
+    easing: (t) => 1 - Math.pow(1 - t, 3),
   });
 }
 

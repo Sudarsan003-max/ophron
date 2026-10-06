@@ -294,6 +294,24 @@ export default function Approach() {
           </div>
         </ScrollReveal>
 
+        {/* Section Conversion Dual CTAs */}
+        <ScrollReveal variant="up" delay={250} className="mt-10 sm:mt-12 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="#solutions"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#B7A38B] text-[#032147] hover:bg-white text-xs sm:text-sm font-montserrat font-bold tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+          >
+            <span>Explore All 5 Operational Pillars</span>
+            <span>→</span>
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-[#EDE5DA] text-xs sm:text-sm font-montserrat font-bold tracking-wide transition-all duration-300 hover:scale-105"
+          >
+            <span>Request Platform Audit</span>
+            <span>↗</span>
+          </a>
+        </ScrollReveal>
+
       </div>
     </section>
   );

@@ -144,11 +144,11 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-16 bg-[#032147] overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
+    <section id="contact" className="relative py-10 sm:py-16 bg-[#032147] overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
       <div className="absolute -top-20 -right-20 h-[420px] w-[420px] blob bg-[#B7A38B]/20 opacity-90 pointer-events-none" aria-hidden="true" />
       <div className="absolute bottom-10 -left-20 h-[260px] w-[260px] rounded-full bg-[#B7A38B]/10 blur-[80px] pointer-events-none" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-[1400px] px-5">
+      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-5">
         <SectionHead n="012" label="Contact & Singapore Operations" light />
 
         <div className="mt-8 grid lg:grid-cols-12 gap-12 items-start">

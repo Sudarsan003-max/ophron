@@ -145,23 +145,23 @@ export default function Showcase() {
   const ry = (tilt?.id === 3 && tilt) ? -tilt.y * 35 : 0;
 
   return (
-    <section id="dashboard" className="relative py-16 bg-[#032147] text-[#EDE5DA] overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
+    <section id="dashboard" className="relative py-10 sm:py-16 bg-[#032147] text-[#EDE5DA] overflow-hidden" style={{ background: "#032147", color: "#EDE5DA" }}>
       {/* Background glowing gradients */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#B7A38B]/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-20 -left-40 w-96 h-96 bg-[#B7A38B]/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="mx-auto max-w-[1400px] px-5">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-5">
         <SectionHead n="010" label="OPHRON OS Live Dashboard" light />
 
-        <div className="mt-8 grid lg:grid-cols-12 gap-10 items-end">
+        <div className="mt-6 sm:mt-8 grid lg:grid-cols-12 gap-6 lg:gap-10 items-end">
           <div className="lg:col-span-7">
-            <h2 className="font-canela font-bold text-[38px] sm:text-[58px] lg:text-[76px] leading-[0.95] tracking-tight text-white">
+            <h2 className="font-canela font-bold text-[34px] sm:text-[54px] lg:text-[76px] leading-[0.95] tracking-tight text-white">
               Visualizing your <span className="font-serif-i italic text-[#B7A38B]">operational</span>
               <br />
               infrastructure dashboard.
             </h2>
           </div>
-          <p className="lg:col-span-5 font-inter text-[15px] leading-relaxed text-[#EDE5DA]/80 max-w-md lg:ml-auto">
+          <p className="lg:col-span-5 font-inter text-[14px] sm:text-[15px] leading-relaxed text-[#EDE5DA]/80 max-w-md lg:ml-auto">
             A real-time operational dashboard system engineered to track workforce deployment, hygiene compliance, IFM Lite facility uptime, and commercial performance across Singapore & international facilities.
           </p>
         </div>
@@ -679,8 +679,26 @@ export default function Showcase() {
 
         </div>
 
-        <div className="mt-10 text-center text-[12px] font-mono uppercase tracking-[0.22em] text-[#EDE5DA]/60 font-semibold">
+        <div className="mt-8 text-center text-[12px] font-mono uppercase tracking-[0.22em] text-[#EDE5DA]/60 font-semibold">
           ✦ Real-Time compliance monitoring · SFA &amp; NEA auditable operational logs ✦
+        </div>
+
+        {/* Section Conversion CTA */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#B7A38B] text-[#032147] hover:bg-white text-xs sm:text-sm font-montserrat font-bold tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+          >
+            <span>Schedule an Operations OS Live Walkthrough</span>
+            <span>→</span>
+          </a>
+          <a
+            href="/services"
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-[#EDE5DA] text-xs sm:text-sm font-montserrat font-bold tracking-wide transition-all duration-300 hover:scale-105"
+          >
+            <span>Explore Technology Suite</span>
+            <span>↗</span>
+          </a>
         </div>
       </div>
     </section>
