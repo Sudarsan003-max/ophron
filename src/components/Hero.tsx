@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ScrollReveal } from "./ui/animations";
 import logoNavy from "./logo-navy.png";
 import {
@@ -22,7 +22,7 @@ export interface HeroServiceSlide {
   icon: typeof Sparkle;
 }
 
-const HERO_SERVICES: HeroServiceSlide[] = [
+export const HERO_SERVICES: HeroServiceSlide[] = [
   {
     id: "marble",
     pillar: "SPECIALIZED HYGIENE & STONE CARE",
@@ -82,7 +82,8 @@ const MARQUEE_ITEMS = [
   "OPHRON PEOPLE — WORKFORCE & COMPLIANCE MANAGEMENT",
 ];
 
-const SLIDE_DURATION = 6500; // 6.5s per service loop
+const SKYLINE_VIDEO_SRC = "/videos/hero-singapore-skyline.mp4";
+const SKYLINE_POSTER_SRC = "/images/hero/hero_tech_dashboard_desktop.webp";
 
 function useCount(target: number, duration = 1600, start = false) {
   const [v, setV] = useState(0);
@@ -104,8 +105,8 @@ function useCount(target: number, duration = 1600, start = false) {
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [inView, setInView] = useState(false);
-  const [activeIdx, setActiveIdx] = useState(0);
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -119,203 +120,213 @@ export default function Hero() {
   const yrs = useCount(20, 1600, inView);
   const contracts = useCount(140, 1800, inView);
 
-  // Auto-loop ticker
-  const nextSlide = useCallback(() => {
-    setActiveIdx((prev) => (prev + 1) % HERO_SERVICES.length);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      nextSlide();
-    }, SLIDE_DURATION);
-
-    return () => clearInterval(timer);
-  }, [nextSlide]);
-
-  const currentService = HERO_SERVICES[activeIdx];
-  const IconComponent = currentService.icon;
-
   return (
     <section
       id="top"
       ref={ref}
       aria-label="OPHRON Hero Section"
-      className="relative overflow-hidden pt-[108px] sm:pt-[128px] lg:pt-[140px] bg-[#032147] text-[#EDE5DA]"
+      className="relative overflow-hidden pt-[104px] sm:pt-[124px] lg:pt-[136px] bg-[#032147] text-[#EDE5DA]"
       style={{ fontFamily: "inherit" }}
     >
-      {/* ── 4K DEDICATED DESKTOP & MOBILE HERO BACKGROUND ENGINE ──────── */}
+      {/* ── 50% RIGHT-HALF SINGAPORE SKYLINE AMBIENT BACKGROUND ENGINE ── */}
       <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
-        {HERO_SERVICES.map((srv, index) => {
-          const isActive = index === activeIdx;
-          return (
-            <div
-              key={srv.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                isActive ? "opacity-100 z-10" : "opacity-0 z-0"
-              }`}
-            >
-              {/* Responsive <picture> loading: 
-                  - Mobile (<768px): Dedicated 3:4 portrait image (never downloads 4K desktop asset)
-                  - Desktop/Tablet (>=768px): High-resolution 16:9 4K image 
-                  - Sharp static rendering without forced subpixel downsampling transforms */}
-              <picture className="w-full h-full block">
-                {/* Mobile WebP */}
-                <source
-                  media="(max-width: 767px)"
-                  srcSet={srv.imageMobileWebp}
-                  type="image/webp"
-                />
-                {/* Mobile JPEG Fallback */}
-                <source
-                  media="(max-width: 767px)"
-                  srcSet={srv.imageMobileJpg}
-                  type="image/jpeg"
-                />
-                {/* Desktop WebP */}
-                <source
-                  media="(min-width: 768px)"
-                  srcSet={srv.imageDesktopWebp}
-                  type="image/webp"
-                />
-                {/* Desktop JPEG Fallback */}
-                <source
-                  media="(min-width: 768px)"
-                  srcSet={srv.imageDesktopJpg}
-                  type="image/jpeg"
-                />
-                <img
-                  src={srv.imageDesktopJpg}
-                  alt={`OPHRON ${srv.title} - Singapore Hospitality Operations`}
-                  width={2752}
-                  height={1536}
-                  className="w-full h-full object-cover object-center"
-                  style={{ imageRendering: "auto" }}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  {...(index === 0 ? { fetchPriority: "high" as const } : {})}
-                  decoding="async"
-                />
-              </picture>
-            </div>
-          );
-        })}
+        
+        {/* Base Solid Deep Navy Canvas for Entire Hero */}
+        <div className="absolute inset-0 bg-[#032147]" />
 
-        {/* ── DESKTOP DIRECTIONAL SCRIM (LEFT DEEP NAVY FADE → RIGHT VIBRANT PHOTO) ── */}
+        {/* Ambient illumination aura on left */}
         <div
-          className="hidden md:block absolute inset-0 z-20 pointer-events-none"
+          className="absolute top-1/4 -left-28 w-[500px] h-[500px] rounded-full opacity-20 blur-[130px]"
           style={{
-            background:
-              "linear-gradient(90deg, rgba(3,33,71,0.96) 0%, rgba(3,33,71,0.90) 36%, rgba(3,33,71,0.52) 62%, rgba(3,33,71,0.12) 82%, transparent 100%)",
+            background: "radial-gradient(circle, rgba(14, 52, 102, 0.9) 0%, transparent 70%)",
           }}
         />
 
-        {/* ── MOBILE DIRECTIONAL SCRIM (INTENTIONAL VERTICAL TOP-TO-BOTTOM FADE) ── */}
-        <div
-          className="block md:hidden absolute inset-0 z-20 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(3,33,71,0.94) 0%, rgba(3,33,71,0.88) 42%, rgba(3,33,71,0.35) 70%, rgba(3,33,71,0.88) 100%)",
-          }}
-        />
+        {/* The 50% Right-Half Singapore Skyline Video Stage */}
+        <div className="absolute top-0 bottom-0 right-0 w-full md:w-[60%] lg:w-[54%] xl:w-[50%] overflow-hidden">
+          <video
+            ref={videoRef}
+            src={SKYLINE_VIDEO_SRC}
+            poster={SKYLINE_POSTER_SRC}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover object-center"
+            style={{
+              filter: "brightness(0.92) contrast(1.10) saturate(1.08)",
+            }}
+          />
 
-        {/* ── TOP & BOTTOM REFINED AMBIENT ANCHORS ── */}
-        <div
-          className="absolute inset-0 z-20 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(3,33,71,0.50) 0%, rgba(3,33,71,0.10) 25%, transparent 50%, rgba(3,33,71,0.20) 75%, rgba(3,33,71,0.80) 100%)",
-          }}
-        />
+          {/* ── SEAMLESS HORIZONTAL GRADIENT FADE (LEFT NAVY → RIGHT SKYLINE) ── */}
+          <div
+            className="absolute inset-y-0 left-0 w-32 sm:w-48 lg:w-72"
+            style={{
+              background:
+                "linear-gradient(90deg, #032147 0%, rgba(3,33,71,0.92) 28%, rgba(3,33,71,0.55) 60%, rgba(3,33,71,0.15) 85%, transparent 100%)",
+            }}
+          />
+
+          {/* ── MOBILE VERTICAL GRADIENT FADE ── */}
+          <div
+            className="block md:hidden absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(3,33,71,0.95) 0%, rgba(3,33,71,0.88) 45%, rgba(3,33,71,0.40) 80%, #032147 100%)",
+            }}
+          />
+
+          {/* ── TOP NAV BAR & BOTTOM ANCHOR BLENDS ── */}
+          <div
+            className="absolute inset-x-0 top-0 h-24 sm:h-32"
+            style={{
+              background:
+                "linear-gradient(180deg, #032147 0%, rgba(3,33,71,0.7) 40%, transparent 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 h-28 sm:h-36"
+            style={{
+              background:
+                "linear-gradient(0deg, #032147 0%, rgba(3,33,71,0.85) 45%, transparent 100%)",
+            }}
+          />
+
+          {/* Micro Film Texture Overlay */}
+          <div
+            className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
+            style={{
+              backgroundImage:
+                "radial-gradient(#EDE5DA 1px, transparent 1px), radial-gradient(#EDE5DA 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+              backgroundPosition: "0 0, 14px 14px",
+            }}
+          />
+        </div>
       </div>
 
-      {/* ── MAIN HERO BODY (CLEAN EDITORIAL CONTENT) ─────────────────── */}
-      <div className="relative z-30 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pb-10 sm:pb-14">
-        <div className="max-w-3xl">
+      {/* ── MAIN HERO BODY (CLEAN EDITORIAL CONTENT + PURE SKYLINE STAGE) ── */}
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pb-12 sm:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
           
-          {/* Active Service Tag Indicator */}
-          <ScrollReveal variant="up" delay={50}>
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#032147]/85 border border-[#EDE5DA]/35 backdrop-blur-md mb-5 sm:mb-6 w-fit shadow-lg shadow-black/20">
-              <IconComponent className="w-3.5 h-3.5 text-[#E3D1BE]" />
-              <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.16em] uppercase text-[#FFFFFF] font-semibold">
-                OPHRON INFRASTRUCTURE · {currentService.pillar}
-              </span>
-            </div>
-          </ScrollReveal>
-
-          {/* Main Editorial Headline */}
-          <ScrollReveal variant="up" delay={120}>
-            <h1
-              className="text-[34px] xs:text-[40px] sm:text-6xl lg:text-[76px] xl:text-[86px] font-bold text-white tracking-tight leading-[1.02] sm:leading-[0.93] mb-5 sm:mb-6 drop-shadow-md"
-              style={{ fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif" }}
-            >
-              One partner.
-              <br />
-              One ecosystem.
-              <br />
-              <span
-                className="italic font-normal tracking-normal inline-block"
-                style={{
-                  background: "linear-gradient(135deg, #F5EFEB 0%, #E3D1BE 35%, #CBB59B 70%, #E3D1BE 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  filter: "drop-shadow(0 2px 14px rgba(227,209,190,0.4))",
-                }}
-              >
-                Better operations.
-              </span>
-            </h1>
-          </ScrollReveal>
-
-          {/* Subtitle & Value Proposition */}
-          <ScrollReveal variant="up" delay={180}>
-            <p className="text-sm sm:text-lg lg:text-[20px] font-normal leading-relaxed text-[#EDE5DA] mb-3 max-w-2xl">
-              OPHRON unifies <span className="text-white font-semibold">People</span>,{" "}
-              <span className="text-white font-semibold">Hygiene</span>,{" "}
-              <span className="text-white font-semibold">Facilities</span>,{" "}
-              <span className="text-white font-semibold">Technology</span>, and{" "}
-              <span className="text-white font-semibold">Commercial Intelligence</span> into a{" "}
-              <span className="text-white font-semibold">single operational platform</span>{" "}
-              — built for Singapore's hotels, restaurants, and hospitality groups.
-            </p>
-            <p className="text-xs sm:text-sm lg:text-[14.5px] text-[#EDE5DA]/80 leading-relaxed mb-7 sm:mb-8 max-w-xl font-normal">
-              Instead of coordinating 5+ fragmented vendors, OPHRON gives you one accountable partner,
-              one transparent contract, and full operational visibility.
-            </p>
-          </ScrollReveal>
-
-          {/* High-Conversion Dual CTAs — Bright, Lustrous & Accessible */}
-          <ScrollReveal variant="up" delay={240}>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 mb-8">
-              {/* Primary CTA */}
-              <a
-                href="#contact"
-                className="group relative inline-flex items-center justify-center gap-3.5 px-6 sm:px-7 py-3.5 sm:py-4 min-h-[48px] rounded-full font-bold text-[13px] sm:text-sm tracking-wide text-[#032147] transition-all duration-300 shadow-xl shadow-black/30 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E3D1BE]"
-                style={{
-                  background: "linear-gradient(135deg, #F5EFEB 0%, #E3D1BE 40%, #CBB59B 100%)",
-                  border: "1px solid rgba(255,255,255,0.7)",
-                }}
-              >
-                <span className="font-extrabold tracking-tight">Discuss Your Operations</span>
-                <span className="w-7 h-7 rounded-full bg-[#032147] text-[#EDE5DA] inline-flex items-center justify-center transition-transform group-hover:translate-x-1 group-hover:rotate-45 shadow-sm">
-                  <ArrowRight className="w-3.5 h-3.5" />
+          {/* ── LEFT COLUMN: EDITORIAL TYPOGRAPHY & VALUE PROPOSITION ──── */}
+          <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
+            
+            {/* Status Badge */}
+            <ScrollReveal variant="up" delay={40}>
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#032147]/90 border border-[#EDE5DA]/35 backdrop-blur-md mb-5 sm:mb-6 w-fit shadow-lg shadow-black/20">
+                <Sparkle className="w-3.5 h-3.5 text-[#E3D1BE]" />
+                <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.16em] uppercase text-[#FFFFFF] font-semibold">
+                  OPHRON SINGAPORE · HOSPITALITY INFRASTRUCTURE & AI
                 </span>
-              </a>
+              </div>
+            </ScrollReveal>
 
-              {/* Secondary CTA */}
-              <a
-                href="#solutions"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:py-4 min-h-[48px] rounded-full border border-white/40 hover:border-white bg-[#032147]/65 hover:bg-[#032147]/90 text-white text-[13px] sm:text-sm font-semibold transition duration-300 backdrop-blur-md shadow-lg shadow-black/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+            {/* Editorial Headline */}
+            <ScrollReveal variant="up" delay={100}>
+              <h1
+                className="text-[36px] xs:text-[44px] sm:text-6xl lg:text-[68px] xl:text-[78px] font-bold text-white tracking-tight leading-[1.02] sm:leading-[0.94] mb-5 sm:mb-6 drop-shadow-md"
+                style={{ fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif" }}
               >
-                <span>Explore Solutions</span>
-                <span className="text-[#E3D1BE] text-xs">◆</span>
-              </a>
-            </div>
-          </ScrollReveal>
+                One partner.
+                <br />
+                One ecosystem.
+                <br />
+                <span
+                  className="italic font-normal tracking-normal inline-block"
+                  style={{
+                    background: "linear-gradient(135deg, #F5EFEB 0%, #E3D1BE 35%, #CBB59B 70%, #E3D1BE 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    filter: "drop-shadow(0 2px 14px rgba(227,209,190,0.4))",
+                  }}
+                >
+                  Better operations.
+                </span>
+              </h1>
+            </ScrollReveal>
+
+            {/* Subtitle & Value Proposition */}
+            <ScrollReveal variant="up" delay={160}>
+              <p className="text-base sm:text-lg lg:text-[19px] font-normal leading-relaxed text-[#EDE5DA] mb-3 max-w-2xl">
+                OPHRON unifies <span className="text-white font-semibold">People</span>,{" "}
+                <span className="text-white font-semibold">Hygiene</span>,{" "}
+                <span className="text-white font-semibold">Facilities</span>,{" "}
+                <span className="text-white font-semibold">Technology</span>, and{" "}
+                <span className="text-white font-semibold">Commercial Intelligence</span> into a{" "}
+                <span className="text-white font-semibold">single operational platform</span>{" "}
+                — built for Singapore's hotels, restaurants, and hospitality groups.
+              </p>
+              <p className="text-xs sm:text-sm lg:text-[14px] text-[#EDE5DA]/80 leading-relaxed mb-6 sm:mb-7 max-w-xl font-normal">
+                Instead of coordinating 5+ fragmented vendors, OPHRON gives you one accountable partner,
+                one transparent contract, and full operational visibility.
+              </p>
+            </ScrollReveal>
+
+            {/* 4 Pillars Quick Badges */}
+            <ScrollReveal variant="up" delay={200}>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-7 sm:mb-8">
+                <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#E3D1BE]/85 uppercase mr-1">
+                  PILLARS:
+                </span>
+                {[
+                  { icon: Sparkle, name: "Stone & Marble Care" },
+                  { icon: Building2, name: "Luxury Venue Resets" },
+                  { icon: Users, name: "Hospitality Manpower" },
+                  { icon: Cpu, name: "AI Ops Platform" },
+                ].map((p, idx) => (
+                  <a
+                    key={idx}
+                    href="#solutions"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium text-[#EDE5DA]/90 bg-[#032147]/80 hover:bg-[#032147] border border-[#EDE5DA]/25 hover:border-[#E3D1BE] backdrop-blur-sm transition-all duration-200 hover:scale-[1.03]"
+                  >
+                    <p.icon className="w-3 h-3 text-[#E3D1BE]" />
+                    <span>{p.name}</span>
+                  </a>
+                ))}
+              </div>
+            </ScrollReveal>
+
+            {/* Dual CTAs */}
+            <ScrollReveal variant="up" delay={240}>
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 mb-2">
+                {/* Primary CTA */}
+                <a
+                  href="#contact"
+                  className="group relative inline-flex items-center justify-center gap-3.5 px-6 sm:px-7 py-3.5 sm:py-4 min-h-[48px] rounded-full font-bold text-[13px] sm:text-sm tracking-wide text-[#032147] transition-all duration-300 shadow-xl shadow-black/30 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E3D1BE]"
+                  style={{
+                    background: "linear-gradient(135deg, #F5EFEB 0%, #E3D1BE 40%, #CBB59B 100%)",
+                    border: "1px solid rgba(255,255,255,0.7)",
+                  }}
+                >
+                  <span className="font-extrabold tracking-tight">Discuss Your Operations</span>
+                  <span className="w-7 h-7 rounded-full bg-[#032147] text-[#EDE5DA] inline-flex items-center justify-center transition-transform group-hover:translate-x-1 group-hover:rotate-45 shadow-sm">
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </a>
+
+                {/* Secondary CTA */}
+                <a
+                  href="#solutions"
+                  className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:py-4 min-h-[48px] rounded-full border border-white/40 hover:border-white bg-[#032147]/65 hover:bg-[#032147]/90 text-white text-[13px] sm:text-sm font-semibold transition duration-300 backdrop-blur-md shadow-lg shadow-black/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                >
+                  <span>Explore Solutions</span>
+                  <span className="text-[#E3D1BE] text-xs">◆</span>
+                </a>
+              </div>
+            </ScrollReveal>
+
+          </div>
+
+          {/* ── RIGHT COLUMN: UNOBSTRUCTED CINEMATIC STAGE (NO OVERLAY CARDS) ── */}
+          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 pointer-events-none min-h-[420px]" />
 
         </div>
       </div>
 
       {/* ── STATS & SOCIAL PROOF STRIP (LUMINOUS CHAMPAGNE FROSTED GLASS) ──────── */}
-      <div className="relative z-30 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 mb-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 mb-8">
         <div
           className="rounded-2xl p-5 sm:p-7 grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 items-center shadow-2xl transition-all duration-300"
           style={{
@@ -362,7 +373,7 @@ export default function Hero() {
       {/* ── BOTTOM MARQUEE TICKER ────────────────────────────────────── */}
       <div
         aria-hidden="true"
-        className="relative z-30 border-t overflow-hidden py-3"
+        className="relative z-10 border-t overflow-hidden py-3"
         style={{
           background: "#EDE5DA",
           borderColor: "rgba(3, 33, 71, 0.12)",

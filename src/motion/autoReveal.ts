@@ -1,6 +1,5 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MOTION_TOKENS } from "./motionTokens";
 
 gsap.registerPlugin(ScrollTrigger);
 
