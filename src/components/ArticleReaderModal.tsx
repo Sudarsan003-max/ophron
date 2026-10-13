@@ -43,7 +43,7 @@ export default function ArticleReaderModal({ post, onClose }: Props) {
         <div className="sticky top-0 z-30 flex items-center justify-between bg-[#032147]/95 backdrop-blur-md px-6 sm:px-8 py-5 border-b border-white/10">
           <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.2em] text-[#B7A38B]">
             <span className="grid place-items-center h-6 w-6 rounded-full bg-[#B7A38B] shadow-sm">
-              <img src="/images/brand/ophron-navy-emblem-transparent.png" className="h-3.5 w-auto object-contain" alt="OPHRON" />
+              <img src="/images/brand/ophron-navy-emblem-transparent.png" decoding="async" className="h-3.5 w-auto object-contain" alt="OPHRON" />
             </span>
             <span>OPHRON Research</span>
             <span className="opacity-40">/</span>
@@ -78,7 +78,7 @@ export default function ArticleReaderModal({ post, onClose }: Props) {
 
           {/* Featured Image */}
           <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-black/40 border border-white/10">
-            <img src={post.image} alt={post.title} className="h-full w-full object-cover" />
+            <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           </div>
 
           {/* Key Takeaways Box */}

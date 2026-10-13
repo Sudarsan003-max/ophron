@@ -348,6 +348,7 @@ export default function ServicesPage() {
                             alt={srv.name}
                             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                             loading="lazy"
+                            decoding="async"
                           />
                           <div className="absolute top-3 left-3 z-20 bg-[#032147] text-[#EDE5DA] group-hover:bg-[#B7A38B] group-hover:text-[#032147] px-2.5 py-1 rounded-full text-[9px] font-mono uppercase font-bold tracking-[0.1em] transition duration-300 shadow">
                             {srv.category}
@@ -483,6 +484,7 @@ export default function ServicesPage() {
                                   alt={srv.name}
                                   className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                                   loading="lazy"
+                                  decoding="async"
                                 />
                                 <span className="absolute top-2 right-2 text-[9px] font-mono font-bold uppercase bg-white/95 text-[#032147] px-2 py-0.5 rounded-full shadow">
                                   {srv.badge}
@@ -546,6 +548,7 @@ export default function ServicesPage() {
                             alt={srv.heroTitle}
                             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                             loading="lazy"
+                            decoding="async"
                           />
                           <CornerBrackets color="#B7A38B" size={14} hoverSize={22} />
                           <div className="absolute top-3 left-3 z-30 bg-[#032147] text-[#EDE5DA] group-hover:bg-[#B7A38B] group-hover:text-[#032147] px-3 py-1 rounded-full text-[10px] font-mono uppercase font-bold tracking-[0.1em] transition duration-300 shadow">

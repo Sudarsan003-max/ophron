@@ -377,6 +377,7 @@ export default function Gallery() {
                     src={item.src}
                     alt={item.alt}
                     loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-106"
                   />
 
@@ -519,6 +520,7 @@ export default function Gallery() {
               <img
                 src={activePhoto.src}
                 alt={activePhoto.alt}
+                decoding="async"
                 className="max-h-full max-w-full object-contain"
               />
             </div>

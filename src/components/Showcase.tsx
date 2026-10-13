@@ -387,7 +387,7 @@ export default function Showcase() {
                   {/* Phone Header */}
                   <div className="flex items-center justify-between border-b border-white/10 pb-3.5 pt-6 mt-4 z-10">
                     <div className="flex items-center gap-2">
-                      <img src="/images/brand/ophron-gold-emblem-transparent.png" className="h-5 w-auto object-contain" alt="OPHRON Logo" />
+                      <img src="/images/brand/ophron-gold-emblem-transparent.png" loading="lazy" decoding="async" className="h-5 w-auto object-contain" alt="OPHRON Logo" />
                       <span className="text-[12px] font-display font-bold tracking-wider text-[#EDE5DA]">OPHRON PLATFORM</span>
                     </div>
                     <span className="text-[8.5px] font-mono uppercase tracking-[0.15em] bg-[#B7A38B] text-[#032147] px-2 py-0.5 rounded-full font-bold">
@@ -402,7 +402,7 @@ export default function Showcase() {
                     }`}
                   >
                     <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#B7A38B]/30 to-[#032147]/80 border border-[#B7A38B]/50 shadow-[0_15px_30px_rgba(3,33,71,0.6)] flex items-center justify-center relative">
-                      <img src="/images/brand/ophron-gold-emblem-transparent.png" className="h-10 w-auto object-contain z-10 filter drop-shadow-[0_4px_10px_rgba(183,163,139,0.5)]" alt="OPHRON Emblem" />
+                      <img src="/images/brand/ophron-gold-emblem-transparent.png" loading="lazy" decoding="async" className="h-10 w-auto object-contain z-10 filter drop-shadow-[0_4px_10px_rgba(183,163,139,0.5)]" alt="OPHRON Emblem" />
                     </div>
                     <div className="space-y-2">
                       <h4 className="text-[18px] font-canela font-bold leading-tight text-white">

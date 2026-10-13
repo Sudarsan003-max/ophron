@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Security Headers (B-003, R-008, BT-SEC-001) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; connect-src 'self' https://script.google.com https://api.ophronsystems.com https://*.google.com https://*.googleapis.com; object-src 'none'; base-uri 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; connect-src 'self' https://script.google.com https://api.ophronsystems.com https://*.google.com https://*.googleapis.com; object-src 'none'; base-uri 'self';" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     
@@ -40,10 +40,10 @@
     <link rel="icon" type="image/png" href="/images/brand/ophron-gold-emblem-transparent.png" />
     <link rel="apple-touch-icon" href="/images/brand/ophron-gold-emblem-transparent.png" />
 
-    <!-- Fonts Preconnect & Stylesheets -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- 100% Local Self-Hosted Typography (Zero External Network Overhead) -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/local-font-9.woff2" crossorigin fetchpriority="high">
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/local-font-2.woff2" crossorigin fetchpriority="high">
+    <link rel="stylesheet" href="/fonts/fonts.css" />
 
     <!-- Preload Hero High-Priority LCP Images -->
     <link rel="preload" as="image" href="/images/hero/hero_marble_polish_desktop.webp" media="(min-width: 768px)" type="image/webp" fetchpriority="high">

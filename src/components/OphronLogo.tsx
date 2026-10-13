@@ -55,6 +55,7 @@ export const OphronLogo: React.FC<OphronLogoProps> = ({
         <img
           src={fullSrc}
           alt="OPHRON"
+          decoding="async"
           style={customStyle}
           className={`${heightClass} w-auto object-contain drop-shadow-sm`}
         />
@@ -77,6 +78,7 @@ export const OphronLogo: React.FC<OphronLogoProps> = ({
         <img
           src={emblemSrc}
           alt="OPHRON Emblem"
+          decoding="async"
           style={customStyle}
           className={`${heightClass} w-auto object-contain`}
         />
@@ -107,6 +109,7 @@ export const OphronLogo: React.FC<OphronLogoProps> = ({
     <img
       src={emblemSrc}
       alt="OPHRON Emblem"
+      decoding="async"
       style={customStyle}
       className={`select-none ${heightClass} w-auto object-contain ${className}`}
     />

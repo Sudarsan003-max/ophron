@@ -200,6 +200,7 @@ export default function Nav() {
                 <img
                   src="/images/brand/ophron-navy-emblem-transparent.png"
                   className="h-[20px] w-auto object-contain"
+                  decoding="async"
                   alt="OPHRON Emblem"
                 />
               </span>

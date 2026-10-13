@@ -101,7 +101,7 @@ export default function About() {
                 />
               </TiltCard>
               
-              {/* Founder Bento Card with Corner Brackets */}
+              {/* Founder Bento Card with Corner Brackets & Executive Styling */}
               <TiltCard
                 className="col-span-2 md:col-span-3 rounded-2xl"
                 onClick={() => {
@@ -110,26 +110,82 @@ export default function About() {
                 }}
               >
                 <div 
-                  className="w-full h-full group relative rounded-2xl p-5 border bg-[#EDE5DA] text-[#032147] border-[#B7A38B]/30 flex flex-col justify-between overflow-hidden cursor-pointer"
+                  className="w-full h-full group relative rounded-2xl p-5 sm:p-6 border bg-[#021733] text-[#EDE5DA] border-[#B7A38B]/40 hover:border-[#B7A38B] transition-all duration-500 flex flex-col justify-between overflow-hidden cursor-pointer shadow-xl hover:shadow-[0_12px_45px_rgba(3,33,71,0.5)]"
                   data-cursor="hover"
                 >
-                  <CornerBrackets size={10} hoverSize={16} />
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <div className="font-montserrat font-bold text-xl sm:text-2xl tracking-tight text-[#032147]">Isaac Vivian</div>
-                      <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#B7A38B] mt-0.5 font-bold">Founder, OPHRON</div>
+                  {/* Subtle luxury ambient backlighting glow */}
+                  <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#B7A38B]/15 rounded-full blur-2xl pointer-events-none group-hover:bg-[#B7A38B]/25 transition-colors duration-500" />
+                  <div className="absolute -bottom-10 -left-10 w-28 h-28 bg-[#B7A38B]/10 rounded-full blur-xl pointer-events-none" />
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(183,163,139,0.06)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+
+                  <CornerBrackets color="#B7A38B" size={10} hoverSize={16} />
+
+                  <div>
+                    {/* Eyebrow Status */}
+                    <div className="flex items-center justify-between mb-3.5">
+                      <div className="inline-flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
+                        [ Executive Leadership ]
+                      </div>
+                      <span className="text-[9px] font-mono text-[#EDE5DA]/60 uppercase tracking-widest font-semibold">
+                        Founder
+                      </span>
                     </div>
-                    {/* Real Portrait Avatar */}
-                    <div className="relative h-12 w-12 shrink-0 rounded-full overflow-hidden border border-[#032147]/15 shadow-sm">
-                      <img src={isaacPortrait} alt="Isaac Vivian Portrait" className="w-full h-full object-cover" />
+
+                    {/* Founder Header with Enhanced Executive Portrait */}
+                    <div className="flex items-center gap-3.5 sm:gap-4">
+                      {/* High-End Framed Portrait Avatar */}
+                      <div className="relative group/avatar shrink-0">
+                        <div className="absolute -inset-1 rounded-2xl bg-[#B7A38B]/30 blur-md opacity-40 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none" />
+                        <div className="relative h-18 w-18 sm:h-22 sm:w-22 rounded-2xl overflow-hidden border-2 border-[#B7A38B]/60 shadow-[0_6px_20px_rgba(0,0,0,0.6)] bg-[#032147]">
+                          <img 
+                            src={isaacPortrait} 
+                            alt="Isaac Vivian — Founder, OPHRON" 
+                            loading="lazy" 
+                            decoding="async" 
+                            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-108" 
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-60" />
+                        </div>
+                      </div>
+
+                      {/* Name & Title */}
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-canela text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#B7A38B] transition-colors truncate">
+                            Isaac Vivian
+                          </span>
+                          <span className="text-[#B7A38B] shrink-0" title="Verified Founder">
+                            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                          </span>
+                        </div>
+                        <div className="text-[10px] sm:text-[10.5px] font-mono uppercase tracking-[0.18em] text-[#B7A38B] font-bold mt-0.5 truncate">
+                          Founder & Managing Director
+                        </div>
+                        <div className="text-[9px] font-mono text-[#EDE5DA]/60 uppercase tracking-wider mt-0.5">
+                          OPHRON Systems · Singapore
+                        </div>
+                      </div>
                     </div>
+
+                    {/* Executive Quote */}
+                    <p className="mt-4 font-inter text-[12px] sm:text-[12.5px] leading-relaxed text-[#EDE5DA]/85 italic border-l-2 border-[#B7A38B]/60 pl-3">
+                      “We don't sell cleaning or manpower. We become the strategic operating partner that powers hospitality and commercial operations across Singapore and globally.”
+                    </p>
                   </div>
-                  <p className="mt-4 font-inter text-[12px] leading-relaxed text-[#032147]/80">
-                    “We don't sell cleaning or manpower. We become the strategic operating partner that powers hospitality and commercial operations across Singapore and globally.”
-                  </p>
-                  <div className="mt-3 flex items-center justify-between text-[9px] font-mono tracking-[0.2em] uppercase text-[#032147]/60 border-t border-[#032147]/10 pt-2">
-                    <span>Leadership Vision</span>
-                    <span className="text-[#B7A38B] font-bold">View Profile →</span>
+
+                  {/* Bottom Action / View Profile Bar */}
+                  <div className="mt-4 pt-3 flex items-center justify-between text-[9px] sm:text-[10px] font-mono tracking-[0.18em] uppercase text-[#EDE5DA]/65 border-t border-white/10">
+                    <span className="flex items-center gap-1.5">
+                      <span className="text-[#B7A38B]">✦</span>
+                      <span>Operational Blueprint</span>
+                    </span>
+                    <span className="text-[#B7A38B] group-hover:text-white font-bold transition flex items-center gap-1">
+                      <span>View Profile</span>
+                      <span className="group-hover:translate-x-1 transition-transform">→</span>
+                    </span>
                   </div>
                 </div>
               </TiltCard>

@@ -35,19 +35,19 @@ export default function Founder() {
       <TiltCard maxTilt={5} className="rounded-[32px]">
         <div className="rounded-[32px] border border-[#B7A38B]/30 bg-[#EDE5DA] overflow-hidden shadow-xl relative flex flex-col md:flex-row">
           {/* Left Side: Dark Portrait block with grid overlay */}
-          <div className="w-full md:w-72 bg-[#032147] relative flex items-center justify-center p-8 shrink-0 overflow-hidden">
+          <div className="w-full md:w-80 bg-[#032147] relative flex items-center justify-center p-8 shrink-0 overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-            <div className="absolute -top-10 -left-10 w-32 h-32 bg-[#B7A38B]/20 rounded-full blur-2xl pointer-events-none" />
-            <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#B7A38B]/20 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -top-10 -left-10 w-36 h-36 bg-[#B7A38B]/25 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-10 -right-10 w-36 h-36 bg-[#B7A38B]/20 rounded-full blur-2xl pointer-events-none" />
             
             {/* High-End Squircle Portrait with Glass offset & Corner Brackets */}
-            <div className="relative group">
-              <div className="absolute inset-0 rounded-[40px_16px_40px_16px] bg-[#B7A38B]/30 blur-lg opacity-40 group-hover:opacity-75 transition-opacity duration-500 pointer-events-none" />
-              <div className="absolute -inset-1.5 rounded-[42px_18px_42px_18px] border border-white/20 bg-white/[0.05] backdrop-blur-sm pointer-events-none" />
+            <div className="relative group w-full flex justify-center">
+              <div className="absolute inset-0 rounded-[40px_16px_40px_16px] bg-[#B7A38B]/35 blur-xl opacity-40 group-hover:opacity-75 transition-opacity duration-500 pointer-events-none" />
+              <div className="absolute -inset-1.5 rounded-[42px_18px_42px_18px] border border-[#B7A38B]/40 bg-white/[0.05] backdrop-blur-sm pointer-events-none" />
               
-              <div className="h-48 w-48 rounded-[40px_16px_40px_16px] overflow-hidden border border-white/30 bg-[#0a1e3f] shadow-2xl relative transition-all duration-700 hover:scale-[1.03]">
-                <img src={isaacPortrait} alt="Isaac Vivian Portrait" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+              <div className="h-64 w-52 sm:h-72 sm:w-60 rounded-[40px_16px_40px_16px] overflow-hidden border-2 border-[#B7A38B]/60 bg-[#0a1e3f] shadow-2xl relative transition-all duration-700 hover:scale-[1.02]">
+                <img src={isaacPortrait} alt="Isaac Vivian Portrait" loading="lazy" decoding="async" className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-50" />
               </div>
               <CornerBrackets color="#B7A38B" size={14} hoverSize={20} />
             </div>

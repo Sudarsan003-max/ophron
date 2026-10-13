@@ -88,6 +88,7 @@ export default function Logos() {
                     alt={item.name}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
+                    decoding="async"
                   />
                   <CornerBrackets color="#B7A38B" size={10} hoverSize={16} />
                   {item.badge && (
@@ -136,6 +137,8 @@ export default function Logos() {
                 <img
                   src="/images/brand/ophron-gold-emblem-transparent.png"
                   alt="OPHRON Emblem"
+                  loading="lazy"
+                  decoding="async"
                   className="h-3.5 w-auto object-contain"
                 />
               </span>

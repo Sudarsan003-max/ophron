@@ -45,7 +45,7 @@ export default function ServiceDetailModal({ serviceSlug, onClose }: Props) {
         <div className="sticky top-0 z-30 flex items-center justify-between bg-[#032147]/95 backdrop-blur-md px-6 sm:px-8 py-5 border-b border-white/10">
           <div className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.2em] text-[#B7A38B]">
             <span className="grid place-items-center h-6 w-6 rounded-full bg-[#B7A38B] shadow-sm">
-              <img src="/images/brand/ophron-navy-emblem-transparent.png" className="h-3.5 w-auto object-contain" alt="OPHRON" />
+              <img src="/images/brand/ophron-navy-emblem-transparent.png" decoding="async" className="h-3.5 w-auto object-contain" alt="OPHRON" />
             </span>
             <span>OPHRON Platform</span>
             <span className="opacity-40">/</span>
@@ -65,7 +65,7 @@ export default function ServiceDetailModal({ serviceSlug, onClose }: Props) {
           {/* Hero Banner */}
           <div className="relative rounded-3xl overflow-hidden bg-black/40 border border-white/10 p-8 sm:p-12 lg:p-14">
             <div className="absolute inset-0 z-0">
-              <img src={data.heroImage} alt={data.heroTitle} className="h-full w-full object-cover opacity-25" />
+              <img src={data.heroImage} alt={data.heroTitle} loading="lazy" decoding="async" className="h-full w-full object-cover opacity-25" />
               <div className="absolute inset-0 bg-gradient-to-r from-[#032147] via-[#032147]/90 to-transparent" />
             </div>
 
@@ -147,7 +147,7 @@ function SectionBlockRenderer({ block }: { block: SectionBlock }) {
 
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 aspect-[4/3] bg-black/40 shadow-xl">
-              <img src={block.image} alt={block.imageAlt} className="h-full w-full object-cover" />
+              <img src={block.image} alt={block.imageAlt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
             </div>
           </div>
         </div>
@@ -268,7 +268,7 @@ function SectionBlockRenderer({ block }: { block: SectionBlock }) {
           <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {block.images.map((img, i) => (
               <div key={i} className="rounded-2xl overflow-hidden border border-white/10 bg-black/40 aspect-[4/3]">
-                <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
+                <img src={img.src} alt={img.alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
               </div>
             ))}
           </div>

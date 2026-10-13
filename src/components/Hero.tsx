@@ -3,75 +3,11 @@ import { ScrollReveal } from "./ui/animations";
 import logoNavy from "./logo-navy.png";
 import {
   ArrowRight,
-  Sparkle,
-  Building2,
-  Users,
-  Cpu,
+  ArrowUpRight,
+  Shield,
+  Award,
+  CheckCircle2,
 } from "lucide-react";
-
-export interface HeroServiceSlide {
-  id: string;
-  pillar: string;
-  number: string;
-  title: string;
-  tagline: string;
-  imageDesktopWebp: string;
-  imageDesktopJpg: string;
-  imageMobileWebp: string;
-  imageMobileJpg: string;
-  icon: typeof Sparkle;
-}
-
-export const HERO_SERVICES: HeroServiceSlide[] = [
-  {
-    id: "marble",
-    pillar: "SPECIALIZED HYGIENE & STONE CARE",
-    number: "01",
-    title: "Powder & Diamond Marble Polishing",
-    tagline: "Heavy-duty diamond planetary grinding & mirror-reflection restoration.",
-    imageDesktopWebp: "/images/hero/hero_marble_polish_desktop.webp",
-    imageDesktopJpg: "/images/hero/hero_marble_polish_desktop.jpg",
-    imageMobileWebp: "/images/hero/hero_marble_polish_mobile.webp",
-    imageMobileJpg: "/images/hero/hero_marble_polish_mobile.jpg",
-    icon: Sparkle,
-  },
-  {
-    id: "venues",
-    pillar: "FACILITY SERVICES & RAPID RESETS",
-    number: "02",
-    title: "Events & Luxury Venue Turnover",
-    tagline: "Rapid 60-minute ballroom turnovers & high-traffic venue maintenance.",
-    imageDesktopWebp: "/images/hero/hero_event_venue_desktop.webp",
-    imageDesktopJpg: "/images/hero/hero_event_venue_desktop.jpg",
-    imageMobileWebp: "/images/hero/hero_event_venue_mobile.webp",
-    imageMobileJpg: "/images/hero/hero_event_venue_mobile.jpg",
-    icon: Building2,
-  },
-  {
-    id: "manpower",
-    pillar: "HOSPITALITY WORKFORCE INFRASTRUCTURE",
-    number: "03",
-    title: "Hospitality Manpower & Executive Staffing",
-    tagline: "WSQ-trained housekeeping, stewarding & operational crews on demand.",
-    imageDesktopWebp: "/images/hero/hero_manpower_suite_desktop.webp",
-    imageDesktopJpg: "/images/hero/hero_manpower_suite_desktop.jpg",
-    imageMobileWebp: "/images/hero/hero_manpower_suite_mobile.webp",
-    imageMobileJpg: "/images/hero/hero_manpower_suite_mobile.jpg",
-    icon: Users,
-  },
-  {
-    id: "technology",
-    pillar: "OPHRON TECHNOLOGY & AI SAAS",
-    number: "04",
-    title: "Smart Hospitality Technology & AI Operations",
-    tagline: "Real-time shift dashboards, IoT IAQ tracking & automated compliance logs.",
-    imageDesktopWebp: "/images/hero/hero_tech_dashboard_desktop.webp",
-    imageDesktopJpg: "/images/hero/hero_tech_dashboard_desktop.jpg",
-    imageMobileWebp: "/images/hero/hero_tech_dashboard_mobile.webp",
-    imageMobileJpg: "/images/hero/hero_tech_dashboard_mobile.jpg",
-    icon: Cpu,
-  },
-];
 
 const MARQUEE_ITEMS = [
   "OPHRON FACILITIES — INTEGRATED FACILITY OPERATIONS",
@@ -82,8 +18,81 @@ const MARQUEE_ITEMS = [
   "OPHRON PEOPLE — WORKFORCE & COMPLIANCE MANAGEMENT",
 ];
 
-const SKYLINE_VIDEO_SRC = "/videos/hero-singapore-skyline.mp4";
-const SKYLINE_POSTER_SRC = "/images/hero/hero_tech_dashboard_desktop.webp";
+
+const HERO_SERVICES = [
+  {
+    chip: "Kitchen",
+    badge: "✦ SFA GRADE A · HOT-LINE RESTORATION",
+    title: "Commercial Kitchen Deep Hygiene",
+    sector: "Hot-Line Degreasing & SFA Compliance",
+    imageWebp: "/images/services/commercial_kitchen_deep_cleaning.webp",
+    imageJpg: "/images/services/commercial_kitchen_deep_cleaning.jpg",
+    alt: "Commercial kitchen stainless steel surfaces restored to mirror finish",
+  },
+  {
+    chip: "Hotel Suites",
+    badge: "✦ 5-STAR SUITE TURNOVER · HOSPITALITY CREW",
+    title: "Luxury Hotel Suite Turnover",
+    sector: "Housekeeping & Linen Preparation",
+    imageWebp: "/images/photo-6466496.webp",
+    imageJpg: "/images/photo-6466496.jpg",
+    alt: "Luxury hotel suite dressed to five-star standard by OPHRON crew",
+  },
+  {
+    chip: "Marble Polish",
+    badge: "✦ 98+ GU GLOSS · MARBLE RESTORATION",
+    title: "Diamond & Powder Marble Polishing",
+    sector: "Architectural Stone Restoration",
+    imageWebp: "/images/services/marble_polishing.webp",
+    imageJpg: "/images/services/marble_polishing.jpg",
+    alt: "Architectural Italian marble floor diamond polished to mirror gloss",
+  },
+  {
+    chip: "Façade Access",
+    badge: "✦ IRATA ROPE ACCESS · FAÇADE CARE",
+    title: "High-Rise Façade & Window Care",
+    sector: "High-Altitude Exterior Operations",
+    imageWebp: "/images/services/high_rise_facade_cleaning.webp",
+    imageJpg: "/images/services/high_rise_facade_cleaning.jpg",
+    alt: "High-rise rope access certified glass façade cleaning",
+  },
+  {
+    chip: "Stewarding",
+    badge: "✦ WSQ TRAINED · BOH KITCHEN STEWARDING",
+    title: "F&B Stewarding & Dishwasher Support",
+    sector: "Back-of-House Manpower Operations",
+    imageWebp: "/images/services/fnb_stewarding_manpower.webp",
+    imageJpg: "/images/services/fnb_stewarding_manpower.jpg",
+    alt: "WSQ certified stewarding manpower for hospitality groups",
+  },
+  {
+    chip: "Bio-Sanitation",
+    badge: "✦ HOSPITAL-GRADE · SANITARY DESCALING",
+    title: "Restroom Hygiene & IAQ Decontamination",
+    sector: "Sanitation & Bio-Burden Control",
+    imageWebp: "/images/services/hospital_grade_disinfection.webp",
+    imageJpg: "/images/services/hospital_grade_disinfection.jpg",
+    alt: "Commercial washroom hygiene restoration and hospital grade disinfection",
+  },
+  {
+    chip: "Corporate Towers",
+    badge: "✦ GRADE-A TOWERS · DAY & NIGHT PORTERS",
+    title: "Commercial Office & Corporate Towers",
+    sector: "Integrated Corporate Facilities",
+    imageWebp: "/images/services/commercial_office_cleaning.webp",
+    imageJpg: "/images/services/commercial_office_cleaning.jpg",
+    alt: "Grade-A corporate tower day and night facility operations",
+  },
+  {
+    chip: "Venue Turnover",
+    badge: "✦ 4-HOUR SLA · OVERNIGHT VENUE TURNOVER",
+    title: "Overnight Ballroom & Event Turnover",
+    sector: "Time-Critical Hospitality Venues",
+    imageWebp: "/images/services/overnight_venue_turnover.webp",
+    imageJpg: "/images/services/overnight_venue_turnover.jpg",
+    alt: "Luxury ballroom rapid overnight turnover and sanitation",
+  },
+];
 
 function useCount(target: number, duration = 1600, start = false) {
   const [v, setV] = useState(0);
@@ -105,8 +114,18 @@ function useCount(target: number, duration = 1600, start = false) {
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [inView, setInView] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // 6-second continuous loop through curated services images
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setSlideIndex((prev) => (prev + 1) % HERO_SERVICES.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [isPaused]);
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -125,216 +144,272 @@ export default function Hero() {
       id="top"
       ref={ref}
       aria-label="OPHRON Hero Section"
-      className="relative overflow-hidden pt-[104px] sm:pt-[124px] lg:pt-[136px] bg-[#032147] text-[#EDE5DA]"
-      style={{ fontFamily: "inherit" }}
+      className="relative overflow-hidden pt-[112px] sm:pt-[132px] lg:pt-[144px] bg-[#02142B] text-[#EDE5DA]"
     >
-      {/* ── 50% RIGHT-HALF SINGAPORE SKYLINE AMBIENT BACKGROUND ENGINE ── */}
-      <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
-        
-        {/* Base Solid Deep Navy Canvas for Entire Hero */}
-        <div className="absolute inset-0 bg-[#032147]" />
+      {/* ── AMBIENT ATMOSPHERIC ARCHITECTURE ── */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none" aria-hidden="true">
+        {/* Base Solid Deep Midnight Canvas */}
+        <div className="absolute inset-0 bg-[#02142B]" />
 
-        {/* Ambient illumination aura on left */}
+        {/* Subtle Architectural Blueprint Grid */}
         <div
-          className="absolute top-1/4 -left-28 w-[500px] h-[500px] rounded-full opacity-20 blur-[130px]"
+          className="absolute inset-0 opacity-[0.08]"
           style={{
-            background: "radial-gradient(circle, rgba(14, 52, 102, 0.9) 0%, transparent 70%)",
+            backgroundImage:
+              "linear-gradient(rgba(183,163,139,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(183,163,139,0.18) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
           }}
         />
 
-        {/* The 50% Right-Half Singapore Skyline Video Stage */}
-        <div className="absolute top-0 bottom-0 right-0 w-full md:w-[60%] lg:w-[54%] xl:w-[50%] overflow-hidden">
-          <video
-            ref={videoRef}
-            src={SKYLINE_VIDEO_SRC}
-            poster={SKYLINE_POSTER_SRC}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover object-center"
-            style={{
-              filter: "brightness(0.92) contrast(1.10) saturate(1.08)",
-            }}
-          />
+        {/* Ambient Warm Brass Radial Lighting (Top-Right aura illuminating imagery) */}
+        <div
+          className="absolute -top-32 right-[-5%] w-[680px] h-[680px] rounded-full opacity-25 blur-[140px]"
+          style={{
+            background: "radial-gradient(circle, rgba(183,163,139,0.45) 0%, rgba(14,52,102,0.55) 50%, transparent 75%)",
+          }}
+        />
 
-          {/* ── SEAMLESS HORIZONTAL GRADIENT FADE (LEFT NAVY → RIGHT SKYLINE) ── */}
-          <div
-            className="absolute inset-y-0 left-0 w-32 sm:w-48 lg:w-72"
-            style={{
-              background:
-                "linear-gradient(90deg, #032147 0%, rgba(3,33,71,0.92) 28%, rgba(3,33,71,0.55) 60%, rgba(3,33,71,0.15) 85%, transparent 100%)",
-            }}
-          />
+        {/* Ambient Navy Aura on Left */}
+        <div
+          className="absolute top-1/3 -left-32 w-[520px] h-[520px] rounded-full opacity-20 blur-[130px]"
+          style={{
+            background: "radial-gradient(circle, rgba(14,52,102,0.9) 0%, transparent 70%)",
+          }}
+        />
 
-          {/* ── MOBILE VERTICAL GRADIENT FADE ── */}
-          <div
-            className="block md:hidden absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(3,33,71,0.95) 0%, rgba(3,33,71,0.88) 45%, rgba(3,33,71,0.40) 80%, #032147 100%)",
-            }}
-          />
+        {/* Watermark Numeral in Background */}
+        <p
+          className="pointer-events-none absolute top-1/2 -right-8 hidden -translate-y-1/2 font-serif text-[16rem] leading-none font-bold tracking-tight select-none xl:block opacity-[0.035] text-white"
+        >
+          01
+        </p>
 
-          {/* ── TOP NAV BAR & BOTTOM ANCHOR BLENDS ── */}
-          <div
-            className="absolute inset-x-0 top-0 h-24 sm:h-32"
-            style={{
-              background:
-                "linear-gradient(180deg, #032147 0%, rgba(3,33,71,0.7) 40%, transparent 100%)",
-            }}
-          />
-          <div
-            className="absolute inset-x-0 bottom-0 h-28 sm:h-36"
-            style={{
-              background:
-                "linear-gradient(0deg, #032147 0%, rgba(3,33,71,0.85) 45%, transparent 100%)",
-            }}
-          />
-
-          {/* Micro Film Texture Overlay */}
-          <div
-            className="absolute inset-0 opacity-[0.035] mix-blend-overlay"
-            style={{
-              backgroundImage:
-                "radial-gradient(#EDE5DA 1px, transparent 1px), radial-gradient(#EDE5DA 1px, transparent 1px)",
-              backgroundSize: "28px 28px",
-              backgroundPosition: "0 0, 14px 14px",
-            }}
-          />
-        </div>
+        {/* Subtle Micro Film Grain Texture */}
+        <div
+          className="absolute inset-0 opacity-[0.03] mix-blend-overlay"
+          style={{
+            backgroundImage:
+              "radial-gradient(#EDE5DA 1px, transparent 1px), radial-gradient(#EDE5DA 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+            backgroundPosition: "0 0, 14px 14px",
+          }}
+        />
       </div>
 
-      {/* ── MAIN HERO BODY (CLEAN EDITORIAL CONTENT + PURE SKYLINE STAGE) ── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pb-12 sm:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
+      {/* ── MAIN HERO BODY (EDITORIAL TYPOGRAPHY + LAYERED COLLAGE) ── */}
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-6 sm:pt-10 lg:pt-14 pb-10 sm:pb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 items-center">
           
           {/* ── LEFT COLUMN: EDITORIAL TYPOGRAPHY & VALUE PROPOSITION ──── */}
           <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             
-            {/* Status Badge */}
-            <ScrollReveal variant="up" delay={40}>
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#032147]/90 border border-[#EDE5DA]/35 backdrop-blur-md mb-5 sm:mb-6 w-fit shadow-lg shadow-black/20">
-                <Sparkle className="w-3.5 h-3.5 text-[#E3D1BE]" />
-                <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.16em] uppercase text-[#FFFFFF] font-semibold">
-                  OPHRON SINGAPORE · HOSPITALITY INFRASTRUCTURE & AI
-                </span>
-              </div>
-            </ScrollReveal>
-
-            {/* Editorial Headline */}
-            <ScrollReveal variant="up" delay={100}>
+            {/* Editorial Serif Headline */}
+            <ScrollReveal variant="up" delay={60}>
               <h1
-                className="text-[36px] xs:text-[44px] sm:text-6xl lg:text-[68px] xl:text-[78px] font-bold text-white tracking-tight leading-[1.02] sm:leading-[0.94] mb-5 sm:mb-6 drop-shadow-md"
-                style={{ fontFamily: "'Canela', 'Playfair Display', 'Georgia', serif" }}
+                className="text-[40px] xs:text-[48px] sm:text-6xl md:text-[4.2rem] lg:text-[4.5rem] xl:text-[5rem] font-bold text-white tracking-tight leading-[1.06] sm:leading-[1.03] mb-6 sm:mb-7"
+                style={{ fontFamily: "'Canela', 'Cinzel', 'Playfair Display', 'Georgia', serif" }}
               >
                 One partner.
                 <br />
                 One ecosystem.
                 <br />
-                <span
-                  className="italic font-normal tracking-normal inline-block"
-                  style={{
-                    background: "linear-gradient(135deg, #F5EFEB 0%, #E3D1BE 35%, #CBB59B 70%, #E3D1BE 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    filter: "drop-shadow(0 2px 14px rgba(227,209,190,0.4))",
-                  }}
-                >
+                <span className="font-normal italic text-[#CBB59D]">
                   Better operations.
                 </span>
               </h1>
             </ScrollReveal>
 
-            {/* Subtitle & Value Proposition */}
-            <ScrollReveal variant="up" delay={160}>
-              <p className="text-base sm:text-lg lg:text-[19px] font-normal leading-relaxed text-[#EDE5DA] mb-3 max-w-2xl">
-                OPHRON unifies <span className="text-white font-semibold">People</span>,{" "}
-                <span className="text-white font-semibold">Hygiene</span>,{" "}
-                <span className="text-white font-semibold">Facilities</span>,{" "}
-                <span className="text-white font-semibold">Technology</span>, and{" "}
-                <span className="text-white font-semibold">Commercial Intelligence</span> into a{" "}
-                <span className="text-white font-semibold">single operational platform</span>{" "}
-                — built for Singapore's hotels, restaurants, and hospitality groups.
-              </p>
-              <p className="text-xs sm:text-sm lg:text-[14px] text-[#EDE5DA]/80 leading-relaxed mb-6 sm:mb-7 max-w-xl font-normal">
-                Instead of coordinating 5+ fragmented vendors, OPHRON gives you one accountable partner,
-                one transparent contract, and full operational visibility.
-              </p>
-            </ScrollReveal>
-
-            {/* 4 Pillars Quick Badges */}
-            <ScrollReveal variant="up" delay={200}>
-              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-7 sm:mb-8">
-                <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#E3D1BE]/85 uppercase mr-1">
-                  PILLARS:
-                </span>
-                {[
-                  { icon: Sparkle, name: "Stone & Marble Care" },
-                  { icon: Building2, name: "Luxury Venue Resets" },
-                  { icon: Users, name: "Hospitality Manpower" },
-                  { icon: Cpu, name: "AI Ops Platform" },
-                ].map((p, idx) => (
-                  <a
-                    key={idx}
-                    href="#solutions"
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium text-[#EDE5DA]/90 bg-[#032147]/80 hover:bg-[#032147] border border-[#EDE5DA]/25 hover:border-[#E3D1BE] backdrop-blur-sm transition-all duration-200 hover:scale-[1.03]"
-                  >
-                    <p.icon className="w-3 h-3 text-[#E3D1BE]" />
-                    <span>{p.name}</span>
-                  </a>
-                ))}
+            {/* Authoritative Subtitle */}
+            <ScrollReveal variant="up" delay={120}>
+              <div className="space-y-4 max-w-xl mb-7 sm:mb-8">
+                <p className="text-base sm:text-lg lg:text-[18px] text-[#EDE5DA]/90 leading-relaxed font-normal">
+                  OPHRON unifies <strong className="font-semibold text-white">People</strong>,{" "}
+                  <strong className="font-semibold text-white">Hygiene</strong>,{" "}
+                  <strong className="font-semibold text-white">Facilities</strong>,{" "}
+                  <strong className="font-semibold text-white">Technology</strong>, and{" "}
+                  <strong className="font-semibold text-white">Commercial Intelligence</strong> into a{" "}
+                  <strong className="font-semibold text-white">single operational platform</strong> — built for Singapore's hotels, restaurants, and hospitality groups.
+                </p>
+                <p className="text-sm sm:text-base text-[#EDE5DA]/75 leading-relaxed font-normal">
+                  Instead of coordinating 5+ fragmented vendors, OPHRON gives you one accountable partner, one transparent contract, and full operational visibility.
+                </p>
               </div>
             </ScrollReveal>
 
-            {/* Dual CTAs */}
-            <ScrollReveal variant="up" delay={240}>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 mb-2">
-                {/* Primary CTA */}
+
+            {/* Dual CTAs (Luxury Solid Brass + Ghost Link) */}
+            <ScrollReveal variant="up" delay={250}>
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-8 sm:mb-10">
+                {/* Primary Solid Brass Button */}
                 <a
                   href="#contact"
-                  className="group relative inline-flex items-center justify-center gap-3.5 px-6 sm:px-7 py-3.5 sm:py-4 min-h-[48px] rounded-full font-bold text-[13px] sm:text-sm tracking-wide text-[#032147] transition-all duration-300 shadow-xl shadow-black/30 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E3D1BE]"
-                  style={{
-                    background: "linear-gradient(135deg, #F5EFEB 0%, #E3D1BE 40%, #CBB59B 100%)",
-                    border: "1px solid rgba(255,255,255,0.7)",
-                  }}
+                  className="group relative inline-flex items-center justify-center gap-3 px-7 sm:px-8 py-3.5 sm:py-4 bg-[#B7A38B] text-[#02142B] font-mono text-xs sm:text-[12.5px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#cbb59b] hover:shadow-[0_10px_25px_rgba(183,163,139,0.35)] hover:-translate-y-0.5 active:translate-y-0"
                 >
-                  <span className="font-extrabold tracking-tight">Discuss Your Operations</span>
-                  <span className="w-7 h-7 rounded-full bg-[#032147] text-[#EDE5DA] inline-flex items-center justify-center transition-transform group-hover:translate-x-1 group-hover:rotate-45 shadow-sm">
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
+                  <span>Request Platform Audit</span>
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
 
-                {/* Secondary CTA */}
+                {/* Secondary Ghost Link */}
                 <a
                   href="#solutions"
-                  className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:py-4 min-h-[48px] rounded-full border border-white/40 hover:border-white bg-[#032147]/65 hover:bg-[#032147]/90 text-white text-[13px] sm:text-sm font-semibold transition duration-300 backdrop-blur-md shadow-lg shadow-black/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                  className="group inline-flex items-center gap-2.5 px-4 py-3.5 text-xs sm:text-[12.5px] font-mono font-bold tracking-[0.2em] text-[#EDE5DA] hover:text-[#B7A38B] transition-colors duration-200 uppercase"
                 >
-                  <span>Explore Solutions</span>
-                  <span className="text-[#E3D1BE] text-xs">◆</span>
+                  <span>Explore 5 Pillars</span>
+                  <ArrowRight className="w-4 h-4 text-[#B7A38B] transition-transform group-hover:translate-x-1.5" />
                 </a>
+              </div>
+            </ScrollReveal>
+
+            {/* Trust Badges Row */}
+            <ScrollReveal variant="up" delay={300}>
+              <div className="flex flex-wrap items-center gap-x-6 sm:gap-x-8 gap-y-2.5 border-t border-[#EDE5DA]/15 pt-5 sm:pt-6">
+                <span className="flex items-center gap-2 font-mono text-[10px] sm:text-[10.5px] tracking-[0.22em] text-[#EDE5DA]/80 uppercase">
+                  <Shield className="w-3.5 h-3.5 text-[#B7A38B]" />
+                  NEA Licensed Operator
+                </span>
+                <span className="flex items-center gap-2 font-mono text-[10px] sm:text-[10.5px] tracking-[0.22em] text-[#EDE5DA]/80 uppercase">
+                  <Award className="w-3.5 h-3.5 text-[#B7A38B]" />
+                  bizSAFE Level 3
+                </span>
+                <span className="flex items-center gap-2 font-mono text-[10px] sm:text-[10.5px] tracking-[0.22em] text-[#EDE5DA]/80 uppercase">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#B7A38B]" />
+                  100% SLA Guarantee
+                </span>
               </div>
             </ScrollReveal>
 
           </div>
 
-          {/* ── RIGHT COLUMN: UNOBSTRUCTED CINEMATIC STAGE (NO OVERLAY CARDS) ── */}
-          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 pointer-events-none min-h-[420px]" />
+          {/* ── RIGHT COLUMN: APPLE TABLET SHOWCASE (HIGH-QUALITY PHOTO & APPLE TAB CONTROLS) ── */}
+          <div
+            className="relative lg:col-span-5 xl:col-span-5 pt-4 sm:pt-0"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <ScrollReveal variant="up" delay={200}>
+              <div className="relative mx-auto max-w-[500px] lg:max-w-none">
+                
+                {/* Apple iPad Pro Mockup Chassis */}
+                <div className="relative rounded-[2rem] sm:rounded-[2.4rem] bg-gradient-to-b from-[#1E293B] via-[#0F172A] to-[#030A14] p-2.5 sm:p-3.5 border-2 border-white/20 shadow-[0_30px_90px_rgba(0,0,0,0.85),0_0_40px_rgba(183,163,139,0.12)]">
+                  
+                  {/* iPad Top Hardware: Front Camera Lens & Ambient Light Sensor */}
+                  <div className="flex items-center justify-center gap-2 mb-2 pt-0.5" aria-hidden="true">
+                    <span className="w-2.5 h-2.5 rounded-full bg-black border border-white/30 flex items-center justify-center shadow-inner">
+                      <span className="w-1 h-1 rounded-full bg-[#102A45]" />
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                  </div>
+
+                  {/* iPad Display Canvas (Crisp High-Quality Image) */}
+                  <div className="relative rounded-2xl overflow-hidden bg-black h-[350px] xs:h-[390px] sm:h-[440px] md:h-[470px] w-full border border-white/10 group">
+                    
+                    {/* Cross-fading 8 High-Quality Service Photos */}
+                    {HERO_SERVICES.map((s, idx) => (
+                      <div
+                        key={s.badge}
+                        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                          idx === slideIndex ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                        }`}
+                      >
+                        <picture>
+                          <source srcSet={s.imageWebp} type="image/webp" />
+                          <img
+                            src={s.imageJpg}
+                            alt={s.alt}
+                            className={`h-full w-full object-cover transition-transform duration-[6000ms] ease-out ${
+                              idx === slideIndex ? "scale-105" : "scale-100"
+                            }`}
+                            loading={idx === 0 ? "eager" : "lazy"}
+                            decoding="async"
+                          />
+                        </picture>
+                      </div>
+                    ))}
+
+                    {/* Subtle Apple Glass Specular Glare */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.08] pointer-events-none z-20" />
+
+                    {/* Apple Tab Bar Inside the Picture (Top Floating Pill Tab Strip to Move On) */}
+                    <div className="absolute top-3 inset-x-3 z-30 flex justify-center">
+                      <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/65 backdrop-blur-xl border border-white/25 shadow-2xl max-w-full overflow-x-auto no-scrollbar">
+                        {HERO_SERVICES.map((s, idx) => {
+                          const isActive = idx === slideIndex;
+                          return (
+                            <button
+                              key={s.chip}
+                              type="button"
+                              onClick={() => setSlideIndex(idx)}
+                              className={`px-2.5 py-1 rounded-full text-[10px] sm:text-[10.5px] font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap select-none ${
+                                isActive
+                                  ? "bg-[#B7A38B] text-[#02142B] font-bold shadow-[0_0_12px_rgba(183,163,139,0.5)] scale-[1.02]"
+                                  : "text-white/75 hover:text-white hover:bg-white/15"
+                              }`}
+                              title={s.title}
+                              aria-label={`Go to ${s.title}`}
+                            >
+                              {s.chip}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Apple Interactive Navigation Pill at Bottom Inside the Pic */}
+                    <div className="absolute bottom-3 inset-x-3 z-30 flex items-center justify-between gap-2">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/65 backdrop-blur-xl border border-white/25 shadow-2xl text-[11px] font-mono text-[#EDE5DA] truncate">
+                        <span className="text-[#B7A38B] font-bold">✦</span>
+                        <span className="font-semibold truncate">{HERO_SERVICES[slideIndex].title}</span>
+                      </div>
+
+                      <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/65 backdrop-blur-xl border border-white/25 shadow-2xl shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setSlideIndex((prev) => (prev - 1 + HERO_SERVICES.length) % HERO_SERVICES.length)}
+                          className="h-6 w-6 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all cursor-pointer font-bold text-sm"
+                          aria-label="Previous slide"
+                        >
+                          ‹
+                        </button>
+                        <span className="text-[10px] font-mono text-[#B7A38B] px-1 font-bold">
+                          {slideIndex + 1}/{HERO_SERVICES.length}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setSlideIndex((prev) => (prev + 1) % HERO_SERVICES.length)}
+                          className="h-6 w-6 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all cursor-pointer font-bold text-sm"
+                          aria-label="Next slide"
+                        >
+                          ›
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* iPad Bottom Hardware: Home Indicator Bar */}
+                  <div className="flex justify-center pt-2 pb-0.5" aria-hidden="true">
+                    <div className="h-1 w-28 rounded-full bg-white/35 shadow-sm" />
+                  </div>
+
+                </div>
+
+              </div>
+            </ScrollReveal>
+          </div>
 
         </div>
       </div>
 
-      {/* ── STATS & SOCIAL PROOF STRIP (LUMINOUS CHAMPAGNE FROSTED GLASS) ──────── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 mb-8">
+
+      {/* ── STATS & SOCIAL PROOF STRIP (HALF-WHITE BONE CARD) ──────── */}
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 mt-6 sm:mt-8 mb-8 sm:mb-10">
         <div
-          className="rounded-2xl p-5 sm:p-7 grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 items-center shadow-2xl transition-all duration-300"
+          className="rounded-xl p-5 sm:p-7 grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 items-center shadow-2xl transition-all duration-300"
           style={{
-            background: "rgba(245, 239, 230, 0.94)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(255, 255, 255, 0.9)",
-            boxShadow: "0 20px 50px rgba(0,0,0,0.30), 0 0 0 1px rgba(255,255,255,0.4)",
+            background: "#EDE5DA",
+            color: "#032147",
+            border: "1px solid rgba(183, 163, 139, 0.45)",
+            boxShadow: "0 20px 45px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5)",
           }}
         >
           <StatBlock value={`${yrs}+`} label="Yrs" sub="OPERATIONAL EXPERTISE" />
@@ -344,27 +419,24 @@ export default function Hero() {
 
           <div
             className="col-span-2 lg:col-span-1 border-t lg:border-t-0 lg:border-l pt-4 lg:pt-0 lg:pl-6 flex flex-col justify-center"
-            style={{ borderColor: "rgba(3, 33, 71, 0.14)" }}
+            style={{ borderColor: "rgba(3, 33, 71, 0.18)" }}
           >
-            <div className="flex items-center gap-1 text-[#9E805E] text-xs mb-1">
+            <div className="flex items-center gap-1 text-[#032147] text-xs mb-1">
               {"★★★★★".split("").map((s, i) => (
-                <span key={i}>{s}</span>
+                <span key={i} className="text-[#8C7355]">{s}</span>
               ))}
-              <span
-                className="text-[10px] font-mono font-bold ml-2"
-                style={{ color: "rgba(3, 33, 71, 0.65)" }}
-              >
+              <span className="text-[10px] font-mono font-bold ml-2 text-[#032147]/80">
                 100% SLA
               </span>
             </div>
-            <div className="text-xs font-extrabold text-[#032147] tracking-wider uppercase">
+            <div
+              className="text-xs font-bold text-[#032147] tracking-wider uppercase"
+              style={{ fontFamily: "'Canela', 'Cinzel', 'Playfair Display', 'Georgia', serif" }}
+            >
               PAN PACIFIC · YOTEL · ATLAS
             </div>
-            <div
-              className="text-[11px] font-medium mt-0.5"
-              style={{ color: "rgba(3, 33, 71, 0.60)" }}
-            >
-              Singapore's trusted hospitality partner
+            <div className="text-[11px] font-medium mt-0.5 text-[#032147]/70">
+              Singapore's trusted partner
             </div>
           </div>
         </div>
@@ -414,22 +486,19 @@ function StatBlock({ value, label, sub }: { value: string; label: string; sub: s
     <div aria-label={accessibleText} className="flex flex-col">
       <div
         className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#032147] tracking-tight leading-none"
-        style={{ fontFamily: "'Canela', 'Georgia', serif" }}
+        style={{ fontFamily: "'Canela', 'Cinzel', 'Playfair Display', 'Georgia', serif" }}
       >
         {value}
         {label && (
           <span
-            className="text-base font-normal ml-1"
-            style={{ color: "#9E805E" }}
+            className="text-base sm:text-lg font-normal ml-1 text-[#032147]/80"
+            style={{ fontFamily: "'Canela', 'Cinzel', 'Playfair Display', 'Georgia', serif" }}
           >
             {label}
           </span>
         )}
       </div>
-      <div
-        className="mt-1.5 text-[9.5px] font-mono font-bold tracking-[0.16em] uppercase"
-        style={{ color: "rgba(3, 33, 71, 0.55)" }}
-      >
+      <div className="mt-1.5 text-[9.5px] font-mono font-bold tracking-[0.16em] uppercase text-[#032147]/75">
         {sub}
       </div>
     </div>

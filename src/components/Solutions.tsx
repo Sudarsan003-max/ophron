@@ -316,7 +316,8 @@ export default function Solutions() {
                           src={srv.heroImage}
                           alt={srv.heroTitle}
                           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-                          loading="eager"
+                          loading="lazy"
+                          decoding="async"
                         />
                         <CornerBrackets color="#B7A38B" size={12} hoverSize={18} />
                         <div className="absolute top-3 left-3 z-20 bg-[#032147]/95 backdrop-blur-sm text-[#EDE5DA] group-hover:bg-[#B7A38B] group-hover:text-[#032147] px-3 py-1 rounded-full text-[9.5px] font-mono uppercase font-bold tracking-[0.1em] transition duration-300 shadow">
@@ -365,6 +366,8 @@ export default function Solutions() {
                 <img
                   src="/images/brand/ophron-gold-emblem-transparent.png"
                   alt="OPHRON Emblem"
+                  loading="lazy"
+                  decoding="async"
                   className="h-5 w-auto object-contain"
                 />
               </div>
