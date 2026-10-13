@@ -9,6 +9,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+import { ALL_SERVICES_CATALOG } from "../data/ophronServicePages";
+
 const MARQUEE_ITEMS = [
   "OPHRON FACILITIES — INTEGRATED FACILITY OPERATIONS",
   "OPHRON TECHNOLOGY — AI AUTOMATION & OPERATIONS SAAS",
@@ -16,82 +18,6 @@ const MARQUEE_ITEMS = [
   "COMMERCIAL KITCHEN HYGIENE — 100% SFA/NEA AUDIT READY",
   "HIGH-RISE FAÇADE CLEANING — IRATA ROPE ACCESS CERTIFIED",
   "OPHRON PEOPLE — WORKFORCE & COMPLIANCE MANAGEMENT",
-];
-
-
-const HERO_SERVICES = [
-  {
-    chip: "Kitchen",
-    badge: "✦ SFA GRADE A · HOT-LINE RESTORATION",
-    title: "Commercial Kitchen Deep Hygiene",
-    sector: "Hot-Line Degreasing & SFA Compliance",
-    imageWebp: "/images/hygiene_kitchen_compliance_4k.webp",
-    imageJpg: "/images/hygiene_kitchen_compliance_4k.jpg",
-    alt: "Commercial kitchen stainless steel surfaces restored to mirror finish",
-  },
-  {
-    chip: "Hotel Suites",
-    badge: "✦ 5-STAR SUITE TURNOVER · HOSPITALITY CREW",
-    title: "Luxury Hotel Suite Turnover",
-    sector: "Housekeeping & Linen Preparation",
-    imageWebp: "/images/photo-6466496.webp",
-    imageJpg: "/images/photo-6466496.jpg",
-    alt: "Luxury hotel suite dressed to five-star standard by OPHRON crew",
-  },
-  {
-    chip: "Marble Polish",
-    badge: "✦ 98+ GU GLOSS · MARBLE RESTORATION",
-    title: "Diamond & Powder Marble Polishing",
-    sector: "Architectural Stone Restoration",
-    imageWebp: "/images/marble_polishing_4k.webp",
-    imageJpg: "/images/marble_polishing_4k.jpg",
-    alt: "Architectural Italian marble floor diamond polished to mirror gloss",
-  },
-  {
-    chip: "Façade Access",
-    badge: "✦ IRATA ROPE ACCESS · FAÇADE CARE",
-    title: "High-Rise Façade & Window Care",
-    sector: "High-Altitude Exterior Operations",
-    imageWebp: "/images/facade_skyscraper_4k.webp",
-    imageJpg: "/images/facade_skyscraper_4k.jpg",
-    alt: "High-rise rope access certified glass façade cleaning",
-  },
-  {
-    chip: "Stewarding",
-    badge: "✦ WSQ TRAINED · BOH KITCHEN STEWARDING",
-    title: "F&B Stewarding & Dishwasher Support",
-    sector: "Back-of-House Manpower Operations",
-    imageWebp: "/images/fnb_stewarding_manpower_4k.webp",
-    imageJpg: "/images/fnb_stewarding_manpower_4k.jpg",
-    alt: "WSQ certified stewarding manpower for hospitality groups",
-  },
-  {
-    chip: "Bio-Sanitation",
-    badge: "✦ HOSPITAL-GRADE · SANITARY DESCALING",
-    title: "Restroom Hygiene & IAQ Decontamination",
-    sector: "Sanitation & Bio-Burden Control",
-    imageWebp: "/images/disinfection_service_4k.webp",
-    imageJpg: "/images/disinfection_service_4k.jpg",
-    alt: "Commercial washroom hygiene restoration and hospital grade disinfection",
-  },
-  {
-    chip: "Corporate Towers",
-    badge: "✦ GRADE-A TOWERS · DAY & NIGHT PORTERS",
-    title: "Commercial Office & Corporate Towers",
-    sector: "Integrated Corporate Facilities",
-    imageWebp: "/images/office_cleaning_4k.webp",
-    imageJpg: "/images/office_cleaning_4k.jpg",
-    alt: "Grade-A corporate tower day and night facility operations",
-  },
-  {
-    chip: "Venue Turnover",
-    badge: "✦ 4-HOUR SLA · OVERNIGHT VENUE TURNOVER",
-    title: "Overnight Ballroom & Event Turnover",
-    sector: "Time-Critical Hospitality Venues",
-    imageWebp: "/images/banquet_venue_4k.webp",
-    imageJpg: "/images/banquet_venue_4k.jpg",
-    alt: "Luxury ballroom rapid overnight turnover and sanitation",
-  },
 ];
 
 function useCount(target: number, duration = 1600, start = false) {
@@ -116,16 +42,24 @@ export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [prevSlideIndex, setPrevSlideIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // 6-second continuous loop through curated services images
+  // 6-second continuous loop through all services page images
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
-      setSlideIndex((prev) => (prev + 1) % HERO_SERVICES.length);
+      setSlideIndex((curr) => {
+        setPrevSlideIndex(curr);
+        return (curr + 1) % ALL_SERVICES_CATALOG.length;
+      });
     }, 6000);
     return () => clearInterval(timer);
   }, [isPaused]);
+
+  const currentService = ALL_SERVICES_CATALOG[slideIndex];
+  const prevService = ALL_SERVICES_CATALOG[prevSlideIndex];
+  const nextService = ALL_SERVICES_CATALOG[(slideIndex + 1) % ALL_SERVICES_CATALOG.length];
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -287,10 +221,16 @@ export default function Hero() {
             onMouseLeave={() => setIsPaused(false)}
           >
             <ScrollReveal variant="up" delay={200}>
-              <div className="relative mx-auto max-w-[500px] lg:max-w-none">
+              <div className="relative mx-auto max-w-[500px] lg:max-w-none apple-tab-perspective">
                 
-                {/* Apple iPad Pro Mockup Chassis */}
-                <div className="relative rounded-[2.2rem] sm:rounded-[2.6rem] bg-gradient-to-b from-[#1C232E] via-[#0E1520] to-[#040810] p-2.5 sm:p-3.5 border-2 border-white/25 shadow-[0_35px_100px_rgba(0,0,0,0.9),0_0_40px_rgba(183,163,139,0.15)] ring-1 ring-white/15">
+                {/* 3D Dynamic Floor Cast Shadow (Increases Realism & Richness) */}
+                <div 
+                  className="absolute -bottom-8 inset-x-8 h-14 bg-black/85 blur-2xl rounded-full pointer-events-none transform -rotate-2 scale-95" 
+                  aria-hidden="true"
+                />
+
+                {/* 3D Tilted Apple iPad Pro Mockup Chassis */}
+                <div className="relative rounded-[2.2rem] sm:rounded-[2.6rem] bg-gradient-to-b from-[#1C232E] via-[#0E1520] to-[#040810] p-2.5 sm:p-3.5 border-2 border-t-white/35 border-l-white/25 border-b-white/10 border-r-white/15 shadow-[-25px_40px_90px_-10px_rgba(0,0,0,0.95),0_20px_50px_rgba(0,0,0,0.7),0_0_40px_rgba(183,163,139,0.15)] ring-1 ring-white/15 apple-tab-tilt">
                   
                   {/* Physical Hardware Buttons (Authentic Apple Details) */}
                   <div className="absolute -top-[3px] right-12 w-10 h-[3px] rounded-t-sm bg-neutral-600/80 pointer-events-none" aria-hidden="true" />
@@ -305,114 +245,44 @@ export default function Hero() {
                     <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
                   </div>
 
-                  {/* iPad Display Canvas (Crisp 4K Quality Image & iPadOS UI) */}
+                  {/* iPad Display Canvas (Clean, Full-Bleed Services Page Loop with Zero Overlay Icons) */}
                   <div className="relative rounded-2xl overflow-hidden bg-black h-[350px] xs:h-[390px] sm:h-[440px] md:h-[470px] w-full border border-white/15 group select-none">
                     
-                    {/* Cross-fading 8 High-Quality Service Photos */}
-                    {HERO_SERVICES.map((s, idx) => (
-                      <div
-                        key={s.badge}
-                        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                          idx === slideIndex ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                        }`}
-                      >
+                    {/* Previous Photo Fading Out */}
+                    {prevSlideIndex !== slideIndex && (
+                      <div className="absolute inset-0 pointer-events-none">
                         <picture>
-                          <source srcSet={s.imageWebp} type="image/webp" />
+                          <source srcSet={prevService.image.replace(/\.(jpg|jpeg|png)$/i, ".webp")} type="image/webp" />
                           <img
-                            src={s.imageJpg}
-                            alt={s.alt}
-                            className={`h-full w-full object-cover transition-transform duration-[6000ms] ease-out ${
-                              idx === slideIndex ? "scale-105" : "scale-100"
-                            }`}
-                            loading={idx === 0 ? "eager" : "lazy"}
+                            src={prevService.image}
+                            alt={prevService.name}
+                            className="h-full w-full object-cover"
+                            loading="lazy"
                             decoding="async"
                           />
                         </picture>
                       </div>
-                    ))}
+                    )}
+
+                    {/* Active Photo (Smooth Crossfade & Micro-Zoom) */}
+                    <div key={slideIndex} className="absolute inset-0 animate-apple-fade">
+                      <picture>
+                        <source srcSet={currentService.image.replace(/\.(jpg|jpeg|png)$/i, ".webp")} type="image/webp" />
+                        <img
+                          src={currentService.image}
+                          alt={currentService.name}
+                          className="h-full w-full object-cover transition-transform duration-[6000ms] ease-out scale-100 group-hover:scale-105"
+                          loading="eager"
+                          decoding="async"
+                        />
+                      </picture>
+                    </div>
 
                     {/* Subtle Apple Glass Specular Glare */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.09] pointer-events-none z-20" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.08] pointer-events-none z-20" />
 
-                    {/* iPadOS Status Bar (Authentic Apple UI) */}
-                    <div className="absolute top-1.5 inset-x-4 z-30 flex items-center justify-between text-[11px] font-sans font-medium text-white/90 drop-shadow pointer-events-none">
-                      <span>9:41</span>
-                      <div className="flex items-center gap-2">
-                        {/* 5G Signal Bars */}
-                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                          <path d="M2 17h3v4H2v-4zm5-4h3v8H7v-8zm5-4h3v12h-3V9zm5-4h3v16h-3V5z" />
-                        </svg>
-                        {/* Wi-Fi Icon */}
-                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                          <path d="M12 3C7.31 3 3.07 4.9 0 7.94l1.41 1.41C4.09 6.7 7.82 5 12 5s7.91 1.7 10.59 4.35L24 7.94C20.93 4.9 16.69 3 12 3zm0 6c-3.31 0-6.32 1.34-8.49 3.51l1.41 1.41C6.67 12.18 9.2 11 12 11s5.33 1.18 7.08 2.92l1.41-1.41C18.32 10.34 15.31 9 12 9zm0 6c-1.66 0-3.16.67-4.24 1.76l1.41 1.41C9.89 17.45 10.89 17 12 17s2.11.45 2.83 1.17l1.41-1.41C15.16 15.67 13.66 15 12 15zm0 4a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
-                        </svg>
-                        {/* Battery Pill */}
-                        <div className="flex items-center gap-0.5">
-                          <span className="text-[10px] font-semibold">100%</span>
-                          <div className="w-5 h-2.5 rounded-sm border border-white/80 p-0.5 flex items-center">
-                            <div className="w-full h-full bg-white rounded-xs" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Apple Safari Unified Liquid Glass Tab Bar (Top Floating inside Picture) */}
-                    <div className="absolute top-7 inset-x-3 z-30 flex flex-col gap-1.5">
-                      {/* Apple Safari Floating Pill Tab Bar */}
-                      <div className="flex items-center gap-1 p-1 rounded-full bg-black/60 backdrop-blur-2xl border border-white/20 shadow-2xl overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                        {HERO_SERVICES.map((s, idx) => {
-                          const isActive = idx === slideIndex;
-                          return (
-                            <button
-                              key={s.chip}
-                              type="button"
-                              onClick={() => setSlideIndex(idx)}
-                              className={`px-3 py-1 rounded-full text-[11px] font-sans font-medium transition-all duration-300 cursor-pointer whitespace-nowrap select-none flex items-center gap-1.5 ${
-                                isActive
-                                  ? "bg-white/25 text-white font-semibold backdrop-blur-xl border border-white/25 shadow-[0_2px_10px_rgba(0,0,0,0.4)]"
-                                  : "text-white/70 hover:text-white hover:bg-white/10"
-                              }`}
-                              title={s.title}
-                              aria-label={`Go to ${s.title}`}
-                            >
-                              {isActive && <span className="h-1.5 w-1.5 rounded-full bg-[#B7A38B] shadow-[0_0_6px_#B7A38B]" />}
-                              <span>{s.chip}</span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* Apple Interactive Navigation Pill at Bottom Inside the Pic */}
-                    <div className="absolute bottom-3 inset-x-3 z-30 flex items-center justify-between gap-2">
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-2xl border border-white/20 shadow-2xl text-[11px] font-sans text-white/95 truncate">
-                        <span className="text-[#B7A38B] font-bold">✦</span>
-                        <span className="font-semibold truncate">{HERO_SERVICES[slideIndex].title}</span>
-                      </div>
-
-                      <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/60 backdrop-blur-2xl border border-white/20 shadow-2xl shrink-0">
-                        <button
-                          type="button"
-                          onClick={() => setSlideIndex((prev) => (prev - 1 + HERO_SERVICES.length) % HERO_SERVICES.length)}
-                          className="h-6 w-6 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all cursor-pointer font-bold text-sm"
-                          aria-label="Previous slide"
-                        >
-                          ‹
-                        </button>
-                        <span className="text-[10px] font-mono text-[#B7A38B] px-1 font-bold">
-                          {slideIndex + 1}/{HERO_SERVICES.length}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => setSlideIndex((prev) => (prev + 1) % HERO_SERVICES.length)}
-                          className="h-6 w-6 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all cursor-pointer font-bold text-sm"
-                          aria-label="Next slide"
-                        >
-                          ›
-                        </button>
-                      </div>
-                    </div>
-
+                    {/* Preload Next Image for Instant 60fps Transitions */}
+                    <img src={nextService.image} alt="" className="hidden" aria-hidden="true" loading="eager" />
                   </div>
 
                   {/* iPad Bottom Hardware: Home Indicator Bar */}

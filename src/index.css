@@ -114,6 +114,44 @@ html, body {
   animation: heroSlideProgress 6s linear forwards;
 }
 
+/* 3D Apple Tablet Showcase Perspective Tilt */
+.apple-tab-perspective {
+  perspective: 1400px;
+  perspective-origin: 50% 38%;
+}
+
+.apple-tab-tilt {
+  transform: rotateY(-8deg) rotateX(5deg) rotateZ(-1.5deg);
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.apple-tab-tilt:hover {
+  transform: rotateY(-2deg) rotateX(2deg) rotateZ(0deg) scale(1.02);
+}
+
+@media (max-width: 1024px) {
+  .apple-tab-tilt {
+    transform: rotateY(-4deg) rotateX(3deg) rotateZ(-0.8deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .apple-tab-tilt {
+    transform: none;
+  }
+}
+
+/* Apple Screen Fade-In for Continuous Service Loop */
+@keyframes appleFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-apple-fade {
+  animation: appleFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* ================================================================== */
 /*  OPHRON 60FPS ADVANCED ANIMATION & SCROLL EFFECTS SYSTEM           */
 /* ================================================================== */
