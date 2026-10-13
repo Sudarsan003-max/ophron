@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import isaacPortrait from "./isaac_portrait.png";
+import gktFounder from "./gkt_founder.jpg";
 import {
   AnimatedCounter,
   MaskedHeadline,
@@ -100,94 +101,14 @@ export default function About() {
                   tone="dark"
                 />
               </TiltCard>
-              
-              {/* Founder Bento Card with Corner Brackets & Executive Styling */}
-              <TiltCard
-                className="col-span-2 md:col-span-3 rounded-2xl"
-                onClick={() => {
-                  window.history.pushState(null, "", "/founder");
-                  window.dispatchEvent(new PopStateEvent("popstate"));
-                }}
-              >
-                <div 
-                  className="w-full h-full group relative rounded-2xl p-5 sm:p-6 border bg-[#021733] text-[#EDE5DA] border-[#B7A38B]/40 hover:border-[#B7A38B] transition-all duration-500 flex flex-col justify-between overflow-hidden cursor-pointer shadow-xl hover:shadow-[0_12px_45px_rgba(3,33,71,0.5)]"
-                  data-cursor="hover"
-                >
-                  {/* Subtle luxury ambient backlighting glow */}
-                  <div className="absolute -top-12 -right-12 w-36 h-36 bg-[#B7A38B]/15 rounded-full blur-2xl pointer-events-none group-hover:bg-[#B7A38B]/25 transition-colors duration-500" />
-                  <div className="absolute -bottom-10 -left-10 w-28 h-28 bg-[#B7A38B]/10 rounded-full blur-xl pointer-events-none" />
-                  <div className="absolute inset-0 bg-[radial-gradient(rgba(183,163,139,0.06)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
 
-                  <CornerBrackets color="#B7A38B" size={10} hoverSize={16} />
-
-                  <div>
-                    {/* Eyebrow Status */}
-                    <div className="flex items-center justify-between mb-3.5">
-                      <div className="inline-flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold">
-                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
-                        [ Executive Leadership ]
-                      </div>
-                      <span className="text-[9px] font-mono text-[#EDE5DA]/60 uppercase tracking-widest font-semibold">
-                        Founder
-                      </span>
-                    </div>
-
-                    {/* Founder Header with Enhanced Executive Portrait */}
-                    <div className="flex items-center gap-3.5 sm:gap-4">
-                      {/* High-End Framed Portrait Avatar */}
-                      <div className="relative group/avatar shrink-0">
-                        <div className="absolute -inset-1 rounded-2xl bg-[#B7A38B]/30 blur-md opacity-40 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none" />
-                        <div className="relative h-18 w-18 sm:h-22 sm:w-22 rounded-2xl overflow-hidden border-2 border-[#B7A38B]/60 shadow-[0_6px_20px_rgba(0,0,0,0.6)] bg-[#032147]">
-                          <img 
-                            src={isaacPortrait} 
-                            alt="Isaac Vivian — Founder, OPHRON" 
-                            loading="lazy" 
-                            decoding="async" 
-                            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-108" 
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-60" />
-                        </div>
-                      </div>
-
-                      {/* Name & Title */}
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-1.5">
-                          <span className="font-canela text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#B7A38B] transition-colors truncate">
-                            Isaac Vivian
-                          </span>
-                          <span className="text-[#B7A38B] shrink-0" title="Verified Founder">
-                            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                            </svg>
-                          </span>
-                        </div>
-                        <div className="text-[10px] sm:text-[10.5px] font-mono uppercase tracking-[0.18em] text-[#B7A38B] font-bold mt-0.5 truncate">
-                          Founder & Managing Director
-                        </div>
-                        <div className="text-[9px] font-mono text-[#EDE5DA]/60 uppercase tracking-wider mt-0.5">
-                          OPHRON Systems · Singapore
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Executive Quote */}
-                    <p className="mt-4 font-inter text-[12px] sm:text-[12.5px] leading-relaxed text-[#EDE5DA]/85 italic border-l-2 border-[#B7A38B]/60 pl-3">
-                      “We don't sell cleaning or manpower. We become the strategic operating partner that powers hospitality and commercial operations across Singapore and globally.”
-                    </p>
-                  </div>
-
-                  {/* Bottom Action / View Profile Bar */}
-                  <div className="mt-4 pt-3 flex items-center justify-between text-[9px] sm:text-[10px] font-mono tracking-[0.18em] uppercase text-[#EDE5DA]/65 border-t border-white/10">
-                    <span className="flex items-center gap-1.5">
-                      <span className="text-[#B7A38B]">✦</span>
-                      <span>Operational Blueprint</span>
-                    </span>
-                    <span className="text-[#B7A38B] group-hover:text-white font-bold transition flex items-center gap-1">
-                      <span>View Profile</span>
-                      <span className="group-hover:translate-x-1 transition-transform">→</span>
-                    </span>
-                  </div>
-                </div>
+              <TiltCard className="col-span-1 md:col-span-3 rounded-2xl">
+                <BentoCard
+                  span="w-full h-full"
+                  big="1 Partner"
+                  k="Unified Ecosystem Accountability"
+                  tone="lime"
+                />
               </TiltCard>
             </div>
 
@@ -265,6 +186,244 @@ export default function About() {
               </TiltCard>
             </ScrollReveal>
           </div>
+        </div>
+
+        {/* ── UNIFIED EXECUTIVE LEADERSHIP: OPHRON SYSTEMS × GKT INTERNATIONAL ── */}
+        <div id="executive-leadership" className="mt-14 sm:mt-20 pt-10 sm:pt-14 border-t border-[#032147]/15">
+          <ScrollReveal variant="up" delay={100}>
+            
+            {/* Section Introduction Header */}
+            <div className="mb-8 sm:mb-12 text-center max-w-3xl mx-auto px-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#032147] text-[#B7A38B] border border-[#B7A38B]/30 text-[10px] font-mono uppercase tracking-[0.22em] font-bold mb-3.5 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
+                <span>Executive Leadership & Strategic Synergy</span>
+              </div>
+              <h3
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#032147] tracking-tight leading-[1.1] mb-4"
+                style={{ fontFamily: "'Canela', 'Cinzel', 'Playfair Display', 'Georgia', serif" }}
+              >
+                Two Powerhouses. One Combined Platform.
+              </h3>
+              <p className="text-sm sm:text-base text-[#032147]/80 leading-relaxed font-normal">
+                <strong className="text-[#032147] font-semibold">GKT International Pte. Ltd.</strong> operates alongside <strong className="text-[#032147] font-semibold">OPHRON Systems</strong> as part of a unified organization, combining over two decades of Singapore’s facility management expertise with advanced technology, intelligent automation, and modern operational solutions.
+              </p>
+            </div>
+
+            {/* Dual Founder Cards Grid (Side-by-Side 2-Column Showcase) */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+              
+              {/* ── CARD 1: ISAAC VIVIAN (OPHRON SYSTEMS) ── */}
+              <div className="rounded-[30px] border border-[#B7A38B]/40 bg-[#021733] text-[#EDE5DA] overflow-hidden shadow-2xl relative flex flex-col justify-between group hover:border-[#B7A38B] transition-all duration-500">
+                <div className="absolute -top-24 -left-24 w-72 h-72 bg-[#B7A38B]/15 rounded-full blur-3xl pointer-events-none" />
+                <CornerBrackets color="#B7A38B" size={14} hoverSize={20} />
+
+                <div className="p-6 sm:p-8 flex-1 flex flex-col">
+                  {/* Portrait Visual Frame */}
+                  <div className="relative rounded-2xl overflow-hidden border-2 border-[#B7A38B]/50 shadow-[0_15px_40px_rgba(0,0,0,0.85)] bg-black mb-6">
+                    <img
+                      src={isaacPortrait}
+                      alt="Isaac Vivian — Founder & Managing Director, OPHRON Systems"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-auto aspect-[3/2] object-cover transition-transform duration-1000 group-hover:scale-[1.02]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-white/[0.04] pointer-events-none" />
+                    
+                    {/* Office Tag Badge */}
+                    <div className="absolute bottom-3.5 left-3.5 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-[#B7A38B]/40 text-[9.5px] font-mono uppercase tracking-[0.18em] text-[#EDE5DA]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
+                      <span>Isaac Vivian · OPHRON Systems</span>
+                    </div>
+                  </div>
+
+                  {/* Header & Titles */}
+                  <div className="flex items-center gap-2 text-[9.5px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold mb-2">
+                    <span>[ Infrastructure & Tech OS ]</span>
+                    <span className="opacity-40">/</span>
+                    <span className="text-[#EDE5DA]/70 font-normal">Singapore HQ</span>
+                  </div>
+
+                  <div className="flex items-center gap-2 mb-1">
+                    <h4
+                      className="text-2xl sm:text-3xl font-bold text-white tracking-tight"
+                      style={{ fontFamily: "'Canela', 'Cinzel', 'Playfair Display', 'Georgia', serif" }}
+                    >
+                      Isaac Vivian
+                    </h4>
+                    <span className="text-[#B7A38B] inline-flex items-center" title="Verified Founder">
+                      <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                    </span>
+                  </div>
+
+                  <p className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-[#B7A38B] font-semibold mb-4">
+                    Founder & Managing Director — OPHRON Systems
+                  </p>
+
+                  <blockquote className="pl-3.5 border-l-2 border-[#B7A38B] italic text-[13px] sm:text-[13.5px] leading-relaxed text-[#EDE5DA]/90 font-serif mb-4">
+                    “We don't sell cleaning or manpower. We become the strategic operating partner that powers hospitality and commercial operations across Singapore and globally.”
+                  </blockquote>
+
+                  <p className="text-[12.5px] leading-relaxed text-[#EDE5DA]/75 font-inter mb-5 flex-1">
+                    Isaac engineered OPHRON to solve vendor fragmentation across Singapore's hospitality scene — unifying People, Facilities, Hygiene, and Technology under a single accountable standard built for institutional reliability.
+                  </p>
+
+                  {/* Capability Tags */}
+                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
+                    {[
+                      "Platform Architecture",
+                      "AI SaaS Telemetry",
+                      "IFM Lite Operations",
+                      "Commercial Strategy",
+                    ].map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="px-2 py-0.5 rounded-full text-[9px] font-mono font-semibold tracking-wider uppercase bg-white/10 border border-[#B7A38B]/30 text-[#EDE5DA]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Footer Bar */}
+                <div className="px-6 sm:px-8 py-3.5 bg-black/40 border-t border-white/10 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      window.history.pushState(null, "", "/contact");
+                      window.dispatchEvent(new PopStateEvent("popstate"));
+                    }}
+                    className="inline-flex items-center gap-1.5 text-[10.5px] font-mono uppercase tracking-[0.18em] text-[#B7A38B] hover:text-white font-bold transition-colors cursor-pointer group/btn"
+                  >
+                    <span>Connect with OPHRON Leadership</span>
+                    <span className="transform group-hover/btn:translate-x-1 transition-transform">→</span>
+                  </button>
+                  <span className="text-[9.5px] font-mono text-[#EDE5DA]/50 uppercase tracking-wider">
+                    OPHRON Systems SG
+                  </span>
+                </div>
+              </div>
+
+
+              {/* ── CARD 2: GKT INTERNATIONAL FOUNDER (GKT INTERNATIONAL) ── */}
+              <div className="rounded-[30px] border border-[#B7A38B]/40 bg-[#021733] text-[#EDE5DA] overflow-hidden shadow-2xl relative flex flex-col justify-between group hover:border-[#B7A38B] transition-all duration-500">
+                <div className="absolute -top-24 -right-24 w-72 h-72 bg-[#B7A38B]/15 rounded-full blur-3xl pointer-events-none" />
+                <CornerBrackets color="#B7A38B" size={14} hoverSize={20} />
+
+                <div className="p-6 sm:p-8 flex-1 flex flex-col">
+                  {/* Portrait Visual Frame */}
+                  <div className="relative rounded-2xl overflow-hidden border-2 border-[#B7A38B]/50 shadow-[0_15px_40px_rgba(0,0,0,0.85)] bg-black mb-6">
+                    <img
+                      src={gktFounder}
+                      alt="Kelvin — Founder & Managing Director, GKT International Pte. Ltd."
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-auto aspect-[3/2] object-cover transition-transform duration-1000 group-hover:scale-[1.02]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-white/[0.04] pointer-events-none" />
+                    
+                    {/* Office Tag Badge */}
+                    <div className="absolute bottom-3.5 left-3.5 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-[#B7A38B]/40 text-[9.5px] font-mono uppercase tracking-[0.18em] text-[#EDE5DA]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
+                      <span>Kelvin · GKT International</span>
+                    </div>
+                  </div>
+
+                  {/* Header & Titles */}
+                  <div className="flex items-center gap-2 text-[9.5px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold mb-2">
+                    <span>[ 20+ Yrs Operational Mastery ]</span>
+                    <span className="opacity-40">/</span>
+                    <span className="text-[#EDE5DA]/70 font-normal">Est. 2012 Singapore</span>
+                  </div>
+
+                  <div className="flex items-center gap-2 mb-1">
+                    <h4
+                      className="text-2xl sm:text-3xl font-bold text-white tracking-tight"
+                      style={{ fontFamily: "'Canela', 'Cinzel', 'Playfair Display', 'Georgia', serif" }}
+                    >
+                      Kelvin
+                    </h4>
+                    <span className="text-[#B7A38B] inline-flex items-center" title="Verified Founder">
+                      <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      </svg>
+                    </span>
+                  </div>
+
+                  <p className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-[#B7A38B] font-semibold mb-4">
+                    Founder & Managing Director — GKT International Pte. Ltd.
+                  </p>
+
+                  <blockquote className="pl-3.5 border-l-2 border-[#B7A38B] italic text-[13px] sm:text-[13.5px] leading-relaxed text-[#EDE5DA]/90 font-serif mb-4">
+                    “Cleanliness and operational readiness are never commodities. Since 2012, GKT has set the benchmark for Singapore’s top hotel towers, Michelin-selected kitchens, and premier commercial venues.”
+                  </blockquote>
+
+                  <p className="text-[12.5px] leading-relaxed text-[#EDE5DA]/75 font-inter mb-5 flex-1">
+                    Built on over two decades of hands-on Singapore industry expertise, GKT International represents our seasoned operational frontline — treating facility hygiene and kitchen stewarding as disciplined, audit-ready crafts.
+                  </p>
+
+                  {/* Capability Tags */}
+                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
+                    {[
+                      "20+ Yrs SG Heritage",
+                      "NEA Licensed Operations",
+                      "Kitchen Stewarding",
+                      "bizSAFE 3 Certified",
+                    ].map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="px-2 py-0.5 rounded-full text-[9px] font-mono font-semibold tracking-wider uppercase bg-white/10 border border-[#B7A38B]/30 text-[#EDE5DA]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Footer Bar */}
+                <div className="px-6 sm:px-8 py-3.5 bg-black/40 border-t border-white/10 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      window.history.pushState(null, "", "/services");
+                      window.dispatchEvent(new PopStateEvent("popstate"));
+                    }}
+                    className="inline-flex items-center gap-1.5 text-[10.5px] font-mono uppercase tracking-[0.18em] text-[#B7A38B] hover:text-white font-bold transition-colors cursor-pointer group/btn"
+                  >
+                    <span>View GKT Operational Services</span>
+                    <span className="transform group-hover/btn:translate-x-1 transition-transform">→</span>
+                  </button>
+                  <span className="text-[9.5px] font-mono text-[#EDE5DA]/50 uppercase tracking-wider">
+                    GKT International Pte. Ltd.
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* ── UNIFIED ALLIANCE SUMMARY CARD ── */}
+            <div className="mt-8 rounded-2xl bg-[#EDE5DA] p-6 sm:p-7 border border-[#B7A38B]/50 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="space-y-1.5 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#8C7355] font-bold">
+                  <span>✦ Unified Operating Alliance</span>
+                  <span className="text-[#032147]/40">·</span>
+                  <span>Singapore & Regional</span>
+                </div>
+                <h4
+                  className="text-xl sm:text-2xl font-bold text-[#032147] tracking-tight"
+                  style={{ fontFamily: "'Canela', 'Cinzel', 'Playfair Display', 'Georgia', serif" }}
+                >
+                  OPHRON Systems & GKT International — Combined Under One Platform
+                </h4>
+                <p className="text-xs sm:text-[13px] text-[#032147]/80 max-w-3xl leading-relaxed">
+                  Together, GKT International and OPHRON Systems operate as one unified organization, bringing together shared expertise, streamlined operations, and a common commitment to delivering reliable, high-quality facility management services across Singapore.
+                </p>
+              </div>
+            </div>
+
+          </ScrollReveal>
         </div>
       </div>
     </section>

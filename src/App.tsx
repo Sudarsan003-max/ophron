@@ -3,7 +3,6 @@ import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import Logos from "./components/Logos";
 import About from "./components/About";
-import Founder from "./components/Founder";
 import Problems from "./components/Problems";
 import Approach from "./components/Approach";
 import Solutions from "./components/Solutions";
@@ -31,6 +30,11 @@ export function resolveCurrentRoute(): string {
   const rawPath = window.location.pathname.toLowerCase().replace(/\/+$/, "") || "/";
   const rawHash = window.location.hash.toLowerCase().replace(/^#\/?/, "");
 
+  // Legacy founder route redirect to about
+  if (rawPath === "/founder" || rawHash === "founder") {
+    return "/about";
+  }
+
   // Check known route paths
   const knownRoutes = [
     "about",
@@ -40,7 +44,6 @@ export function resolveCurrentRoute(): string {
     "gallery-grid",
     "blog",
     "contact",
-    "founder",
     "all-articles",
     "mainframe",
   ];
@@ -270,7 +273,6 @@ export default function App() {
   const isGalleryPage = currentRoute === "/gallery" || currentRoute === "/gallery-grid";
   const isBlogPage = currentRoute === "/blog";
   const isContactPage = currentRoute === "/contact";
-  const isFounderPage = currentRoute === "/founder";
   const isAllArticlesPage = currentRoute === "/all-articles";
   const isMainframePage = currentRoute === "/mainframe";
 
@@ -294,7 +296,6 @@ export default function App() {
           <About />
           <Problems />
           <Ecosystem />
-          <Founder />
         </main>
       ) : isServicesPage ? (
         <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
@@ -318,10 +319,6 @@ export default function App() {
       ) : isContactPage ? (
         <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
           <Contact />
-        </main>
-      ) : isFounderPage ? (
-        <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
-          <Founder />
         </main>
       ) : isAllArticlesPage ? (
         <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">

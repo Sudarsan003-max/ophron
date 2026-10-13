@@ -42,23 +42,16 @@ export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
-  const [prevSlideIndex, setPrevSlideIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
 
-  // 6-second continuous loop through all services page images
+  // 5-second continuous loop through all services page images
   useEffect(() => {
-    if (isPaused) return;
     const timer = setInterval(() => {
-      setSlideIndex((curr) => {
-        setPrevSlideIndex(curr);
-        return (curr + 1) % ALL_SERVICES_CATALOG.length;
-      });
-    }, 6000);
+      setSlideIndex((curr) => (curr + 1) % ALL_SERVICES_CATALOG.length);
+    }, 5000);
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, []);
 
   const currentService = ALL_SERVICES_CATALOG[slideIndex];
-  const prevService = ALL_SERVICES_CATALOG[prevSlideIndex];
   const nextService = ALL_SERVICES_CATALOG[(slideIndex + 1) % ALL_SERVICES_CATALOG.length];
 
   useEffect(() => {
@@ -214,12 +207,8 @@ export default function Hero() {
 
           </div>
 
-          {/* ── RIGHT COLUMN: APPLE TABLET SHOWCASE (HIGH-QUALITY PHOTO & APPLE TAB CONTROLS) ── */}
-          <div
-            className="relative lg:col-span-5 xl:col-span-5 pt-4 sm:pt-0"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-          >
+          {/* ── RIGHT COLUMN: APPLE TABLET SHOWCASE (SERVICES CATALOG LOOP) ── */}
+          <div className="relative lg:col-span-5 xl:col-span-5 pt-4 sm:pt-0">
             <ScrollReveal variant="up" delay={200}>
               <div className="relative mx-auto max-w-[500px] lg:max-w-none apple-tab-perspective">
                 
@@ -245,41 +234,29 @@ export default function Hero() {
                     <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
                   </div>
 
-                  {/* iPad Display Canvas (Clean, Full-Bleed Services Page Loop with Zero Overlay Icons) */}
+                  {/* iPad Display Canvas (Full-Bleed Services Page Loop with Service Name at the Bottom) */}
                   <div className="relative rounded-2xl overflow-hidden bg-black h-[350px] xs:h-[390px] sm:h-[440px] md:h-[470px] w-full border border-white/15 group select-none">
                     
-                    {/* Previous Photo Fading Out */}
-                    {prevSlideIndex !== slideIndex && (
-                      <div className="absolute inset-0 pointer-events-none">
-                        <picture>
-                          <source srcSet={prevService.image.replace(/\.(jpg|jpeg|png)$/i, ".webp")} type="image/webp" />
-                          <img
-                            src={prevService.image}
-                            alt={prevService.name}
-                            className="h-full w-full object-cover"
-                            loading="lazy"
-                            decoding="async"
-                          />
-                        </picture>
-                      </div>
-                    )}
-
-                    {/* Active Photo (Smooth Crossfade & Micro-Zoom) */}
+                    {/* Active Service Photo (Smooth Crossfade & Micro-Zoom) */}
                     <div key={slideIndex} className="absolute inset-0 animate-apple-fade">
-                      <picture>
-                        <source srcSet={currentService.image.replace(/\.(jpg|jpeg|png)$/i, ".webp")} type="image/webp" />
-                        <img
-                          src={currentService.image}
-                          alt={currentService.name}
-                          className="h-full w-full object-cover transition-transform duration-[6000ms] ease-out scale-100 group-hover:scale-105"
-                          loading="eager"
-                          decoding="async"
-                        />
-                      </picture>
+                      <img
+                        src={currentService.image}
+                        alt={currentService.name}
+                        className="h-full w-full object-cover transition-transform duration-[5000ms] ease-out scale-100 group-hover:scale-105"
+                        loading="eager"
+                        decoding="async"
+                      />
                     </div>
 
                     {/* Subtle Apple Glass Specular Glare */}
                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.08] pointer-events-none z-20" />
+
+                    {/* Service Name Mention Down at the Bottom */}
+                    <div className="absolute bottom-3 inset-x-3 z-30 flex items-center justify-center pointer-events-none">
+                      <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-black/75 backdrop-blur-xl border border-white/20 shadow-2xl text-[12px] font-sans text-white/95 max-w-[90%] truncate">
+                        <span className="font-semibold truncate tracking-wide">{currentService.name}</span>
+                      </div>
+                    </div>
 
                     {/* Preload Next Image for Instant 60fps Transitions */}
                     <img src={nextService.image} alt="" className="hidden" aria-hidden="true" loading="eager" />
