@@ -25,8 +25,8 @@ const HERO_SERVICES = [
     badge: "✦ SFA GRADE A · HOT-LINE RESTORATION",
     title: "Commercial Kitchen Deep Hygiene",
     sector: "Hot-Line Degreasing & SFA Compliance",
-    imageWebp: "/images/services/commercial_kitchen_deep_cleaning.webp",
-    imageJpg: "/images/services/commercial_kitchen_deep_cleaning.jpg",
+    imageWebp: "/images/hygiene_kitchen_compliance_4k.webp",
+    imageJpg: "/images/hygiene_kitchen_compliance_4k.jpg",
     alt: "Commercial kitchen stainless steel surfaces restored to mirror finish",
   },
   {
@@ -43,8 +43,8 @@ const HERO_SERVICES = [
     badge: "✦ 98+ GU GLOSS · MARBLE RESTORATION",
     title: "Diamond & Powder Marble Polishing",
     sector: "Architectural Stone Restoration",
-    imageWebp: "/images/services/marble_polishing.webp",
-    imageJpg: "/images/services/marble_polishing.jpg",
+    imageWebp: "/images/marble_polishing_4k.webp",
+    imageJpg: "/images/marble_polishing_4k.jpg",
     alt: "Architectural Italian marble floor diamond polished to mirror gloss",
   },
   {
@@ -52,8 +52,8 @@ const HERO_SERVICES = [
     badge: "✦ IRATA ROPE ACCESS · FAÇADE CARE",
     title: "High-Rise Façade & Window Care",
     sector: "High-Altitude Exterior Operations",
-    imageWebp: "/images/services/high_rise_facade_cleaning.webp",
-    imageJpg: "/images/services/high_rise_facade_cleaning.jpg",
+    imageWebp: "/images/facade_skyscraper_4k.webp",
+    imageJpg: "/images/facade_skyscraper_4k.jpg",
     alt: "High-rise rope access certified glass façade cleaning",
   },
   {
@@ -61,8 +61,8 @@ const HERO_SERVICES = [
     badge: "✦ WSQ TRAINED · BOH KITCHEN STEWARDING",
     title: "F&B Stewarding & Dishwasher Support",
     sector: "Back-of-House Manpower Operations",
-    imageWebp: "/images/services/fnb_stewarding_manpower.webp",
-    imageJpg: "/images/services/fnb_stewarding_manpower.jpg",
+    imageWebp: "/images/fnb_stewarding_manpower_4k.webp",
+    imageJpg: "/images/fnb_stewarding_manpower_4k.jpg",
     alt: "WSQ certified stewarding manpower for hospitality groups",
   },
   {
@@ -70,8 +70,8 @@ const HERO_SERVICES = [
     badge: "✦ HOSPITAL-GRADE · SANITARY DESCALING",
     title: "Restroom Hygiene & IAQ Decontamination",
     sector: "Sanitation & Bio-Burden Control",
-    imageWebp: "/images/services/hospital_grade_disinfection.webp",
-    imageJpg: "/images/services/hospital_grade_disinfection.jpg",
+    imageWebp: "/images/disinfection_service_4k.webp",
+    imageJpg: "/images/disinfection_service_4k.jpg",
     alt: "Commercial washroom hygiene restoration and hospital grade disinfection",
   },
   {
@@ -79,8 +79,8 @@ const HERO_SERVICES = [
     badge: "✦ GRADE-A TOWERS · DAY & NIGHT PORTERS",
     title: "Commercial Office & Corporate Towers",
     sector: "Integrated Corporate Facilities",
-    imageWebp: "/images/services/commercial_office_cleaning.webp",
-    imageJpg: "/images/services/commercial_office_cleaning.jpg",
+    imageWebp: "/images/office_cleaning_4k.webp",
+    imageJpg: "/images/office_cleaning_4k.jpg",
     alt: "Grade-A corporate tower day and night facility operations",
   },
   {
@@ -88,8 +88,8 @@ const HERO_SERVICES = [
     badge: "✦ 4-HOUR SLA · OVERNIGHT VENUE TURNOVER",
     title: "Overnight Ballroom & Event Turnover",
     sector: "Time-Critical Hospitality Venues",
-    imageWebp: "/images/services/overnight_venue_turnover.webp",
-    imageJpg: "/images/services/overnight_venue_turnover.jpg",
+    imageWebp: "/images/banquet_venue_4k.webp",
+    imageJpg: "/images/banquet_venue_4k.jpg",
     alt: "Luxury ballroom rapid overnight turnover and sanitation",
   },
 ];
@@ -290,18 +290,23 @@ export default function Hero() {
               <div className="relative mx-auto max-w-[500px] lg:max-w-none">
                 
                 {/* Apple iPad Pro Mockup Chassis */}
-                <div className="relative rounded-[2rem] sm:rounded-[2.4rem] bg-gradient-to-b from-[#1E293B] via-[#0F172A] to-[#030A14] p-2.5 sm:p-3.5 border-2 border-white/20 shadow-[0_30px_90px_rgba(0,0,0,0.85),0_0_40px_rgba(183,163,139,0.12)]">
+                <div className="relative rounded-[2.2rem] sm:rounded-[2.6rem] bg-gradient-to-b from-[#1C232E] via-[#0E1520] to-[#040810] p-2.5 sm:p-3.5 border-2 border-white/25 shadow-[0_35px_100px_rgba(0,0,0,0.9),0_0_40px_rgba(183,163,139,0.15)] ring-1 ring-white/15">
                   
+                  {/* Physical Hardware Buttons (Authentic Apple Details) */}
+                  <div className="absolute -top-[3px] right-12 w-10 h-[3px] rounded-t-sm bg-neutral-600/80 pointer-events-none" aria-hidden="true" />
+                  <div className="absolute top-16 -right-[3px] w-[3px] h-9 rounded-r-sm bg-neutral-600/80 pointer-events-none" aria-hidden="true" />
+                  <div className="absolute top-28 -right-[3px] w-[3px] h-9 rounded-r-sm bg-neutral-600/80 pointer-events-none" aria-hidden="true" />
+
                   {/* iPad Top Hardware: Front Camera Lens & Ambient Light Sensor */}
                   <div className="flex items-center justify-center gap-2 mb-2 pt-0.5" aria-hidden="true">
                     <span className="w-2.5 h-2.5 rounded-full bg-black border border-white/30 flex items-center justify-center shadow-inner">
-                      <span className="w-1 h-1 rounded-full bg-[#102A45]" />
+                      <span className="w-1 h-1 rounded-full bg-[#1b3a5a]" />
                     </span>
                     <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
                   </div>
 
-                  {/* iPad Display Canvas (Crisp High-Quality Image) */}
-                  <div className="relative rounded-2xl overflow-hidden bg-black h-[350px] xs:h-[390px] sm:h-[440px] md:h-[470px] w-full border border-white/10 group">
+                  {/* iPad Display Canvas (Crisp 4K Quality Image & iPadOS UI) */}
+                  <div className="relative rounded-2xl overflow-hidden bg-black h-[350px] xs:h-[390px] sm:h-[440px] md:h-[470px] w-full border border-white/15 group select-none">
                     
                     {/* Cross-fading 8 High-Quality Service Photos */}
                     {HERO_SERVICES.map((s, idx) => (
@@ -327,11 +332,34 @@ export default function Hero() {
                     ))}
 
                     {/* Subtle Apple Glass Specular Glare */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.08] pointer-events-none z-20" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.09] pointer-events-none z-20" />
 
-                    {/* Apple Tab Bar Inside the Picture (Top Floating Pill Tab Strip to Move On) */}
-                    <div className="absolute top-3 inset-x-3 z-30 flex justify-center">
-                      <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/65 backdrop-blur-xl border border-white/25 shadow-2xl max-w-full overflow-x-auto no-scrollbar">
+                    {/* iPadOS Status Bar (Authentic Apple UI) */}
+                    <div className="absolute top-1.5 inset-x-4 z-30 flex items-center justify-between text-[11px] font-sans font-medium text-white/90 drop-shadow pointer-events-none">
+                      <span>9:41</span>
+                      <div className="flex items-center gap-2">
+                        {/* 5G Signal Bars */}
+                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                          <path d="M2 17h3v4H2v-4zm5-4h3v8H7v-8zm5-4h3v12h-3V9zm5-4h3v16h-3V5z" />
+                        </svg>
+                        {/* Wi-Fi Icon */}
+                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                          <path d="M12 3C7.31 3 3.07 4.9 0 7.94l1.41 1.41C4.09 6.7 7.82 5 12 5s7.91 1.7 10.59 4.35L24 7.94C20.93 4.9 16.69 3 12 3zm0 6c-3.31 0-6.32 1.34-8.49 3.51l1.41 1.41C6.67 12.18 9.2 11 12 11s5.33 1.18 7.08 2.92l1.41-1.41C18.32 10.34 15.31 9 12 9zm0 6c-1.66 0-3.16.67-4.24 1.76l1.41 1.41C9.89 17.45 10.89 17 12 17s2.11.45 2.83 1.17l1.41-1.41C15.16 15.67 13.66 15 12 15zm0 4a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+                        </svg>
+                        {/* Battery Pill */}
+                        <div className="flex items-center gap-0.5">
+                          <span className="text-[10px] font-semibold">100%</span>
+                          <div className="w-5 h-2.5 rounded-sm border border-white/80 p-0.5 flex items-center">
+                            <div className="w-full h-full bg-white rounded-xs" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Apple Safari Unified Liquid Glass Tab Bar (Top Floating inside Picture) */}
+                    <div className="absolute top-7 inset-x-3 z-30 flex flex-col gap-1.5">
+                      {/* Apple Safari Floating Pill Tab Bar */}
+                      <div className="flex items-center gap-1 p-1 rounded-full bg-black/60 backdrop-blur-2xl border border-white/20 shadow-2xl overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                         {HERO_SERVICES.map((s, idx) => {
                           const isActive = idx === slideIndex;
                           return (
@@ -339,15 +367,16 @@ export default function Hero() {
                               key={s.chip}
                               type="button"
                               onClick={() => setSlideIndex(idx)}
-                              className={`px-2.5 py-1 rounded-full text-[10px] sm:text-[10.5px] font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap select-none ${
+                              className={`px-3 py-1 rounded-full text-[11px] font-sans font-medium transition-all duration-300 cursor-pointer whitespace-nowrap select-none flex items-center gap-1.5 ${
                                 isActive
-                                  ? "bg-[#B7A38B] text-[#02142B] font-bold shadow-[0_0_12px_rgba(183,163,139,0.5)] scale-[1.02]"
-                                  : "text-white/75 hover:text-white hover:bg-white/15"
+                                  ? "bg-white/25 text-white font-semibold backdrop-blur-xl border border-white/25 shadow-[0_2px_10px_rgba(0,0,0,0.4)]"
+                                  : "text-white/70 hover:text-white hover:bg-white/10"
                               }`}
                               title={s.title}
                               aria-label={`Go to ${s.title}`}
                             >
-                              {s.chip}
+                              {isActive && <span className="h-1.5 w-1.5 rounded-full bg-[#B7A38B] shadow-[0_0_6px_#B7A38B]" />}
+                              <span>{s.chip}</span>
                             </button>
                           );
                         })}
@@ -356,12 +385,12 @@ export default function Hero() {
 
                     {/* Apple Interactive Navigation Pill at Bottom Inside the Pic */}
                     <div className="absolute bottom-3 inset-x-3 z-30 flex items-center justify-between gap-2">
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/65 backdrop-blur-xl border border-white/25 shadow-2xl text-[11px] font-mono text-[#EDE5DA] truncate">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-2xl border border-white/20 shadow-2xl text-[11px] font-sans text-white/95 truncate">
                         <span className="text-[#B7A38B] font-bold">✦</span>
                         <span className="font-semibold truncate">{HERO_SERVICES[slideIndex].title}</span>
                       </div>
 
-                      <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/65 backdrop-blur-xl border border-white/25 shadow-2xl shrink-0">
+                      <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/60 backdrop-blur-2xl border border-white/20 shadow-2xl shrink-0">
                         <button
                           type="button"
                           onClick={() => setSlideIndex((prev) => (prev - 1 + HERO_SERVICES.length) % HERO_SERVICES.length)}
@@ -388,7 +417,7 @@ export default function Hero() {
 
                   {/* iPad Bottom Hardware: Home Indicator Bar */}
                   <div className="flex justify-center pt-2 pb-0.5" aria-hidden="true">
-                    <div className="h-1 w-28 rounded-full bg-white/35 shadow-sm" />
+                    <div className="h-1 w-32 rounded-full bg-white/70 shadow-sm" />
                   </div>
 
                 </div>
