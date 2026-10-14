@@ -5,12 +5,12 @@ interface ParticleTextProps {
   className?: string;
 }
 
-// Resting face is white; touched particles light up blue.
+// Resting face is crisp white/ice-white; touched particles light up electric blue.
 const FACE = [240, 244, 255];
-const TOUCH = [96, 156, 255]; // glow blue
-// Extruded side: deep blue (far) -> mid blue (near) for static 3D depth.
-const EXT_FAR = [12, 22, 70];
-const EXT_NEAR = [30, 60, 150];
+const TOUCH = [96, 156, 255]; // glow electric blue
+// Extruded side: deep navy blue (far) -> royal blue (near) for static 3D depth extrusion.
+const EXT_FAR = [8, 16, 55];
+const EXT_NEAR = [35, 75, 175];
 
 interface Particle {
   hx: number; // home x (with centring offset baked in)
@@ -26,8 +26,8 @@ interface Particle {
 /**
  * ParticleText — a static, centred 3D extruded particle wordmark in white.
  * Depth is a pre-rendered blue extrusion behind a white dotted face. At rest
- * the text is static; particles touched by the cursor push away, brighten to
- * blue and glow, then spring back. Pure canvas, no dependencies.
+ * the text is static; particles touched by cursor or touch push away, brighten to
+ * electric blue and glow, then spring back. Pure canvas, no dependencies.
  */
 export default function ParticleText({
   text = "OPHRON",
@@ -38,13 +38,13 @@ export default function ParticleText({
 
   useEffect(() => {
     if (!canvasRef.current) return;
+    const cv: HTMLCanvasElement = canvasRef.current;
     const sample = document.createElement("canvas");
     const ext = document.createElement("canvas"); // pre-rendered extrusion
-    const ctx0 = canvasRef.current.getContext("2d");
+    const ctx0 = cv.getContext("2d");
     const sctx0 = sample.getContext("2d", { willReadFrequently: true });
     const ectx0 = ext.getContext("2d");
     if (!ctx0 || !sctx0 || !ectx0) return;
-    const cv: HTMLCanvasElement = canvasRef.current;
     const ctx: CanvasRenderingContext2D = ctx0;
     const sctx: CanvasRenderingContext2D = sctx0;
     const ectx: CanvasRenderingContext2D = ectx0;
@@ -65,6 +65,7 @@ export default function ParticleText({
       cv.height = height * dpr;
       cv.style.width = width + "px";
       cv.style.height = height + "px";
+      cv.style.touchAction = "pan-y"; // allows natural vertical scrolling on touch devices
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       sample.width = width;
@@ -73,16 +74,16 @@ export default function ParticleText({
       ext.height = height * dpr;
       ectx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const family = getComputedStyle(cv).fontFamily || "Arial, sans-serif";
+      const family = getComputedStyle(cv).fontFamily || "'Montserrat', Arial, sans-serif";
       sctx.clearRect(0, 0, width, height);
       sctx.textAlign = "center";
       sctx.textBaseline = "middle";
 
-      // Fit to ~92% of the frame width and centre it.
+      // Fit to ~94% of the frame width and centre it.
       let fontSize = height;
       sctx.font = `800 ${fontSize}px ${family}`;
       const measured = sctx.measureText(text).width || 1;
-      fontSize = (fontSize * (width * 0.92)) / measured;
+      fontSize = (fontSize * (width * 0.94)) / measured;
       fontSize = Math.min(fontSize, height * 0.82);
       sctx.font = `800 ${fontSize}px ${family}`;
       sctx.fillStyle = "#fff";
@@ -90,14 +91,17 @@ export default function ParticleText({
 
       const data = sctx.getImageData(0, 0, width, height).data;
 
-      const extDepth = Math.max(8, fontSize * 0.13);
+      const extDepth = Math.max(7, fontSize * 0.125);
       const dirX = 0.55;
       const dirY = 0.62;
       const ox = -extDepth * dirX * 0.5;
       const oy = -extDepth * dirY * 0.5;
 
-      const gap = width > 1100 ? 5 : 4;
-      const pSize = gap > 4 ? 2 : 1.7;
+      // Density tuned for crisp letter clarity across all viewports
+      const isMobile = width < 640;
+      const gap = width > 1100 ? 5 : isMobile ? 3 : 4;
+      const pSize = width > 1100 ? 2.1 : isMobile ? 1.4 : 1.7;
+
       const next: Particle[] = [];
       for (let y = 0; y < height; y += gap) {
         for (let x = 0; x < width; x += gap) {
@@ -117,10 +121,10 @@ export default function ParticleText({
       }
       particles = next;
 
-      // Pre-render the static blue extrusion once.
+      // Pre-render the static 3D blue extrusion layers once.
       ectx.clearRect(0, 0, width, height);
-      const layers = Math.max(8, Math.round(extDepth / 1.6));
-      const extSize = extDepth / layers + 1.2;
+      const layers = Math.max(8, Math.round(extDepth / 1.5));
+      const extSize = extDepth / layers + (isMobile ? 1.0 : 1.25);
       for (let i = layers; i >= 1; i--) {
         const f = i / layers;
         const t = 1 - f;
@@ -137,9 +141,6 @@ export default function ParticleText({
       }
     }
 
-    const RADIUS = 70;
-    const RADIUS2 = RADIUS * RADIUS;
-
     function frame() {
       ctx.clearRect(0, 0, width, height);
       // Static extrusion (device-pixel blit).
@@ -150,11 +151,14 @@ export default function ParticleText({
 
       const mx = mouse.current.x;
       const my = mouse.current.y;
+      const isMobile = width < 640;
+      const RADIUS = isMobile ? 42 : 70;
+      const RADIUS2 = RADIUS * RADIUS;
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Cursor touch: push away + raise energy.
+        // Cursor / touch touch: push away + raise energy.
         const dx = p.x - mx;
         const dy = p.y - my;
         const d2 = dx * dx + dy * dy;
@@ -175,20 +179,20 @@ export default function ParticleText({
         p.y += p.vy;
         p.energy *= 0.92;
 
-        // Colour: white at rest, blue glow when touched.
+        // Colour: white at rest, electric blue glow when touched.
         const e = p.energy;
         const r = Math.round(FACE[0] + (TOUCH[0] - FACE[0]) * e);
         const g = Math.round(FACE[1] + (TOUCH[1] - FACE[1]) * e);
         const b = Math.round(FACE[2] + (TOUCH[2] - FACE[2]) * e);
 
         if (e > 0.05) {
-          ctx.shadowColor = `rgba(96,156,255,${0.7 * e})`;
+          ctx.shadowColor = `rgba(96,156,255,${0.75 * e})`;
           ctx.shadowBlur = 10 * e;
         } else {
           ctx.shadowBlur = 0;
         }
         ctx.fillStyle = `rgb(${r},${g},${b})`;
-        const s = p.size + e * 1.6;
+        const s = p.size + e * 1.5;
         ctx.fillRect(p.x, p.y, s, s);
       }
       ctx.shadowBlur = 0;
@@ -205,7 +209,7 @@ export default function ParticleText({
       mouse.current.y = -9999;
     }
 
-    function onTouchMove(ev: TouchEvent) {
+    function onTouch(ev: TouchEvent) {
       if (ev.touches.length > 0) {
         const rect = cv.getBoundingClientRect();
         mouse.current.x = ev.touches[0].clientX - rect.left;
@@ -220,13 +224,18 @@ export default function ParticleText({
     build();
     raf = requestAnimationFrame(frame);
 
+    // Font loading safety
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => build());
+    }
+
     const ro = new ResizeObserver(() => build());
     const parentEl = cv.parentElement;
     if (parentEl) ro.observe(parentEl);
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseout", onLeave, { passive: true });
-    cv.addEventListener("touchstart", onTouchMove, { passive: true });
-    cv.addEventListener("touchmove", onTouchMove, { passive: true });
+    cv.addEventListener("touchstart", onTouch, { passive: true });
+    cv.addEventListener("touchmove", onTouch, { passive: true });
     cv.addEventListener("touchend", onTouchEnd, { passive: true });
     cv.addEventListener("touchcancel", onTouchEnd, { passive: true });
 
@@ -235,12 +244,12 @@ export default function ParticleText({
       ro.disconnect();
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseout", onLeave);
-      cv.removeEventListener("touchstart", onTouchMove);
-      cv.removeEventListener("touchmove", onTouchMove);
+      cv.removeEventListener("touchstart", onTouch);
+      cv.removeEventListener("touchmove", onTouch);
       cv.removeEventListener("touchend", onTouchEnd);
       cv.removeEventListener("touchcancel", onTouchEnd);
     };
   }, [text]);
 
-  return <canvas ref={canvasRef} className={`font-display ${className}`} />;
+  return <canvas ref={canvasRef} className={`font-display block ${className}`} />;
 }

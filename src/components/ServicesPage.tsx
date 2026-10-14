@@ -81,7 +81,12 @@ export default function ServicesPage() {
     });
   }, [selectedPillar, searchQuery]);
 
-  const specializedSOPs = Object.values(OPHRON_SERVICE_PAGES);
+  const specializedSOPs = useMemo(() => {
+    const prioritySlugs = ["commercial-cleaning", "fnb-stewarding-manpower", "events-venue"];
+    const top = prioritySlugs.map((s) => OPHRON_SERVICE_PAGES[s]).filter(Boolean);
+    const rest = Object.values(OPHRON_SERVICE_PAGES).filter((s) => !prioritySlugs.includes(s.slug));
+    return [...top, ...rest];
+  }, []);
 
   return (
     <div className="relative bg-paper text-ink min-h-screen pb-28">
@@ -376,11 +381,11 @@ export default function ServicesPage() {
                           )}
                         </div>
 
-                        <h3 className="font-canela font-bold text-xl text-[#032147] group-hover:text-white transition duration-300 tracking-tight leading-snug">
+                        <h3 className="font-canela font-bold text-xl text-[#032147] group-hover:text-white transition duration-300 tracking-tight leading-snug min-h-[54px] flex items-center">
                           {srv.name}
                         </h3>
 
-                        <p className="mt-2 font-inter text-[13px] leading-relaxed text-[#032147]/80 group-hover:text-[#EDE5DA]/85 transition duration-300">
+                        <p className="mt-2 font-inter text-[13px] leading-relaxed text-[#032147]/80 group-hover:text-[#EDE5DA]/85 transition duration-300 line-clamp-3 min-h-[58px]">
                           {srv.description}
                         </p>
 

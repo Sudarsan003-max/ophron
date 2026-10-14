@@ -1,3 +1,4 @@
+import ParticleText from "./ui/particle-text";
 import { GradientBars } from "./ui/gradient-bars-background";
 import Footer3DBackground from "./ui/footer-3d-background";
 import {
@@ -25,7 +26,7 @@ export default function Footer() {
       aria-label="Site Footer"
     >
       {/* Background Animated Gradient Bars — subtle ambient illumination */}
-      <div className="absolute inset-0 opacity-30 sm:opacity-60 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 opacity-35 sm:opacity-70 pointer-events-none overflow-hidden">
         <GradientBars
           numBars={14}
           gradientFrom="rgba(183, 163, 139, 0.12)"
@@ -35,7 +36,7 @@ export default function Footer() {
       </div>
 
       {/* Cinematic ambient background glow */}
-      <div className="hidden sm:block opacity-40 lg:opacity-60 pointer-events-none">
+      <div className="block opacity-35 sm:opacity-55 pointer-events-none">
         <Footer3DBackground
           text="OPHRON"
           className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
@@ -287,24 +288,10 @@ export default function Footer() {
 
         </div>
 
-        {/* Corporate Wordmark Banner (Consistent High-End Display across Mobile & Desktop) */}
-        <div className="relative z-10 w-full mt-10 sm:mt-14 mb-6">
-          <div className="relative overflow-hidden rounded-2xl border border-[#B7A38B]/20 bg-gradient-to-b from-[#032147]/90 via-[#021833]/95 to-[#011024] px-4 py-7 sm:py-12 md:py-14 text-center shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-            {/* Subtle background ambient lighting */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(183,163,139,0.12)_0%,transparent_70%)] pointer-events-none" />
-            
-            <div
-              className="text-[38px] sm:text-[64px] md:text-[84px] lg:text-[104px] font-display font-bold tracking-[0.16em] sm:tracking-[0.22em] text-[#EDE5DA]/85 uppercase leading-none select-none transition-all duration-500 hover:text-white hover:tracking-[0.25em]"
-              style={{
-                textShadow:
-                  "0 2px 20px rgba(183,163,139,0.25), 0 0 40px rgba(3,33,71,0.8)",
-              }}
-            >
-              OPHRON
-            </div>
-            <div className="text-[8.5px] sm:text-[10px] md:text-[11px] font-mono tracking-[0.22em] sm:tracking-[0.3em] uppercase text-[#B7A38B] mt-2 sm:mt-3 font-semibold">
-              Operational Infrastructure Platform · Singapore & International
-            </div>
+        {/* 3D Particle Text — Interactive on both mobile and desktop with touch & mouse physics */}
+        <div className="relative z-10 mx-auto max-w-[1400px] w-full px-2 sm:px-5 mt-10 sm:mt-14 mb-6">
+          <div className="h-[105px] sm:h-[150px] md:h-[190px] lg:h-[230px] w-full flex items-center justify-center">
+            <ParticleText text="OPHRON" className="h-full w-full" />
           </div>
         </div>
 

@@ -308,17 +308,22 @@ export const BUSINESS_PILLARS_DATA: BusinessPillarTaxonomy[] = [
             features: ["High-spec streak-free glass cleaning", "Buffing of polished concrete & porcelain floors", "Dust-free showcase display care", "Spotless customer reception presentation"],
           },
           {
-            id: "daily-janitorial-cleaning",
-            name: "Daily Janitorial Cleaning",
+            id: "commercial-cleaning",
+            name: "Commercial Cleaning",
             slug: "commercial-cleaning",
             pillarId: "hygiene",
             category: "Commercial Hygiene",
-            tagline: "Systematic, structured day-to-day cleaning programs for commercial premises.",
+            tagline: "Front-of-house presentation and back-of-house discipline for retail, hospitality, and mixed-use premises across Singapore.",
             description:
-              "Dedicated cleaners assigned to building common areas, corridors, lift lobbies, and stairwells working to supervisor-signed digital checklists.",
+              "Systematic daily janitorial programs, entrance glass detailing, corridor auto-scrubbing, and washroom sanitation engineered for Singapore's premier facilities.",
             image: "/images/services/daily_janitorial_cleaning.jpg",
-            badge: "Core Service",
-            features: ["Lift lobby & entrance glass polishing", "Corridor mopping & auto-scrubbing", "Waste sorting and bin liners rotation", "Supervisor audit logs signed per shift"],
+            badge: "Flagship Service",
+            features: [
+              "Daily janitorial & front-of-house presentation",
+              "Hard-floor machine scrubbing and carpet care",
+              "Washroom servicing with consumables management",
+              "Supervisor-signed digital checklists per shift",
+            ],
           },
           {
             id: "retail-commercial-cleaning",
@@ -1477,36 +1482,45 @@ export const BUSINESS_PILLARS_DATA: BusinessPillarTaxonomy[] = [
 /* ------------------------------------------------------------------ */
 
 export const SERVICE_PRIORITY_MAP: Record<string, number> = {
-  // ── 1. Flagship Hospitality Workforce & BOH Leadership (Row 1, #1) ──
-  "fnb-stewarding-manpower": 1,
+  // ── Row 1: The 3 Primary Services (Exact Order Required) ──
+  // 1. Commercial Cleaning
+  "commercial-cleaning": 1,
+  "daily-janitorial-cleaning": 1,
 
-  // ── 2. Flagship Stone & Diamond Restoration (Tier 1) ──
-  "diamond-polishing": 2,
-  "powder-polishing": 3,
-  "marble-restoration": 4,
-  "marble-polishing": 5,
-  "stone-floor-care": 6,
+  // 2. F&B Stewarding Manpower & Kitchen Workforce
+  "fnb-stewarding-manpower": 2,
 
-  // ── 3. High-Altitude Facade & Rope Access (Tier 1) ──
-  "rope-access-cleaning": 7,
-  "high-rise-facade-cleaning": 8,
-  "high-rise-window-cleaning": 9,
-  "exterior-glass-cleaning": 10,
+  // 3. Events Venue Maintenance
+  "events-venue-maintenance": 3,
+  "events-venue": 3,
 
-  // ── 4. Integrated Facility Management (IFM Lite) (Tier 1) ──
-  "integrated-facility-management-ifm-lite": 11,
-  "facility-maintenance-coordination": 12,
+  // ── Subsequent Rows: All remaining services in existing order ──
+  // 4. Flagship Stone & Diamond Restoration (Tier 1)
+  "diamond-polishing": 4,
+  "powder-polishing": 5,
+  "marble-restoration": 6,
+  "marble-polishing": 7,
+  "stone-floor-care": 8,
 
-  // ── 5. Luxury Events & Rapid Venue Turnovers (Tier 1) ──
-  "events-venue-maintenance": 13,
-  "overnight-venue-turnover": 14,
-  "exhibition-hall-cleaning": 15,
+  // 5. High-Altitude Facade & Rope Access (Tier 1)
+  "rope-access-cleaning": 9,
+  "high-rise-facade-cleaning": 10,
+  "high-rise-window-cleaning": 11,
+  "exterior-glass-cleaning": 12,
 
-  // ── 6. Commercial Kitchen & Exhaust Duct Engineering (Tier 1) ──
-  "commercial-kitchen-deep-cleaning": 16,
-  "exhaust-duct-cleaning-degreasing": 17,
-  "exhaust-hood-cleaning": 18,
-  "grease-trap-cleaning-maintenance": 19,
+  // 6. Integrated Facility Management (IFM Lite) (Tier 1)
+  "integrated-facility-management-ifm-lite": 13,
+  "facility-maintenance-coordination": 14,
+
+  // 7. Luxury Events & Rapid Venue Turnovers (Remaining)
+  "overnight-venue-turnover": 15,
+  "exhibition-hall-cleaning": 16,
+
+  // 8. Commercial Kitchen & Exhaust Duct Engineering (Tier 1)
+  "commercial-kitchen-deep-cleaning": 17,
+  "exhaust-duct-cleaning-degreasing": 18,
+  "exhaust-hood-cleaning": 19,
+  "grease-trap-cleaning-maintenance": 20,
 
   // ── 7. Additional Hospitality Workforce & Support (Tier 1) ──
   "outsourced-cleaning-manpower": 20,
@@ -1579,7 +1593,6 @@ export const SERVICE_PRIORITY_MAP: Record<string, number> = {
   "sales-marketing-technology": 73,
 
   // ── 14. Operational Support & Back-of-House Utility ──
-  "daily-janitorial-cleaning": 74,
   "retail-commercial-cleaning": 75,
   "stewarding-staff": 76,
   "dishwashing-kitchen-hygiene": 77,
@@ -2000,11 +2013,11 @@ export const OPHRON_SERVICE_PAGES: Record<string, ServicePageData> = {
     pillarId: "hygiene",
     pillarName: "OPHRON HYGIENE",
     category: "Commercial Hygiene",
-    heroTitle: "Commercial Cleaning Services",
+    heroTitle: "Commercial Cleaning",
     heroLead:
       "Front-of-house presentation and back-of-house discipline for retail, hospitality, and mixed-use premises across Singapore.",
     heroImage: "/images/services/daily_janitorial_cleaning.jpg",
-    badge: "Front & Back-of-House",
+    badge: "Flagship Hygiene",
     sections: [
       {
         kind: "overview",
@@ -2020,6 +2033,37 @@ export const OPHRON_SERVICE_PAGES: Record<string, ServicePageData> = {
           "Hard-floor machine scrubbing and carpet care",
           "Washroom servicing with consumables management",
           "Glass, partition and high-touch surface programmes",
+        ],
+      },
+      {
+        kind: "grid",
+        title: "Commercial Cleaning Operational Scopes",
+        cols: 3,
+        items: [
+          { title: "Daily Janitorial Programmes", text: "Fixed daytime or after-hours uniformed crews executing supervisor-audited daily checklists." },
+          { title: "Hard-Floor Machine Scrubbing", text: "Industrial auto-scrubbers and buffering machines restoring marble, terrazzo, and vinyl luster." },
+          { title: "Washroom Hygiene & Replenishment", text: "Continuous biological disinfection, odor control, and luxury consumable restocking." },
+          { title: "High-Touch Surface Sanitization", text: "Hospital-grade antimicrobial wipe-downs on lift buttons, door handles, and handrails." },
+          { title: "Entrance & Architectural Glass", text: "Streak-free polishing of curtain walls, storefront glass, and revolving door facades." },
+          { title: "Digital Shift Compliance Logs", text: "Real-time QR-verified timestamped supervisor reports accessible directly on your dashboard." },
+        ],
+      },
+      {
+        kind: "faq",
+        title: "Frequently Asked Questions",
+        items: [
+          {
+            q: "What types of commercial facilities do you service?",
+            a: "We service Grade-A commercial offices, retail malls, flagship showrooms, hospitality venues, mixed-use developments, and educational institutions across Singapore.",
+          },
+          {
+            q: "Are your cleaners licensed and WSQ certified?",
+            a: "Yes. 100% of our cleaning specialists hold NEA licenses and WSQ certifications in Environmental Cleaning and workplace safety.",
+          },
+          {
+            q: "Can cleaning schedules be tailored to off-peak or overnight hours?",
+            a: "Absolutely. We operate 24/7/365 and configure rosters around your operational downtime to avoid any disruption to tenants or visitors.",
+          },
         ],
       },
     ],
