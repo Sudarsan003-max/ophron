@@ -222,7 +222,7 @@ export default function About() {
                   <div className="relative rounded-2xl overflow-hidden border-2 border-[#B7A38B]/50 shadow-[0_15px_40px_rgba(0,0,0,0.85)] bg-black mb-6">
                     <img
                       src={isaacPortrait}
-                      alt="Isaac Vivian — Founder & Managing Director, OPHRON Systems"
+                      alt="Isaac Vivian — Founder, OPHRON Systems"
                       loading="lazy"
                       decoding="async"
                       className="w-full h-auto aspect-[3/2] object-cover transition-transform duration-1000 group-hover:scale-[1.02]"
@@ -232,7 +232,7 @@ export default function About() {
                     {/* Office Tag Badge */}
                     <div className="absolute bottom-3.5 left-3.5 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-[#B7A38B]/40 text-[9.5px] font-mono uppercase tracking-[0.18em] text-[#EDE5DA]">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
-                      <span>Isaac Vivian · OPHRON Systems</span>
+                      <span>Isaac Vivian · Founder, OPHRON Systems</span>
                     </div>
                   </div>
 
@@ -258,7 +258,7 @@ export default function About() {
                   </div>
 
                   <p className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-[#B7A38B] font-semibold mb-4">
-                    Founder & Managing Director — OPHRON Systems
+                    Founder — OPHRON Systems
                   </p>
 
                   <blockquote className="pl-3.5 border-l-2 border-[#B7A38B] italic text-[13px] sm:text-[13.5px] leading-relaxed text-[#EDE5DA]/90 font-serif mb-4">
@@ -307,7 +307,7 @@ export default function About() {
               </div>
 
 
-              {/* ── CARD 2: GKT INTERNATIONAL FOUNDER (GKT INTERNATIONAL) ── */}
+              {/* ── CARD 2: KELVIN (DIRECTOR, OPHRON SYSTEMS & FOUNDER, GKT INTERNATIONAL) ── */}
               <div className="rounded-[30px] border border-[#B7A38B]/40 bg-[#021733] text-[#EDE5DA] overflow-hidden shadow-2xl relative flex flex-col justify-between group hover:border-[#B7A38B] transition-all duration-500">
                 <div className="absolute -top-24 -right-24 w-72 h-72 bg-[#B7A38B]/15 rounded-full blur-3xl pointer-events-none" />
                 <CornerBrackets color="#B7A38B" size={14} hoverSize={20} />
@@ -317,7 +317,7 @@ export default function About() {
                   <div className="relative rounded-2xl overflow-hidden border-2 border-[#B7A38B]/50 shadow-[0_15px_40px_rgba(0,0,0,0.85)] bg-black mb-6">
                     <img
                       src={gktFounder}
-                      alt="Kelvin — Founder & Managing Director, GKT International Pte. Ltd."
+                      alt="Kelvin — Director, OPHRON Systems & Founder, GKT International Pte. Ltd."
                       loading="lazy"
                       decoding="async"
                       className="w-full h-auto aspect-[3/2] object-cover transition-transform duration-1000 group-hover:scale-[1.02]"
@@ -327,15 +327,15 @@ export default function About() {
                     {/* Office Tag Badge */}
                     <div className="absolute bottom-3.5 left-3.5 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-[#B7A38B]/40 text-[9.5px] font-mono uppercase tracking-[0.18em] text-[#EDE5DA]">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
-                      <span>Kelvin · GKT International</span>
+                      <span>Kelvin · Director, OPHRON Systems</span>
                     </div>
                   </div>
 
                   {/* Header & Titles */}
                   <div className="flex items-center gap-2 text-[9.5px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold mb-2">
-                    <span>[ 20+ Yrs Operational Mastery ]</span>
+                    <span>[ Operations & Frontline Excellence ]</span>
                     <span className="opacity-40">/</span>
-                    <span className="text-[#EDE5DA]/70 font-normal">Est. 2012 Singapore</span>
+                    <span className="text-[#EDE5DA]/70 font-normal">Director, OPHRON Systems</span>
                   </div>
 
                   <div className="flex items-center gap-2 mb-1">
@@ -345,7 +345,7 @@ export default function About() {
                     >
                       Kelvin
                     </h4>
-                    <span className="text-[#B7A38B] inline-flex items-center" title="Verified Founder">
+                    <span className="text-[#B7A38B] inline-flex items-center" title="Director, OPHRON Systems & Verified Founder">
                       <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                       </svg>
@@ -353,7 +353,7 @@ export default function About() {
                   </div>
 
                   <p className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-[#B7A38B] font-semibold mb-4">
-                    Founder & Managing Director — GKT International Pte. Ltd.
+                    Director — OPHRON Systems | Founder & Managing Director — GKT International
                   </p>
 
                   <blockquote className="pl-3.5 border-l-2 border-[#B7A38B] italic text-[13px] sm:text-[13.5px] leading-relaxed text-[#EDE5DA]/90 font-serif mb-4">
@@ -361,16 +361,16 @@ export default function About() {
                   </blockquote>
 
                   <p className="text-[12.5px] leading-relaxed text-[#EDE5DA]/75 font-inter mb-5 flex-1">
-                    Built on over two decades of hands-on Singapore industry expertise, GKT International represents our seasoned operational frontline — treating facility hygiene and kitchen stewarding as disciplined, audit-ready crafts.
+                    As Director of OPHRON and Founder of GKT International, Kelvin brings over two decades of hands-on Singapore industry leadership — steering our seasoned operational frontline and treating facility hygiene, stewarding, and institutional readiness as disciplined, audit-ready crafts.
                   </p>
 
                   {/* Capability Tags */}
                   <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
                     {[
+                      "Director, OPHRON",
                       "20+ Yrs SG Heritage",
-                      "NEA Licensed Operations",
-                      "Kitchen Stewarding",
-                      "bizSAFE 3 Certified",
+                      "Frontline Operations",
+                      "NEA & bizSAFE Certified",
                     ].map((tag, idx) => (
                       <span
                         key={idx}
@@ -387,16 +387,16 @@ export default function About() {
                   <button
                     type="button"
                     onClick={() => {
-                      window.history.pushState(null, "", "/services");
+                      window.history.pushState(null, "", "/contact");
                       window.dispatchEvent(new PopStateEvent("popstate"));
                     }}
                     className="inline-flex items-center gap-1.5 text-[10.5px] font-mono uppercase tracking-[0.18em] text-[#B7A38B] hover:text-white font-bold transition-colors cursor-pointer group/btn"
                   >
-                    <span>View GKT Operational Services</span>
+                    <span>Connect with Leadership</span>
                     <span className="transform group-hover/btn:translate-x-1 transition-transform">→</span>
                   </button>
                   <span className="text-[9.5px] font-mono text-[#EDE5DA]/50 uppercase tracking-wider">
-                    GKT International Pte. Ltd.
+                    OPHRON Systems · GKT International
                   </span>
                 </div>
               </div>
