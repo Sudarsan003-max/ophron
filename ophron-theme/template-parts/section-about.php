@@ -47,24 +47,44 @@
                 </div>
             </div>
 
-            <div class="lg:col-span-5">
-                <!-- Founder / Leadership Feature Card -->
-                <div class="relative rounded-3xl overflow-hidden border border-[#B7A38B]/30 bg-[#032147] text-[#EDE5DA] p-8 shadow-2xl">
-                    <div class="flex items-center gap-4 mb-6">
-                        <img src="<?php echo ophron_asset('images/isaac_portrait.jpg'); ?>" alt="Isaac Emmanuel" class="h-16 w-16 rounded-full object-cover border-2 border-[#B7A38B]" />
+            <div class="lg:col-span-5 space-y-6">
+                <!-- Leadership Card 1: Isaac Vivian (Founder) -->
+                <div class="relative rounded-3xl overflow-hidden border border-[#B7A38B]/30 bg-[#032147] text-[#EDE5DA] p-6 sm:p-7 shadow-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="<?php echo ophron_asset('images/isaac_portrait.png'); ?>" alt="Isaac Vivian — Founder, OPHRON Systems" class="h-16 w-16 rounded-full object-cover border-2 border-[#B7A38B]" onerror="this.src='<?php echo ophron_asset('images/isaac_portrait.jpg'); ?>'" />
                         <div>
-                            <div class="font-canela text-xl font-bold text-[#EDE5DA]">Isaac Emmanuel</div>
-                            <div class="text-xs font-mono uppercase tracking-wider text-[#B7A38B]">Group CEO & Founder</div>
+                            <div class="font-canela text-xl font-bold text-[#EDE5DA]">Isaac Vivian</div>
+                            <div class="text-xs font-mono uppercase tracking-wider text-[#B7A38B] font-semibold">Founder — OPHRON Systems</div>
                         </div>
                     </div>
 
-                    <blockquote class="font-canela text-lg sm:text-xl italic text-[#EDE5DA]/90 leading-snug">
-                        "Hospitality excellence is never accidental. It is the natural consequence of disciplined operational infrastructure running silently behind the curtain."
+                    <blockquote class="font-serif italic text-sm text-[#EDE5DA]/90 leading-relaxed pl-3 border-l-2 border-[#B7A38B]">
+                        "We don't sell cleaning or manpower. We become the strategic operating partner that powers hospitality and commercial operations across Singapore and globally."
                     </blockquote>
 
-                    <div class="mt-6 pt-6 border-t border-[#EDE5DA]/15 flex items-center justify-between text-xs font-mono text-[#EDE5DA]/60">
-                        <span>SINGAPORE HEADQUARTERS</span>
-                        <span class="text-[#B7A38B] font-bold">20+ YEARS HERITAGE</span>
+                    <div class="mt-4 pt-4 border-t border-[#EDE5DA]/15 flex items-center justify-between text-xs font-mono text-[#EDE5DA]/60">
+                        <span>SINGAPORE HQ</span>
+                        <span class="text-[#B7A38B] font-bold">PLATFORM ARCHITECTURE</span>
+                    </div>
+                </div>
+
+                <!-- Leadership Card 2: Kelvin (Director) -->
+                <div class="relative rounded-3xl overflow-hidden border border-[#B7A38B]/30 bg-[#032147] text-[#EDE5DA] p-6 sm:p-7 shadow-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="<?php echo ophron_asset('images/gkt_founder.jpg'); ?>" alt="Kelvin — Director, OPHRON Systems & Founder, GKT International" class="h-16 w-16 rounded-full object-cover border-2 border-[#B7A38B]" />
+                        <div>
+                            <div class="font-canela text-xl font-bold text-[#EDE5DA]">Kelvin</div>
+                            <div class="text-xs font-mono uppercase tracking-wider text-[#B7A38B] font-semibold">Director — OPHRON Systems | Founder & MD — GKT International</div>
+                        </div>
+                    </div>
+
+                    <blockquote class="font-serif italic text-sm text-[#EDE5DA]/90 leading-relaxed pl-3 border-l-2 border-[#B7A38B]">
+                        "Cleanliness and operational readiness are never commodities. Since 2012, GKT has set the benchmark for Singapore’s top hotel towers, Michelin-selected kitchens, and premier commercial venues."
+                    </blockquote>
+
+                    <div class="mt-4 pt-4 border-t border-[#EDE5DA]/15 flex items-center justify-between text-xs font-mono text-[#EDE5DA]/60">
+                        <span>FRONTLINE OPERATIONS</span>
+                        <span class="text-[#B7A38B] font-bold">20+ YRS SG HERITAGE</span>
                     </div>
                 </div>
             </div>
