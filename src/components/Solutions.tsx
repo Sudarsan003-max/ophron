@@ -78,7 +78,10 @@ export default function Solutions() {
                 <TiltCard
                   maxTilt={5}
                   className="rounded-3xl h-full"
-                  onClick={() => setActiveSlug(srv.slug)}
+                  onClick={() => {
+                    window.history.pushState(null, "", `/services/${srv.slug}`);
+                    window.dispatchEvent(new PopStateEvent("popstate"));
+                  }}
                 >
                   <div className="group relative cursor-pointer rounded-3xl bg-[#EDE5DA] border border-[#B7A38B]/35 p-6 sm:p-7 flex flex-col justify-between hover:bg-[#032147] hover:text-[#EDE5DA] hover:border-[#B7A38B] transition-all duration-500 shadow-lg hover:shadow-2xl overflow-hidden h-full">
                     <CornerBrackets color="#B7A38B" size={12} hoverSize={18} />

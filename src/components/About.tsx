@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import isaacPortrait from "./isaac_portrait.png";
 import gktFounder from "./gkt_founder.jpg";
+import { isHomePage } from "../utils/routes";
 import {
   AnimatedCounter,
   MaskedHeadline,
@@ -22,7 +23,7 @@ export default function About() {
   return (
     <section id="about" className="relative py-10 sm:py-16 lg:py-24 overflow-hidden bg-paper">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-5">
-        <SectionHead n="002" label="Strategic Operating Platform" />
+        <SectionHead label="Strategic Operating Platform" />
 
         <div className="mt-6 sm:mt-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-7">
@@ -458,19 +459,69 @@ function MissionCard({ k, text }: { k: string; text: string }) {
   );
 }
 
-export function SectionHead({ n, label, light }: { n: string; label: string; light?: boolean }) {
+export function SectionHead({
+  n,
+  label,
+  light,
+  forceShowNumber,
+  forceHideNumber,
+}: {
+  n?: string;
+  label: string;
+  light?: boolean;
+  forceShowNumber?: boolean;
+  forceHideNumber?: boolean;
+}) {
+  const [isHome, setIsHome] = useState<boolean>(() => isHomePage());
+
+  useEffect(() => {
+    const handleLocation = () => setIsHome(isHomePage());
+    window.addEventListener("popstate", handleLocation);
+    window.addEventListener("hashchange", handleLocation);
+    window.addEventListener("ophron-route-change", handleLocation);
+    return () => {
+      window.removeEventListener("popstate", handleLocation);
+      window.removeEventListener("hashchange", handleLocation);
+      window.removeEventListener("ophron-route-change", handleLocation);
+    };
+  }, []);
+
+  const showNumber = forceShowNumber ?? (!forceHideNumber && isHome && Boolean(n));
+
   return (
-    <div className={`flex items-center justify-between border-b pb-2.5 ${light ? "border-[#EDE5DA]/20 text-[#EDE5DA]" : "border-[#032147]/15 text-[#032147]"}`} style={light ? { borderColor: "rgba(237,229,218,.2)", color: "#EDE5DA" } : {}}>
+    <div
+      className={`flex items-center justify-between border-b pb-2.5 ${
+        light ? "border-[#EDE5DA]/20 text-[#EDE5DA]" : "border-[#032147]/15 text-[#032147]"
+      }`}
+      style={light ? { borderColor: "rgba(237,229,218,.2)", color: "#EDE5DA" } : {}}
+    >
       <div className="flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.22em]">
-        <span className={`grid place-items-center h-6 w-6 rounded-full text-[9px] ${light ? "bg-[#EDE5DA] text-[#032147]" : "bg-[#032147] text-[#EDE5DA]"}`} style={light ? { background: "#EDE5DA", color: "#032147" } : { background: "#032147", color: "#EDE5DA" }}>
-          §
-        </span>
-        <span className="opacity-60">{n}</span>
-        <span>/</span>
-        <span>{label}</span>
+        {showNumber ? (
+          <>
+            <span
+              className={`grid place-items-center h-6 w-6 rounded-full text-[9px] font-bold ${
+                light ? "bg-[#EDE5DA] text-[#032147]" : "bg-[#032147] text-[#EDE5DA]"
+              }`}
+              style={light ? { background: "#EDE5DA", color: "#032147" } : { background: "#032147", color: "#EDE5DA" }}
+            >
+              §
+            </span>
+            <span className="opacity-60">{n}</span>
+            <span>/</span>
+          </>
+        ) : (
+          <span
+            className={`inline-block h-2 w-2 rounded-full shrink-0 ${
+              light ? "bg-[#B7A38B]" : "bg-[#032147]"
+            }`}
+            style={light ? { background: "#B7A38B" } : { background: "#032147" }}
+          />
+        )}
+        <span className="font-semibold tracking-[0.22em]">{label}</span>
       </div>
       <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.22em] opacity-50">
-        <span>scroll</span><span>↓</span>
+        <span>scroll</span>
+        <span>↓</span>
       </div>
     </div>
   );

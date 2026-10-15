@@ -43,7 +43,7 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="relative py-10 sm:py-16 bg-paper overflow-hidden">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-5">
-        <SectionHead n="005" label="Singapore Client Endorsements" />
+        <SectionHead label="Singapore Client Endorsements" />
 
         <div className="mt-8 sm:mt-12 grid lg:grid-cols-12 gap-6 lg:gap-10 items-end">
           <div className="lg:col-span-7">

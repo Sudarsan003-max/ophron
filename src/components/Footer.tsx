@@ -183,7 +183,7 @@ export default function Footer() {
               <ul className="space-y-2 text-[12.5px] sm:text-[13px] font-inter opacity-90">
                 <li>
                   <a
-                    href="/services?service=disinfecting-services"
+                    href="/services/disinfecting-services"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
                     Disinfection & Decon
@@ -191,7 +191,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/services?service=microfibre-concept"
+                    href="/services/microfibre-cleaning"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
                     Microfibre Concept
@@ -199,7 +199,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/services?service=cleanroom-cleaning"
+                    href="/services/cleanroom-healthcare"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
                     Cleanroom & Healthcare
@@ -207,7 +207,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/services?service=carpet-cleaning"
+                    href="/services/carpet-upholstery"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
                     Carpet & Upholstery
@@ -215,7 +215,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/services?service=marble-polishing"
+                    href="/services/marble-polishing"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
                     Marble Diamond Polish
@@ -223,7 +223,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/services?service=facade-cleaning"
+                    href="/services/facade-cleaning"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
                     High-Rise Facade
@@ -231,7 +231,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/services?service=dishwashing-services"
+                    href="/services/dishwashing-kitchen"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
                     Dishwashing & Kitchen
@@ -239,7 +239,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/services?service=events-venue-cleaning"
+                    href="/services/events-venue"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
                     Events Venue Care

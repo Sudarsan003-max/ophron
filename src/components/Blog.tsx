@@ -18,7 +18,7 @@ export default function Blog() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-[#B7A38B]/10 blur-[150px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-[1400px] px-5">
-        <SectionHead n="011" label="Insights & Operations Research" light />
+        <SectionHead label="Insights & Operations Research" light />
 
         {/* Section Intro Subheading */}
         <ScrollReveal variant="up" delay={50}>

@@ -276,7 +276,7 @@ export default function Gallery() {
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8">
         
         {/* Section Header */}
-        <SectionHead n="007" label="Operational Deployments Gallery" light />
+        <SectionHead label="Operational Deployments Gallery" light />
 
         <div className="mt-8 grid lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">

@@ -101,7 +101,7 @@ export default function Nav() {
       title: "OPHRON People",
       subtitle: "Vetted hospitality stewarding, kitchen helpers & venue cleaners",
       badge: "WSQ Vetted",
-      href: "/services?service=people",
+      href: "/services/people",
     },
     {
       icon: ShieldCheck,
@@ -109,7 +109,7 @@ export default function Nav() {
       title: "OPHRON Hygiene",
       subtitle: "SFA kitchen deep cleans, exhaust ducts & NEA disinfection",
       badge: "SFA Grade A",
-      href: "/services?service=hygiene",
+      href: "/services/hygiene",
     },
     {
       icon: Building2,
@@ -117,7 +117,7 @@ export default function Nav() {
       title: "OPHRON Facilities",
       subtitle: "High-rise IRATA rope access façade, event resets & IFM Lite",
       badge: "IRATA L3",
-      href: "/services?service=facilities",
+      href: "/services/facilities",
     },
     {
       icon: Cpu,
@@ -125,7 +125,7 @@ export default function Nav() {
       title: "OPHRON Technology",
       subtitle: "Connected hospitality POS, AI shift tracking & SaaS telemetry",
       badge: "Cloud POS",
-      href: "/services?service=technology",
+      href: "/services/technology",
     },
     {
       icon: TrendingUp,
@@ -133,7 +133,7 @@ export default function Nav() {
       title: "Commercial Intelligence",
       subtitle: "Labor yield optimization, RevPASH & executive margin advisory",
       badge: "Yield Strategy",
-      href: "/services?service=intelligence",
+      href: "/services/intelligence",
     },
   ];
 

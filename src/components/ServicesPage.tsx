@@ -21,8 +21,8 @@ export default function ServicesPage() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleOpenService = (slug: string) => {
-    setActiveSlug(slug);
-    window.history.replaceState(null, "", `#services?service=${slug}`);
+    window.history.pushState(null, "", `/services/${slug}`);
+    window.dispatchEvent(new PopStateEvent("popstate"));
   };
 
   const handleCloseModal = () => {

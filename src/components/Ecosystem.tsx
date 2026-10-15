@@ -208,7 +208,7 @@ export default function Ecosystem() {
 
       <div className="relative mx-auto max-w-[1400px] px-5">
         {/* Section Header */}
-        <SectionHead n="004" label="The OPHRON Ecosystem" light />
+        <SectionHead label="The OPHRON Ecosystem" light />
 
         <div className="grid lg:grid-cols-12 gap-10 items-end mt-12 mb-16">
           <div className="lg:col-span-7">

@@ -8,7 +8,6 @@ import Approach from "./components/Approach";
 import Solutions from "./components/Solutions";
 import Showcase from "./components/Showcase";
 import WhyUs from "./components/WhyUs";
-import Testimonials from "./components/Testimonials";
 import Blog from "./components/Blog";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -16,54 +15,20 @@ import AllArticles from "./components/AllArticles";
 import MainframeHero from "./components/MainframeHero";
 import Gallery from "./components/Gallery";
 import ServicesPage from "./components/ServicesPage";
+import ServiceDetailPage from "./components/ServiceDetailPage";
+import WhyPage from "./components/WhyPage";
+import Founder from "./components/Founder";
+import WhoWeServe from "./components/WhoWeServe";
 import Ecosystem from "./components/Ecosystem";
 import HowItWorks from "./components/HowItWorks";
 import FAQ from "./components/FAQ";
 import FloatingActions from "./components/FloatingActions";
+import { OPHRON_SERVICE_PAGES } from "./data/ophronServicePages";
+import { resolveCurrentRoute } from "./utils/routes";
 
 import { initScrollEngine, initAutoReveals } from "./motion";
 
-// Helper to determine active route from URL path or legacy hash
-export function resolveCurrentRoute(): string {
-  if (typeof window === "undefined") return "/";
-  
-  const rawPath = window.location.pathname.toLowerCase().replace(/\/+$/, "") || "/";
-  const rawHash = window.location.hash.toLowerCase().replace(/^#\/?/, "");
-
-  // Legacy founder route redirect to about
-  if (rawPath === "/founder" || rawHash === "founder") {
-    return "/about";
-  }
-
-  // Check known route paths
-  const knownRoutes = [
-    "about",
-    "services",
-    "why",
-    "gallery",
-    "gallery-grid",
-    "blog",
-    "contact",
-    "all-articles",
-    "mainframe",
-  ];
-
-  // If path matches a known route
-  for (const r of knownRoutes) {
-    if (rawPath === `/${r}` || rawPath.startsWith(`/${r}/`)) {
-      return `/${r}`;
-    }
-  }
-
-  // If visited via legacy hash (e.g. #about, #services), support and upgrade
-  for (const r of knownRoutes) {
-    if (rawHash === r || rawHash.startsWith(`${r}?`) || rawHash.startsWith(`${r}/`)) {
-      return `/${r}`;
-    }
-  }
-
-  return "/";
-}
+export { resolveCurrentRoute };
 
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState<string>(resolveCurrentRoute());
@@ -75,6 +40,7 @@ export default function App() {
     const handleLocationChange = () => {
       const route = resolveCurrentRoute();
       setCurrentRoute(route);
+      window.dispatchEvent(new Event("ophron-route-change"));
 
       // Legacy hash auto-upgrade to clean SEO URL (e.g. /#about -> /about)
       const rawHash = window.location.hash.toLowerCase();
@@ -230,7 +196,20 @@ export default function App() {
 
   // Sync SEO Title, Meta Description, and Canonical URL on route change
   useEffect(() => {
-    const meta = ROUTE_METADATA[currentRoute] || ROUTE_METADATA["/"];
+    let meta = ROUTE_METADATA[currentRoute];
+    if (!meta && currentRoute.startsWith("/services/")) {
+      const slug = currentRoute.replace(/^\/services\//, "").replace(/\/+$/, "");
+      const srv = OPHRON_SERVICE_PAGES[slug];
+      if (srv) {
+        meta = {
+          title: `${srv.heroTitle} — OPHRON Singapore Specialized Services`,
+          description: srv.heroLead,
+          canonical: `https://ophronsystems.com/services/${slug}`,
+        };
+      }
+    }
+    if (!meta) meta = ROUTE_METADATA["/"];
+
     document.title = meta.title;
 
     // Update or create Meta Description
@@ -268,7 +247,11 @@ export default function App() {
   }, [currentRoute]);
 
   const isAboutPage = currentRoute === "/about";
-  const isServicesPage = currentRoute === "/services";
+  const isServicesRoute = currentRoute === "/services" || currentRoute.startsWith("/services/");
+  const isServiceDetailPage = currentRoute.startsWith("/services/");
+  const serviceSlug = isServiceDetailPage
+    ? currentRoute.replace(/^\/services\//, "").replace(/\/+$/, "")
+    : "";
   const isWhyPage = currentRoute === "/why";
   const isGalleryPage = currentRoute === "/gallery" || currentRoute === "/gallery-grid";
   const isBlogPage = currentRoute === "/blog";
@@ -293,19 +276,25 @@ export default function App() {
       <Nav />
       {isAboutPage ? (
         <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
+          {/* Unique About Content: Leadership, Enterprise Sectors, and Operating Ecosystem */}
           <About />
-          <Problems />
+          <Founder />
+          <WhoWeServe />
           <Ecosystem />
         </main>
-      ) : isServicesPage ? (
+      ) : isServicesRoute ? (
         <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
-          <ServicesPage />
+          {/* Dedicated Individual Service Landing Page or Full Directory */}
+          {isServiceDetailPage ? (
+            <ServiceDetailPage slug={serviceSlug} />
+          ) : (
+            <ServicesPage />
+          )}
         </main>
       ) : isWhyPage ? (
         <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
-          <WhyUs />
-          <Showcase />
-          <Testimonials />
+          {/* Unique Why Us Content: Comparative Matrix, Compliance Architecture, SLAs */}
+          <WhyPage />
         </main>
       ) : isGalleryPage ? (
         <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
