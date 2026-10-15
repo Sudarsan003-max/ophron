@@ -18,7 +18,7 @@ function ophron_output_structured_data() {
     $site_url = esc_url(home_url('/'));
     $site_name = esc_attr(get_bloginfo('name'));
     $site_desc = esc_attr(get_bloginfo('description'));
-    $logo_url = esc_url(get_template_directory_uri() . '/assets/images/brand/ophron-gold-emblem-transparent.png');
+    $logo_url = esc_url(get_template_directory_uri() . '/images/brand/ophron-gold-emblem-transparent.png');
 
     $schema = array(
         '@context' => 'https://schema.org',

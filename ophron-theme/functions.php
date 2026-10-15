@@ -106,7 +106,11 @@ add_filter('script_loader_tag', 'ophron_set_script_as_module', 10, 3);
 
 // 5. Helper function for asset paths
 function ophron_asset($path) {
-    return esc_url(get_template_directory_uri() . '/assets/' . ltrim($path, '/'));
+    $clean_path = ltrim($path, '/');
+    if (strpos($clean_path, 'images/') === 0) {
+        return esc_url(get_template_directory_uri() . '/' . $clean_path);
+    }
+    return esc_url(get_template_directory_uri() . '/assets/' . $clean_path);
 }
 
 // 6. SPA Rewrite Rules for Clean Dedicated Sub-Pages (/about, /services, /why, etc.)

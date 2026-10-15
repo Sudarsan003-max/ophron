@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   base: "./",
+  publicDir: false,
   plugins: [react(), tailwindcss()],
   build: {
     outDir: "ophron-theme/assets/dist",
