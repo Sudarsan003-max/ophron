@@ -17,7 +17,6 @@ import Gallery from "./components/Gallery";
 import ServicesPage from "./components/ServicesPage";
 import ServiceDetailPage from "./components/ServiceDetailPage";
 import WhyPage from "./components/WhyPage";
-import Founder from "./components/Founder";
 import WhoWeServe from "./components/WhoWeServe";
 import Ecosystem from "./components/Ecosystem";
 import HowItWorks from "./components/HowItWorks";
@@ -291,7 +290,6 @@ export default function App() {
         <main id="main-content" tabIndex={-1} className="pt-24 focus:outline-none">
           {/* Unique About Content: Leadership, Enterprise Sectors, and Operating Ecosystem */}
           <About />
-          <Founder />
           <WhoWeServe />
           <Ecosystem />
         </main>

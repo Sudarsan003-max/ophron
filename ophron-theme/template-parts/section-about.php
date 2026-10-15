@@ -48,13 +48,13 @@
             </div>
 
             <div class="lg:col-span-5 space-y-6">
-                <!-- Leadership Card 1: Isaac Vivian (Founder) -->
+                <!-- Leadership Card 1: Isaac Vivian (Director & Co-Founder) -->
                 <div class="relative rounded-3xl overflow-hidden border border-[#B7A38B]/30 bg-[#032147] text-[#EDE5DA] p-6 sm:p-7 shadow-2xl">
                     <div class="flex items-center gap-4 mb-4">
-                        <img src="<?php echo ophron_asset('images/isaac_portrait.png'); ?>" alt="Isaac Vivian — Founder, OPHRON Systems" class="h-16 w-16 rounded-full object-cover border-2 border-[#B7A38B]" onerror="this.src='<?php echo ophron_asset('images/isaac_portrait.jpg'); ?>'" />
+                        <img src="<?php echo ophron_asset('images/isaac_portrait.png'); ?>" alt="Isaac Vivian — Director & Co-Founder, OPHRON Systems" class="h-16 w-16 rounded-full object-cover border-2 border-[#B7A38B]" onerror="this.src='<?php echo ophron_asset('images/isaac_portrait.jpg'); ?>'" />
                         <div>
                             <div class="font-canela text-xl font-bold text-[#EDE5DA]">Isaac Vivian</div>
-                            <div class="text-xs font-mono uppercase tracking-wider text-[#B7A38B] font-semibold">Founder — OPHRON Systems</div>
+                            <div class="text-xs font-mono uppercase tracking-wider text-[#B7A38B] font-semibold">Director & Co-Founder — OPHRON Systems</div>
                         </div>
                     </div>
 
@@ -64,17 +64,17 @@
 
                     <div class="mt-4 pt-4 border-t border-[#EDE5DA]/15 flex items-center justify-between text-xs font-mono text-[#EDE5DA]/60">
                         <span>SINGAPORE HQ</span>
-                        <span class="text-[#B7A38B] font-bold">PLATFORM ARCHITECTURE</span>
+                        <span class="text-[#B7A38B] font-bold">STRATEGY & VISION</span>
                     </div>
                 </div>
 
-                <!-- Leadership Card 2: Kelvin (Director) -->
+                <!-- Leadership Card 2: Kelvin (Director & Co-Founder) -->
                 <div class="relative rounded-3xl overflow-hidden border border-[#B7A38B]/30 bg-[#032147] text-[#EDE5DA] p-6 sm:p-7 shadow-2xl">
                     <div class="flex items-center gap-4 mb-4">
-                        <img src="<?php echo ophron_asset('images/gkt_founder.jpg'); ?>" alt="Kelvin — Director, OPHRON Systems & Founder, GKT International" class="h-16 w-16 rounded-full object-cover border-2 border-[#B7A38B]" />
+                        <img src="<?php echo ophron_asset('images/gkt_founder.jpg'); ?>" alt="Kelvin — Director & Co-Founder, OPHRON Systems & Founder, GKT International" class="h-16 w-16 rounded-full object-cover border-2 border-[#B7A38B]" />
                         <div>
                             <div class="font-canela text-xl font-bold text-[#EDE5DA]">Kelvin</div>
-                            <div class="text-xs font-mono uppercase tracking-wider text-[#B7A38B] font-semibold">Director — OPHRON Systems | Founder & MD — GKT International</div>
+                            <div class="text-xs font-mono uppercase tracking-wider text-[#B7A38B] font-semibold">Director & Co-Founder — OPHRON Systems | Founder & Managing Director — GKT International</div>
                         </div>
                     </div>
 

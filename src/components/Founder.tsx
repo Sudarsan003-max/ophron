@@ -63,7 +63,7 @@ export default function Founder() {
                 lines={[
                   <span className="inline-flex items-center gap-2">
                     Isaac Vivian
-                    <span className="text-[#B7A38B] inline-flex items-center" title="Verified Founder">
+                    <span className="text-[#B7A38B] inline-flex items-center" title="Director & Co-Founder">
                       <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                       </svg>
@@ -73,7 +73,7 @@ export default function Founder() {
               />
               
               <p className="mt-3 text-[14.5px] font-inter font-medium leading-relaxed text-[#032147]/85 max-w-2xl flex flex-wrap items-center gap-x-1">
-                Founder <a href="https://www.instagram.com/ophronsystems/" target="_blank" rel="noopener noreferrer" className="text-[#032147] hover:text-[#B7A38B] transition duration-300 font-bold underline-draw">@ophronsystems</a> – Complete Hospitality Operational Infrastructure Platform | Singapore & International
+                Director & Co-Founder <a href="https://www.instagram.com/ophronsystems/" target="_blank" rel="noopener noreferrer" className="text-[#032147] hover:text-[#B7A38B] transition duration-300 font-bold underline-draw">@ophronsystems</a> – Complete Hospitality Operational Infrastructure Platform | Singapore & International
               </p>
 
               {/* Monospace Tags */}
@@ -162,11 +162,11 @@ export default function Founder() {
                 <div className="rounded-3xl border border-[#B7A38B]/30 bg-[#EDE5DA] p-6 sm:p-8 shadow-sm">
                   <h3 className="font-canela text-2xl font-bold text-[#032147] mb-6 flex items-center gap-2">
                     <span className="w-1.5 h-6 bg-[#B7A38B] rounded-full" />
-                    Founder Vision & Platform Architecture
+                    Strategic Vision & Platform Architecture
                   </h3>
                   <div className="text-[14.5px] leading-relaxed text-[#032147]/85 space-y-6 font-inter">
                     <p className="first-letter:text-5xl first-letter:font-canela first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:text-[#B7A38B] first-letter:leading-none">
-                      Isaac Vivian is the Founder of OPHRON, with the vision of building a complete Hospitality Operational Infrastructure Platform for hotels, restaurants, resorts, serviced apartments, healthcare facilities, and commercial establishments across Singapore and internationally.
+                      Isaac Vivian is Director & Co-Founder of OPHRON, with the vision of building a complete Hospitality Operational Infrastructure Platform for hotels, restaurants, resorts, serviced apartments, healthcare facilities, and commercial establishments across Singapore and internationally.
                     </p>
                     <p>
                       Instead of viewing OPHRON as a standard cleaning or manpower vendor, Isaac designed OPHRON as a strategic operating partner that unifies people, facilities, hygiene, technology, and commercial performance on a single platform.
@@ -188,7 +188,7 @@ export default function Founder() {
                     <blockquote className="font-serif-i text-[20px] leading-relaxed text-[#032147] pt-8 relative z-10 font-medium">
                       When I look at this model, I don't see us selling manpower or cleaning services. I see us becoming the operating system that powers hospitality operations.
                     </blockquote>
-                    <cite className="block mt-5 font-mono text-[10px] uppercase tracking-[0.2em] text-[#B7A38B] font-bold">— Isaac Vivian, Founder</cite>
+                    <cite className="block mt-5 font-mono text-[10px] uppercase tracking-[0.2em] text-[#B7A38B] font-bold">— Isaac Vivian, Director & Co-Founder</cite>
                   </div>
                 </TiltCard>
               </ScrollReveal>
@@ -275,7 +275,7 @@ export default function Founder() {
                       <div className="rounded-2xl border border-[#B7A38B]/30 bg-[#EDE5DA] p-6 hover:bg-white/80 transition duration-300 group">
                         <div className="flex justify-between items-start flex-wrap gap-2">
                           <div>
-                            <h4 className="font-montserrat font-bold text-[17px] text-[#032147] group-hover:text-[#B7A38B] transition duration-300">Founder</h4>
+                            <h4 className="font-montserrat font-bold text-[17px] text-[#032147] group-hover:text-[#B7A38B] transition duration-300">Director & Co-Founder</h4>
                             <p className="text-[13px] text-[#B7A38B] font-bold mt-0.5">OPHRON Platform · Full-time</p>
                           </div>
                           <span className="rounded-full bg-[#032147]/5 px-3 py-1 font-mono text-[9px] text-[#032147]/70 font-bold">2023 – Present</span>

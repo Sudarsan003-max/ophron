@@ -232,10 +232,10 @@ export default function About() {
               </p>
             </div>
 
-            {/* Dual Founder Cards Grid (Side-by-Side 2-Column Showcase) */}
+            {/* Dual Leadership Cards Grid (Side-by-Side 2-Column Showcase) */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
               
-              {/* ── CARD 1: ISAAC VIVIAN (OPHRON SYSTEMS) ── */}
+              {/* ── CARD 1: ISAAC VIVIAN (DIRECTOR & CO-FOUNDER) ── */}
               <div className="rounded-[30px] border border-[#B7A38B]/40 bg-[#021733] text-[#EDE5DA] overflow-hidden shadow-2xl relative flex flex-col justify-between group hover:border-[#B7A38B] transition-all duration-500">
                 <div className="absolute -top-24 -left-24 w-72 h-72 bg-[#B7A38B]/15 rounded-full blur-3xl pointer-events-none" />
                 <CornerBrackets color="#B7A38B" size={14} hoverSize={20} />
@@ -245,7 +245,7 @@ export default function About() {
                   <div className="relative rounded-2xl overflow-hidden border-2 border-[#B7A38B]/50 shadow-[0_15px_40px_rgba(0,0,0,0.85)] bg-black mb-6">
                     <img
                       src={isaacPortrait}
-                      alt="Isaac Vivian — Founder, OPHRON Systems"
+                      alt="Isaac Vivian — Director & Co-Founder, OPHRON Systems"
                       loading="lazy"
                       decoding="async"
                       className="w-full h-auto aspect-[3/2] object-cover transition-transform duration-1000 group-hover:scale-[1.02]"
@@ -255,13 +255,13 @@ export default function About() {
                     {/* Office Tag Badge */}
                     <div className="absolute bottom-3.5 left-3.5 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-[#B7A38B]/40 text-[9.5px] font-mono uppercase tracking-[0.18em] text-[#EDE5DA]">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
-                      <span>Isaac Vivian · Founder, OPHRON Systems</span>
+                      <span>Isaac Vivian · Director & Co-Founder</span>
                     </div>
                   </div>
 
                   {/* Header & Titles */}
                   <div className="flex items-center gap-2 text-[9.5px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold mb-2">
-                    <span>[ Infrastructure & Tech OS ]</span>
+                    <span>[ Strategy & Ecosystem Architecture ]</span>
                     <span className="opacity-40">/</span>
                     <span className="text-[#EDE5DA]/70 font-normal">Singapore HQ</span>
                   </div>
@@ -273,7 +273,7 @@ export default function About() {
                     >
                       Isaac Vivian
                     </h4>
-                    <span className="text-[#B7A38B] inline-flex items-center" title="Verified Founder">
+                    <span className="text-[#B7A38B] inline-flex items-center" title="Director & Co-Founder">
                       <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                       </svg>

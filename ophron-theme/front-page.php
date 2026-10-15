@@ -12,8 +12,8 @@ get_header();
     <!-- Server-Side SEO Fallback for Search Engine Crawlers (overridden on client-side React hydration) -->
     <noscript>
         <main class="p-8 text-center bg-[#EDE5DA] text-[#032147]">
-            <h1 class="text-4xl font-bold font-serif">OPHRON — Hospitality & Facilities Operational Infrastructure</h1>
-            <p class="mt-4 text-lg">Unifying People, Hygiene, Facilities, Technology, and Commercial Intelligence across Singapore & globally. NEA Licensed & bizSAFE Level 3 Certified.</p>
+            <h1 class="text-4xl font-bold font-serif">One partner. One ecosystem. Better operations.</h1>
+            <p class="mt-4 text-lg">OPHRON helps Singapore restaurants, hotels and commercial properties manage manpower, cleaning, hygiene and facilities with one accountable operating partner.</p>
         </main>
     </noscript>
 </div>
