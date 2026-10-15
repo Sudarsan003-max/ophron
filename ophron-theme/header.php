@@ -25,6 +25,7 @@
             window.top.location = window.self.location;
         }
         window.__OPHRON_THEME_URL__ = "<?php echo esc_url(get_template_directory_uri()); ?>";
+        window.__OPHRON_SITE_URL__ = "<?php echo esc_url(home_url('/')); ?>";
     </script>
     <?php wp_head(); ?>
 </head>

@@ -5,8 +5,24 @@
 export function resolveCurrentRoute(): string {
   if (typeof window === "undefined") return "/";
 
-  const rawPath = window.location.pathname.toLowerCase().replace(/\/+$/, "") || "/";
+  let rawPath = window.location.pathname.toLowerCase().replace(/\/+$/, "") || "/";
   const rawHash = window.location.hash.toLowerCase().replace(/^#\/?/, "");
+
+  // Strip WordPress subdirectory base URL if present
+  try {
+    const siteUrl =
+      (window as any).ophronData?.siteUrl ||
+      (window as any).__OPHRON_SITE_URL__ ||
+      "";
+    if (siteUrl) {
+      const sitePath = new URL(siteUrl).pathname.toLowerCase().replace(/\/+$/, "");
+      if (sitePath && sitePath !== "/" && rawPath.startsWith(sitePath)) {
+        rawPath = rawPath.slice(sitePath.length) || "/";
+      }
+    }
+  } catch {
+    // URL parse fallback
+  }
 
   // Legacy founder route redirect to about
   if (rawPath === "/founder" || rawHash === "founder") {

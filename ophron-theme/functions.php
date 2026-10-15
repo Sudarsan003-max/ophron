@@ -108,3 +108,29 @@ add_filter('script_loader_tag', 'ophron_set_script_as_module', 10, 3);
 function ophron_asset($path) {
     return esc_url(get_template_directory_uri() . '/assets/' . ltrim($path, '/'));
 }
+
+// 6. SPA Rewrite Rules for Clean Dedicated Sub-Pages (/about, /services, /why, etc.)
+function ophron_spa_rewrite_rules() {
+    $spa_routes = array(
+        'about',
+        'why',
+        'services',
+        'services/([^/]+)',
+        'gallery',
+        'gallery-grid',
+        'blog',
+        'contact',
+        'all-articles',
+        'mainframe',
+    );
+    foreach ($spa_routes as $route) {
+        add_rewrite_rule('^' . $route . '/?$', 'index.php', 'top');
+    }
+}
+add_action('init', 'ophron_spa_rewrite_rules');
+
+function ophron_flush_rewrites() {
+    ophron_spa_rewrite_rules();
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'ophron_flush_rewrites');
