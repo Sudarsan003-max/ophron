@@ -28,26 +28,48 @@ export default function About() {
         <div className="mt-6 sm:mt-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-7">
             <MaskedHeadline
-              as="h2"
+              as="h1"
               className="font-canela font-bold text-[34px] sm:text-[54px] lg:text-[76px] leading-[0.95] tracking-tight text-ink"
               lines={[
-                <>Operations <span className="font-serif-i text-[#B7A38B]">unified.</span></>,
+                "We make complex",
                 <>
-                  Hospitality{" "}
-                  <span className="relative inline-block">
-                    empowered
-                    <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 300 14" fill="none">
-                      <path d="M3 9 Q 80 -2 150 6 T 297 5" stroke="#B7A38B" strokeWidth="4" strokeLinecap="round" />
-                    </svg>
-                  </span>.
+                  operations <span className="font-serif-i text-[#B7A38B]">easier to manage.</span>
                 </>,
               ]}
             />
 
             <ScrollReveal variant="up" delay={150}>
-              <p className="mt-5 sm:mt-8 font-inter max-w-xl text-[14.5px] sm:text-[16.5px] leading-relaxed text-[#032147]/85">
-                Instead of managing fragmented vendors for manpower, cleaning, and tech, OPHRON serves as your single <strong className="text-[#032147] font-semibold">Strategic Operating Partner</strong> — managing people, facilities, hygiene, technology, and performance from a single centralized platform.
-              </p>
+              <div className="mt-5 sm:mt-8 space-y-4 font-inter max-w-xl text-[14.5px] sm:text-[16px] leading-relaxed text-[#032147]/85">
+                <p className="m-0">
+                  A restaurant depends on more than its kitchen. A hotel depends on more than its rooms. Behind every good guest experience is a team of people, cleaning routines, facilities and systems that need to work together.
+                </p>
+                <p className="m-0">
+                  OPHRON was built around a simple idea: businesses should spend less time managing disconnected suppliers and more time focusing on customers, teams and growth.
+                </p>
+                <p className="m-0">
+                  We connect practical frontline services with clearer coordination and useful operational technology. Whether you need one service or several, the goal is the same: reliable support without unnecessary complexity.
+                </p>
+              </div>
+
+              {/* Mission & Vision */}
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-w-xl">
+                <div className="rounded-2xl p-4 border border-[#B7A38B]/40 bg-[#EDE5DA]/70">
+                  <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#8C7355] font-bold mb-1.5">
+                    Our Mission
+                  </div>
+                  <p className="text-[13px] font-inter leading-relaxed text-[#032147] font-medium m-0">
+                    To make essential hospitality and commercial operations simpler, more dependable and easier to manage.
+                  </p>
+                </div>
+                <div className="rounded-2xl p-4 border border-[#B7A38B]/40 bg-[#EDE5DA]/70">
+                  <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#8C7355] font-bold mb-1.5">
+                    Our Vision
+                  </div>
+                  <p className="text-[13px] font-inter leading-relaxed text-[#032147] font-medium m-0">
+                    To become a trusted operating partner for hospitality and commercial businesses—bringing the people, services and systems they depend on into one connected ecosystem.
+                  </p>
+                </div>
+              </div>
             </ScrollReveal>
 
             {/* Bento metrics with 3D Tilt & Animated Counters */}
@@ -259,24 +281,20 @@ export default function About() {
                   </div>
 
                   <p className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-[#B7A38B] font-semibold mb-4">
-                    Founder — OPHRON Systems
+                    Director & Co-Founder — OPHRON Systems
                   </p>
 
-                  <blockquote className="pl-3.5 border-l-2 border-[#B7A38B] italic text-[13px] sm:text-[13.5px] leading-relaxed text-[#EDE5DA]/90 font-serif mb-4">
-                    “We don't sell cleaning or manpower. We become the strategic operating partner that powers hospitality and commercial operations across Singapore and globally.”
-                  </blockquote>
-
-                  <p className="text-[12.5px] leading-relaxed text-[#EDE5DA]/75 font-inter mb-5 flex-1">
-                    Isaac engineered OPHRON to solve vendor fragmentation across Singapore's hospitality scene — unifying People, Facilities, Hygiene, and Technology under a single accountable standard built for institutional reliability.
+                  <p className="text-[13px] leading-relaxed text-[#EDE5DA]/85 font-inter mb-5 flex-1">
+                    Isaac leads OPHRON's strategy, business development, and long-term vision. Combining business, legal, financial, and technology perspectives, he focuses on building an integrated operational ecosystem that brings essential services and technology together to simplify operations, improve efficiency, and support business growth.
                   </p>
 
                   {/* Capability Tags */}
                   <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
                     {[
-                      "Platform Architecture",
-                      "AI SaaS Telemetry",
-                      "IFM Lite Operations",
-                      "Commercial Strategy",
+                      "Director & Co-Founder",
+                      "Operational Strategy",
+                      "Integrated Ecosystems",
+                      "Commercial Growth",
                     ].map((tag, idx) => (
                       <span
                         key={idx}
@@ -298,7 +316,7 @@ export default function About() {
                     }}
                     className="inline-flex items-center gap-1.5 text-[10.5px] font-mono uppercase tracking-[0.18em] text-[#B7A38B] hover:text-white font-bold transition-colors cursor-pointer group/btn"
                   >
-                    <span>Connect with OPHRON Leadership</span>
+                    <span>Discuss Your Requirements</span>
                     <span className="transform group-hover/btn:translate-x-1 transition-transform">→</span>
                   </button>
                   <span className="text-[9.5px] font-mono text-[#EDE5DA]/50 uppercase tracking-wider">
@@ -318,7 +336,7 @@ export default function About() {
                   <div className="relative rounded-2xl overflow-hidden border-2 border-[#B7A38B]/50 shadow-[0_15px_40px_rgba(0,0,0,0.85)] bg-black mb-6">
                     <img
                       src={gktFounder}
-                      alt="Kelvin — Director, OPHRON Systems & Founder, GKT International Pte. Ltd."
+                      alt="Kelvin — Director & Co-Founder, OPHRON Systems & Founder, GKT International Pte. Ltd."
                       loading="lazy"
                       decoding="async"
                       className="w-full h-auto aspect-[3/2] object-cover transition-transform duration-1000 group-hover:scale-[1.02]"
@@ -328,15 +346,15 @@ export default function About() {
                     {/* Office Tag Badge */}
                     <div className="absolute bottom-3.5 left-3.5 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-[#B7A38B]/40 text-[9.5px] font-mono uppercase tracking-[0.18em] text-[#EDE5DA]">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
-                      <span>Kelvin · Director, OPHRON Systems</span>
+                      <span>Kelvin · Director & Co-Founder</span>
                     </div>
                   </div>
 
                   {/* Header & Titles */}
                   <div className="flex items-center gap-2 text-[9.5px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold mb-2">
-                    <span>[ Operations & Frontline Excellence ]</span>
+                    <span>[ Frontline Operations & Service Delivery ]</span>
                     <span className="opacity-40">/</span>
-                    <span className="text-[#EDE5DA]/70 font-normal">Director, OPHRON Systems</span>
+                    <span className="text-[#EDE5DA]/70 font-normal">Singapore Operations</span>
                   </div>
 
                   <div className="flex items-center gap-2 mb-1">
@@ -346,7 +364,7 @@ export default function About() {
                     >
                       Kelvin
                     </h4>
-                    <span className="text-[#B7A38B] inline-flex items-center" title="Director, OPHRON Systems & Verified Founder">
+                    <span className="text-[#B7A38B] inline-flex items-center" title="Director & Co-Founder">
                       <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                       </svg>
@@ -354,24 +372,20 @@ export default function About() {
                   </div>
 
                   <p className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-[#B7A38B] font-semibold mb-4">
-                    Director — OPHRON Systems | Founder & Managing Director — GKT International
+                    Director & Co-Founder — OPHRON Systems | Founder & Managing Director — GKT International
                   </p>
 
-                  <blockquote className="pl-3.5 border-l-2 border-[#B7A38B] italic text-[13px] sm:text-[13.5px] leading-relaxed text-[#EDE5DA]/90 font-serif mb-4">
-                    “Cleanliness and operational readiness are never commodities. Since 2012, GKT has set the benchmark for Singapore’s top hotel towers, Michelin-selected kitchens, and premier commercial venues.”
-                  </blockquote>
-
-                  <p className="text-[12.5px] leading-relaxed text-[#EDE5DA]/75 font-inter mb-5 flex-1">
-                    As Director of OPHRON and Founder of GKT International, Kelvin brings over two decades of hands-on Singapore industry leadership — steering our seasoned operational frontline and treating facility hygiene, stewarding, and institutional readiness as disciplined, audit-ready crafts.
+                  <p className="text-[13px] leading-relaxed text-[#EDE5DA]/85 font-inter mb-5 flex-1">
+                    Kelvin brings over two decades of hands-on experience in Singapore's manpower, cleaning, and facility management industries. As the Founder and Managing Director of GKT International, he has built extensive operational expertise serving Singapore's hospitality and commercial sectors. At OPHRON, Kelvin leads frontline operations, service delivery, and quality standards, bringing established industry experience and operational capabilities into a modern, integrated service ecosystem.
                   </p>
 
                   {/* Capability Tags */}
                   <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
                     {[
-                      "Director, OPHRON",
+                      "Director & Co-Founder",
                       "20+ Yrs SG Heritage",
                       "Frontline Operations",
-                      "NEA & bizSAFE Certified",
+                      "Service Delivery Standards",
                     ].map((tag, idx) => (
                       <span
                         key={idx}
@@ -393,7 +407,7 @@ export default function About() {
                     }}
                     className="inline-flex items-center gap-1.5 text-[10.5px] font-mono uppercase tracking-[0.18em] text-[#B7A38B] hover:text-white font-bold transition-colors cursor-pointer group/btn"
                   >
-                    <span>Connect with Leadership</span>
+                    <span>Discuss Your Requirements</span>
                     <span className="transform group-hover/btn:translate-x-1 transition-transform">→</span>
                   </button>
                   <span className="text-[9.5px] font-mono text-[#EDE5DA]/50 uppercase tracking-wider">
@@ -405,21 +419,21 @@ export default function About() {
             </div>
 
             {/* ── UNIFIED ALLIANCE SUMMARY CARD ── */}
-            <div className="mt-8 rounded-2xl bg-[#EDE5DA] p-6 sm:p-7 border border-[#B7A38B]/50 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="space-y-1.5 text-center md:text-left">
+            <div className="mt-8 rounded-2xl bg-[#EDE5DA] p-6 sm:p-8 border border-[#B7A38B]/50 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="space-y-2 text-center md:text-left">
                 <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#8C7355] font-bold">
                   <span>✦ Unified Operating Alliance</span>
                   <span className="text-[#032147]/40">·</span>
-                  <span>Singapore & Regional</span>
+                  <span>Part of the GKT International Group</span>
                 </div>
                 <h4
                   className="text-xl sm:text-2xl font-bold text-[#032147] tracking-tight"
                   style={{ fontFamily: "'Canela', 'Cinzel', 'Playfair Display', 'Georgia', serif" }}
                 >
-                  OPHRON Systems & GKT International — Combined Under One Platform
+                  Two strengths. One ecosystem. One commitment to better operations.
                 </h4>
-                <p className="text-xs sm:text-[13px] text-[#032147]/80 max-w-3xl leading-relaxed">
-                  Together, GKT International and OPHRON Systems operate as one unified organization, bringing together shared expertise, streamlined operations, and a common commitment to delivering reliable, high-quality facility management services across Singapore.
+                <p className="text-xs sm:text-[13.5px] text-[#032147]/85 max-w-3xl leading-relaxed">
+                  <strong>OPHRON is part of the GKT International Group</strong>, combining GKT International's established operational expertise in Singapore with OPHRON's modern approach to hospitality and commercial facility management. Together, we bring experienced teams, proven operational capabilities, and technology-driven solutions under one ecosystem. From manpower and cleaning to facility services and operational technology, we help businesses operate more efficiently, reliably, and confidently.
                 </p>
               </div>
             </div>

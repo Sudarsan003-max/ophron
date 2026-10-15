@@ -23,9 +23,12 @@ export default function Blog() {
         {/* Section Intro Subheading */}
         <ScrollReveal variant="up" delay={50}>
           <div className="mt-3 mb-6 max-w-2xl">
-            <h2 className="font-canela text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              Empirical Standards. <span className="font-serif-i italic text-[#B7A38B]">Audited Delivery.</span>
-            </h2>
+            <h1 className="font-canela text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              Useful answers for <span className="font-serif-i italic text-[#B7A38B]">people who run busy places.</span>
+            </h1>
+            <p className="mt-2 text-sm sm:text-base text-[#EDE5DA]/80 font-inter">
+              Practical guidance on staffing, kitchen hygiene, commercial cleaning and facility operations—written for managers who need decisions, not jargon.
+            </p>
           </div>
         </ScrollReveal>
 

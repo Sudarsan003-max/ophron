@@ -124,9 +124,9 @@ export default function ServicesPage() {
                 className="font-canela font-bold text-4xl sm:text-6xl lg:text-7xl leading-[0.98] tracking-tight text-white"
                 staggerMs={130}
                 lines={[
-                  "Specialized Hospitality &",
+                  "The right support for the way",
                   <>
-                    Facility <span className="font-serif-i italic text-[#B7A38B]">Services.</span>
+                    your business <span className="font-serif-i italic text-[#B7A38B]">runs.</span>
                   </>,
                 ]}
               />
@@ -134,7 +134,7 @@ export default function ServicesPage() {
             <div className="lg:col-span-4">
               <ScrollReveal variant="left" delay={250}>
                 <p className="font-inter text-[15.5px] leading-relaxed text-[#EDE5DA]/85">
-                  Explore our complete operational directory covering all Business Pillars — <strong>OPHRON PEOPLE</strong>, <strong>OPHRON HYGIENE</strong>, <strong>OPHRON FACILITIES</strong>, and <strong>OPHRON TECHNOLOGY</strong> — with verified standard operating procedures, technical equipment, and high-resolution service-specific photography.
+                  From a single cleaning team to coordinated support across several sites, OPHRON helps you find a practical solution for your daily operating needs.
                 </p>
               </ScrollReveal>
             </div>

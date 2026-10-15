@@ -86,11 +86,12 @@ export default function Nav() {
 
   const links = [
     { href: "/", label: "HOME" },
-    { href: "/about", label: "ABOUT" },
     { href: "/services", label: "SERVICES", hasDropdown: true },
-    { href: "/why", label: "WHY US" },
-    { href: "/gallery", label: "GALLERY" },
-    { href: "/blog", label: "BLOG" },
+    { href: "#who-we-serve", label: "INDUSTRIES" },
+    { href: "/about", label: "ABOUT" },
+    { href: "/why", label: "WHY OPHRON" },
+    { href: "/gallery", label: "OUR WORK" },
+    { href: "/blog", label: "INSIGHTS" },
     { href: "/contact", label: "CONTACT" },
   ];
 
@@ -98,41 +99,41 @@ export default function Nav() {
     {
       icon: Users,
       tag: "PILLAR 01",
-      title: "OPHRON People",
-      subtitle: "Vetted hospitality stewarding, kitchen helpers & venue cleaners",
-      badge: "WSQ Vetted",
+      title: "People & Manpower",
+      subtitle: "Dishwashing, stewarding, kitchen and cleaning staff.",
+      badge: "Manpower",
       href: "/services/people",
     },
     {
       icon: ShieldCheck,
       tag: "PILLAR 02",
-      title: "OPHRON Hygiene",
-      subtitle: "SFA kitchen deep cleans, exhaust ducts & NEA disinfection",
-      badge: "SFA Grade A",
+      title: "Cleaning & Hygiene",
+      subtitle: "Office cleaning, kitchen deep cleaning, exhaust cleaning and specialist hygiene.",
+      badge: "Hygiene",
       href: "/services/hygiene",
     },
     {
       icon: Building2,
       tag: "PILLAR 03",
-      title: "OPHRON Facilities",
-      subtitle: "High-rise IRATA rope access façade, event resets & IFM Lite",
-      badge: "IRATA L3",
+      title: "Facility Services",
+      subtitle: "Property upkeep, maintenance coordination, venue and event support.",
+      badge: "Facilities",
       href: "/services/facilities",
     },
     {
       icon: Cpu,
       tag: "PILLAR 04",
-      title: "OPHRON Technology",
-      subtitle: "Connected hospitality POS, AI shift tracking & SaaS telemetry",
-      badge: "Cloud POS",
+      title: "Hospitality Technology",
+      subtitle: "Practical software, reporting and automation for operations teams.",
+      badge: "Technology",
       href: "/services/technology",
     },
     {
       icon: TrendingUp,
       tag: "PILLAR 05",
       title: "Commercial Intelligence",
-      subtitle: "Labor yield optimization, RevPASH & executive margin advisory",
-      badge: "Yield Strategy",
+      subtitle: "Better visibility into staffing, costs and operational performance.",
+      badge: "Intelligence",
       href: "/services/intelligence",
     },
   ];
@@ -158,11 +159,11 @@ export default function Nav() {
         <div className="flex items-center justify-between px-5 py-2 text-[10px] font-mono tracking-[0.2em] uppercase">
           <div className="flex items-center gap-4">
             <span className="opacity-90 font-bold text-[#B7A38B]">
-              SINGAPORE & INTERNATIONAL
+              SINGAPORE OPERATIONS
             </span>
             <span className="opacity-40 hidden sm:inline">|</span>
             <span className="hidden sm:inline font-bold text-[#EDE5DA]/90">
-              OPHRON HOSPITALITY OPERATIONAL INFRASTRUCTURE PLATFORM
+              MANPOWER • CLEANING • FACILITIES • TECHNOLOGY
             </span>
           </div>
           <div className="flex items-center gap-4">
@@ -289,7 +290,7 @@ export default function Nav() {
                 onClick={() => setServicesDropdownOpen(false)}
                 className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[#B7A38B] text-[#032147] pl-4 pr-1.5 py-1.5 text-[12px] font-heading font-semibold hover:bg-white hover:text-[#032147] transition group"
               >
-                Request Platform Audit
+                Request a Site Assessment
                 <span className="grid place-items-center h-7 w-7 rounded-full bg-[#032147] text-[#EDE5DA] transition-transform group-hover:rotate-45">
                   <svg
                     viewBox="0 0 24 24"
@@ -577,7 +578,7 @@ export default function Nav() {
                 onClick={() => setOpen(false)}
                 className="mt-2 mx-1 inline-flex justify-center rounded-2xl bg-[#B7A38B] text-[#032147] px-4 py-3 text-sm font-heading font-semibold hover:bg-white transition"
               >
-                Request Platform Audit →
+                Request a Site Assessment →
               </a>
             </div>
           </div>

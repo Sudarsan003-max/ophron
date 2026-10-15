@@ -62,11 +62,11 @@ export default function ContactPage() {
               </span>
 
               <h1 className="font-canela font-bold text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight leading-[0.98]">
-                Singapore Operations <span className="font-serif-i italic text-[#B7A38B]">Hub.</span>
+                Tell us what your operation <span className="font-serif-i italic text-[#B7A38B]">needs.</span>
               </h1>
 
               <p className="mt-5 font-inter text-[16px] sm:text-[18px] leading-relaxed text-[#EDE5DA]/85 max-w-2xl">
-                Direct operational access for General Managers, Operations Directors, and Property Owners. Initiate a formal facility review, request an emergency shift deployment, or schedule a physical site walkthrough.
+                Need dishwashing staff, a reliable cleaning plan or help coordinating facility services? Share a few details and our Singapore team can discuss the next step with you.
               </p>
             </div>
 
@@ -130,7 +130,7 @@ export default function ContactPage() {
               <p className="mt-2 text-xs font-inter text-[#032147]/75 leading-relaxed">
                 RFP / Tender Inquiries: <strong>operations@ophronsystems.com</strong>
                 <br />
-                Executive Office: <strong>isaac@ophronsystems.com</strong>
+                General Administration: <strong>admin@ophronsystems.com</strong>
               </p>
             </div>
             <a
@@ -400,7 +400,7 @@ export default function ContactPage() {
                       type="submit"
                       className="w-full rounded-full bg-[#B7A38B] text-[#032147] py-3.5 text-sm font-montserrat font-bold hover:bg-white transition duration-300 shadow-xl cursor-pointer"
                     >
-                      Submit Facility Audit Request →
+                      Send My Enquiry →
                     </button>
                   </form>
                 )}

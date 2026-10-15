@@ -149,7 +149,7 @@ export default function Contact() {
       <div className="absolute bottom-10 -left-20 h-[260px] w-[260px] rounded-full bg-[#B7A38B]/10 blur-[80px] pointer-events-none" aria-hidden="true" />
 
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-5">
-        <SectionHead n="012" label="Contact & Singapore Operations" light />
+        <SectionHead n="012" label="Contact & Site Assessments" light />
 
         <div className="mt-8 grid lg:grid-cols-12 gap-12 items-start">
           {/* Left Column: Singapore Channels & Details */}
@@ -159,25 +159,24 @@ export default function Contact() {
               className="font-canela font-bold text-[38px] sm:text-[56px] lg:text-[76px] leading-[0.92] tracking-tight text-white"
               staggerMs={130}
               lines={[
+                "Tell us what your",
                 <>
-                  Power your <span className="font-serif-i italic text-[#B7A38B]">hospitality</span>
+                  operation <span className="font-serif-i italic text-[#B7A38B]">needs.</span>
                 </>,
-                "operations",
-                <span key="eff" className="text-[#B7A38B]">effortlessly.</span>,
               ]}
             />
             <ScrollReveal variant="left" delay={150}>
               <p className="mt-4 font-inter max-w-md text-[15px] leading-relaxed text-[#EDE5DA]/85">
-                Partner with OPHRON to unify People, Hygiene, Facilities, Technology, and Commercial Intelligence under a single strategic platform agreement across Singapore and internationally.
+                Need dishwashing staff, a reliable cleaning plan or help coordinating facility services? Share a few details and our Singapore team can discuss the next step with you.
               </p>
             </ScrollReveal>
 
             <ScrollReveal variant="up" delay={200}>
               <div className="mt-6 space-y-1 border-t border-white/10">
                 {[
-                  { k: "Singapore Operational Audit", v: "Complimentary site review of manpower, hygiene & facility SLA compliance" },
-                  { k: "Rapid 1-Hour SLA Response", v: "Site supervisor dispatched within 48h with formal scope the same week" },
-                  { k: "Single Operating Agreement", v: "Unified management across all 5 business pillars" },
+                  { k: "Direct Singapore Team Response", v: "Direct response from our Singapore team within one business day" },
+                  { k: "30-Minute Site Walkthrough", v: "Site assessment to understand your space, operating hours and volume" },
+                  { k: "Clear & Transparent Proposal", v: "Transparent proposal with agreed scope and no hidden commitments" },
                 ].map((b) => (
                   <div key={b.k} className="group flex items-center justify-between py-3.5 border-b border-white/10">
                     <div className="flex items-center gap-4">
@@ -286,8 +285,11 @@ export default function Contact() {
                 ) : (
                   <>
                     <h3 className="mt-4 font-canela text-3xl sm:text-4xl font-bold tracking-tight">
-                      Let's look at <span className="font-serif-i italic text-[#B7A38B]">your operation.</span>
+                      Request a <span className="font-serif-i italic text-[#B7A38B]">Site Assessment</span>
                     </h3>
+                    <p className="mt-1 text-[13px] font-inter text-[#032147]/75">
+                      Fill in your details below and our operations lead will follow up directly.
+                    </p>
 
                     {error && (
                       <div className="mt-4 p-3 rounded-xl bg-red-100/90 border border-red-300 text-red-900 text-xs font-inter font-semibold" role="alert">
@@ -297,48 +299,37 @@ export default function Contact() {
 
                     <div className="mt-5 grid sm:grid-cols-2 gap-3.5">
                       <Field label="Full Name *" value={form.name} onChange={(v) => setForm({ ...form, name: v })} placeholder="Tan Wei Ming" />
+                      <Field label="Company / Establishment *" value={form.company} onChange={(v) => setForm({ ...form, company: v })} placeholder="Grand Park Hotel Group" />
+                      <Field label="Role / Designation" value={form.role} onChange={(v) => setForm({ ...form, role: v })} placeholder="Operations Manager / GM" />
                       <Field label="Phone Number *" type="tel" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} placeholder="+65 9XXX XXXX" />
                       <Field label="Work Email *" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} placeholder="weiming@hotelgroup.com" />
-                      <Field label="Company *" value={form.company} onChange={(v) => setForm({ ...form, company: v })} placeholder="Grand Park Hotel Group" />
                       
                       <div className="sm:col-span-2">
-                        <label className="text-[10px] font-mono tracking-[0.22em] uppercase text-[#032147]/70 font-bold">Primary Service Required</label>
+                        <label className="text-[10px] font-mono tracking-[0.22em] uppercase text-[#032147]/70 font-bold">Service of Interest</label>
                         <select
                           value={form.service}
                           onChange={(e) => setForm({ ...form, service: e.target.value })}
                           className="mt-2 w-full rounded-2xl bg-white/70 border border-[#032147]/15 px-4 py-3 text-[13.5px] font-inter text-[#032147] focus:outline-none focus:border-[#032147]"
-                          aria-label="Select primary service required"
+                          aria-label="Select service of interest"
                         >
-                          <optgroup label="── 5 Master Platform Pillars ──">
-                            <option value="OPHRON People (Workforce & Stewarding)">01. OPHRON People (Manpower, Stewarding, Kitchen Helpers, Housekeeping)</option>
-                            <option value="OPHRON Hygiene (Deep Clean & Compliance)">02. OPHRON Hygiene (Kitchen Deep Clean, Duct Degreasing, IAQ, Disinfection)</option>
-                            <option value="OPHRON Facility Services (IFM Lite)">03. OPHRON Facility Services (IFM Lite, Pest Control, Waste, Repairs)</option>
-                            <option value="OPHRON Technology (SaaS & AI)">04. OPHRON Technology (Restaurant & Hotel Tech, AI, Portals, Dashboards)</option>
-                            <option value="Commercial Intelligence (Cost & Margin)">05. Commercial Intelligence (Cost Reduction, Labor & Revenue Optimization)</option>
-                          </optgroup>
-                          <optgroup label="── Specialized Operational Services ──">
-                            <option value="Commercial Cleaning">Commercial Cleaning (Retail, Lobby, Mixed-Use)</option>
-                            <option value="Disinfecting Services">Disinfecting Services (NEA Fogging & Electrostatic)</option>
-                            <option value="Office Cleaning">Office Cleaning (Corporate & Scheduled Janitorial)</option>
-                            <option value="Industrial Cleaning">Industrial Cleaning (Warehouses & Production Plants)</option>
-                            <option value="Restaurant & Kitchen Deep Cleaning">Restaurant & Kitchen Deep Cleaning (SFA Compliance)</option>
-                            <option value="Restroom & Toilet Deep Cleaning">Toilet Deep Cleaning (Descaling, Grout & Odour Elimination)</option>
-                          </optgroup>
-                          <optgroup label="── Multi-Vertical / Enterprise ──">
-                            <option value="Full 5-Pillar Master Platform Agreement">Unified 5-Pillar Master Platform Agreement (Multi-Venue)</option>
-                          </optgroup>
+                          <option value="Dishwashing & Kitchen Stewarding">Dishwashing & Kitchen Stewarding</option>
+                          <option value="Hospitality & Events Manpower">Hospitality & Events Manpower</option>
+                          <option value="Commercial & Restaurant Cleaning">Commercial & Restaurant Cleaning</option>
+                          <option value="Facility Maintenance Coordination">Facility Maintenance Coordination</option>
+                          <option value="Hospitality Technology Solutions">Hospitality Technology Solutions</option>
+                          <option value="Multi-Service Operational Support">Multi-Service Operational Support</option>
                         </select>
                       </div>
                     </div>
 
                     <div className="mt-4">
-                      <label className="text-[10px] font-mono tracking-[0.22em] uppercase text-[#032147]/70 font-bold">About your site / special requirements</label>
+                      <label className="text-[10px] font-mono tracking-[0.22em] uppercase text-[#032147]/70 font-bold">Brief Notes / Requirements</label>
                       <textarea
                         value={form.notes}
                         onChange={(e) => setForm({ ...form, notes: e.target.value })}
                         rows={3}
                         maxLength={1000}
-                        placeholder="Premises type, square footage, operating hours, special requirements…"
+                        placeholder="Premises type, volume, service hours or special requirements…"
                         className="mt-2 w-full rounded-2xl bg-white/70 border border-[#032147]/15 px-4 py-3 text-[13.5px] placeholder:opacity-50 text-[#032147] focus:outline-none focus:border-[#032147] transition resize-none"
                       />
                     </div>
@@ -363,7 +354,7 @@ export default function Contact() {
                       className="group/btn mt-6 relative inline-flex w-full items-center justify-between rounded-full bg-[#032147] text-[#EDE5DA] pl-6 pr-1.5 py-1.5 text-[13.5px] font-montserrat font-bold overflow-hidden disabled:opacity-50 shadow-lg shadow-[#032147]/20 hover:scale-[1.01] transition-transform cursor-pointer"
                       style={{ background: "#032147", color: "#EDE5DA" }}
                     >
-                      <span className="relative">{submitting ? "Submitting Request..." : "Discuss Your Operations"}</span>
+                      <span className="relative">{submitting ? "Submitting Request..." : "Send My Enquiry"}</span>
                       <span className="relative grid place-items-center h-10 w-10 rounded-full bg-[#B7A38B] text-[#032147] transition-transform group-hover/btn:rotate-45 font-bold" aria-hidden="true">
                         <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M7 17 17 7M9 7h8v8" />
@@ -372,7 +363,7 @@ export default function Contact() {
                     </button>
 
                     <p className="mt-4 text-[10px] font-mono tracking-[0.18em] uppercase text-center text-[#032147]/70 font-semibold">
-                      NEA Licensed &amp; bizSAFE Level 3 · Free Assessment · 1-Hour Response
+                      We respect your privacy. In compliance with Singapore PDPA standards.
                     </p>
                   </>
                 )}

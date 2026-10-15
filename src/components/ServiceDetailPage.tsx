@@ -30,6 +30,17 @@ const SLUG_ALIASES: Record<string, string> = {
   "cleanroom-cleaning": "cleanroom-healthcare",
   "carpet-cleaning": "carpet-upholstery",
   "events-venue-cleaning": "events-venue",
+  // hello.md priority Singapore service URLs
+  "dishwashing-manpower-singapore": "dishwashing-kitchen",
+  "kitchen-stewarding-singapore": "fnb-stewarding-manpower",
+  "office-cleaning-singapore": "office-cleaning",
+  "commercial-cleaning-singapore": "commercial-cleaning",
+  "kitchen-deep-cleaning-singapore": "dishwashing-kitchen",
+  "exhaust-hood-cleaning-singapore": "dishwashing-kitchen",
+  "grease-trap-cleaning-singapore": "dishwashing-kitchen",
+  "post-renovation-cleaning-singapore": "post-renovation-cleaning",
+  "facility-services-singapore": "facilities",
+  "event-cleaning-singapore": "events-venue",
 };
 
 export default function ServiceDetailPage({ slug }: Props) {

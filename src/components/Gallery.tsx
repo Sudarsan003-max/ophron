@@ -281,20 +281,20 @@ export default function Gallery() {
         <div className="mt-8 grid lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">
             <MaskedHeadline
-              as="h2"
+              as="h1"
               className="font-canela font-bold text-4xl sm:text-6xl lg:text-7xl leading-[0.94] tracking-tight text-white"
               staggerMs={120}
               lines={[
+                "See the work behind",
                 <>
-                  Operational <span className="font-serif-i italic text-[#B7A38B]">excellence</span>
+                  better-run <span className="font-serif-i italic text-[#B7A38B]">spaces.</span>
                 </>,
-                "in verified deployment.",
               ]}
             />
           </div>
           <div className="lg:col-span-4 lg:ml-auto">
             <p className="font-inter text-sm sm:text-base leading-relaxed text-[#EDE5DA]/80">
-              High-resolution photographic proof from active OPHRON operational sites across Singapore's leading hotels, Michelin-starred kitchens, and commercial towers.
+              Every site is different. Explore the cleaning, manpower and facility challenges our team and operating partners have worked on, and the practical solutions used.
             </p>
           </div>
         </div>

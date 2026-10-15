@@ -77,10 +77,13 @@ export default function Footer() {
             </div>
 
             <p className="mt-3 text-[13.5px] sm:text-[14px] leading-relaxed text-[#EDE5DA]/90 font-inter max-w-[480px]">
-              <strong className="text-white font-semibold">OPHRON Systems</strong> provides NEA-licensed commercial cleaning, kitchen deep hygiene, manpower supply, and facility operations across Singapore and globally.
+              <strong className="text-white font-semibold">OPHRON</strong> helps Singapore hospitality and commercial businesses simplify essential operations across manpower, cleaning, facilities and technology.
             </p>
 
             <div className="mt-4 flex flex-wrap items-center gap-2 text-[10.5px] font-mono text-[#B7A38B]">
+              <span className="px-2.5 py-1 rounded-full border border-[#B7A38B]/40 bg-[#B7A38B]/10">
+                Singapore-based operations
+              </span>
               <span className="px-2.5 py-1 rounded-full border border-[#B7A38B]/40 bg-[#B7A38B]/10">
                 NEA Licensed Operator
               </span>
@@ -121,9 +124,33 @@ export default function Footer() {
             {/* Column 2: Platform Links */}
             <ScrollReveal variant="up" delay={100} className="min-w-0">
               <div className="text-[10.5px] font-mono uppercase tracking-[0.22em] text-[#B7A38B] font-bold border-b border-white/10 pb-2 mb-3.5">
-                Platform
+                Navigation
               </div>
-              <ul className="space-y-2.5 text-[13px] sm:text-[13.5px] font-inter opacity-90">
+              <ul className="space-y-2 text-[13px] sm:text-[13.5px] font-inter opacity-90">
+                <li>
+                  <a
+                    href="/"
+                    className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/services"
+                    className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
+                  >
+                    Services
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/#who-we-serve"
+                    className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
+                  >
+                    Industries
+                  </a>
+                </li>
                 <li>
                   <a
                     href="/about"
@@ -134,18 +161,10 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/services"
+                    href="/why"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
-                    OPHRON Services
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/#approach"
-                    className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
-                  >
-                    5 Pillars
+                    Why OPHRON
                   </a>
                 </li>
                 <li>
@@ -153,7 +172,7 @@ export default function Footer() {
                     href="/gallery"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
-                    Client Portfolio
+                    Our Work
                   </a>
                 </li>
                 <li>
@@ -161,7 +180,7 @@ export default function Footer() {
                     href="/blog"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
-                    Insights & Articles
+                    Insights
                   </a>
                 </li>
                 <li>
@@ -169,7 +188,7 @@ export default function Footer() {
                     href="/contact"
                     className="block break-words whitespace-normal leading-snug hover:text-[#B7A38B] transition-colors"
                   >
-                    Contact Singapore
+                    Contact
                   </a>
                 </li>
               </ul>

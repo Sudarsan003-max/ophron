@@ -419,7 +419,7 @@ export default function Approach() {
             href="#contact"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-[#EDE5DA] text-xs sm:text-sm font-montserrat font-bold tracking-wide transition-all duration-300 hover:scale-105"
           >
-            <span>Request Platform Audit</span>
+            <span>Request a Site Assessment</span>
             <span>↗</span>
           </a>
         </ScrollReveal>

@@ -153,7 +153,7 @@ export default function Logos() {
           href="#contact"
           className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#B7A38B] text-[#032147] hover:bg-white text-xs sm:text-sm font-montserrat font-bold tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
         >
-          <span>Join 140+ Premier Venues — Request Platform Audit</span>
+          <span>Request a Site Assessment</span>
           <span>→</span>
         </a>
       </div>

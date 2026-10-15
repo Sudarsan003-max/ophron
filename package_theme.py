@@ -16,11 +16,10 @@ if os.path.exists(dist_css):
     shutil.copy2(dist_css, assets_css)
     print("Synced latest compiled CSS to assets/css/ophron-style.css")
 
-# 2. Clean and synchronize target images folders
+# 2. Synchronize target images folders
 for img_dir in [target_images, assets_images]:
-    if os.path.exists(img_dir):
-        shutil.rmtree(img_dir)
-    shutil.copytree(public_images, img_dir)
+    os.makedirs(img_dir, exist_ok=True)
+    shutil.copytree(public_images, img_dir, dirs_exist_ok=True)
     print(f"Copied {len(os.listdir(img_dir))} items to {img_dir}")
 
 # 3. Copy components images (portraits, brand assets)

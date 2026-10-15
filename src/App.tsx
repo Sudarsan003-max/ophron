@@ -143,53 +143,53 @@ export default function App() {
   // SEO Dynamic Route Metadata Map
   const ROUTE_METADATA: Record<string, { title: string; description: string; canonical: string }> = {
     "/": {
-      title: "OPHRON — Hospitality Operational Infrastructure Platform | Singapore",
-      description: "OPHRON powers hospitality operations across Singapore & internationally — unifying People, Hygiene, Facilities, Technology, and Commercial Intelligence on a single strategic platform.",
+      title: "Hospitality Manpower, Cleaning & Facility Services Singapore | OPHRON",
+      description: "OPHRON helps Singapore restaurants, hotels and commercial properties manage manpower, cleaning, hygiene and facilities with one accountable operating partner.",
       canonical: "https://ophronsystems.com/",
     },
     "/about": {
-      title: "About OPHRON — Strategic Operating Platform | Singapore",
-      description: "Learn how OPHRON unifies People, Hygiene, Facilities, Technology, and Commercial Intelligence for Singapore hotels and F&B establishments.",
+      title: "About OPHRON | Singapore Hospitality Operations Partner",
+      description: "Learn how OPHRON brings manpower, cleaning, facilities and technology together to simplify hospitality and commercial operations in Singapore.",
       canonical: "https://ophronsystems.com/about",
     },
     "/services": {
-      title: "Specialized Services & SOP Catalog — OPHRON Singapore",
-      description: "Explore 14 specialized operational services including marble polishing, kitchen hygiene, rope access façade, and stewarding crews.",
+      title: "Manpower, Commercial Cleaning & Facility Services Singapore | OPHRON",
+      description: "Explore OPHRON's Singapore services: dishwashing manpower, kitchen stewarding, office cleaning, deep cleaning, facility support and operational technology.",
       canonical: "https://ophronsystems.com/services",
     },
     "/why": {
-      title: "Why Choose OPHRON — NEA Licensed & bizSAFE 3 Partner",
-      description: "20+ years of operational discipline, supervisor-signed accountability, and 100% SLA compliance for Singapore hospitality venues.",
+      title: "Why Choose OPHRON? | One Partner for Singapore Operations",
+      description: "Reduce vendor coordination with OPHRON's connected manpower, cleaning and facility support for Singapore restaurants, hotels and commercial properties.",
       canonical: "https://ophronsystems.com/why",
     },
     "/gallery": {
-      title: "Project Gallery & Portfolio — OPHRON Singapore",
-      description: "View verified visual field photography of marble grinding, commercial kitchen deep degreasing, hotel suites, and event turnovers.",
+      title: "Commercial Cleaning & Hospitality Operations Projects Singapore | OPHRON",
+      description: "View examples of hospitality, kitchen cleaning, stewarding and commercial facility work in Singapore, with project scopes and site photographs.",
       canonical: "https://ophronsystems.com/gallery",
     },
     "/gallery-grid": {
-      title: "Project Gallery & Portfolio — OPHRON Singapore",
-      description: "View verified visual field photography of marble grinding, commercial kitchen deep degreasing, hotel suites, and event turnovers.",
+      title: "Commercial Cleaning & Hospitality Operations Projects Singapore | OPHRON",
+      description: "View examples of hospitality, kitchen cleaning, stewarding and commercial facility work in Singapore, with project scopes and site photographs.",
       canonical: "https://ophronsystems.com/gallery",
     },
     "/blog": {
-      title: "Operations Research & Industry Benchmarks — OPHRON",
-      description: "Empirical research briefings and whitepapers on SFA Grade A kitchen audits, NEA disinfection biocides, and labor yield optimization.",
+      title: "Singapore Cleaning, Manpower & Facility Operations Guides | OPHRON",
+      description: "Practical guides for Singapore restaurant, hotel and commercial property operators on cleaning, kitchen hygiene, manpower and facility upkeep.",
       canonical: "https://ophronsystems.com/blog",
     },
     "/all-articles": {
-      title: "Editorial Research Whitepapers & Field Guides — OPHRON",
-      description: "Comprehensive library of hospitality operations whitepapers, compliance blueprints, and vendor consolidation frameworks.",
+      title: "Editorial Research & Operations Guides — OPHRON Singapore",
+      description: "Practical guides for Singapore restaurant, hotel and commercial property operators on cleaning, kitchen hygiene, manpower and facility upkeep.",
       canonical: "https://ophronsystems.com/all-articles",
     },
     "/founder": {
-      title: "Isaac Vivian, Founder — OPHRON Operational Infrastructure",
-      description: "Executive profile and vision of Isaac Vivian, Founder of OPHRON Systems Singapore.",
+      title: "Isaac Vivian, Director & Co-Founder — OPHRON Systems",
+      description: "Executive profile and vision of Isaac Vivian, Director & Co-Founder of OPHRON Systems Singapore.",
       canonical: "https://ophronsystems.com/founder",
     },
     "/contact": {
-      title: "Contact Singapore Operations — OPHRON Systems",
-      description: "Initiate your operational review with OPHRON. Call +65 9295 1155 or submit your facility requirements for rapid 24h response.",
+      title: "Contact OPHRON Singapore | Manpower, Cleaning & Facility Enquiries",
+      description: "Contact OPHRON for manpower, commercial cleaning, kitchen hygiene and facility services in Singapore. Share your site requirements and request an assessment.",
       canonical: "https://ophronsystems.com/contact",
     },
   };
@@ -198,13 +198,26 @@ export default function App() {
   useEffect(() => {
     let meta = ROUTE_METADATA[currentRoute];
     if (!meta && currentRoute.startsWith("/services/")) {
-      const slug = currentRoute.replace(/^\/services\//, "").replace(/\/+$/, "");
+      const rawSlug = currentRoute.replace(/^\/services\//, "").replace(/\/+$/, "");
+      const SERVICE_ALIASES: Record<string, string> = {
+        "dishwashing-manpower-singapore": "dishwashing-kitchen",
+        "kitchen-stewarding-singapore": "fnb-stewarding-manpower",
+        "office-cleaning-singapore": "office-cleaning",
+        "commercial-cleaning-singapore": "commercial-cleaning",
+        "kitchen-deep-cleaning-singapore": "dishwashing-kitchen",
+        "exhaust-hood-cleaning-singapore": "dishwashing-kitchen",
+        "grease-trap-cleaning-singapore": "dishwashing-kitchen",
+        "post-renovation-cleaning-singapore": "post-renovation-cleaning",
+        "facility-services-singapore": "facilities",
+        "event-cleaning-singapore": "events-venue",
+      };
+      const slug = SERVICE_ALIASES[rawSlug] || rawSlug;
       const srv = OPHRON_SERVICE_PAGES[slug];
       if (srv) {
         meta = {
-          title: `${srv.heroTitle} — OPHRON Singapore Specialized Services`,
+          title: `${srv.heroTitle} Singapore | OPHRON`,
           description: srv.heroLead,
-          canonical: `https://ophronsystems.com/services/${slug}`,
+          canonical: `https://ophronsystems.com/services/${rawSlug}`,
         };
       }
     }

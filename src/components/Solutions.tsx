@@ -49,13 +49,13 @@ export default function Solutions() {
               className="font-canela font-bold text-3xl sm:text-5xl lg:text-6xl text-[#032147] tracking-tight leading-[1.02]"
               lines={[
                 <>
-                  Specialized Hygiene & Facility{" "}
-                  <span className="font-serif-i italic text-[#B7A38B]">Services.</span>
+                  The support your operation needs,{" "}
+                  <span className="font-serif-i italic text-[#B7A38B]">under one roof.</span>
                 </>,
               ]}
             />
             <p className="mt-3 sm:mt-4 font-inter text-[14px] sm:text-[15.5px] leading-relaxed text-[#032147]/80 max-w-2xl">
-              Explore key protocols, equipment specs, and SOP breakdowns for our primary operational service offerings across Singapore.
+              From daily dishwashing and kitchen stewarding to routine commercial cleaning and facility support, we help you keep your operation running smoothly.
             </p>
           </div>
           <div className="hidden lg:block text-right">

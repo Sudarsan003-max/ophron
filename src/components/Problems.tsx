@@ -3,41 +3,40 @@ import { SectionHead } from "./About";
 import {
   MaskedHeadline,
   ScrollReveal,
-  AnimatedCounter,
   ExpandRule,
 } from "./ui/animations";
 
 const problems = [
   {
     n: "01",
-    title: "Manpower Shortages & High Stewarding Churn",
-    shortDesc: "Inconsistent casual labor, unvetted kitchen helpers, and weekend staffing shortages driving thin F&B margins.",
+    title: "Staffing gaps disrupt service.",
+    shortDesc: "A missing dishwasher or steward can slow down an entire shift.",
     items: [
       "Inconsistent back-of-house staffing & casual labor reliability",
       "Severe labor shortages during peak service & weekend surges",
       "Absence of WSQ-certified, supervisor-led deployment",
-      "Unpredictable overtime costs eating into thin F&B margins",
+      "Unpredictable overtime costs eating into thin operating margins",
     ],
   },
   {
     n: "02",
-    title: "SFA Hygiene Demerits, Canopy Grease & Fire Risks",
-    shortDesc: "Grease buildup in exhaust ducts, foul grease traps, and demerit points risking forced SFA audit suspensions.",
+    title: "Cleaning problems create bigger problems.",
+    shortDesc: "Grease, poor hygiene and missed cleaning schedules can affect safety, inspections and guest experience.",
     items: [
-      "Heavy grease accumulation in exhaust hoods & ventilation ducts",
+      "Grease accumulation in exhaust hoods & ventilation ducts",
       "Persistent grease trap odors & drainage backup risks",
-      "Lack of documented batch-level chemical records for SFA audits",
+      "Lack of documented batch-level chemical records for inspections",
       "Poor washroom hygiene damaging guest reviews & ratings",
     ],
   },
   {
     n: "03",
-    title: "Fragmented Multi-Vendor Chaos & Rising Overhead",
-    shortDesc: "Coordinating 5+ disconnected vendors for cleaning, manpower, and repairs with zero unified SLA accountability.",
+    title: "Separate vendors mean separate headaches.",
+    shortDesc: "When something goes wrong, your team ends up chasing updates instead of solving the issue.",
     items: [
       "Managing 5+ separate vendors with zero unified reporting",
       "Sudden kitchen equipment & facility breakdown downtime",
-      "Unsynchronized vendor schedules disrupting guest experience",
+      "Unsynchronized vendor schedules disrupting daily operations",
       "Escalating vendor invoices with zero SLA accountability",
     ],
   },
@@ -58,25 +57,23 @@ export default function Problems() {
         <SectionHead n="003" label="Operational Realities" light />
 
         <div className="mt-6 sm:mt-8 grid lg:grid-cols-12 gap-6 sm:gap-10">
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-8">
             <MaskedHeadline
               as="h2"
-              className="font-canela text-[32px] sm:text-[54px] lg:text-[72px] leading-[0.96] tracking-tight text-white font-bold"
+              className="font-canela text-[32px] sm:text-[54px] lg:text-[70px] leading-[0.96] tracking-tight text-white font-bold"
               staggerMs={100}
               lines={[
+                "Too many vendors.",
                 <>
-                  The operational <span className="font-serif-i italic text-[#B7A38B]">frictions</span>
-                </>,
-                <>
-                  we eliminate <span className="text-[#B7A38B]">every shift.</span>
+                  Too many follow-ups. <span className="font-serif-i italic text-[#B7A38B]">Not enough time.</span>
                 </>,
               ]}
             />
           </div>
-          <div className="lg:col-span-5 lg:pt-3">
+          <div className="lg:col-span-4 lg:pt-3">
             <ScrollReveal variant="left" delay={100}>
               <p className="text-[14px] sm:text-[15.5px] font-inter leading-relaxed text-[#EDE5DA]/80">
-                Singapore's hospitality and commercial venues battle three recurring bottlenecks: manpower churn, strict SFA compliance, and multi-vendor chaos. OPHRON unifies the solution under one accountable platform.
+                Running a hotel, restaurant or commercial venue is demanding enough. Managing multiple service providers shouldn't make it harder.
               </p>
             </ScrollReveal>
           </div>
@@ -93,7 +90,7 @@ export default function Problems() {
 
         <ExpandRule className="border-white/15 my-6" />
 
-        {/* CTA strip */}
+        {/* The OPHRON approach card */}
         <ScrollReveal variant="scale">
           <div className="rounded-2xl sm:rounded-3xl bg-[#EDE5DA] text-[#032147] p-5 sm:p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 border border-[#B7A38B]/30 shadow-xl">
             <div className="flex items-start gap-3.5">
@@ -101,20 +98,23 @@ export default function Problems() {
                 ✓
               </span>
               <div>
-                <div className="font-canela font-bold text-xl sm:text-2xl lg:text-3xl tracking-tight text-[#032147]">
-                  Solved across <AnimatedCounter value={140} suffix="+" /> Singapore venues.
+                <div className="text-[10.5px] font-mono uppercase tracking-[0.2em] text-[#B7A38B] font-bold mb-1">
+                  [ The OPHRON Approach ]
                 </div>
-                <div className="text-[12.5px] sm:text-[13.5px] font-inter text-[#032147]/75 mt-0.5">
-                  5-star hotel towers, luxury banquets & commercial central kitchens.
+                <div className="font-canela font-bold text-xl sm:text-2xl lg:text-3xl tracking-tight text-[#032147]">
+                  Clear responsibilities, practical service plans and a direct point of contact.
+                </div>
+                <div className="text-[12.5px] sm:text-[13.5px] font-inter text-[#032147]/75 mt-1">
+                  Start with one service. Expand when you need more.
                 </div>
               </div>
             </div>
             <a
-              href="/services"
+              href="#solutions"
               className="group inline-flex items-center gap-2 rounded-full bg-[#032147] text-[#EDE5DA] pl-5 pr-2 py-2 text-[12px] sm:text-[13px] font-montserrat font-bold hover:bg-[#B7A38B] hover:text-[#032147] transition shrink-0 hover:scale-105"
               style={{ color: "#EDE5DA" }}
             >
-              Explore Solutions
+              Explore Our Solutions
               <span className="grid place-items-center h-8 w-8 rounded-full bg-[#B7A38B] text-[#032147] transition-transform group-hover:rotate-45 font-bold text-xs">
                 →
               </span>

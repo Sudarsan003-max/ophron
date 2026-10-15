@@ -5,27 +5,27 @@ import WhoWeServe from "./WhoWeServe";
 const steps = [
   {
     n: "01",
-    title: "Understand",
-    desc: "We review your current operational setup — staffing, cleaning, facilities, technology, and vendor landscape. No assumptions.",
+    title: "Tell us what you need",
+    desc: "Share your current operational challenges—whether you need dishwashing staff, kitchen stewarding support, commercial cleaning or multi-service operational coordination.",
     outcome: "Operational assessment completed",
   },
   {
     n: "02",
-    title: "Design",
-    desc: "We identify which combination of OPHRON capabilities closes your specific gaps, with clear scope, timelines, and accountability.",
+    title: "We review your site",
+    desc: "We look at your operating hours, layout, volume and specific requirements so we can propose a plan that fits your day-to-day reality.",
     outcome: "Custom solution scoped",
   },
   {
     n: "03",
-    title: "Deploy",
-    desc: "We implement with dedicated on-site leads, documented procedures, and clean handover. Operations continue without disruption.",
-    outcome: "Live within agreed timeline",
+    title: "You receive a clear proposal",
+    desc: "We provide clear scope, transparent pricing, agreed schedules and assigned points of contact. No hidden assumptions.",
+    outcome: "Transparent plan agreed",
   },
   {
     n: "04",
-    title: "Improve",
-    desc: "We monitor performance against defined SLAs, surface operational intelligence, and continuously refine the engagement.",
-    outcome: "Ongoing SLA visibility",
+    title: "We get to work",
+    desc: "Our team deploys with briefed staff, standard operating procedures and active supervision. Operations start smoothly without disrupting your business.",
+    outcome: "Seamless operational delivery",
   },
 ];
 
@@ -55,10 +55,10 @@ export default function HowItWorks() {
                     margin: 0,
                   }}
                 >
-                  Simple to engage.
+                  Straightforward from the
                   <br />
                   <span style={{ color: "#B7A38B", fontStyle: "italic", fontWeight: 400 }}>
-                    Structured to perform.
+                    first conversation.
                   </span>
                 </h2>
               </ScrollReveal>
@@ -66,7 +66,7 @@ export default function HowItWorks() {
             <div className="lg:col-span-6">
               <ScrollReveal variant="left" delay={150}>
                 <p style={{ fontSize: "14px", lineHeight: 1.7, color: "rgba(3,33,71,0.70)", margin: 0 }}>
-                  Engaging OPHRON is designed to feel like starting a business conversation — not a procurement project. Here is how we move from first contact to operational delivery.
+                  Engaging OPHRON is designed to be simple, transparent and practical. Here is how we start working together.
                 </p>
               </ScrollReveal>
             </div>
@@ -159,51 +159,68 @@ export default function HowItWorks() {
           </div>
 
           <ScrollReveal variant="up" delay={200}>
-            <div style={{ textAlign: "center", marginTop: "24px" }}>
-              <a
-                href="#contact"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  background: "#032147",
-                  color: "#EDE5DA",
-                  padding: "13px 26px",
-                  borderRadius: "50px",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  transition: "transform 0.2s, box-shadow 0.2s",
-                }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.transform = "translateY(-2px)";
-                  el.style.boxShadow = "0 10px 24px rgba(3,33,71,0.25)";
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.transform = "translateY(0)";
-                  el.style.boxShadow = "none";
-                }}
-              >
-                Start the Conversation
-                <span
+            <div style={{ textAlign: "center", marginTop: "32px", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+              <p style={{ fontSize: "14px", fontWeight: 600, color: "#032147", margin: 0 }}>
+                Ready to simplify your operations?
+              </p>
+              <div style={{ display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap", justifyContent: "center" }}>
+                <a
+                  href="#contact"
                   style={{
-                    width: "28px",
-                    height: "28px",
-                    borderRadius: "50%",
-                    background: "#B7A38B",
-                    display: "flex",
+                    display: "inline-flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    color: "#032147",
-                    fontWeight: 800,
-                    fontSize: "14px",
+                    gap: "10px",
+                    background: "#032147",
+                    color: "#EDE5DA",
+                    padding: "13px 26px",
+                    borderRadius: "50px",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    textDecoration: "none",
+                    transition: "transform 0.2s, box-shadow 0.2s",
+                  }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLAnchorElement;
+                    el.style.transform = "translateY(-2px)";
+                    el.style.boxShadow = "0 10px 24px rgba(3,33,71,0.25)";
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLAnchorElement;
+                    el.style.transform = "translateY(0)";
+                    el.style.boxShadow = "none";
                   }}
                 >
-                  →
-                </span>
-              </a>
+                  Request a Site Assessment
+                  <span
+                    style={{
+                      width: "28px",
+                      height: "28px",
+                      borderRadius: "50%",
+                      background: "#B7A38B",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#032147",
+                      fontWeight: 800,
+                      fontSize: "14px",
+                    }}
+                  >
+                    →
+                  </span>
+                </a>
+                <a
+                  href="#contact"
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    color: "#032147",
+                    textDecoration: "underline",
+                    textUnderlineOffset: "4px",
+                  }}
+                >
+                  Talk to our Singapore team →
+                </a>
+              </div>
             </div>
           </ScrollReveal>
         </div>

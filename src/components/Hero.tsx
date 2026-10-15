@@ -130,6 +130,14 @@ export default function Hero() {
           {/* ── LEFT COLUMN: EDITORIAL TYPOGRAPHY & VALUE PROPOSITION ──── */}
           <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             
+            {/* Eyebrow */}
+            <ScrollReveal variant="up" delay={30}>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B7A38B]/20 border border-[#B7A38B]/35 text-[#B7A38B] font-mono text-[10.5px] uppercase tracking-[0.22em] font-bold mb-4">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#B7A38B] animate-pulse" />
+                <span>SINGAPORE | HOSPITALITY & COMMERCIAL OPERATIONS</span>
+              </div>
+            </ScrollReveal>
+
             {/* Editorial Serif Headline */}
             <ScrollReveal variant="up" delay={60}>
               <h1
@@ -150,40 +158,39 @@ export default function Hero() {
             <ScrollReveal variant="up" delay={120}>
               <div className="space-y-4 max-w-xl mb-7 sm:mb-8">
                 <p className="text-base sm:text-lg lg:text-[18px] text-[#EDE5DA]/90 leading-relaxed font-normal">
-                  OPHRON unifies <strong className="font-semibold text-white">People</strong>,{" "}
-                  <strong className="font-semibold text-white">Hygiene</strong>,{" "}
-                  <strong className="font-semibold text-white">Facilities</strong>,{" "}
-                  <strong className="font-semibold text-white">Technology</strong>, and{" "}
-                  <strong className="font-semibold text-white">Commercial Intelligence</strong> into a{" "}
-                  <strong className="font-semibold text-white">single operational platform</strong> — built for Singapore's hotels, restaurants, and hospitality groups.
+                  Running a hotel, restaurant or commercial property is demanding enough. Managing multiple service providers shouldn't make it harder.
                 </p>
                 <p className="text-sm sm:text-base text-[#EDE5DA]/75 leading-relaxed font-normal">
-                  Instead of coordinating 5+ fragmented vendors, OPHRON gives you one accountable partner, one transparent contract, and full operational visibility.
+                  OPHRON brings manpower, cleaning, hygiene, facility services and operational technology together—so your team can spend less time coordinating vendors and more time running the business.
                 </p>
               </div>
             </ScrollReveal>
 
-
             {/* Dual CTAs (Luxury Solid Brass + Ghost Link) */}
             <ScrollReveal variant="up" delay={250}>
-              <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-8 sm:mb-10">
-                {/* Primary Solid Brass Button */}
-                <a
-                  href="#contact"
-                  className="group relative inline-flex items-center justify-center gap-3 px-7 sm:px-8 py-3.5 sm:py-4 bg-[#B7A38B] text-[#02142B] font-mono text-xs sm:text-[12.5px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#cbb59b] hover:shadow-[0_10px_25px_rgba(183,163,139,0.35)] hover:-translate-y-0.5 active:translate-y-0"
-                >
-                  <span>Request Platform Audit</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
+              <div className="space-y-3 mb-8 sm:mb-10">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                  {/* Primary Solid Brass Button */}
+                  <a
+                    href="#contact"
+                    className="group relative inline-flex items-center justify-center gap-3 px-7 sm:px-8 py-3.5 sm:py-4 bg-[#B7A38B] text-[#02142B] font-mono text-xs sm:text-[12.5px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#cbb59b] hover:shadow-[0_10px_25px_rgba(183,163,139,0.35)] hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    <span>Request a Site Assessment</span>
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
 
-                {/* Secondary Ghost Link */}
-                <a
-                  href="#solutions"
-                  className="group inline-flex items-center gap-2.5 px-4 py-3.5 text-xs sm:text-[12.5px] font-mono font-bold tracking-[0.2em] text-[#EDE5DA] hover:text-[#B7A38B] transition-colors duration-200 uppercase"
-                >
-                  <span>Explore 5 Pillars</span>
-                  <ArrowRight className="w-4 h-4 text-[#B7A38B] transition-transform group-hover:translate-x-1.5" />
-                </a>
+                  {/* Secondary Ghost Link */}
+                  <a
+                    href="/services"
+                    className="group inline-flex items-center gap-2.5 px-4 py-3.5 text-xs sm:text-[12.5px] font-mono font-bold tracking-[0.2em] text-[#EDE5DA] hover:text-[#B7A38B] transition-colors duration-200 uppercase"
+                  >
+                    <span>Explore Our Services</span>
+                    <ArrowRight className="w-4 h-4 text-[#B7A38B] transition-transform group-hover:translate-x-1.5" />
+                  </a>
+                </div>
+                <div className="text-[11px] font-mono tracking-[0.15em] text-[#EDE5DA]/65 uppercase pl-1">
+                  Start with one service. Expand when you need more.
+                </div>
               </div>
             </ScrollReveal>
 
@@ -192,15 +199,15 @@ export default function Hero() {
               <div className="flex flex-wrap items-center gap-x-6 sm:gap-x-8 gap-y-2.5 border-t border-[#EDE5DA]/15 pt-5 sm:pt-6">
                 <span className="flex items-center gap-2 font-mono text-[10px] sm:text-[10.5px] tracking-[0.22em] text-[#EDE5DA]/80 uppercase">
                   <Shield className="w-3.5 h-3.5 text-[#B7A38B]" />
-                  NEA Licensed Operator
+                  Singapore-Based Operations
                 </span>
                 <span className="flex items-center gap-2 font-mono text-[10px] sm:text-[10.5px] tracking-[0.22em] text-[#EDE5DA]/80 uppercase">
                   <Award className="w-3.5 h-3.5 text-[#B7A38B]" />
-                  bizSAFE Level 3
+                  NEA Licensed Operator
                 </span>
                 <span className="flex items-center gap-2 font-mono text-[10px] sm:text-[10.5px] tracking-[0.22em] text-[#EDE5DA]/80 uppercase">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#B7A38B]" />
-                  100% SLA Guarantee
+                  bizSAFE Level 3
                 </span>
               </div>
             </ScrollReveal>

@@ -4,35 +4,35 @@ import { ScrollReveal } from "./ui/animations";
 const faqs = [
   {
     q: "What services does OPHRON provide?",
-    a: "OPHRON covers five areas: People & Manpower, Cleaning & Hygiene, Facility Services, Hospitality Technology, and Operational Intelligence. Clients typically engage us across two or more areas.",
+    a: "OPHRON provides hospitality manpower (dishwashers, kitchen stewards, cleaners, events crew), commercial cleaning and hygiene services, facility maintenance coordination and hospitality technology solutions for Singapore businesses.",
   },
   {
-    q: "Can OPHRON provide multiple services under one contract?",
-    a: "Yes. Many clients consolidate multiple services under a single OPHRON agreement — one contract, one point of contact, one SLA.",
+    q: "Can we start with just one service, like dishwashing or cleaning?",
+    a: "Yes. Most clients start with a single, immediate operational need—such as reliable dishwashers for a busy outlet or after-hours restaurant cleaning. You can add more services whenever you are ready.",
   },
   {
-    q: "Can OPHRON work alongside our existing vendors?",
-    a: "Yes. We can complement your current arrangements. Some clients start with one service and expand. We never push for unnecessary consolidation.",
+    q: "Can OPHRON replace multiple existing vendors?",
+    a: "Yes. If you are currently coordinating separate vendors for staffing, cleaning, pest control or maintenance, OPHRON can consolidate those services under a single point of contact, one invoice and consistent standards.",
   },
   {
-    q: "Is OPHRON only a manpower or cleaning company?",
-    a: "No. OPHRON is an operational infrastructure platform. Manpower and cleaning are part of a broader ecosystem that includes facilities, technology, and operational intelligence.",
+    q: "Can you work alongside our current suppliers?",
+    a: "Yes. We regularly work alongside existing in-house teams and preferred vendors. We fit into the areas where you need additional support or better reliability.",
   },
   {
-    q: "Can you support multiple locations?",
-    a: "Yes. OPHRON is structured to support multi-location hospitality and F&B businesses across Singapore. Speak with us about your specific footprint.",
+    q: "Is OPHRON licensed and compliant in Singapore?",
+    a: "Yes. We operate fully in compliance with Singapore regulations, including NEA cleaning licensing standards, Ministry of Manpower (MOM) employment guidelines and workplace safety protocols.",
   },
   {
-    q: "What happens after I enquire?",
-    a: "You will hear from us within one business day. We will arrange an initial operational review — no pitch decks, no pressure. Just a clear conversation about what you're managing and where we can help.",
+    q: "How quickly can OPHRON deploy staff or start services?",
+    a: "Depending on the scope and requirements, we can often deploy staff or begin initial services within 3 to 7 working days following a site review and confirmation.",
   },
   {
-    q: "How do you maintain service quality?",
-    a: "Through documented SOPs, supervisor-led deployment, digital SLA tracking, and regular operational reviews. You will always have visibility into performance.",
+    q: "How do you ensure service quality and consistency?",
+    a: "Every deployment includes briefed personnel, clear operating checklists, regular site inspections and a designated operations manager who is directly reachable by phone and messaging.",
   },
   {
-    q: "How quickly can we start?",
-    a: "Depends on scope. For focused engagements, we can typically be operational within 2–4 weeks of agreement. We will confirm a realistic timeline during the review.",
+    q: "What does a site assessment involve?",
+    a: "A site assessment is a straightforward 30-minute walkthrough of your premises. We look at your operational volume, layout, current challenges and service hours so we can give you an accurate, no-obligation proposal.",
   },
 ];
 
@@ -68,7 +68,7 @@ export default function FAQ() {
                 </span>
               </h2>
               <p style={{ fontSize: "14px", lineHeight: 1.65, color: "rgba(3,33,71,0.60)" }}>
-                These are the questions we hear most from operations teams, GMs, and procurement managers. We answer them here so you can evaluate OPHRON without a sales call.
+                These are the questions we hear most from business owners, general managers and operations teams. If you need something specific, our Singapore team is ready to help.
               </p>
               <div style={{ marginTop: "20px" }}>
                 <a
